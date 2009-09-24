@@ -46,7 +46,7 @@
    <value key="ProjectExplorer.BuildConfiguration.DisplayName" type="QString" >Debug</value>
    <value key="QtVersionId" type="int" >7</value>
    <value key="addQDumper" type="" ></value>
-   <value key="buildDirectory" type="QString" >/home/moshe/qtp/QLuach</value>
+   <value key="buildDirectory" type="QString" >/home/moshe/QLuach</value>
   </valuemap>
  </data>
  <data>
@@ -85,16 +85,15 @@
     <value type="QString" >XDM_MANAGED=/var/run/xdmctl/xdmctl-:0,maysd,mayfn,sched,rsvd,method=classic,auto</value>
    </valuelist>
    <valuelist key="abstractProcess.arguments" type="QVariantList" >
-    <value type="QString" >/home/moshe/qtp/QLuach/QLuach.pro</value>
+    <value type="QString" >/home/moshe/QLuach/QLuach.pro</value>
     <value type="QString" >-spec</value>
     <value type="QString" >linux-g++</value>
     <value type="QString" >-r</value>
-    <value type="QString" >CONFIG+=debug</value>
    </valuelist>
    <value key="abstractProcess.command" type="QString" >/home/moshe/qtsdk-2009.03/qt/bin/qmake</value>
    <value key="abstractProcess.enabled" type="bool" >false</value>
-   <value key="abstractProcess.workingDirectory" type="QString" >/home/moshe/qtp/QLuach</value>
-   <value key="buildConfiguration" type="int" >2</value>
+   <value key="abstractProcess.workingDirectory" type="QString" >/home/moshe/QLuach</value>
+   <value key="buildConfiguration" type="int" >0</value>
   </valuemap>
  </data>
  <data>
@@ -137,7 +136,7 @@
    </valuelist>
    <value key="abstractProcess.command" type="QString" >/usr/bin/make</value>
    <value key="abstractProcess.enabled" type="bool" >true</value>
-   <value key="abstractProcess.workingDirectory" type="QString" >/home/moshe/qtp/QLuach</value>
+   <value key="abstractProcess.workingDirectory" type="QString" >/home/moshe/QLuach</value>
   </valuemap>
  </data>
  <data>

@@ -32,8 +32,8 @@ dayButton::dayButton(QWidget * parent, int jd)
 
     vbox->addLayout(hbox);
 
-    hebday = new QLabel(stringify(date.get_gday()));
-    engday = new QLabel(date.get_hebrew_day_string());
+    engday = new QLabel(stringify(date.get_gday()));
+    hebday = new QLabel(date.get_hebrew_day_string());
 
     hbox->addWidget(hebday);
     hbox->addStretch(1);
@@ -92,20 +92,27 @@ void dayButton::Unselect()
 
 void dayButton::setToday()
 {
+    QFont q; q.setBold(true); q.setPixelSize(17);
+    hebday->setFont(q);
+    engday->setFont(q);
+    
     today = true;
     updateStyle();
 }
 
+
 void dayButton::updateStyle()
 {
+    QString selcolor = "#BBBBFF;";
+
     QString basecolor = "";
 
-    if (today) basecolor = "pink; ";
-    else
-    {
-        if (!selected) basecolor += "#F2F5A9;";
-        else basecolor += "#FFFF33;";
-    }
+    //if (today) basecolor = "#CCFFFF; ";
+    //else
+    //{
+        if (!selected) basecolor += "#EEFFEE;";
+        else basecolor += selcolor;
+    //}
 
 
     QString str =
@@ -114,11 +121,14 @@ void dayButton::updateStyle()
     str +=  basecolor;
 
     str +=
-            "border-radius: 3px; "
+            "border-radius: 10px; "
+            "border-style: solid;"
+            "border-color:#BBBBFF;"
+            "border-width:3px;"
             "} " ;
     str +=
             "dayButton:hover { "
-            "background-color: #FFFF33; "
+            "background-color: " + selcolor +
             "} ";
 
     setStyleSheet(str);

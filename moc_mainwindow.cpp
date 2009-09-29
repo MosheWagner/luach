@@ -1,7 +1,7 @@
 /****************************************************************************
 ** Meta object code from reading C++ file 'mainwindow.h'
 **
-** Created: Thu Sep 24 22:31:05 2009
+** Created: Tue Sep 29 12:05:39 2009
 **      by: The Qt Meta Object Compiler version 61 (Qt 4.5.2)
 **
 ** WARNING! All changes made in this file will be lost!
@@ -23,7 +23,7 @@ static const uint qt_meta_data_MainWindow[] = {
        2,       // revision
        0,       // classname
        0,    0, // classinfo
-      15,   12, // methods
+      17,   12, // methods
        0,    0, // properties
        0,    0, // enums/sets
        0,    0, // constructors
@@ -44,6 +44,8 @@ static const uint qt_meta_data_MainWindow[] = {
      308,   11,   11,   11, 0x08,
      318,   11,   11,   11, 0x08,
      328,   11,   11,   11, 0x08,
+     342,  337,   11,   11, 0x08,
+     364,   11,   11,   11, 0x08,
 
        0        // eod
 };
@@ -58,7 +60,8 @@ static const char qt_meta_stringdata_MainWindow[] = {
     "on_backMonthBTN_clicked()\0clearMonth()\0"
     "firstday\0showMonth(Hdate*)\0readFromStdout()\0"
     "day\0dayClicked(dayButton*)\0nextDay()\0"
-    "backDay()\0redraw()\0"
+    "backDay()\0redraw()\0date\0updateLabels(mHdate*)\0"
+    "gotTimes()\0"
 };
 
 const QMetaObject MainWindow::staticMetaObject = {
@@ -101,9 +104,11 @@ int MainWindow::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
         case 12: nextDay(); break;
         case 13: backDay(); break;
         case 14: redraw(); break;
+        case 15: updateLabels((*reinterpret_cast< mHdate*(*)>(_a[1]))); break;
+        case 16: gotTimes(); break;
         default: ;
         }
-        _id -= 15;
+        _id -= 17;
     }
     return _id;
 }

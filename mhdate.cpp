@@ -20,9 +20,9 @@ mHdate::mHdate()
 {
 }
 
-mHdate::mHdate(int hd, int hm, int hy)
+mHdate::mHdate(Hdate *d)
 {
-    set_hd(hd, hm, hy);
+    set_jd(d->get_julian());
 }
 
 void mHdate::set_hd(int hd, int hm, int hy)

@@ -17,9 +17,10 @@
 #ifndef MHDATE_H
 #define MHDATE_H
 
-#include <hdatepp.h>
 #include <QtGui/QMainWindow>
 #include <QtCore/QObject>
+
+#include <hdatepp.h>
 
 #include "functions.h"
 
@@ -31,7 +32,7 @@ class mHdate : public QObject, public Hdate
 
 public:
     mHdate();
-    mHdate(int hd, int hm, int hy);
+    mHdate(Hdate *d);
 
     void removeMonth();
     void addMonth();

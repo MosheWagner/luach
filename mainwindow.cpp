@@ -36,23 +36,17 @@
 */
 
 //TODO: OK, clean all this mess up...
+//TODO: Comments! comments, comments comments!
 
-
-QProcess *proc;
-
-#include <iostream>
-#include <hdatepp.h>
-#include <locale.h>
-
-
-using namespace std;
-using namespace hdate;
-
+//List of all day button shown
 QList <dayButton *> dayList;
+//Points to the selected button
 dayButton * lastselected;
 
 QStringList weekdays;
 QStringList engmonths;
+
+QProcess *zmanimproc;
 
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent), ui(new Ui::MainWindow)
@@ -71,7 +65,8 @@ MainWindow::MainWindow(QWidget *parent)
     
     lastselected = NULL;
 
-    //Force the locale to hebrew, so Hdate will give Hebrew strings. I don't like this.
+
+    //Force the locale to hebrew, so Hdate will give Hebrew strings. Yup, I don't like this either.
     // TODO: test on windows
     setlocale (LC_ALL, "he_IL.UTF-8");
     
@@ -96,35 +91,25 @@ MainWindow::MainWindow(QWidget *parent)
 
     d.set_hdate(1, today.get_hmonth(), today.get_hyear());
     showMonth(&d);
+
+    //Current time (do something with this):
+    QTime t;
+    print (t.currentTime ().toString());
+
+
 }
 
+
+//Rebuild the calendar from the given first day of the month
 void MainWindow::showMonth(Hdate *firstday)
 {
+    //Clear last month
     clearMonth();
+
+    updateLabels(&current);
 
     //A defualt Hdate class has today's date
     Hdate today;
-
-    ui->monthlabel->setText(firstday->get_hebrew_month_string(0));
-    ui->yearlabel->setText(firstday->get_hebrew_year_string());
-
-    ui->daylabel->setText(current.get_hebrew_day_string());
-
-    ui->engdaylbl->setText(stringify(current.get_gday()));
-
-
-    ui->engmonthlbl->setText(engmonths[current.get_gmonth() - 1]);
-    ui->engyearlbl->setText(stringify(current.get_gyear()));
-    
-    ui->hmonthlbl->setText(firstday->get_hebrew_month_string(0));
-
-    
-    QString gmonths = engmonths[current.get_gmonth() - 1];
-    Hdate e;
-    e.set_hdate(current.getMonthLength(), current.get_hmonth(), current.get_hyear());
-    if (engmonths[e.get_gmonth()-1] != gmonths) gmonths += " - " + engmonths[e.get_gmonth()-1];
-    ui->gmonthlbl->setText(gmonths);
-
 
     Hdate tmpday;
     tmpday.set_hdate(firstday->get_hday(), firstday->get_hmonth(), firstday->get_hyear());
@@ -198,13 +183,12 @@ void MainWindow::dayClicked(dayButton * day)
 
     current.set_jd(day->getHDate()->get_julian());
 
-    ui->daylabel->setText(current.get_hebrew_day_string());
-    ui->engdaylbl->setText(stringify(current.get_gday()));
+    updateLabels(&current);
 }
 
 void MainWindow::readFromStdout()
 {
-    std::cout << QString(proc->readAll()).toStdString() << std::endl;
+    //print( QString(proc->readAllStandardOutput()) );
 }
 
 MainWindow::~MainWindow()
@@ -224,8 +208,7 @@ void MainWindow::nextDay()
     dayList[current.get_julian() - dayList[0]->getHDate()->get_julian()]->Select();
     lastselected = dayList[current.get_julian() - dayList[0]->getHDate()->get_julian()];
 
-    ui->daylabel->setText(current.get_hebrew_day_string());
-    ui->engdaylbl->setText(stringify(current.get_gday()));
+    updateLabels(&current);
 }
 
 void MainWindow::backDay()
@@ -237,8 +220,7 @@ void MainWindow::backDay()
     dayList[current.get_julian() - dayList[0]->getHDate()->get_julian()]->Select();
     lastselected = dayList[current.get_julian() - dayList[0]->getHDate()->get_julian()];
 
-    ui->daylabel->setText(current.get_hebrew_day_string());
-    ui->engdaylbl->setText(stringify(current.get_gday()));
+    updateLabels(&current);
 }
 
 
@@ -282,3 +264,129 @@ void MainWindow::on_doublebackYearBTN_clicked()
 {
     current.removeYear(10);
 }
+
+void MainWindow::updateLabels(mHdate *date)
+{
+    ui->monthlabel->setText(date->get_hebrew_month_string(0));
+    ui->yearlabel->setText(date->get_hebrew_year_string());
+    ui->engyearlbl->setText(stringify(date->get_gyear()));
+    ui->hmonthlbl->setText(date->get_hebrew_month_string(0));
+
+
+    ui->daylabel->setText(current.get_hebrew_day_string());
+    ui->engdaylbl->setText(stringify(current.get_gday()));
+    ui->engmonthlbl->setText(engmonths[current.get_gmonth() - 1]);
+
+    Hdate e;
+
+    e.set_hdate(1, date->get_hmonth(), date->get_hyear());
+    QString gmonths = engmonths[e.get_gmonth() - 1];
+
+    e.set_hdate(date->getMonthLength(), date->get_hmonth(), date->get_hyear());
+    if (engmonths[e.get_gmonth()-1] != gmonths) gmonths += " - " + engmonths[e.get_gmonth()-1];
+    ui->gmonthlbl->setText(gmonths);
+
+
+
+    //Show times:
+
+    delete zmanimproc;
+    zmanimproc = new QProcess(this);
+
+    QStringList args;
+
+    QString dstr = stringify(date->get_gyear()) + "/" + stringify(date->get_gmonth()) + "/" + stringify(date->get_gday());
+
+    args << "-jar" << "/usr/bin/ZmanimCLI.jar" << "-d" << dstr;
+    zmanimproc->start("java", args);
+
+    connect(zmanimproc, SIGNAL(readyReadStandardOutput()), this, SLOT(gotTimes()));
+}
+
+void MainWindow::gotTimes()
+{
+    QString str =  zmanimproc->readAllStandardOutput();
+
+    QStringList times = str.split('\n');
+
+    for (int i=0; i<times.size(); i++)
+    {
+        QString t = times[i].mid(times[i].lastIndexOf(" "));
+        //A time
+        if (times[i][0] == '*')
+        {
+            if (times[i].startsWith("* AlosHashachar:") == true)
+            {
+                //Clear all labels, as this is the first time:
+                // (Maybe unneccesary: )
+                ui->sunriselabel->setText("");
+                ui->shmamgalbl->setText("");
+                ui->shmagralbl->setText("");
+                ui->tfilamgalbl->setText("");
+                ui->tfilagralbl->setText("");
+                ui->hatzotlbl->setText("");
+                ui->minchagdolalbl->setText("");
+                ui->minchaktanalbl->setText("");
+                ui->plaglbl->setText("");
+                ui->skialbl->setText("");
+                ui->tzitslbl->setText("");
+                ui->tzits72lbl->setText("");
+
+
+                //Show alos
+                ui->aloslabel->setText(t);
+            }
+            if (times[i].startsWith("* sunrise:") == true)
+            {
+                ui->sunriselabel->setText(t);
+            }
+            if (times[i].startsWith("* SofZmanShmaMGA:") == true)
+            {
+                ui->shmamgalbl->setText(t);
+            }
+            if (times[i].startsWith("* SofZmanShmaGRA:") == true)
+            {
+                ui->shmagralbl->setText(t);
+            }
+            if (times[i].startsWith("* SofZmanTfilaMGA:") == true)
+            {
+                ui->tfilamgalbl->setText(t);
+            }
+            if (times[i].startsWith("* SofZmanTfilaGRA:") == true)
+            {
+                ui->tfilagralbl->setText(t);
+            }
+            if (times[i].startsWith("* Chatzos:") == true)
+            {
+                ui->hatzotlbl->setText(t);
+            }
+            if (times[i].startsWith("* MinchaGedola:") == true)
+            {
+                ui->minchagdolalbl->setText(t);
+            }
+            if (times[i].startsWith("* MinchaKetana:") == true)
+            {
+                ui->minchaktanalbl->setText(t);
+            }
+            if (times[i].startsWith("* PlagHamincha:") == true)
+            {
+                ui->plaglbl->setText(t);
+            }
+            if (times[i].startsWith("* Sunset:") == true)
+            {
+                ui->skialbl->setText(t);
+            }
+            if (times[i].startsWith("* Tzais:") == true)
+            {
+                ui->tzitslbl->setText(t);
+            }
+            if (times[i].startsWith("* Tzais72:") == true)
+            {
+                ui->tzits72lbl->setText(t);
+            }
+
+        }
+    }
+}
+
+

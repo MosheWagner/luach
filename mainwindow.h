@@ -20,10 +20,16 @@
 #include <QtGui/QMainWindow>
 #include <QProcess>
 #include <QTextCodec>
-#include <iostream>
+#include <QTime>
+
+#include <locale.h>
+#include <hdatepp.h>
+
 #include "daybutton.h"
 #include "functions.h"
 #include "mhdate.h"
+
+using namespace hdate;
 
 namespace Ui
 {
@@ -60,6 +66,10 @@ private slots:
     void backDay();
 
     void redraw();
+
+    void updateLabels(mHdate *date);
+
+    void gotTimes();
 
 
 private:

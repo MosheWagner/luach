@@ -111,6 +111,9 @@
        <property name="maximum">
         <double>99999999.000000000000000</double>
        </property>
+       <property name="singleStep">
+        <double>50.000000000000000</double>
+       </property>
       </widget>
      </item>
      <item row="1" column="1">
@@ -168,6 +171,9 @@
      </item>
      <item>
       <widget class="QDoubleSpinBox" name="offsetLine">
+       <property name="enabled">
+        <bool>false</bool>
+       </property>
        <property name="sizePolicy">
         <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
          <horstretch>0</horstretch>
@@ -211,9 +217,12 @@
     </spacer>
    </item>
    <item>
-    <widget class="QCheckBox" name="checkBox_2">
+    <widget class="QCheckBox" name="saveCheckBox">
      <property name="text">
       <string>שמור מיקום להפעלה הבאה</string>
+     </property>
+     <property name="checked">
+      <bool>true</bool>
      </property>
     </widget>
    </item>

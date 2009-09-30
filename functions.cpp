@@ -100,3 +100,30 @@ void print(int num)
     string str(qstr.toUtf8());
     cout << str << endl;
 }
+
+
+//Writes the given data to the given file path
+void writetofile(QString filename, QString data, bool overwrite)
+{
+    //Open given file
+    QFile outfile(filename);
+    //Set a TextStream to it
+    QTextStream outstream( &outfile );
+
+    QFlag *mode;
+    if (overwrite == false) mode = new QFlag(QIODevice::WriteOnly | QIODevice::Append);
+    //TODO: haw?
+    else mode = mode = new QFlag(QIODevice::WriteOnly);
+
+    //Write the data to the file
+    if (outfile.open(*mode))
+    {
+        outstream << data;
+    }
+    outfile.close();
+
+    delete mode;
+}
+
+
+

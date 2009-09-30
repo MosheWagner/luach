@@ -18,6 +18,9 @@
 #define FUNCTIONS_H
 
 #include <QString>
+#include <QFile>
+#include <QTextStream>
+#include <QTextCodec>
 #include <string>
 #include <iostream>
 
@@ -37,5 +40,9 @@ void print(QString);
 
 //Prints (couts) the given int
 void print(int);
+
+//Writes the given data to the given file path with the given encoding
+void writetofile(QString filename, QString data, bool overwrite = true);
+
 
 #endif // FUNCTIONS_H

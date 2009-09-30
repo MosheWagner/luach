@@ -67,6 +67,9 @@ private slots:
 
     void redraw();
 
+    void saveConfs();
+    void loadConfs();
+
     void updateLabels(mHdate *date);
 
     void gotTimes();

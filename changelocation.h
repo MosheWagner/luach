@@ -29,8 +29,10 @@ private:
 
 signals:
     void changed();
+    void save();
 
 private slots:
+    void on_checkBox_clicked(bool checked);
     void on_okBTN_clicked();
     void on_exitBTN_clicked();
     void gotTZ();

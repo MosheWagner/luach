@@ -73,6 +73,9 @@ QString TimeZone = "Israel";
 double elavation = 800;
 double candleLightingOffset = 18.0;
 
+
+#define CONFPATH ".confs"
+
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent), ui(new Ui::MainWindow)
 {
@@ -100,6 +103,13 @@ MainWindow::MainWindow(QWidget *parent)
     setlocale (LC_ALL, "he_IL.UTF-8");
     setlocale (LC_ALL, "he_IL.utf8");
     
+    locationName = "ירושלים";
+
+    loadConfs();
+
+    connect(ui->exitaction, SIGNAL(triggered()), this, SLOT(close()));
+    connect(ui->changelocationaction, SIGNAL(triggered()), this, SLOT(changeLocationForm()));
+
     //Add weekday labels
     for (int i=0; i<7; i++)
     {
@@ -126,17 +136,16 @@ MainWindow::MainWindow(QWidget *parent)
     QTime t;
     print (t.currentTime ().toString());
 
-    locationName = "ירושלים";
-
-    connect(ui->exitaction, SIGNAL(triggered()), this, SLOT(close()));
-    connect(ui->changelocationaction, SIGNAL(triggered()), this, SLOT(changeLocationForm()));
 }
 
 
 void MainWindow::changeLocationForm()
 {
     cl = new ChangeLocation (this, &locationName, &latitude, &longitude, &TimeZone, &elavation);
+
     connect(cl, SIGNAL(changed()), this, SLOT(redraw()));
+    connect(cl, SIGNAL(save()), this, SLOT(saveConfs()));
+
     cl->show();
 }
 
@@ -482,3 +491,62 @@ void MainWindow::keyPressEvent( QKeyEvent *keyEvent )
 }
 
 
+void MainWindow::saveConfs()
+{
+    QString confs = "";
+
+    confs += "LocationName=" + locationName + "\n";
+    confs += "Latitude=" + stringify(latitude) + "\n";
+    confs += "Longitude=" + stringify(longitude) + "\n";
+    confs += "TimeZone=" + TimeZone + "\n";
+    confs += "Elavation=" + stringify(elavation) + "\n";
+    confs += "CandleLightingOffset=" + stringify(candleLightingOffset) + "\n";
+
+    writetofile(CONFPATH, confs, true);
+}
+
+void MainWindow::loadConfs()
+{
+    QFile infile(CONFPATH);
+
+    if ((infile.open(QIODevice::ReadOnly)))
+    {
+        QString text = infile.readAll();
+        infile.close();
+
+        QStringList lines = text.split('\n');
+
+        for (int i=0; i<lines.size(); i++)
+        {
+            QStringList p = lines[i].split('=');
+
+            if (p.size() == 2)
+            {
+                if (p[0] == "LocationName") locationName = p[1];
+                if (p[0] == "Latitude")
+                {
+                    bool ok; p[1].toDouble(&ok);
+                    if (ok) latitude = p[1].toDouble(&ok);
+                }
+                if (p[0] == "Longitude")
+                {
+                    bool ok; p[1].toDouble(&ok);
+                    if (ok) longitude = p[1].toDouble(&ok);
+                }
+                if (p[0] == "TimeZone") TimeZone = p[1];
+                if (p[0] == "Elavation")
+                {
+                    bool ok; p[1].toDouble(&ok);
+                    if (ok) elavation = p[1].toDouble(&ok);
+                }
+                if (p[0] == "CandleLightingOffset")
+                {
+                    bool ok; p[1].toDouble(&ok);
+                    if (ok) candleLightingOffset = p[1].toDouble(&ok);
+                }
+            }
+        }
+    }
+
+
+}

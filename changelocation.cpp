@@ -88,5 +88,15 @@ void ChangeLocation::on_okBTN_clicked()
 
     emit changed();
 
+
+    //Save changes:
+    if (m_ui->saveCheckBox->isChecked()) emit save();
+
     close();
+}
+
+void ChangeLocation::on_checkBox_clicked(bool checked)
+{
+    m_ui->label_6->setEnabled(checked);
+    m_ui->offsetLine->setEnabled(checked);
 }

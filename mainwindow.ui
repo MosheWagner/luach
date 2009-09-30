@@ -870,6 +870,29 @@
      <height>29</height>
     </rect>
    </property>
+   <property name="layoutDirection">
+    <enum>Qt::RightToLeft</enum>
+   </property>
+   <widget class="QMenu" name="menu">
+    <property name="layoutDirection">
+     <enum>Qt::RightToLeft</enum>
+    </property>
+    <property name="title">
+     <string>הגדרות</string>
+    </property>
+    <addaction name="changelocationaction"/>
+   </widget>
+   <widget class="QMenu" name="menu_2">
+    <property name="layoutDirection">
+     <enum>Qt::RightToLeft</enum>
+    </property>
+    <property name="title">
+     <string>קובץ</string>
+    </property>
+    <addaction name="exitaction"/>
+   </widget>
+   <addaction name="menu"/>
+   <addaction name="menu_2"/>
   </widget>
   <widget class="QStatusBar" name="statusBar"/>
   <widget class="QDockWidget" name="dockWidget">
@@ -1527,6 +1550,24 @@
     </layout>
    </widget>
   </widget>
+  <action name="changelocationaction">
+   <property name="icon">
+    <iconset resource="QLuach.qrc">
+     <normaloff>:/Icons/location.png</normaloff>:/Icons/location.png</iconset>
+   </property>
+   <property name="text">
+    <string>שינוי מיקום</string>
+   </property>
+  </action>
+  <action name="exitaction">
+   <property name="icon">
+    <iconset resource="QLuach.qrc">
+     <normaloff>:/Icons/exit.png</normaloff>:/Icons/exit.png</iconset>
+   </property>
+   <property name="text">
+    <string>יציאה</string>
+   </property>
+  </action>
  </widget>
  <layoutdefault spacing="6" margin="11"/>
  <resources>

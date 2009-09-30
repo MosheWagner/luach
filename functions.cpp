@@ -18,7 +18,7 @@
 
 
 //Converts numbers into strs:
-QString stringify(int x)
+QString stringify(double x)
 {
     QString qs = QString::number(x);
     return qs;

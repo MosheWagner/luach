@@ -25,7 +25,7 @@ using namespace std;
 
 //Converts numbers into strings:
 // (Returns a QString representing the given value)
-QString stringify(int);
+QString stringify(double);
 
 
 //Returns a hebrew string representing the given gematria value

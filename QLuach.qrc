@@ -5,5 +5,8 @@
         <file>Icons/icon.png</file>
         <file>Icons/arrow-left-double.png</file>
         <file>Icons/arrow-right-double.png</file>
+        <file>Icons/location.png</file>
+        <file>Icons/calendar.png</file>
+        <file>Icons/exit.png</file>
     </qresource>
 </RCC>

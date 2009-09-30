@@ -35,12 +35,18 @@
 
 */
 
+//TODO: Load/Save confs
+
+//TODO: g_date navagation
 //TODO: Make g_date smaller
 //TODO: Add no g_date option
 //TODO: Align holidays to center
-//TODO: Sfirat Hoomer
+//TODO: Sfirat Haomer
 //TODO: Days of חנוכה וחול המועד
+//TODO: Knisat shabat in the luach
+//TODO: ברכת החמה
 
+//TODO: fix size of labels on top
 
 
 //TODO: OK, clean all this mess up...
@@ -56,6 +62,17 @@ QStringList engmonths;
 
 QProcess *zmanimproc;
 
+///
+ChangeLocation *cl;
+
+
+QString locationName;
+double latitude = 31.77805; //קו רוחב
+double longitude = 35.235149; //קו אורך
+QString TimeZone = "Israel";
+double elavation = 800;
+double candleLightingOffset = 18.0;
+
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent), ui(new Ui::MainWindow)
 {
@@ -63,6 +80,10 @@ MainWindow::MainWindow(QWidget *parent)
 
     //Set all QString to work with unicode
     QTextCodec::setCodecForCStrings(QTextCodec::codecForName("utf8"));
+
+
+    setWindowIcon(QIcon(":/Icons/calendar.png"));
+    setWindowTitle("QT Luach");
 
     connect( &current, SIGNAL(month_changed()), this, SLOT(redraw()));
 
@@ -77,6 +98,7 @@ MainWindow::MainWindow(QWidget *parent)
     //Force the locale to hebrew, so Hdate will give Hebrew strings. Yup, I don't like this either.
     // TODO: test on windows
     setlocale (LC_ALL, "he_IL.UTF-8");
+    setlocale (LC_ALL, "he_IL.utf8");
     
     //Add weekday labels
     for (int i=0; i<7; i++)
@@ -104,9 +126,19 @@ MainWindow::MainWindow(QWidget *parent)
     QTime t;
     print (t.currentTime ().toString());
 
+    locationName = "ירושלים";
 
+    connect(ui->exitaction, SIGNAL(triggered()), this, SLOT(close()));
+    connect(ui->changelocationaction, SIGNAL(triggered()), this, SLOT(changeLocationForm()));
 }
 
+
+void MainWindow::changeLocationForm()
+{
+    cl = new ChangeLocation (this, &locationName, &latitude, &longitude, &TimeZone, &elavation);
+    connect(cl, SIGNAL(changed()), this, SLOT(redraw()));
+    cl->show();
+}
 
 //Rebuild the calendar from the given first day of the month
 void MainWindow::showMonth(Hdate *firstday)
@@ -298,7 +330,7 @@ void MainWindow::updateLabels(mHdate *date)
 
     QString dstr = stringify(date->get_gyear()) + "/" + stringify(date->get_gmonth()) + "/" + stringify(date->get_gday());
 
-    args << "-jar" << "/usr/bin/ZmanimCLI.jar" << "-d" << dstr;
+    args << "-jar" << "/usr/bin/ZmanimCLI.jar" << "-d" << dstr << "-lat" << stringify(latitude) << "-lon" << stringify(longitude) << "-e" << stringify(elavation) << "-tz" << TimeZone;
     zmanimproc->start("java", args);
 
     connect(zmanimproc, SIGNAL(readyReadStandardOutput()), this, SLOT(gotTimes()));

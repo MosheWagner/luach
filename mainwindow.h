@@ -28,6 +28,7 @@
 #include "daybutton.h"
 #include "functions.h"
 #include "mhdate.h"
+#include "changelocation.h"
 
 using namespace hdate;
 
@@ -62,8 +63,6 @@ private slots:
 
     void dayClicked(dayButton * day);
 
-    //void nextDay();
-    //void backDay();
     void changeDay(int i);
 
     void redraw();
@@ -72,7 +71,7 @@ private slots:
 
     void gotTimes();
 
-
+    void changeLocationForm();
 
     QString dafYomi(int jd);
 

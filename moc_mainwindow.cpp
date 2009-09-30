@@ -1,7 +1,7 @@
 /****************************************************************************
 ** Meta object code from reading C++ file 'mainwindow.h'
 **
-** Created: Wed Sep 30 12:04:27 2009
+** Created: Wed Sep 30 13:37:00 2009
 **      by: The Qt Meta Object Compiler version 61 (Qt 4.5.2)
 **
 ** WARNING! All changes made in this file will be lost!
@@ -23,7 +23,7 @@ static const uint qt_meta_data_MainWindow[] = {
        2,       // revision
        0,       // classname
        0,    0, // classinfo
-      17,   12, // methods
+      18,   12, // methods
        0,    0, // properties
        0,    0, // enums/sets
        0,    0, // constructors
@@ -45,7 +45,8 @@ static const uint qt_meta_data_MainWindow[] = {
      325,   11,   11,   11, 0x08,
      339,  334,   11,   11, 0x08,
      361,   11,   11,   11, 0x08,
-     383,  380,  372,   11, 0x08,
+     372,   11,   11,   11, 0x08,
+     404,  401,  393,   11, 0x08,
 
        0        // eod
 };
@@ -62,7 +63,8 @@ static const char qt_meta_stringdata_MainWindow[] = {
     "day\0dayClicked(dayButton*)\0i\0"
     "changeDay(int)\0redraw()\0date\0"
     "updateLabels(mHdate*)\0gotTimes()\0"
-    "QString\0jd\0dafYomi(int)\0"
+    "changeLocationForm()\0QString\0jd\0"
+    "dafYomi(int)\0"
 };
 
 const QMetaObject MainWindow::staticMetaObject = {
@@ -106,11 +108,12 @@ int MainWindow::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
         case 13: redraw(); break;
         case 14: updateLabels((*reinterpret_cast< mHdate*(*)>(_a[1]))); break;
         case 15: gotTimes(); break;
-        case 16: { QString _r = dafYomi((*reinterpret_cast< int(*)>(_a[1])));
+        case 16: changeLocationForm(); break;
+        case 17: { QString _r = dafYomi((*reinterpret_cast< int(*)>(_a[1])));
             if (_a[0]) *reinterpret_cast< QString*>(_a[0]) = _r; }  break;
         default: ;
         }
-        _id -= 17;
+        _id -= 18;
     }
     return _id;
 }

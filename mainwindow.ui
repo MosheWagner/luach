@@ -443,20 +443,14 @@
      <number>25</number>
     </property>
     <item>
-     <layout class="QHBoxLayout" name="horizontalLayout" stretch="0,0,0,0,0,0,0,0,0">
-      <property name="spacing">
-       <number>-1</number>
-      </property>
-      <property name="leftMargin">
+     <layout class="QGridLayout" name="gridLayout_2" columnstretch="100,100,100,100,100,100,100,0,0,0">
+      <property name="horizontalSpacing">
        <number>20</number>
       </property>
-      <property name="topMargin">
-       <number>0</number>
+      <property name="verticalSpacing">
+       <number>-1</number>
       </property>
-      <property name="rightMargin">
-       <number>10</number>
-      </property>
-      <item>
+      <item row="0" column="0">
        <layout class="QHBoxLayout" name="horizontalLayout_4">
         <property name="spacing">
          <number>2</number>
@@ -523,7 +517,7 @@
         </item>
        </layout>
       </item>
-      <item>
+      <item row="0" column="1">
        <layout class="QHBoxLayout" name="horizontalLayout_3">
         <property name="spacing">
          <number>2</number>
@@ -593,7 +587,7 @@
         </item>
        </layout>
       </item>
-      <item>
+      <item row="0" column="2">
        <layout class="QHBoxLayout" name="horizontalLayout_2">
         <property name="spacing">
          <number>0</number>
@@ -694,20 +688,7 @@
         </item>
        </layout>
       </item>
-      <item>
-       <spacer name="horizontalSpacer_10">
-        <property name="orientation">
-         <enum>Qt::Horizontal</enum>
-        </property>
-        <property name="sizeHint" stdset="0">
-         <size>
-          <width>40</width>
-          <height>20</height>
-         </size>
-        </property>
-       </spacer>
-      </item>
-      <item>
+      <item row="0" column="3">
        <layout class="QVBoxLayout" name="verticalLayout_2">
         <property name="leftMargin">
          <number>0</number>
@@ -756,20 +737,7 @@
         </item>
        </layout>
       </item>
-      <item>
-       <spacer name="horizontalSpacer_11">
-        <property name="orientation">
-         <enum>Qt::Horizontal</enum>
-        </property>
-        <property name="sizeHint" stdset="0">
-         <size>
-          <width>40</width>
-          <height>20</height>
-         </size>
-        </property>
-       </spacer>
-      </item>
-      <item>
+      <item row="0" column="4">
        <widget class="QLabel" name="engdaylbl">
         <property name="sizePolicy">
          <sizepolicy hsizetype="Maximum" vsizetype="Maximum">
@@ -792,7 +760,7 @@
         </property>
        </widget>
       </item>
-      <item>
+      <item row="0" column="5">
        <widget class="QLabel" name="engmonthlbl">
         <property name="sizePolicy">
          <sizepolicy hsizetype="Maximum" vsizetype="Maximum">
@@ -815,7 +783,7 @@
         </property>
        </widget>
       </item>
-      <item>
+      <item row="0" column="6">
        <widget class="QLabel" name="engyearlbl">
         <property name="sizePolicy">
          <sizepolicy hsizetype="Maximum" vsizetype="Maximum">

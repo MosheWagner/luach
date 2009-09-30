@@ -1,7 +1,7 @@
 /********************************************************************************
 ** Form generated from reading ui file 'mainwindow.ui'
 **
-** Created: Wed Sep 30 16:01:14 2009
+** Created: Wed Sep 30 18:59:25 2009
 **      by: Qt User Interface Compiler version 4.5.2
 **
 ** WARNING! All changes made in this file will be lost when recompiling ui file!
@@ -39,7 +39,7 @@ public:
     QAction *gdateaction;
     QWidget *centralWidget;
     QVBoxLayout *verticalLayout;
-    QHBoxLayout *horizontalLayout;
+    QGridLayout *gridLayout_2;
     QHBoxLayout *horizontalLayout_4;
     QToolButton *backDayBTN;
     QLabel *daylabel;
@@ -54,11 +54,9 @@ public:
     QLabel *yearlabel;
     QToolButton *nextYearBTN;
     QToolButton *doublenextYearBTN;
-    QSpacerItem *horizontalSpacer_10;
     QVBoxLayout *verticalLayout_2;
     QLabel *hmonthlbl;
     QLabel *gmonthlbl;
-    QSpacerItem *horizontalSpacer_11;
     QLabel *engdaylbl;
     QLabel *engmonthlbl;
     QLabel *engyearlbl;
@@ -192,10 +190,11 @@ public:
         verticalLayout->setSpacing(25);
         verticalLayout->setMargin(11);
         verticalLayout->setObjectName(QString::fromUtf8("verticalLayout"));
-        horizontalLayout = new QHBoxLayout();
-        horizontalLayout->setSpacing(-1);
-        horizontalLayout->setObjectName(QString::fromUtf8("horizontalLayout"));
-        horizontalLayout->setContentsMargins(20, 0, 10, -1);
+        gridLayout_2 = new QGridLayout();
+        gridLayout_2->setSpacing(6);
+        gridLayout_2->setObjectName(QString::fromUtf8("gridLayout_2"));
+        gridLayout_2->setHorizontalSpacing(20);
+        gridLayout_2->setVerticalSpacing(-1);
         horizontalLayout_4 = new QHBoxLayout();
         horizontalLayout_4->setSpacing(2);
         horizontalLayout_4->setObjectName(QString::fromUtf8("horizontalLayout_4"));
@@ -237,7 +236,7 @@ public:
         horizontalLayout_4->addWidget(nextDayBTN);
 
 
-        horizontalLayout->addLayout(horizontalLayout_4);
+        gridLayout_2->addLayout(horizontalLayout_4, 0, 0, 1, 1);
 
         horizontalLayout_3 = new QHBoxLayout();
         horizontalLayout_3->setSpacing(2);
@@ -270,7 +269,7 @@ public:
         horizontalLayout_3->addWidget(nextMonthBTN);
 
 
-        horizontalLayout->addLayout(horizontalLayout_3);
+        gridLayout_2->addLayout(horizontalLayout_3, 0, 1, 1, 1);
 
         horizontalLayout_2 = new QHBoxLayout();
         horizontalLayout_2->setSpacing(0);
@@ -322,11 +321,7 @@ public:
         horizontalLayout_2->addWidget(doublenextYearBTN);
 
 
-        horizontalLayout->addLayout(horizontalLayout_2);
-
-        horizontalSpacer_10 = new QSpacerItem(40, 20, QSizePolicy::Expanding, QSizePolicy::Minimum);
-
-        horizontalLayout->addItem(horizontalSpacer_10);
+        gridLayout_2->addLayout(horizontalLayout_2, 0, 2, 1, 1);
 
         verticalLayout_2 = new QVBoxLayout();
         verticalLayout_2->setSpacing(6);
@@ -358,11 +353,7 @@ public:
         verticalLayout_2->addWidget(gmonthlbl);
 
 
-        horizontalLayout->addLayout(verticalLayout_2);
-
-        horizontalSpacer_11 = new QSpacerItem(40, 20, QSizePolicy::Expanding, QSizePolicy::Minimum);
-
-        horizontalLayout->addItem(horizontalSpacer_11);
+        gridLayout_2->addLayout(verticalLayout_2, 0, 3, 1, 1);
 
         engdaylbl = new QLabel(centralWidget);
         engdaylbl->setObjectName(QString::fromUtf8("engdaylbl"));
@@ -375,7 +366,7 @@ public:
         engdaylbl->setFont(font3);
         engdaylbl->setLayoutDirection(Qt::LeftToRight);
 
-        horizontalLayout->addWidget(engdaylbl);
+        gridLayout_2->addWidget(engdaylbl, 0, 4, 1, 1);
 
         engmonthlbl = new QLabel(centralWidget);
         engmonthlbl->setObjectName(QString::fromUtf8("engmonthlbl"));
@@ -384,7 +375,7 @@ public:
         engmonthlbl->setFont(font3);
         engmonthlbl->setLayoutDirection(Qt::LeftToRight);
 
-        horizontalLayout->addWidget(engmonthlbl);
+        gridLayout_2->addWidget(engmonthlbl, 0, 5, 1, 1);
 
         engyearlbl = new QLabel(centralWidget);
         engyearlbl->setObjectName(QString::fromUtf8("engyearlbl"));
@@ -393,10 +384,17 @@ public:
         engyearlbl->setFont(font3);
         engyearlbl->setLayoutDirection(Qt::LeftToRight);
 
-        horizontalLayout->addWidget(engyearlbl);
+        gridLayout_2->addWidget(engyearlbl, 0, 6, 1, 1);
 
+        gridLayout_2->setColumnStretch(0, 100);
+        gridLayout_2->setColumnStretch(1, 100);
+        gridLayout_2->setColumnStretch(2, 100);
+        gridLayout_2->setColumnStretch(3, 100);
+        gridLayout_2->setColumnStretch(4, 100);
+        gridLayout_2->setColumnStretch(5, 100);
+        gridLayout_2->setColumnStretch(6, 100);
 
-        verticalLayout->addLayout(horizontalLayout);
+        verticalLayout->addLayout(gridLayout_2);
 
         gridLayout = new QGridLayout();
         gridLayout->setSpacing(3);

@@ -80,7 +80,8 @@ double candleLightingOffset = 18.0;
 
 bool ShowGDate = true;
 
-#define CONFPATH ".confs"
+#define LOCATIONCONFPATH ".locationconf"
+#define DISPCONFPATH ".dispconf"
 
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent), ui(new Ui::MainWindow)
@@ -115,7 +116,7 @@ MainWindow::MainWindow(QWidget *parent)
 
     connect(ui->exitaction, SIGNAL(triggered()), this, SLOT(close()));
     connect(ui->changelocationaction, SIGNAL(triggered()), this, SLOT(changeLocationForm()));
-    connect(ui->gdateaction, SIGNAL(triggered(bool)), this, SLOT(toggleGDate(bool)));
+    connect(ui->gdateaction, SIGNAL(toggled(bool)), this, SLOT(toggleGDate(bool)));
 
     //Add weekday labels
     for (int i=0; i<7; i++)
@@ -249,6 +250,8 @@ void MainWindow::readFromStdout()
 
 MainWindow::~MainWindow()
 {
+    saveDispConfs();
+
     clearMonth();
 
     delete ui;
@@ -515,12 +518,23 @@ void MainWindow::saveConfs()
     confs += "Elavation=" + stringify(elavation) + "\n";
     confs += "CandleLightingOffset=" + stringify(candleLightingOffset) + "\n";
 
-    writetofile(CONFPATH, confs, true);
+    writetofile(LOCATIONCONFPATH, confs, true);
 }
+
+void MainWindow::saveDispConfs()
+{
+    QString confs = "";
+
+    if (ShowGDate) confs += "ShowGDate=True\n";
+    else confs += "ShowGDate=False\n";
+
+    writetofile(DISPCONFPATH, confs, true);
+}
+
 
 void MainWindow::loadConfs()
 {
-    QFile infile(CONFPATH);
+    QFile infile(LOCATIONCONFPATH);
 
     if ((infile.open(QIODevice::ReadOnly)))
     {
@@ -561,9 +575,40 @@ void MainWindow::loadConfs()
         }
     }
 
+    //Display Confs
+
+    infile.setFileName(DISPCONFPATH);
+    if ((infile.open(QIODevice::ReadOnly)))
+    {
+        QString text = infile.readAll();
+        infile.close();
+
+        QStringList lines = text.split('\n');
+
+        for (int i=0; i<lines.size(); i++)
+        {
+            QStringList p = lines[i].split('=');
+
+            if (p.size() == 2)
+            {
+                if (p[0] == "ShowGDate")
+                {
+                    if (p[1] == "False")
+                    {
+                        ui->gdateaction->setChecked(false);
+
+                        ShowGDate = false;
+                        ui->engdaylbl->setVisible(false);
+                        ui->engmonthlbl->setVisible(false);
+                        ui->engyearlbl->setVisible(false);
+                        ui->gmonthlbl->setVisible(false);
+                    }
+                }
+            }
+        }
+    }
 
 }
-
 
 void MainWindow::toggleGDate(bool yes)
 {

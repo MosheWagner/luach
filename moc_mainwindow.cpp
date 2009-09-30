@@ -1,7 +1,7 @@
 /****************************************************************************
 ** Meta object code from reading C++ file 'mainwindow.h'
 **
-** Created: Wed Sep 30 16:23:24 2009
+** Created: Wed Sep 30 19:00:13 2009
 **      by: The Qt Meta Object Compiler version 61 (Qt 4.5.2)
 **
 ** WARNING! All changes made in this file will be lost!
@@ -23,7 +23,7 @@ static const uint qt_meta_data_MainWindow[] = {
        2,       // revision
        0,       // classname
        0,    0, // classinfo
-      21,   12, // methods
+      22,   12, // methods
        0,    0, // properties
        0,    0, // enums/sets
        0,    0, // constructors
@@ -45,11 +45,12 @@ static const uint qt_meta_data_MainWindow[] = {
      325,   11,   11,   11, 0x08,
      334,   11,   11,   11, 0x08,
      346,   11,   11,   11, 0x08,
-     362,  358,   11,   11, 0x08,
-     385,  380,   11,   11, 0x08,
-     407,   11,   11,   11, 0x08,
-     418,   11,   11,   11, 0x08,
-     450,  447,  439,   11, 0x08,
+     362,   11,   11,   11, 0x08,
+     378,  374,   11,   11, 0x08,
+     401,  396,   11,   11, 0x08,
+     423,   11,   11,   11, 0x08,
+     434,   11,   11,   11, 0x08,
+     466,  463,  455,   11, 0x08,
 
        0        // eod
 };
@@ -65,10 +66,10 @@ static const char qt_meta_stringdata_MainWindow[] = {
     "firstday\0showMonth(Hdate*)\0readFromStdout()\0"
     "day\0dayClicked(dayButton*)\0i\0"
     "changeDay(int)\0redraw()\0saveConfs()\0"
-    "loadConfs()\0yes\0toggleGDate(bool)\0"
-    "date\0updateLabels(mHdate*)\0gotTimes()\0"
-    "changeLocationForm()\0QString\0jd\0"
-    "dafYomi(int)\0"
+    "saveDispConfs()\0loadConfs()\0yes\0"
+    "toggleGDate(bool)\0date\0updateLabels(mHdate*)\0"
+    "gotTimes()\0changeLocationForm()\0QString\0"
+    "jd\0dafYomi(int)\0"
 };
 
 const QMetaObject MainWindow::staticMetaObject = {
@@ -111,16 +112,17 @@ int MainWindow::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
         case 12: changeDay((*reinterpret_cast< int(*)>(_a[1]))); break;
         case 13: redraw(); break;
         case 14: saveConfs(); break;
-        case 15: loadConfs(); break;
-        case 16: toggleGDate((*reinterpret_cast< bool(*)>(_a[1]))); break;
-        case 17: updateLabels((*reinterpret_cast< mHdate*(*)>(_a[1]))); break;
-        case 18: gotTimes(); break;
-        case 19: changeLocationForm(); break;
-        case 20: { QString _r = dafYomi((*reinterpret_cast< int(*)>(_a[1])));
+        case 15: saveDispConfs(); break;
+        case 16: loadConfs(); break;
+        case 17: toggleGDate((*reinterpret_cast< bool(*)>(_a[1]))); break;
+        case 18: updateLabels((*reinterpret_cast< mHdate*(*)>(_a[1]))); break;
+        case 19: gotTimes(); break;
+        case 20: changeLocationForm(); break;
+        case 21: { QString _r = dafYomi((*reinterpret_cast< int(*)>(_a[1])));
             if (_a[0]) *reinterpret_cast< QString*>(_a[0]) = _r; }  break;
         default: ;
         }
-        _id -= 21;
+        _id -= 22;
     }
     return _id;
 }

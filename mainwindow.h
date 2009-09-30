@@ -68,6 +68,7 @@ private slots:
     void redraw();
 
     void saveConfs();
+    void saveDispConfs();
     void loadConfs();
 
     void toggleGDate(bool yes);
@@ -85,6 +86,7 @@ private:
 
     //Deals with keyboard events
     void keyPressEvent( QKeyEvent *keyEvent );
+
 
     Ui::MainWindow *ui;
 };

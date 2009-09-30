@@ -1,7 +1,7 @@
 /********************************************************************************
 ** Form generated from reading ui file 'mainwindow.ui'
 **
-** Created: Tue Sep 29 12:28:53 2009
+** Created: Wed Sep 30 11:57:51 2009
 **      by: Qt User Interface Compiler version 4.5.2
 **
 ** WARNING! All changes made in this file will be lost when recompiling ui file!
@@ -90,12 +90,16 @@ public:
     QLabel *shmagralbl;
     QLabel *shmamgalbl;
     QLabel *label_3;
+    QLabel *label_4;
+    QLabel *label_13;
+    QSpacerItem *verticalSpacer;
+    QLabel *dafyomilbl;
 
     void setupUi(QMainWindow *MainWindow)
     {
         if (MainWindow->objectName().isEmpty())
             MainWindow->setObjectName(QString::fromUtf8("MainWindow"));
-        MainWindow->resize(998, 512);
+        MainWindow->resize(1001, 532);
         QPalette palette;
         QBrush brush(QColor(0, 0, 0, 255));
         brush.setStyle(Qt::SolidPattern);
@@ -384,7 +388,7 @@ public:
         MainWindow->setCentralWidget(centralWidget);
         menuBar = new QMenuBar(MainWindow);
         menuBar->setObjectName(QString::fromUtf8("menuBar"));
-        menuBar->setGeometry(QRect(0, 0, 998, 29));
+        menuBar->setGeometry(QRect(0, 0, 1001, 29));
         MainWindow->setMenuBar(menuBar);
         statusBar = new QStatusBar(MainWindow);
         statusBar->setObjectName(QString::fromUtf8("statusBar"));
@@ -411,8 +415,9 @@ public:
         label_2->setSizePolicy(sizePolicy);
         label_2->setLayoutDirection(Qt::RightToLeft);
         label_2->setAlignment(Qt::AlignJustify|Qt::AlignVCenter);
+        label_2->setTextInteractionFlags(Qt::TextSelectableByKeyboard|Qt::TextSelectableByMouse);
 
-        formLayout->setWidget(1, QFormLayout::LabelRole, label_2);
+        formLayout->setWidget(2, QFormLayout::LabelRole, label_2);
 
         aloslabel = new QLabel(dockWidgetContents);
         aloslabel->setObjectName(QString::fromUtf8("aloslabel"));
@@ -420,8 +425,9 @@ public:
         aloslabel->setSizePolicy(sizePolicy);
         aloslabel->setLayoutDirection(Qt::RightToLeft);
         aloslabel->setAlignment(Qt::AlignJustify|Qt::AlignVCenter);
+        aloslabel->setTextInteractionFlags(Qt::TextSelectableByKeyboard|Qt::TextSelectableByMouse);
 
-        formLayout->setWidget(1, QFormLayout::FieldRole, aloslabel);
+        formLayout->setWidget(2, QFormLayout::FieldRole, aloslabel);
 
         label = new QLabel(dockWidgetContents);
         label->setObjectName(QString::fromUtf8("label"));
@@ -429,8 +435,9 @@ public:
         label->setSizePolicy(sizePolicy);
         label->setLayoutDirection(Qt::RightToLeft);
         label->setAlignment(Qt::AlignJustify|Qt::AlignVCenter);
+        label->setTextInteractionFlags(Qt::TextSelectableByKeyboard|Qt::TextSelectableByMouse);
 
-        formLayout->setWidget(2, QFormLayout::LabelRole, label);
+        formLayout->setWidget(3, QFormLayout::LabelRole, label);
 
         sunriselabel = new QLabel(dockWidgetContents);
         sunriselabel->setObjectName(QString::fromUtf8("sunriselabel"));
@@ -439,9 +446,9 @@ public:
         sunriselabel->setLayoutDirection(Qt::RightToLeft);
         sunriselabel->setLineWidth(1);
         sunriselabel->setAlignment(Qt::AlignJustify|Qt::AlignVCenter);
-        sunriselabel->setTextInteractionFlags(Qt::TextSelectableByMouse);
+        sunriselabel->setTextInteractionFlags(Qt::TextSelectableByKeyboard|Qt::TextSelectableByMouse);
 
-        formLayout->setWidget(2, QFormLayout::FieldRole, sunriselabel);
+        formLayout->setWidget(3, QFormLayout::FieldRole, sunriselabel);
 
         label_5 = new QLabel(dockWidgetContents);
         label_5->setObjectName(QString::fromUtf8("label_5"));
@@ -449,8 +456,9 @@ public:
         label_5->setSizePolicy(sizePolicy);
         label_5->setLayoutDirection(Qt::RightToLeft);
         label_5->setAlignment(Qt::AlignJustify|Qt::AlignVCenter);
+        label_5->setTextInteractionFlags(Qt::TextSelectableByKeyboard|Qt::TextSelectableByMouse);
 
-        formLayout->setWidget(5, QFormLayout::LabelRole, label_5);
+        formLayout->setWidget(6, QFormLayout::LabelRole, label_5);
 
         label_6 = new QLabel(dockWidgetContents);
         label_6->setObjectName(QString::fromUtf8("label_6"));
@@ -458,8 +466,9 @@ public:
         label_6->setSizePolicy(sizePolicy);
         label_6->setLayoutDirection(Qt::RightToLeft);
         label_6->setAlignment(Qt::AlignJustify|Qt::AlignVCenter);
+        label_6->setTextInteractionFlags(Qt::TextSelectableByKeyboard|Qt::TextSelectableByMouse);
 
-        formLayout->setWidget(6, QFormLayout::LabelRole, label_6);
+        formLayout->setWidget(7, QFormLayout::LabelRole, label_6);
 
         tfilamgalbl = new QLabel(dockWidgetContents);
         tfilamgalbl->setObjectName(QString::fromUtf8("tfilamgalbl"));
@@ -467,8 +476,9 @@ public:
         tfilamgalbl->setSizePolicy(sizePolicy);
         tfilamgalbl->setLayoutDirection(Qt::RightToLeft);
         tfilamgalbl->setAlignment(Qt::AlignJustify|Qt::AlignVCenter);
+        tfilamgalbl->setTextInteractionFlags(Qt::TextSelectableByKeyboard|Qt::TextSelectableByMouse);
 
-        formLayout->setWidget(6, QFormLayout::FieldRole, tfilamgalbl);
+        formLayout->setWidget(7, QFormLayout::FieldRole, tfilamgalbl);
 
         label_7 = new QLabel(dockWidgetContents);
         label_7->setObjectName(QString::fromUtf8("label_7"));
@@ -476,8 +486,9 @@ public:
         label_7->setSizePolicy(sizePolicy);
         label_7->setLayoutDirection(Qt::RightToLeft);
         label_7->setAlignment(Qt::AlignJustify|Qt::AlignVCenter);
+        label_7->setTextInteractionFlags(Qt::TextSelectableByKeyboard|Qt::TextSelectableByMouse);
 
-        formLayout->setWidget(7, QFormLayout::LabelRole, label_7);
+        formLayout->setWidget(8, QFormLayout::LabelRole, label_7);
 
         label_8 = new QLabel(dockWidgetContents);
         label_8->setObjectName(QString::fromUtf8("label_8"));
@@ -485,8 +496,9 @@ public:
         label_8->setSizePolicy(sizePolicy);
         label_8->setLayoutDirection(Qt::RightToLeft);
         label_8->setAlignment(Qt::AlignJustify|Qt::AlignVCenter);
+        label_8->setTextInteractionFlags(Qt::TextSelectableByKeyboard|Qt::TextSelectableByMouse);
 
-        formLayout->setWidget(8, QFormLayout::LabelRole, label_8);
+        formLayout->setWidget(9, QFormLayout::LabelRole, label_8);
 
         hatzotlbl = new QLabel(dockWidgetContents);
         hatzotlbl->setObjectName(QString::fromUtf8("hatzotlbl"));
@@ -494,8 +506,9 @@ public:
         hatzotlbl->setSizePolicy(sizePolicy);
         hatzotlbl->setLayoutDirection(Qt::RightToLeft);
         hatzotlbl->setAlignment(Qt::AlignJustify|Qt::AlignVCenter);
+        hatzotlbl->setTextInteractionFlags(Qt::TextSelectableByKeyboard|Qt::TextSelectableByMouse);
 
-        formLayout->setWidget(8, QFormLayout::FieldRole, hatzotlbl);
+        formLayout->setWidget(9, QFormLayout::FieldRole, hatzotlbl);
 
         label_9 = new QLabel(dockWidgetContents);
         label_9->setObjectName(QString::fromUtf8("label_9"));
@@ -503,8 +516,9 @@ public:
         label_9->setSizePolicy(sizePolicy);
         label_9->setLayoutDirection(Qt::RightToLeft);
         label_9->setAlignment(Qt::AlignJustify|Qt::AlignVCenter);
+        label_9->setTextInteractionFlags(Qt::TextSelectableByKeyboard|Qt::TextSelectableByMouse);
 
-        formLayout->setWidget(9, QFormLayout::LabelRole, label_9);
+        formLayout->setWidget(10, QFormLayout::LabelRole, label_9);
 
         minchagdolalbl = new QLabel(dockWidgetContents);
         minchagdolalbl->setObjectName(QString::fromUtf8("minchagdolalbl"));
@@ -512,8 +526,9 @@ public:
         minchagdolalbl->setSizePolicy(sizePolicy);
         minchagdolalbl->setLayoutDirection(Qt::RightToLeft);
         minchagdolalbl->setAlignment(Qt::AlignJustify|Qt::AlignVCenter);
+        minchagdolalbl->setTextInteractionFlags(Qt::TextSelectableByKeyboard|Qt::TextSelectableByMouse);
 
-        formLayout->setWidget(9, QFormLayout::FieldRole, minchagdolalbl);
+        formLayout->setWidget(10, QFormLayout::FieldRole, minchagdolalbl);
 
         label_10 = new QLabel(dockWidgetContents);
         label_10->setObjectName(QString::fromUtf8("label_10"));
@@ -521,8 +536,9 @@ public:
         label_10->setSizePolicy(sizePolicy);
         label_10->setLayoutDirection(Qt::RightToLeft);
         label_10->setAlignment(Qt::AlignJustify|Qt::AlignVCenter);
+        label_10->setTextInteractionFlags(Qt::TextSelectableByKeyboard|Qt::TextSelectableByMouse);
 
-        formLayout->setWidget(10, QFormLayout::LabelRole, label_10);
+        formLayout->setWidget(11, QFormLayout::LabelRole, label_10);
 
         minchaktanalbl = new QLabel(dockWidgetContents);
         minchaktanalbl->setObjectName(QString::fromUtf8("minchaktanalbl"));
@@ -530,8 +546,9 @@ public:
         minchaktanalbl->setSizePolicy(sizePolicy);
         minchaktanalbl->setLayoutDirection(Qt::RightToLeft);
         minchaktanalbl->setAlignment(Qt::AlignJustify|Qt::AlignVCenter);
+        minchaktanalbl->setTextInteractionFlags(Qt::TextSelectableByKeyboard|Qt::TextSelectableByMouse);
 
-        formLayout->setWidget(10, QFormLayout::FieldRole, minchaktanalbl);
+        formLayout->setWidget(11, QFormLayout::FieldRole, minchaktanalbl);
 
         label_11 = new QLabel(dockWidgetContents);
         label_11->setObjectName(QString::fromUtf8("label_11"));
@@ -539,8 +556,9 @@ public:
         label_11->setSizePolicy(sizePolicy);
         label_11->setLayoutDirection(Qt::RightToLeft);
         label_11->setAlignment(Qt::AlignJustify|Qt::AlignVCenter);
+        label_11->setTextInteractionFlags(Qt::TextSelectableByKeyboard|Qt::TextSelectableByMouse);
 
-        formLayout->setWidget(11, QFormLayout::LabelRole, label_11);
+        formLayout->setWidget(12, QFormLayout::LabelRole, label_11);
 
         plaglbl = new QLabel(dockWidgetContents);
         plaglbl->setObjectName(QString::fromUtf8("plaglbl"));
@@ -548,8 +566,9 @@ public:
         plaglbl->setSizePolicy(sizePolicy);
         plaglbl->setLayoutDirection(Qt::RightToLeft);
         plaglbl->setAlignment(Qt::AlignJustify|Qt::AlignVCenter);
+        plaglbl->setTextInteractionFlags(Qt::TextSelectableByKeyboard|Qt::TextSelectableByMouse);
 
-        formLayout->setWidget(11, QFormLayout::FieldRole, plaglbl);
+        formLayout->setWidget(12, QFormLayout::FieldRole, plaglbl);
 
         label_12 = new QLabel(dockWidgetContents);
         label_12->setObjectName(QString::fromUtf8("label_12"));
@@ -557,8 +576,9 @@ public:
         label_12->setSizePolicy(sizePolicy);
         label_12->setLayoutDirection(Qt::RightToLeft);
         label_12->setAlignment(Qt::AlignJustify|Qt::AlignVCenter);
+        label_12->setTextInteractionFlags(Qt::TextSelectableByKeyboard|Qt::TextSelectableByMouse);
 
-        formLayout->setWidget(12, QFormLayout::LabelRole, label_12);
+        formLayout->setWidget(13, QFormLayout::LabelRole, label_12);
 
         skialbl = new QLabel(dockWidgetContents);
         skialbl->setObjectName(QString::fromUtf8("skialbl"));
@@ -566,8 +586,9 @@ public:
         skialbl->setSizePolicy(sizePolicy);
         skialbl->setLayoutDirection(Qt::RightToLeft);
         skialbl->setAlignment(Qt::AlignJustify|Qt::AlignVCenter);
+        skialbl->setTextInteractionFlags(Qt::TextSelectableByKeyboard|Qt::TextSelectableByMouse);
 
-        formLayout->setWidget(12, QFormLayout::FieldRole, skialbl);
+        formLayout->setWidget(13, QFormLayout::FieldRole, skialbl);
 
         label_21 = new QLabel(dockWidgetContents);
         label_21->setObjectName(QString::fromUtf8("label_21"));
@@ -575,8 +596,9 @@ public:
         label_21->setSizePolicy(sizePolicy);
         label_21->setLayoutDirection(Qt::RightToLeft);
         label_21->setAlignment(Qt::AlignJustify|Qt::AlignVCenter);
+        label_21->setTextInteractionFlags(Qt::TextSelectableByKeyboard|Qt::TextSelectableByMouse);
 
-        formLayout->setWidget(13, QFormLayout::LabelRole, label_21);
+        formLayout->setWidget(14, QFormLayout::LabelRole, label_21);
 
         tzitslbl = new QLabel(dockWidgetContents);
         tzitslbl->setObjectName(QString::fromUtf8("tzitslbl"));
@@ -584,8 +606,9 @@ public:
         tzitslbl->setSizePolicy(sizePolicy);
         tzitslbl->setLayoutDirection(Qt::RightToLeft);
         tzitslbl->setAlignment(Qt::AlignJustify|Qt::AlignVCenter);
+        tzitslbl->setTextInteractionFlags(Qt::TextSelectableByKeyboard|Qt::TextSelectableByMouse);
 
-        formLayout->setWidget(13, QFormLayout::FieldRole, tzitslbl);
+        formLayout->setWidget(14, QFormLayout::FieldRole, tzitslbl);
 
         label_22 = new QLabel(dockWidgetContents);
         label_22->setObjectName(QString::fromUtf8("label_22"));
@@ -593,8 +616,9 @@ public:
         label_22->setSizePolicy(sizePolicy);
         label_22->setLayoutDirection(Qt::RightToLeft);
         label_22->setAlignment(Qt::AlignJustify|Qt::AlignVCenter);
+        label_22->setTextInteractionFlags(Qt::TextSelectableByKeyboard|Qt::TextSelectableByMouse);
 
-        formLayout->setWidget(14, QFormLayout::LabelRole, label_22);
+        formLayout->setWidget(15, QFormLayout::LabelRole, label_22);
 
         tzits72lbl = new QLabel(dockWidgetContents);
         tzits72lbl->setObjectName(QString::fromUtf8("tzits72lbl"));
@@ -602,8 +626,9 @@ public:
         tzits72lbl->setSizePolicy(sizePolicy);
         tzits72lbl->setLayoutDirection(Qt::RightToLeft);
         tzits72lbl->setAlignment(Qt::AlignJustify|Qt::AlignVCenter);
+        tzits72lbl->setTextInteractionFlags(Qt::TextSelectableByKeyboard|Qt::TextSelectableByMouse);
 
-        formLayout->setWidget(14, QFormLayout::FieldRole, tzits72lbl);
+        formLayout->setWidget(15, QFormLayout::FieldRole, tzits72lbl);
 
         tfilagralbl = new QLabel(dockWidgetContents);
         tfilagralbl->setObjectName(QString::fromUtf8("tfilagralbl"));
@@ -611,8 +636,9 @@ public:
         tfilagralbl->setSizePolicy(sizePolicy);
         tfilagralbl->setLayoutDirection(Qt::RightToLeft);
         tfilagralbl->setAlignment(Qt::AlignJustify|Qt::AlignVCenter);
+        tfilagralbl->setTextInteractionFlags(Qt::TextSelectableByKeyboard|Qt::TextSelectableByMouse);
 
-        formLayout->setWidget(7, QFormLayout::FieldRole, tfilagralbl);
+        formLayout->setWidget(8, QFormLayout::FieldRole, tfilagralbl);
 
         shmagralbl = new QLabel(dockWidgetContents);
         shmagralbl->setObjectName(QString::fromUtf8("shmagralbl"));
@@ -620,8 +646,9 @@ public:
         shmagralbl->setSizePolicy(sizePolicy);
         shmagralbl->setLayoutDirection(Qt::RightToLeft);
         shmagralbl->setAlignment(Qt::AlignJustify|Qt::AlignVCenter);
+        shmagralbl->setTextInteractionFlags(Qt::TextSelectableByKeyboard|Qt::TextSelectableByMouse);
 
-        formLayout->setWidget(5, QFormLayout::FieldRole, shmagralbl);
+        formLayout->setWidget(6, QFormLayout::FieldRole, shmagralbl);
 
         shmamgalbl = new QLabel(dockWidgetContents);
         shmamgalbl->setObjectName(QString::fromUtf8("shmamgalbl"));
@@ -629,8 +656,9 @@ public:
         shmamgalbl->setSizePolicy(sizePolicy);
         shmamgalbl->setLayoutDirection(Qt::RightToLeft);
         shmamgalbl->setAlignment(Qt::AlignJustify|Qt::AlignVCenter);
+        shmamgalbl->setTextInteractionFlags(Qt::TextSelectableByKeyboard|Qt::TextSelectableByMouse);
 
-        formLayout->setWidget(4, QFormLayout::FieldRole, shmamgalbl);
+        formLayout->setWidget(5, QFormLayout::FieldRole, shmamgalbl);
 
         label_3 = new QLabel(dockWidgetContents);
         label_3->setObjectName(QString::fromUtf8("label_3"));
@@ -638,8 +666,35 @@ public:
         label_3->setSizePolicy(sizePolicy);
         label_3->setLayoutDirection(Qt::RightToLeft);
         label_3->setAlignment(Qt::AlignJustify|Qt::AlignVCenter);
+        label_3->setTextInteractionFlags(Qt::TextSelectableByKeyboard|Qt::TextSelectableByMouse);
 
-        formLayout->setWidget(4, QFormLayout::LabelRole, label_3);
+        formLayout->setWidget(5, QFormLayout::LabelRole, label_3);
+
+        label_4 = new QLabel(dockWidgetContents);
+        label_4->setObjectName(QString::fromUtf8("label_4"));
+        QFont font4;
+        font4.setPointSize(18);
+        font4.setBold(true);
+        font4.setWeight(75);
+        label_4->setFont(font4);
+
+        formLayout->setWidget(1, QFormLayout::LabelRole, label_4);
+
+        label_13 = new QLabel(dockWidgetContents);
+        label_13->setObjectName(QString::fromUtf8("label_13"));
+        label_13->setTextInteractionFlags(Qt::TextSelectableByKeyboard|Qt::TextSelectableByMouse);
+
+        formLayout->setWidget(17, QFormLayout::LabelRole, label_13);
+
+        verticalSpacer = new QSpacerItem(20, 40, QSizePolicy::Minimum, QSizePolicy::Expanding);
+
+        formLayout->setItem(16, QFormLayout::LabelRole, verticalSpacer);
+
+        dafyomilbl = new QLabel(dockWidgetContents);
+        dafyomilbl->setObjectName(QString::fromUtf8("dafyomilbl"));
+        dafyomilbl->setTextInteractionFlags(Qt::TextSelectableByKeyboard|Qt::TextSelectableByMouse);
+
+        formLayout->setWidget(17, QFormLayout::FieldRole, dafyomilbl);
 
         dockWidget->setWidget(dockWidgetContents);
         MainWindow->addDockWidget(static_cast<Qt::DockWidgetArea>(1), dockWidget);
@@ -695,6 +750,9 @@ public:
         shmagralbl->setText(QApplication::translate("MainWindow", "\327\247\"\327\251 \327\222\327\250\"\327\220", 0, QApplication::UnicodeUTF8));
         shmamgalbl->setText(QApplication::translate("MainWindow", "\327\247\"\327\251 \327\236\327\222\"\327\220", 0, QApplication::UnicodeUTF8));
         label_3->setText(QApplication::translate("MainWindow", "\327\241\327\225\327\243 \327\226\327\236\327\237 \327\247\"\327\251 \327\236\327\222\"\327\220", 0, QApplication::UnicodeUTF8));
+        label_4->setText(QApplication::translate("MainWindow", "\327\226\327\236\327\240\327\231 \327\224\327\231\327\225\327\235:", 0, QApplication::UnicodeUTF8));
+        label_13->setText(QApplication::translate("MainWindow", "\327\223\327\243 \327\231\327\225\327\236\327\231", 0, QApplication::UnicodeUTF8));
+        dafyomilbl->setText(QApplication::translate("MainWindow", "\327\223\327\243", 0, QApplication::UnicodeUTF8));
         Q_UNUSED(MainWindow);
     } // retranslateUi
 

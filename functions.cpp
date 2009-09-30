@@ -85,6 +85,7 @@ QString NumberToGematria (int num, bool addquotes)
     return str;
 }
 
+
 //Prints (couts) the given Qstring
 void print(QString qstr)
 {

@@ -128,7 +128,8 @@ void dayButton::updateStyle()
             "} " ;
     str +=
             "dayButton:hover { "
-            "background-color: " + selcolor +
+            "background-color: #99CCFF;"
+            "border-color: #99CCFF;"
             "} ";
 
     setStyleSheet(str);

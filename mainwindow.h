@@ -62,8 +62,9 @@ private slots:
 
     void dayClicked(dayButton * day);
 
-    void nextDay();
-    void backDay();
+    //void nextDay();
+    //void backDay();
+    void changeDay(int i);
 
     void redraw();
 
@@ -72,12 +73,14 @@ private slots:
     void gotTimes();
 
 
+
+    QString dafYomi(int jd);
+
 private:
     mHdate current;
-    
-    //int currentHDay;
-    //int currentHMonth;
-    //int currentHYear;
+
+    //Deals with keyboard events
+    void keyPressEvent( QKeyEvent *keyEvent );
 
     Ui::MainWindow *ui;
 };

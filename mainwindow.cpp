@@ -35,6 +35,14 @@
 
 */
 
+//TODO: Make g_date smaller
+//TODO: Add no g_date option
+//TODO: Align holidays to center
+//TODO: Sfirat Hoomer
+//TODO: Days of חנוכה וחול המועד
+
+
+
 //TODO: OK, clean all this mess up...
 //TODO: Comments! comments, comments comments!
 
@@ -199,9 +207,16 @@ MainWindow::~MainWindow()
 }
 
 //TODO:
-void MainWindow::nextDay()
+void MainWindow::changeDay(int i)
 {
-    current.addDay();
+    if (i < 0)
+    {
+        for (int j=0; j > i; j--) current.removeDay();
+    }
+    else
+    {
+        for (int j=0; j < i; j++) current.addDay();
+    }
 
     if (lastselected != NULL) lastselected->Unselect();
 
@@ -210,20 +225,6 @@ void MainWindow::nextDay()
 
     updateLabels(&current);
 }
-
-void MainWindow::backDay()
-{
-    current.removeDay();
-
-    if (lastselected != NULL) lastselected->Unselect();
-
-    dayList[current.get_julian() - dayList[0]->getHDate()->get_julian()]->Select();
-    lastselected = dayList[current.get_julian() - dayList[0]->getHDate()->get_julian()];
-
-    updateLabels(&current);
-}
-
-
 
 void MainWindow::on_backMonthBTN_clicked()
 {
@@ -247,12 +248,12 @@ void MainWindow::on_nextYearBTN_clicked()
 
 void MainWindow::on_backDayBTN_clicked()
 {
-    backDay();
+    changeDay(-1);
 }
 
 void MainWindow::on_nextDayBTN_clicked()
 {
-    nextDay();
+    changeDay(1);
 }
 
 void MainWindow::on_doublenextYearBTN_clicked()
@@ -385,7 +386,66 @@ void MainWindow::gotTimes()
                 ui->tzits72lbl->setText(t);
             }
 
+
+            ui->dafyomilbl->setText(dafYomi(current.get_julian()));
         }
+    }
+}
+
+
+//TODO: fix this!!!
+QString MainWindow::dafYomi(int jd)
+{
+    QStringList masehtot;
+
+    masehtot << "ברכות" << "שבת" << "עירובין" << "פסחים" << "שקלים" << "יומא" << "סוכה" << "ביצה" << "ראש השנה" << "תענית" << "מגילה" << "מועד קטן" << "חגיגה" << "יבמות" << "כתובות" << "נדרים" << "נזיר" << "סוטה" << "גיטין" << "קידושין" << "בבא קמא" << "בבא מציעא" << "בבא בתרא" << "סנהדרין" << "מכות" << "שבועות" << "עבודה זרה" << "הוריות" << "זבחים" << "מנחות" << "חולין" << "בכורות" << "ערכין" << "תמורה" << "כריתות" << "מעילה" << "נידה";
+
+    QList <int> dapim;
+    dapim << 64 << 157 << 105 << 121 << 22 << 88 << 56 << 40 << 35 << 31 << 32 << 29 << 27 << /*Yevamot*/122 << 112 << 91 << 66 << 49 << 90 << 82 << /*Bava Kama*/119 << 119 << 176 << 113 << 24 << 49 << 76 << 14 << /*Zevahim*/120 << 110 << 142 << 61 << 34 << 34 << 28 << 37 << 73;
+
+    int numDapim = 0;
+    for (int i=0; i<dapim.size(); i++) numDapim += dapim[i] - 1;
+
+    Hdate d; d.set_hdate(26,10,5683);
+
+    int i=(jd - d.get_julian()+1) % numDapim;
+
+    if ( i < 0 ) return "";
+    else if (i==0) i = numDapim;
+
+    int masehet=0;
+
+    while (dapim[masehet]-1 < i)
+    {
+        i-=dapim[masehet++]-1;
+
+    }
+    
+    return masehtot[masehet] + ' ' + NumberToGematria(i+1, false);
+
+}
+
+
+
+void MainWindow::keyPressEvent( QKeyEvent *keyEvent )
+{
+    if ( keyEvent->key() == Qt::Key_Left)
+    {
+        changeDay(1);
+    }
+    else if ( keyEvent->key() == Qt::Key_Right)
+    {
+        changeDay(-1);
+    }
+    else if ( keyEvent->key() == Qt::Key_Up)
+    {
+        //Move week back:
+         changeDay(-7);
+    }
+    else if ( keyEvent->key() == Qt::Key_Down)
+    {
+        //Move week ahead:
+         changeDay(7);
     }
 }
 

@@ -16,17 +16,18 @@
 
 #include "mhdate.h"
 
-mHdate::mHdate()
-{
-}
+mHdate::mHdate() {}
 
+/*
 mHdate::mHdate(Hdate *d)
 {
     set_jd(d->get_julian());
 }
+*/
 
 void mHdate::set_hd(int hd, int hm, int hy)
 {
+    //Actually set the date
     set_hdate(hd, hm, hy);
 
 
@@ -44,6 +45,7 @@ void mHdate::set_hd(int hd, int hm, int hy)
         jd++;
         tmpday.set_jd(jd);
     }
+
 
     if ( get_hday() > month_length) set_hdate(month_length, hm, hy);
 }

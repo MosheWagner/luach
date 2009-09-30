@@ -26,29 +26,47 @@
 
 using namespace hdate;
 
+
+/*
+    Simple class I wrote that improves the basic Hdate class.
+
+    It adds safe date movments, taking leap months and years into account.
+
+    It also emmits a "month_changed()" Signall every time a month was changed, directly or indirectly.
+
+*/
+
+
+
 class mHdate : public QObject, public Hdate
 {
    Q_OBJECT
 
 public:
     mHdate();
-    mHdate(Hdate *d);
 
-    void removeMonth();
-    void addMonth();
-
-    void removeYear(int i=1);
-    void addYear(int i=1);
+    //mHdate(Hdate *d);
 
     void removeDay();
     void addDay();
 
+    void removeMonth();
+    void addMonth();
 
+    //Goes back the given number of years (default 1)
+    void removeYear(int i=1);
+    //Goes forward the given number of years (default 1)
+    void addYear(int i=1);
+
+
+    //Sets the hebrew date
     void set_hd(int hd, int hm, int hy);
 
+    //Returns the Hebrew date's month length (29 or 30)
     int getMonthLength();
 
 signals:
+    //Emmited every time a month was changed, directly or indirectly.
     void month_changed();
 
 private:

@@ -35,22 +35,26 @@
 
 */
 
-//TODO: Load/Save confs
+//TODO: Candle lighting
+
+//TODO: finish Load/Save confs - g_date show, candle lighting
+
 
 //TODO: g_date navagation
 //TODO: Make g_date smaller
-//TODO: Add no g_date option
+
 //TODO: Align holidays to center
 //TODO: Sfirat Haomer
 //TODO: Days of חנוכה וחול המועד
 //TODO: Knisat shabat in the luach
 //TODO: ברכת החמה
 
-//TODO: fix size of labels on top
+//TODO: fix (as in "allways the same") size of labels on top
 
 
 //TODO: OK, clean all this mess up...
 //TODO: Comments! comments, comments comments!
+
 
 //List of all day button shown
 QList <dayButton *> dayList;

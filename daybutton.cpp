@@ -16,7 +16,7 @@
 
 #include "daybutton.h"
 
-dayButton::dayButton(QWidget * parent, int jd)
+dayButton::dayButton(QWidget * parent, int jd, bool showGDate)
 {
     date.set_jd(jd);
 
@@ -32,11 +32,18 @@ dayButton::dayButton(QWidget * parent, int jd)
 
     vbox->addLayout(hbox);
 
-    engday = new QLabel(stringify(date.get_gday()));
     hebday = new QLabel(date.get_hebrew_day_string());
+
+    engday = new QLabel("");
+    if (showGDate)
+    {
+        engday->setText(stringify(date.get_gday()));
+    }
+
 
     hbox->addWidget(hebday);
     hbox->addStretch(1);
+
     hbox->addWidget(engday);
 
     QString holiday = date.get_holyday_string(0);

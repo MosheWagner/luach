@@ -70,6 +70,8 @@ private slots:
     void saveConfs();
     void loadConfs();
 
+    void toggleGDate(bool yes);
+
     void updateLabels(mHdate *date);
 
     void gotTimes();

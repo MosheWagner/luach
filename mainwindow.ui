@@ -891,7 +891,17 @@
     </property>
     <addaction name="exitaction"/>
    </widget>
+   <widget class="QMenu" name="menu_3">
+    <property name="layoutDirection">
+     <enum>Qt::RightToLeft</enum>
+    </property>
+    <property name="title">
+     <string>תצוגה</string>
+    </property>
+    <addaction name="gdateaction"/>
+   </widget>
    <addaction name="menu"/>
+   <addaction name="menu_3"/>
    <addaction name="menu_2"/>
   </widget>
   <widget class="QStatusBar" name="statusBar"/>
@@ -1515,7 +1525,7 @@
       </widget>
      </item>
      <item row="17" column="0">
-      <widget class="QLabel" name="label_13">
+      <widget class="QLabel" name="dafyomislbllbl">
        <property name="text">
         <string>דף יומי</string>
        </property>
@@ -1566,6 +1576,17 @@
    </property>
    <property name="text">
     <string>יציאה</string>
+   </property>
+  </action>
+  <action name="gdateaction">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="checked">
+    <bool>true</bool>
+   </property>
+   <property name="text">
+    <string>הצג תאריך לועזי</string>
    </property>
   </action>
  </widget>

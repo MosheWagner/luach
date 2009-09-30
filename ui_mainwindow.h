@@ -1,7 +1,7 @@
 /********************************************************************************
 ** Form generated from reading ui file 'mainwindow.ui'
 **
-** Created: Wed Sep 30 13:38:09 2009
+** Created: Wed Sep 30 16:01:14 2009
 **      by: Qt User Interface Compiler version 4.5.2
 **
 ** WARNING! All changes made in this file will be lost when recompiling ui file!
@@ -36,6 +36,7 @@ class Ui_MainWindow
 public:
     QAction *changelocationaction;
     QAction *exitaction;
+    QAction *gdateaction;
     QWidget *centralWidget;
     QVBoxLayout *verticalLayout;
     QHBoxLayout *horizontalLayout;
@@ -65,6 +66,7 @@ public:
     QMenuBar *menuBar;
     QMenu *menu;
     QMenu *menu_2;
+    QMenu *menu_3;
     QStatusBar *statusBar;
     QDockWidget *dockWidget;
     QWidget *dockWidgetContents;
@@ -96,7 +98,7 @@ public:
     QLabel *shmamgalbl;
     QLabel *label_3;
     QLabel *label_4;
-    QLabel *label_13;
+    QLabel *dafyomislbllbl;
     QSpacerItem *verticalSpacer;
     QLabel *dafyomilbl;
 
@@ -180,6 +182,10 @@ public:
         QIcon icon1;
         icon1.addFile(QString::fromUtf8(":/Icons/exit.png"), QSize(), QIcon::Normal, QIcon::Off);
         exitaction->setIcon(icon1);
+        gdateaction = new QAction(MainWindow);
+        gdateaction->setObjectName(QString::fromUtf8("gdateaction"));
+        gdateaction->setCheckable(true);
+        gdateaction->setChecked(true);
         centralWidget = new QWidget(MainWindow);
         centralWidget->setObjectName(QString::fromUtf8("centralWidget"));
         verticalLayout = new QVBoxLayout(centralWidget);
@@ -411,6 +417,9 @@ public:
         menu_2 = new QMenu(menuBar);
         menu_2->setObjectName(QString::fromUtf8("menu_2"));
         menu_2->setLayoutDirection(Qt::RightToLeft);
+        menu_3 = new QMenu(menuBar);
+        menu_3->setObjectName(QString::fromUtf8("menu_3"));
+        menu_3->setLayoutDirection(Qt::RightToLeft);
         MainWindow->setMenuBar(menuBar);
         statusBar = new QStatusBar(MainWindow);
         statusBar->setObjectName(QString::fromUtf8("statusBar"));
@@ -702,11 +711,11 @@ public:
 
         formLayout->setWidget(1, QFormLayout::LabelRole, label_4);
 
-        label_13 = new QLabel(dockWidgetContents);
-        label_13->setObjectName(QString::fromUtf8("label_13"));
-        label_13->setTextInteractionFlags(Qt::TextSelectableByKeyboard|Qt::TextSelectableByMouse);
+        dafyomislbllbl = new QLabel(dockWidgetContents);
+        dafyomislbllbl->setObjectName(QString::fromUtf8("dafyomislbllbl"));
+        dafyomislbllbl->setTextInteractionFlags(Qt::TextSelectableByKeyboard|Qt::TextSelectableByMouse);
 
-        formLayout->setWidget(17, QFormLayout::LabelRole, label_13);
+        formLayout->setWidget(17, QFormLayout::LabelRole, dafyomislbllbl);
 
         verticalSpacer = new QSpacerItem(20, 40, QSizePolicy::Minimum, QSizePolicy::Expanding);
 
@@ -722,9 +731,11 @@ public:
         MainWindow->addDockWidget(static_cast<Qt::DockWidgetArea>(1), dockWidget);
 
         menuBar->addAction(menu->menuAction());
+        menuBar->addAction(menu_3->menuAction());
         menuBar->addAction(menu_2->menuAction());
         menu->addAction(changelocationaction);
         menu_2->addAction(exitaction);
+        menu_3->addAction(gdateaction);
 
         retranslateUi(MainWindow);
 
@@ -737,6 +748,7 @@ public:
         MainWindow->setStyleSheet(QString());
         changelocationaction->setText(QApplication::translate("MainWindow", "\327\251\327\231\327\240\327\225\327\231 \327\236\327\231\327\247\327\225\327\235", 0, QApplication::UnicodeUTF8));
         exitaction->setText(QApplication::translate("MainWindow", "\327\231\327\246\327\231\327\220\327\224", 0, QApplication::UnicodeUTF8));
+        gdateaction->setText(QApplication::translate("MainWindow", "\327\224\327\246\327\222 \327\252\327\220\327\250\327\231\327\232 \327\234\327\225\327\242\327\226\327\231", 0, QApplication::UnicodeUTF8));
         backDayBTN->setText(QApplication::translate("MainWindow", "...", 0, QApplication::UnicodeUTF8));
         daylabel->setText(QApplication::translate("MainWindow", "\327\231\327\225\327\235", 0, QApplication::UnicodeUTF8));
         nextDayBTN->setText(QApplication::translate("MainWindow", "...", 0, QApplication::UnicodeUTF8));
@@ -755,6 +767,7 @@ public:
         engyearlbl->setText(QApplication::translate("MainWindow", "TextLabel", 0, QApplication::UnicodeUTF8));
         menu->setTitle(QApplication::translate("MainWindow", "\327\224\327\222\327\223\327\250\327\225\327\252", 0, QApplication::UnicodeUTF8));
         menu_2->setTitle(QApplication::translate("MainWindow", "\327\247\327\225\327\221\327\245", 0, QApplication::UnicodeUTF8));
+        menu_3->setTitle(QApplication::translate("MainWindow", "\327\252\327\246\327\225\327\222\327\224", 0, QApplication::UnicodeUTF8));
         label_2->setText(QApplication::translate("MainWindow", "\327\242\327\234\327\225\327\252 \327\224\327\251\327\227\327\250", 0, QApplication::UnicodeUTF8));
         aloslabel->setText(QApplication::translate("MainWindow", "\327\242\327\234\327\225\327\224\"\327\251", 0, QApplication::UnicodeUTF8));
         label->setText(QApplication::translate("MainWindow", "\327\226\327\250\327\231\327\227\327\224", 0, QApplication::UnicodeUTF8));
@@ -782,7 +795,7 @@ public:
         shmamgalbl->setText(QApplication::translate("MainWindow", "\327\247\"\327\251 \327\236\327\222\"\327\220", 0, QApplication::UnicodeUTF8));
         label_3->setText(QApplication::translate("MainWindow", "\327\241\327\225\327\243 \327\226\327\236\327\237 \327\247\"\327\251 \327\236\327\222\"\327\220", 0, QApplication::UnicodeUTF8));
         label_4->setText(QApplication::translate("MainWindow", "\327\226\327\236\327\240\327\231 \327\224\327\231\327\225\327\235:", 0, QApplication::UnicodeUTF8));
-        label_13->setText(QApplication::translate("MainWindow", "\327\223\327\243 \327\231\327\225\327\236\327\231", 0, QApplication::UnicodeUTF8));
+        dafyomislbllbl->setText(QApplication::translate("MainWindow", "\327\223\327\243 \327\231\327\225\327\236\327\231", 0, QApplication::UnicodeUTF8));
         dafyomilbl->setText(QApplication::translate("MainWindow", "\327\223\327\243", 0, QApplication::UnicodeUTF8));
     } // retranslateUi
 

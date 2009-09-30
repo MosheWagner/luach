@@ -74,6 +74,8 @@ double elavation = 800;
 double candleLightingOffset = 18.0;
 
 
+bool ShowGDate = true;
+
 #define CONFPATH ".confs"
 
 MainWindow::MainWindow(QWidget *parent)
@@ -109,6 +111,7 @@ MainWindow::MainWindow(QWidget *parent)
 
     connect(ui->exitaction, SIGNAL(triggered()), this, SLOT(close()));
     connect(ui->changelocationaction, SIGNAL(triggered()), this, SLOT(changeLocationForm()));
+    connect(ui->gdateaction, SIGNAL(triggered(bool)), this, SLOT(toggleGDate(bool)));
 
     //Add weekday labels
     for (int i=0; i<7; i++)
@@ -173,7 +176,7 @@ void MainWindow::showMonth(Hdate *firstday)
         //
         //print (tmpday.get_format_date(0));
 
-        dayButton *d = new dayButton(this, jd);
+        dayButton *d = new dayButton(this, jd, ShowGDate);
         dayList << d;
 
         ui->gridLayout->addWidget(d, 1+(i/7), (i%7));
@@ -328,7 +331,17 @@ void MainWindow::updateLabels(mHdate *date)
     if (engmonths[e.get_gmonth()-1] != gmonths) gmonths += " - " + engmonths[e.get_gmonth()-1];
     ui->gmonthlbl->setText(gmonths);
 
-
+    if (dafYomi(current.get_julian()) != "")
+    {
+        ui->dafyomislbllbl->show();
+        ui->dafyomilbl->show();
+        ui->dafyomilbl->setText(dafYomi(current.get_julian()));
+    }
+    else
+    {
+        ui->dafyomilbl->hide();
+        ui->dafyomislbllbl->hide();
+    }
 
     //Show times:
 
@@ -426,15 +439,11 @@ void MainWindow::gotTimes()
             {
                 ui->tzits72lbl->setText(t);
             }
-
-
-            ui->dafyomilbl->setText(dafYomi(current.get_julian()));
         }
     }
 }
 
 
-//TODO: fix this!!!
 QString MainWindow::dafYomi(int jd)
 {
     QStringList masehtot;
@@ -549,4 +558,16 @@ void MainWindow::loadConfs()
     }
 
 
+}
+
+
+void MainWindow::toggleGDate(bool yes)
+{
+    ShowGDate = yes;
+    redraw();
+
+    ui->engdaylbl->setVisible(yes);
+    ui->engmonthlbl->setVisible(yes);
+    ui->engyearlbl->setVisible(yes);
+    ui->gmonthlbl->setVisible(yes);
 }

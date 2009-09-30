@@ -29,7 +29,7 @@ namespace Ui {
 class ChangeLocation : public QDialog {
     Q_OBJECT
 public:
-    ChangeLocation(QWidget *parent, QString *locationName, double *latitude, double *longitude, QString *timeZone, double *elavation);
+    ChangeLocation(QWidget *parent, QString *locationName, double *latitude, double *longitude, double *candleoffset, QString *timeZone, double *elavation);
     ~ChangeLocation();
 
 protected:
@@ -42,6 +42,7 @@ private:
     double *latitudeptr;
     double *longitudeptr;
     double *elavationeptr;
+    double *candleoffsetptr;
     QString *timeZoneptr;
 
 signals:

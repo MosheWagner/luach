@@ -22,7 +22,7 @@
 
 QProcess *tzproc;
 
-ChangeLocation::ChangeLocation(QWidget *parent, QString *locationName, double *latitude, double *longitude, QString *timeZone, double *elavation)
+ChangeLocation::ChangeLocation(QWidget *parent, QString *locationName, double *latitude, double *longitude, double *candleoffset, QString *timeZone, double *elavation)
         : QDialog(parent),  m_ui(new Ui::ChangeLocation)
 {
     m_ui->setupUi(this);
@@ -51,6 +51,10 @@ ChangeLocation::ChangeLocation(QWidget *parent, QString *locationName, double *l
 
     elavationeptr = elavation;
     m_ui->elavationLine->setValue(*elavationeptr);
+
+
+    candleoffsetptr = candleoffset;
+    if (*candleoffset != 18.0) m_ui->offsetLine->setValue(*candleoffset);
 }
 
 
@@ -100,6 +104,7 @@ void ChangeLocation::on_okBTN_clicked()
     *latitudeptr = m_ui->latitudeLine->value();
     *longitudeptr = m_ui->longitudeLine->value();
     *elavationeptr = m_ui->elavationLine->value();
+    *candleoffsetptr = m_ui->offsetLine->value();
 
     *timeZoneptr = m_ui->comboBox->currentText();
 

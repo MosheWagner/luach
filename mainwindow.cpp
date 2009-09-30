@@ -37,7 +37,7 @@
 
 //TODO: Candle lighting
 
-//TODO: finish Load/Save confs - g_date show, candle lighting
+//TODO: finish Load/Save confs - candle lighting
 
 
 //TODO: g_date navagation
@@ -48,8 +48,6 @@
 //TODO: Days of חנוכה וחול המועד
 //TODO: Knisat shabat in the luach
 //TODO: ברכת החמה
-
-//TODO: fix (as in "allways the same") size of labels on top
 
 
 //TODO: OK, clean all this mess up...
@@ -149,7 +147,7 @@ MainWindow::MainWindow(QWidget *parent)
 
 void MainWindow::changeLocationForm()
 {
-    cl = new ChangeLocation (this, &locationName, &latitude, &longitude, &TimeZone, &elavation);
+    cl = new ChangeLocation (this, &locationName, &latitude, &longitude, &candleLightingOffset, &TimeZone, &elavation);
 
     connect(cl, SIGNAL(changed()), this, SLOT(redraw()));
     connect(cl, SIGNAL(save()), this, SLOT(saveConfs()));
@@ -602,6 +600,9 @@ void MainWindow::loadConfs()
                         ui->engmonthlbl->setVisible(false);
                         ui->engyearlbl->setVisible(false);
                         ui->gmonthlbl->setVisible(false);
+                        ui->hmonthlbl->setVisible(false);
+
+                        for (int i=3; i<7; i++) ui->gridLayout_2->setColumnStretch(i,0);
                     }
                 }
             }
@@ -619,4 +620,8 @@ void MainWindow::toggleGDate(bool yes)
     ui->engmonthlbl->setVisible(yes);
     ui->engyearlbl->setVisible(yes);
     ui->gmonthlbl->setVisible(yes);
+    ui->hmonthlbl->setVisible(yes);
+
+    if (yes == false) for (int i=3; i<7; i++) ui->gridLayout_2->setColumnStretch(i,0);
+    else for (int i=0; i<7; i++) ui->gridLayout_2->setColumnStretch(i,100);
 }

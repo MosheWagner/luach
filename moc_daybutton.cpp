@@ -1,7 +1,7 @@
 /****************************************************************************
 ** Meta object code from reading C++ file 'daybutton.h'
 **
-** Created: Wed Sep 30 16:06:02 2009
+** Created: Wed Sep 30 22:02:49 2009
 **      by: The Qt Meta Object Compiler version 61 (Qt 4.5.2)
 **
 ** WARNING! All changes made in this file will be lost!
@@ -35,16 +35,16 @@ static const uint qt_meta_data_dayButton[] = {
       31,   10,   10,   10, 0x0a,
       40,   10,   10,   10, 0x0a,
       51,   10,   10,   10, 0x0a,
-      69,   10,   62,   10, 0x0a,
-      86,   80,   10,   10, 0x08,
+      76,   10,   62,   10, 0x0a,
+      93,   87,   10,   10, 0x08,
 
        0        // eod
 };
 
 static const char qt_meta_stringdata_dayButton[] = {
     "dayButton\0\0clicked(dayButton*)\0Select()\0"
-    "Unselect()\0setToday()\0Hdate*\0getHDate()\0"
-    "event\0mousePressEvent(QMouseEvent*)\0"
+    "Unselect()\0setToday()\0hdate::Hdate*\0"
+    "getHDate()\0event\0mousePressEvent(QMouseEvent*)\0"
 };
 
 const QMetaObject dayButton::staticMetaObject = {
@@ -76,8 +76,8 @@ int dayButton::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
         case 1: Select(); break;
         case 2: Unselect(); break;
         case 3: setToday(); break;
-        case 4: { Hdate* _r = getHDate();
-            if (_a[0]) *reinterpret_cast< Hdate**>(_a[0]) = _r; }  break;
+        case 4: { hdate::Hdate* _r = getHDate();
+            if (_a[0]) *reinterpret_cast< hdate::Hdate**>(_a[0]) = _r; }  break;
         case 5: mousePressEvent((*reinterpret_cast< QMouseEvent*(*)>(_a[1]))); break;
         default: ;
         }

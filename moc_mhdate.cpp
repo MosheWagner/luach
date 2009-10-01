@@ -1,7 +1,7 @@
 /****************************************************************************
 ** Meta object code from reading C++ file 'mhdate.h'
 **
-** Created: Wed Sep 30 16:23:25 2009
+** Created: Wed Sep 30 22:02:50 2009
 **      by: The Qt Meta Object Compiler version 61 (Qt 4.5.2)
 **
 ** WARNING! All changes made in this file will be lost!
@@ -53,8 +53,8 @@ void *mHdate::qt_metacast(const char *_clname)
     if (!_clname) return 0;
     if (!strcmp(_clname, qt_meta_stringdata_mHdate))
         return static_cast<void*>(const_cast< mHdate*>(this));
-    if (!strcmp(_clname, "Hdate"))
-        return static_cast< Hdate*>(const_cast< mHdate*>(this));
+    if (!strcmp(_clname, "hdate::Hdate"))
+        return static_cast< hdate::Hdate*>(const_cast< mHdate*>(this));
     return QObject::qt_metacast(_clname);
 }
 

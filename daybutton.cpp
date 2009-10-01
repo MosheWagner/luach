@@ -18,6 +18,8 @@
 
 dayButton::dayButton(QWidget * parent, int jd, bool showGDate)
 {
+    setParent(parent);
+
     date.set_jd(jd);
 
     selected = false;
@@ -51,10 +53,12 @@ dayButton::dayButton(QWidget * parent, int jd, bool showGDate)
     if (holiday == "יום הזכרון ליצחק רבין" || holiday == "יום המשפחה" || holiday == "יום זאב זבוטינסקי" ) holiday = "";
     event = new QLabel(holiday);
     vbox->addWidget(event);
+    event->setAlignment(Qt::AlignCenter);
 
     reading = new QLabel();
     if (QString(date.get_parasha_string(0)) != "חסר") reading->setText(date.get_parasha_string(0));
     vbox->addWidget(reading);
+    reading->setAlignment(Qt::AlignCenter);
 
     setLayoutDirection(Qt::RightToLeft);
 
@@ -81,7 +85,6 @@ void dayButton::mousePressEvent(QMouseEvent *event)
     if (event->button() == Qt::LeftButton)
     {
         emit clicked(this);
-        //setStyleSheet(style(checked));
     }
 }
 
@@ -108,18 +111,22 @@ void dayButton::setToday()
 }
 
 
+#define unselectedcolor "#EEFFEE;";
+#define selectedcolor "#BBBBFF;";
+#define bordercolor "#BBBBFF;";
+#define hovercolor "#B3CCFF;";
+
+//Updates the style sheet (changes the color if selected, etc')
 void dayButton::updateStyle()
 {
-    QString selcolor = "#BBBBFF;";
-
     QString basecolor = "";
 
-    //if (today) basecolor = "#CCFFFF; ";
-    //else
-    //{
-        if (!selected) basecolor += "#EEFFEE;";
-        else basecolor += selcolor;
-    //}
+    //Base color changes if the day's selected
+    if (!selected)
+    {
+        basecolor += unselectedcolor;
+    }
+    else basecolor += selectedcolor;
 
 
     QString str =
@@ -130,16 +137,22 @@ void dayButton::updateStyle()
     str +=
             "border-radius: 10px; "
             "border-style: solid;"
-            "border-color:#BBBBFF;"
+            "border-color:";
+    str +=  bordercolor;
+    str +=
             "border-width:3px;"
             "} " ;
     str +=
             "dayButton:hover { "
-            "background-color: #99CCFF;"
-            "border-color: #99CCFF;"
+            "background-color:";
+    str +=  hovercolor;
+    str +=
+            "border-color:";
+    str +=  hovercolor;
+    str +=
             "} ";
 
     setStyleSheet(str);
 }
 
-Hdate *dayButton::getHDate() { return &date; }
+hdate::Hdate *dayButton::getHDate() { return &date; }

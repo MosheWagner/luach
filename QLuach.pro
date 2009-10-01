@@ -1,5 +1,5 @@
 # -------------------------------------------------
-# Project created by QtCreator 2009-09-16 10:15:09
+# Project created by QtCreator
 # Author: moshe.wagner@gmail.com
 # -------------------------------------------------
 TARGET = QLuach
@@ -9,13 +9,16 @@ SOURCES += main.cpp \
     daybutton.cpp \
     functions.cpp \
     mhdate.cpp \
-    changelocation.cpp
+    changelocation.cpp \
+    about.cpp
 HEADERS += mainwindow.h \
     daybutton.h \
     functions.h \
     mhdate.h \
-    changelocation.h
+    changelocation.h \
+    about.h
 FORMS += mainwindow.ui \
-    changelocation.ui
+    changelocation.ui \
+    about.ui
 LIBS += -lhdate
 RESOURCES += QLuach.qrc

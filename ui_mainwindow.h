@@ -1,7 +1,7 @@
 /********************************************************************************
 ** Form generated from reading ui file 'mainwindow.ui'
 **
-** Created: Wed Sep 30 19:29:25 2009
+** Created: Thu Oct 1 10:38:56 2009
 **      by: Qt User Interface Compiler version 4.5.2
 **
 ** WARNING! All changes made in this file will be lost when recompiling ui file!
@@ -37,6 +37,8 @@ public:
     QAction *changelocationaction;
     QAction *exitaction;
     QAction *gdateaction;
+    QAction *zmanimpanelaction;
+    QAction *aboutaction;
     QWidget *centralWidget;
     QVBoxLayout *verticalLayout;
     QGridLayout *gridLayout_2;
@@ -57,9 +59,20 @@ public:
     QVBoxLayout *verticalLayout_2;
     QLabel *hmonthlbl;
     QLabel *gmonthlbl;
+    QHBoxLayout *horizontalLayout;
+    QToolButton *backgdayBTN;
     QLabel *engdaylbl;
+    QToolButton *nextgdayBTN;
+    QHBoxLayout *horizontalLayout_5;
+    QToolButton *backgmonthBTN;
     QLabel *engmonthlbl;
+    QToolButton *nextgmonthBTN;
+    QHBoxLayout *horizontalLayout_6;
+    QToolButton *doublebackgYearBTN;
+    QToolButton *backgYearBTN;
     QLabel *engyearlbl;
+    QToolButton *nextgYearBTN;
+    QToolButton *doublenextgYearBTN;
     QGridLayout *gridLayout;
     QMenuBar *menuBar;
     QMenu *menu;
@@ -76,36 +89,39 @@ public:
     QLabel *label;
     QLabel *sunriselabel;
     QLabel *label_3;
+    QLabel *shmamgalbl;
     QLabel *label_5;
+    QLabel *shmagralbl;
     QLabel *label_6;
+    QLabel *tfilamgalbl;
     QLabel *label_7;
+    QLabel *tfilagralbl;
     QLabel *label_8;
+    QLabel *hatzotlbl;
     QLabel *label_9;
     QLabel *minchagdolalbl;
     QLabel *label_10;
-    QLabel *shmamgalbl;
-    QLabel *shmagralbl;
-    QLabel *tfilamgalbl;
-    QLabel *tfilagralbl;
-    QLabel *hatzotlbl;
     QLabel *minchaktanalbl;
     QLabel *label_11;
-    QLabel *label_12;
     QLabel *plaglbl;
+    QLabel *label_12;
     QLabel *skialbl;
     QLabel *label_21;
     QLabel *tzitslbl;
     QLabel *label_22;
     QLabel *tzits72lbl;
+    QSpacerItem *verticalSpacer_2;
+    QSpacerItem *verticalSpacer;
     QLabel *dafyomislbllbl;
     QLabel *dafyomilbl;
-    QSpacerItem *verticalSpacer;
+    QLabel *clllbllbl;
+    QLabel *candellightinglbl;
 
     void setupUi(QMainWindow *MainWindow)
     {
         if (MainWindow->objectName().isEmpty())
             MainWindow->setObjectName(QString::fromUtf8("MainWindow"));
-        MainWindow->resize(1034, 532);
+        MainWindow->resize(1296, 532);
         QPalette palette;
         QBrush brush(QColor(0, 0, 0, 255));
         brush.setStyle(Qt::SolidPattern);
@@ -185,6 +201,15 @@ public:
         gdateaction->setObjectName(QString::fromUtf8("gdateaction"));
         gdateaction->setCheckable(true);
         gdateaction->setChecked(true);
+        zmanimpanelaction = new QAction(MainWindow);
+        zmanimpanelaction->setObjectName(QString::fromUtf8("zmanimpanelaction"));
+        zmanimpanelaction->setCheckable(true);
+        zmanimpanelaction->setChecked(true);
+        aboutaction = new QAction(MainWindow);
+        aboutaction->setObjectName(QString::fromUtf8("aboutaction"));
+        QIcon icon2;
+        icon2.addFile(QString::fromUtf8(":/Icons/help-about.png"), QSize(), QIcon::Normal, QIcon::Off);
+        aboutaction->setIcon(icon2);
         centralWidget = new QWidget(MainWindow);
         centralWidget->setObjectName(QString::fromUtf8("centralWidget"));
         verticalLayout = new QVBoxLayout(centralWidget);
@@ -197,15 +222,15 @@ public:
         gridLayout_2->setHorizontalSpacing(20);
         gridLayout_2->setVerticalSpacing(-1);
         horizontalLayout_4 = new QHBoxLayout();
-        horizontalLayout_4->setSpacing(2);
+        horizontalLayout_4->setSpacing(0);
         horizontalLayout_4->setObjectName(QString::fromUtf8("horizontalLayout_4"));
         horizontalLayout_4->setContentsMargins(0, -1, -1, -1);
         backDayBTN = new QToolButton(centralWidget);
         backDayBTN->setObjectName(QString::fromUtf8("backDayBTN"));
         backDayBTN->setFocusPolicy(Qt::NoFocus);
-        QIcon icon2;
-        icon2.addFile(QString::fromUtf8(":/Icons/arrow-right.png"), QSize(), QIcon::Normal, QIcon::Off);
-        backDayBTN->setIcon(icon2);
+        QIcon icon3;
+        icon3.addFile(QString::fromUtf8(":/Icons/arrow-right.png"), QSize(), QIcon::Normal, QIcon::Off);
+        backDayBTN->setIcon(icon3);
         backDayBTN->setAutoRaise(true);
 
         horizontalLayout_4->addWidget(backDayBTN);
@@ -229,9 +254,9 @@ public:
         nextDayBTN = new QToolButton(centralWidget);
         nextDayBTN->setObjectName(QString::fromUtf8("nextDayBTN"));
         nextDayBTN->setFocusPolicy(Qt::NoFocus);
-        QIcon icon3;
-        icon3.addFile(QString::fromUtf8(":/Icons/arrow-left.png"), QSize(), QIcon::Normal, QIcon::Off);
-        nextDayBTN->setIcon(icon3);
+        QIcon icon4;
+        icon4.addFile(QString::fromUtf8(":/Icons/arrow-left.png"), QSize(), QIcon::Normal, QIcon::Off);
+        nextDayBTN->setIcon(icon4);
         nextDayBTN->setAutoRaise(true);
 
         horizontalLayout_4->addWidget(nextDayBTN);
@@ -240,13 +265,13 @@ public:
         gridLayout_2->addLayout(horizontalLayout_4, 0, 0, 1, 1);
 
         horizontalLayout_3 = new QHBoxLayout();
-        horizontalLayout_3->setSpacing(2);
+        horizontalLayout_3->setSpacing(0);
         horizontalLayout_3->setObjectName(QString::fromUtf8("horizontalLayout_3"));
         horizontalLayout_3->setContentsMargins(0, -1, -1, -1);
         backMonthBTN = new QToolButton(centralWidget);
         backMonthBTN->setObjectName(QString::fromUtf8("backMonthBTN"));
         backMonthBTN->setFocusPolicy(Qt::NoFocus);
-        backMonthBTN->setIcon(icon2);
+        backMonthBTN->setIcon(icon3);
         backMonthBTN->setAutoRaise(true);
 
         horizontalLayout_3->addWidget(backMonthBTN);
@@ -263,7 +288,7 @@ public:
         nextMonthBTN = new QToolButton(centralWidget);
         nextMonthBTN->setObjectName(QString::fromUtf8("nextMonthBTN"));
         nextMonthBTN->setFocusPolicy(Qt::NoFocus);
-        nextMonthBTN->setIcon(icon3);
+        nextMonthBTN->setIcon(icon4);
         nextMonthBTN->setCheckable(false);
         nextMonthBTN->setAutoRaise(true);
 
@@ -279,9 +304,9 @@ public:
         doublebackYearBTN = new QToolButton(centralWidget);
         doublebackYearBTN->setObjectName(QString::fromUtf8("doublebackYearBTN"));
         doublebackYearBTN->setFocusPolicy(Qt::NoFocus);
-        QIcon icon4;
-        icon4.addFile(QString::fromUtf8(":/Icons/arrow-right-double.png"), QSize(), QIcon::Normal, QIcon::Off);
-        doublebackYearBTN->setIcon(icon4);
+        QIcon icon5;
+        icon5.addFile(QString::fromUtf8(":/Icons/arrow-right-double.png"), QSize(), QIcon::Normal, QIcon::Off);
+        doublebackYearBTN->setIcon(icon5);
         doublebackYearBTN->setAutoRaise(true);
 
         horizontalLayout_2->addWidget(doublebackYearBTN);
@@ -289,7 +314,7 @@ public:
         backYearBTN = new QToolButton(centralWidget);
         backYearBTN->setObjectName(QString::fromUtf8("backYearBTN"));
         backYearBTN->setFocusPolicy(Qt::NoFocus);
-        backYearBTN->setIcon(icon2);
+        backYearBTN->setIcon(icon3);
         backYearBTN->setAutoRaise(true);
 
         horizontalLayout_2->addWidget(backYearBTN);
@@ -306,7 +331,7 @@ public:
         nextYearBTN = new QToolButton(centralWidget);
         nextYearBTN->setObjectName(QString::fromUtf8("nextYearBTN"));
         nextYearBTN->setFocusPolicy(Qt::NoFocus);
-        nextYearBTN->setIcon(icon3);
+        nextYearBTN->setIcon(icon4);
         nextYearBTN->setAutoRaise(true);
 
         horizontalLayout_2->addWidget(nextYearBTN);
@@ -314,9 +339,9 @@ public:
         doublenextYearBTN = new QToolButton(centralWidget);
         doublenextYearBTN->setObjectName(QString::fromUtf8("doublenextYearBTN"));
         doublenextYearBTN->setFocusPolicy(Qt::NoFocus);
-        QIcon icon5;
-        icon5.addFile(QString::fromUtf8(":/Icons/arrow-left-double.png"), QSize(), QIcon::Normal, QIcon::Off);
-        doublenextYearBTN->setIcon(icon5);
+        QIcon icon6;
+        icon6.addFile(QString::fromUtf8(":/Icons/arrow-left-double.png"), QSize(), QIcon::Normal, QIcon::Off);
+        doublenextYearBTN->setIcon(icon6);
         doublenextYearBTN->setAutoRaise(true);
 
         horizontalLayout_2->addWidget(doublenextYearBTN);
@@ -356,6 +381,17 @@ public:
 
         gridLayout_2->addLayout(verticalLayout_2, 0, 3, 1, 1);
 
+        horizontalLayout = new QHBoxLayout();
+        horizontalLayout->setSpacing(6);
+        horizontalLayout->setObjectName(QString::fromUtf8("horizontalLayout"));
+        backgdayBTN = new QToolButton(centralWidget);
+        backgdayBTN->setObjectName(QString::fromUtf8("backgdayBTN"));
+        backgdayBTN->setFocusPolicy(Qt::NoFocus);
+        backgdayBTN->setIcon(icon3);
+        backgdayBTN->setAutoRaise(true);
+
+        horizontalLayout->addWidget(backgdayBTN);
+
         engdaylbl = new QLabel(centralWidget);
         engdaylbl->setObjectName(QString::fromUtf8("engdaylbl"));
         sizePolicy.setHeightForWidth(engdaylbl->sizePolicy().hasHeightForWidth());
@@ -367,7 +403,30 @@ public:
         engdaylbl->setFont(font3);
         engdaylbl->setLayoutDirection(Qt::LeftToRight);
 
-        gridLayout_2->addWidget(engdaylbl, 0, 4, 1, 1);
+        horizontalLayout->addWidget(engdaylbl);
+
+        nextgdayBTN = new QToolButton(centralWidget);
+        nextgdayBTN->setObjectName(QString::fromUtf8("nextgdayBTN"));
+        nextgdayBTN->setFocusPolicy(Qt::NoFocus);
+        nextgdayBTN->setIcon(icon4);
+        nextgdayBTN->setAutoRaise(true);
+
+        horizontalLayout->addWidget(nextgdayBTN);
+
+
+        gridLayout_2->addLayout(horizontalLayout, 0, 4, 1, 1);
+
+        horizontalLayout_5 = new QHBoxLayout();
+        horizontalLayout_5->setSpacing(0);
+        horizontalLayout_5->setObjectName(QString::fromUtf8("horizontalLayout_5"));
+        horizontalLayout_5->setContentsMargins(0, -1, -1, -1);
+        backgmonthBTN = new QToolButton(centralWidget);
+        backgmonthBTN->setObjectName(QString::fromUtf8("backgmonthBTN"));
+        backgmonthBTN->setFocusPolicy(Qt::NoFocus);
+        backgmonthBTN->setIcon(icon3);
+        backgmonthBTN->setAutoRaise(true);
+
+        horizontalLayout_5->addWidget(backgmonthBTN);
 
         engmonthlbl = new QLabel(centralWidget);
         engmonthlbl->setObjectName(QString::fromUtf8("engmonthlbl"));
@@ -376,7 +435,38 @@ public:
         engmonthlbl->setFont(font3);
         engmonthlbl->setLayoutDirection(Qt::LeftToRight);
 
-        gridLayout_2->addWidget(engmonthlbl, 0, 5, 1, 1);
+        horizontalLayout_5->addWidget(engmonthlbl);
+
+        nextgmonthBTN = new QToolButton(centralWidget);
+        nextgmonthBTN->setObjectName(QString::fromUtf8("nextgmonthBTN"));
+        nextgmonthBTN->setFocusPolicy(Qt::NoFocus);
+        nextgmonthBTN->setIcon(icon4);
+        nextgmonthBTN->setAutoRaise(true);
+
+        horizontalLayout_5->addWidget(nextgmonthBTN);
+
+
+        gridLayout_2->addLayout(horizontalLayout_5, 0, 5, 1, 1);
+
+        horizontalLayout_6 = new QHBoxLayout();
+        horizontalLayout_6->setSpacing(0);
+        horizontalLayout_6->setObjectName(QString::fromUtf8("horizontalLayout_6"));
+        horizontalLayout_6->setContentsMargins(0, -1, -1, -1);
+        doublebackgYearBTN = new QToolButton(centralWidget);
+        doublebackgYearBTN->setObjectName(QString::fromUtf8("doublebackgYearBTN"));
+        doublebackgYearBTN->setFocusPolicy(Qt::NoFocus);
+        doublebackgYearBTN->setIcon(icon5);
+        doublebackgYearBTN->setAutoRaise(true);
+
+        horizontalLayout_6->addWidget(doublebackgYearBTN);
+
+        backgYearBTN = new QToolButton(centralWidget);
+        backgYearBTN->setObjectName(QString::fromUtf8("backgYearBTN"));
+        backgYearBTN->setFocusPolicy(Qt::NoFocus);
+        backgYearBTN->setIcon(icon3);
+        backgYearBTN->setAutoRaise(true);
+
+        horizontalLayout_6->addWidget(backgYearBTN);
 
         engyearlbl = new QLabel(centralWidget);
         engyearlbl->setObjectName(QString::fromUtf8("engyearlbl"));
@@ -385,7 +475,26 @@ public:
         engyearlbl->setFont(font3);
         engyearlbl->setLayoutDirection(Qt::LeftToRight);
 
-        gridLayout_2->addWidget(engyearlbl, 0, 6, 1, 1);
+        horizontalLayout_6->addWidget(engyearlbl);
+
+        nextgYearBTN = new QToolButton(centralWidget);
+        nextgYearBTN->setObjectName(QString::fromUtf8("nextgYearBTN"));
+        nextgYearBTN->setFocusPolicy(Qt::NoFocus);
+        nextgYearBTN->setIcon(icon4);
+        nextgYearBTN->setAutoRaise(true);
+
+        horizontalLayout_6->addWidget(nextgYearBTN);
+
+        doublenextgYearBTN = new QToolButton(centralWidget);
+        doublenextgYearBTN->setObjectName(QString::fromUtf8("doublenextgYearBTN"));
+        doublenextgYearBTN->setFocusPolicy(Qt::NoFocus);
+        doublenextgYearBTN->setIcon(icon6);
+        doublenextgYearBTN->setAutoRaise(true);
+
+        horizontalLayout_6->addWidget(doublenextgYearBTN);
+
+
+        gridLayout_2->addLayout(horizontalLayout_6, 0, 6, 1, 1);
 
         gridLayout_2->setColumnStretch(0, 100);
         gridLayout_2->setColumnStretch(1, 100);
@@ -408,7 +517,7 @@ public:
         MainWindow->setCentralWidget(centralWidget);
         menuBar = new QMenuBar(MainWindow);
         menuBar->setObjectName(QString::fromUtf8("menuBar"));
-        menuBar->setGeometry(QRect(0, 0, 1034, 29));
+        menuBar->setGeometry(QRect(0, 0, 1296, 29));
         menuBar->setLayoutDirection(Qt::RightToLeft);
         menu = new QMenu(menuBar);
         menu->setObjectName(QString::fromUtf8("menu"));
@@ -426,8 +535,8 @@ public:
         dockWidget = new QDockWidget(MainWindow);
         dockWidget->setObjectName(QString::fromUtf8("dockWidget"));
         dockWidget->setLayoutDirection(Qt::RightToLeft);
-        dockWidget->setFeatures(QDockWidget::AllDockWidgetFeatures);
-        dockWidget->setAllowedAreas(Qt::LeftDockWidgetArea|Qt::RightDockWidgetArea);
+        dockWidget->setFeatures(QDockWidget::DockWidgetClosable);
+        dockWidget->setAllowedAreas(Qt::LeftDockWidgetArea);
         dockWidgetContents = new QWidget();
         dockWidgetContents->setObjectName(QString::fromUtf8("dockWidgetContents"));
         verticalLayout_3 = new QVBoxLayout(dockWidgetContents);
@@ -450,6 +559,7 @@ public:
         formLayout_3->setObjectName(QString::fromUtf8("formLayout_3"));
         formLayout_3->setFieldGrowthPolicy(QFormLayout::ExpandingFieldsGrow);
         formLayout_3->setLabelAlignment(Qt::AlignCenter);
+        formLayout_3->setHorizontalSpacing(10);
         formLayout_3->setContentsMargins(0, 0, -1, -1);
         label_2 = new QLabel(dockWidgetContents);
         label_2->setObjectName(QString::fromUtf8("label_2"));
@@ -502,6 +612,16 @@ public:
 
         formLayout_3->setWidget(2, QFormLayout::LabelRole, label_3);
 
+        shmamgalbl = new QLabel(dockWidgetContents);
+        shmamgalbl->setObjectName(QString::fromUtf8("shmamgalbl"));
+        sizePolicy.setHeightForWidth(shmamgalbl->sizePolicy().hasHeightForWidth());
+        shmamgalbl->setSizePolicy(sizePolicy);
+        shmamgalbl->setLayoutDirection(Qt::RightToLeft);
+        shmamgalbl->setAlignment(Qt::AlignJustify|Qt::AlignVCenter);
+        shmamgalbl->setTextInteractionFlags(Qt::TextSelectableByKeyboard|Qt::TextSelectableByMouse);
+
+        formLayout_3->setWidget(2, QFormLayout::FieldRole, shmamgalbl);
+
         label_5 = new QLabel(dockWidgetContents);
         label_5->setObjectName(QString::fromUtf8("label_5"));
         sizePolicy.setHeightForWidth(label_5->sizePolicy().hasHeightForWidth());
@@ -511,6 +631,16 @@ public:
         label_5->setTextInteractionFlags(Qt::TextSelectableByKeyboard|Qt::TextSelectableByMouse);
 
         formLayout_3->setWidget(3, QFormLayout::LabelRole, label_5);
+
+        shmagralbl = new QLabel(dockWidgetContents);
+        shmagralbl->setObjectName(QString::fromUtf8("shmagralbl"));
+        sizePolicy.setHeightForWidth(shmagralbl->sizePolicy().hasHeightForWidth());
+        shmagralbl->setSizePolicy(sizePolicy);
+        shmagralbl->setLayoutDirection(Qt::RightToLeft);
+        shmagralbl->setAlignment(Qt::AlignJustify|Qt::AlignVCenter);
+        shmagralbl->setTextInteractionFlags(Qt::TextSelectableByKeyboard|Qt::TextSelectableByMouse);
+
+        formLayout_3->setWidget(3, QFormLayout::FieldRole, shmagralbl);
 
         label_6 = new QLabel(dockWidgetContents);
         label_6->setObjectName(QString::fromUtf8("label_6"));
@@ -522,6 +652,16 @@ public:
 
         formLayout_3->setWidget(4, QFormLayout::LabelRole, label_6);
 
+        tfilamgalbl = new QLabel(dockWidgetContents);
+        tfilamgalbl->setObjectName(QString::fromUtf8("tfilamgalbl"));
+        sizePolicy.setHeightForWidth(tfilamgalbl->sizePolicy().hasHeightForWidth());
+        tfilamgalbl->setSizePolicy(sizePolicy);
+        tfilamgalbl->setLayoutDirection(Qt::RightToLeft);
+        tfilamgalbl->setAlignment(Qt::AlignJustify|Qt::AlignVCenter);
+        tfilamgalbl->setTextInteractionFlags(Qt::TextSelectableByKeyboard|Qt::TextSelectableByMouse);
+
+        formLayout_3->setWidget(4, QFormLayout::FieldRole, tfilamgalbl);
+
         label_7 = new QLabel(dockWidgetContents);
         label_7->setObjectName(QString::fromUtf8("label_7"));
         sizePolicy.setHeightForWidth(label_7->sizePolicy().hasHeightForWidth());
@@ -532,6 +672,16 @@ public:
 
         formLayout_3->setWidget(5, QFormLayout::LabelRole, label_7);
 
+        tfilagralbl = new QLabel(dockWidgetContents);
+        tfilagralbl->setObjectName(QString::fromUtf8("tfilagralbl"));
+        sizePolicy.setHeightForWidth(tfilagralbl->sizePolicy().hasHeightForWidth());
+        tfilagralbl->setSizePolicy(sizePolicy);
+        tfilagralbl->setLayoutDirection(Qt::RightToLeft);
+        tfilagralbl->setAlignment(Qt::AlignJustify|Qt::AlignVCenter);
+        tfilagralbl->setTextInteractionFlags(Qt::TextSelectableByKeyboard|Qt::TextSelectableByMouse);
+
+        formLayout_3->setWidget(5, QFormLayout::FieldRole, tfilagralbl);
+
         label_8 = new QLabel(dockWidgetContents);
         label_8->setObjectName(QString::fromUtf8("label_8"));
         sizePolicy.setHeightForWidth(label_8->sizePolicy().hasHeightForWidth());
@@ -541,6 +691,16 @@ public:
         label_8->setTextInteractionFlags(Qt::TextSelectableByKeyboard|Qt::TextSelectableByMouse);
 
         formLayout_3->setWidget(6, QFormLayout::LabelRole, label_8);
+
+        hatzotlbl = new QLabel(dockWidgetContents);
+        hatzotlbl->setObjectName(QString::fromUtf8("hatzotlbl"));
+        sizePolicy.setHeightForWidth(hatzotlbl->sizePolicy().hasHeightForWidth());
+        hatzotlbl->setSizePolicy(sizePolicy);
+        hatzotlbl->setLayoutDirection(Qt::RightToLeft);
+        hatzotlbl->setAlignment(Qt::AlignJustify|Qt::AlignVCenter);
+        hatzotlbl->setTextInteractionFlags(Qt::TextSelectableByKeyboard|Qt::TextSelectableByMouse);
+
+        formLayout_3->setWidget(6, QFormLayout::FieldRole, hatzotlbl);
 
         label_9 = new QLabel(dockWidgetContents);
         label_9->setObjectName(QString::fromUtf8("label_9"));
@@ -572,56 +732,6 @@ public:
 
         formLayout_3->setWidget(8, QFormLayout::LabelRole, label_10);
 
-        shmamgalbl = new QLabel(dockWidgetContents);
-        shmamgalbl->setObjectName(QString::fromUtf8("shmamgalbl"));
-        sizePolicy.setHeightForWidth(shmamgalbl->sizePolicy().hasHeightForWidth());
-        shmamgalbl->setSizePolicy(sizePolicy);
-        shmamgalbl->setLayoutDirection(Qt::RightToLeft);
-        shmamgalbl->setAlignment(Qt::AlignJustify|Qt::AlignVCenter);
-        shmamgalbl->setTextInteractionFlags(Qt::TextSelectableByKeyboard|Qt::TextSelectableByMouse);
-
-        formLayout_3->setWidget(2, QFormLayout::FieldRole, shmamgalbl);
-
-        shmagralbl = new QLabel(dockWidgetContents);
-        shmagralbl->setObjectName(QString::fromUtf8("shmagralbl"));
-        sizePolicy.setHeightForWidth(shmagralbl->sizePolicy().hasHeightForWidth());
-        shmagralbl->setSizePolicy(sizePolicy);
-        shmagralbl->setLayoutDirection(Qt::RightToLeft);
-        shmagralbl->setAlignment(Qt::AlignJustify|Qt::AlignVCenter);
-        shmagralbl->setTextInteractionFlags(Qt::TextSelectableByKeyboard|Qt::TextSelectableByMouse);
-
-        formLayout_3->setWidget(3, QFormLayout::FieldRole, shmagralbl);
-
-        tfilamgalbl = new QLabel(dockWidgetContents);
-        tfilamgalbl->setObjectName(QString::fromUtf8("tfilamgalbl"));
-        sizePolicy.setHeightForWidth(tfilamgalbl->sizePolicy().hasHeightForWidth());
-        tfilamgalbl->setSizePolicy(sizePolicy);
-        tfilamgalbl->setLayoutDirection(Qt::RightToLeft);
-        tfilamgalbl->setAlignment(Qt::AlignJustify|Qt::AlignVCenter);
-        tfilamgalbl->setTextInteractionFlags(Qt::TextSelectableByKeyboard|Qt::TextSelectableByMouse);
-
-        formLayout_3->setWidget(4, QFormLayout::FieldRole, tfilamgalbl);
-
-        tfilagralbl = new QLabel(dockWidgetContents);
-        tfilagralbl->setObjectName(QString::fromUtf8("tfilagralbl"));
-        sizePolicy.setHeightForWidth(tfilagralbl->sizePolicy().hasHeightForWidth());
-        tfilagralbl->setSizePolicy(sizePolicy);
-        tfilagralbl->setLayoutDirection(Qt::RightToLeft);
-        tfilagralbl->setAlignment(Qt::AlignJustify|Qt::AlignVCenter);
-        tfilagralbl->setTextInteractionFlags(Qt::TextSelectableByKeyboard|Qt::TextSelectableByMouse);
-
-        formLayout_3->setWidget(5, QFormLayout::FieldRole, tfilagralbl);
-
-        hatzotlbl = new QLabel(dockWidgetContents);
-        hatzotlbl->setObjectName(QString::fromUtf8("hatzotlbl"));
-        sizePolicy.setHeightForWidth(hatzotlbl->sizePolicy().hasHeightForWidth());
-        hatzotlbl->setSizePolicy(sizePolicy);
-        hatzotlbl->setLayoutDirection(Qt::RightToLeft);
-        hatzotlbl->setAlignment(Qt::AlignJustify|Qt::AlignVCenter);
-        hatzotlbl->setTextInteractionFlags(Qt::TextSelectableByKeyboard|Qt::TextSelectableByMouse);
-
-        formLayout_3->setWidget(6, QFormLayout::FieldRole, hatzotlbl);
-
         minchaktanalbl = new QLabel(dockWidgetContents);
         minchaktanalbl->setObjectName(QString::fromUtf8("minchaktanalbl"));
         sizePolicy.setHeightForWidth(minchaktanalbl->sizePolicy().hasHeightForWidth());
@@ -642,16 +752,6 @@ public:
 
         formLayout_3->setWidget(9, QFormLayout::LabelRole, label_11);
 
-        label_12 = new QLabel(dockWidgetContents);
-        label_12->setObjectName(QString::fromUtf8("label_12"));
-        sizePolicy.setHeightForWidth(label_12->sizePolicy().hasHeightForWidth());
-        label_12->setSizePolicy(sizePolicy);
-        label_12->setLayoutDirection(Qt::RightToLeft);
-        label_12->setAlignment(Qt::AlignJustify|Qt::AlignVCenter);
-        label_12->setTextInteractionFlags(Qt::TextSelectableByKeyboard|Qt::TextSelectableByMouse);
-
-        formLayout_3->setWidget(10, QFormLayout::LabelRole, label_12);
-
         plaglbl = new QLabel(dockWidgetContents);
         plaglbl->setObjectName(QString::fromUtf8("plaglbl"));
         sizePolicy.setHeightForWidth(plaglbl->sizePolicy().hasHeightForWidth());
@@ -661,6 +761,16 @@ public:
         plaglbl->setTextInteractionFlags(Qt::TextSelectableByKeyboard|Qt::TextSelectableByMouse);
 
         formLayout_3->setWidget(9, QFormLayout::FieldRole, plaglbl);
+
+        label_12 = new QLabel(dockWidgetContents);
+        label_12->setObjectName(QString::fromUtf8("label_12"));
+        sizePolicy.setHeightForWidth(label_12->sizePolicy().hasHeightForWidth());
+        label_12->setSizePolicy(sizePolicy);
+        label_12->setLayoutDirection(Qt::RightToLeft);
+        label_12->setAlignment(Qt::AlignJustify|Qt::AlignVCenter);
+        label_12->setTextInteractionFlags(Qt::TextSelectableByKeyboard|Qt::TextSelectableByMouse);
+
+        formLayout_3->setWidget(10, QFormLayout::LabelRole, label_12);
 
         skialbl = new QLabel(dockWidgetContents);
         skialbl->setObjectName(QString::fromUtf8("skialbl"));
@@ -712,17 +822,28 @@ public:
 
         formLayout_3->setWidget(12, QFormLayout::FieldRole, tzits72lbl);
 
+        verticalSpacer_2 = new QSpacerItem(20, 40, QSizePolicy::Minimum, QSizePolicy::Expanding);
+
+        formLayout_3->setItem(13, QFormLayout::FieldRole, verticalSpacer_2);
+
+        verticalSpacer = new QSpacerItem(20, 40, QSizePolicy::Minimum, QSizePolicy::Expanding);
+
+        formLayout_3->setItem(15, QFormLayout::FieldRole, verticalSpacer);
+
         dafyomislbllbl = new QLabel(dockWidgetContents);
         dafyomislbllbl->setObjectName(QString::fromUtf8("dafyomislbllbl"));
+        QFont font5;
+        font5.setPointSize(10);
+        dafyomislbllbl->setFont(font5);
         dafyomislbllbl->setTextInteractionFlags(Qt::TextSelectableByKeyboard|Qt::TextSelectableByMouse);
 
-        formLayout_3->setWidget(14, QFormLayout::LabelRole, dafyomislbllbl);
+        formLayout_3->setWidget(16, QFormLayout::LabelRole, dafyomislbllbl);
 
         dafyomilbl = new QLabel(dockWidgetContents);
         dafyomilbl->setObjectName(QString::fromUtf8("dafyomilbl"));
-        QFont font5;
-        font5.setPointSize(9);
-        dafyomilbl->setFont(font5);
+        QFont font6;
+        font6.setPointSize(9);
+        dafyomilbl->setFont(font6);
         dafyomilbl->setFrameShape(QFrame::NoFrame);
         dafyomilbl->setFrameShadow(QFrame::Plain);
         dafyomilbl->setLineWidth(1);
@@ -734,11 +855,17 @@ public:
         dafyomilbl->setIndent(0);
         dafyomilbl->setTextInteractionFlags(Qt::TextSelectableByKeyboard|Qt::TextSelectableByMouse);
 
-        formLayout_3->setWidget(14, QFormLayout::FieldRole, dafyomilbl);
+        formLayout_3->setWidget(16, QFormLayout::FieldRole, dafyomilbl);
 
-        verticalSpacer = new QSpacerItem(20, 40, QSizePolicy::Minimum, QSizePolicy::Expanding);
+        clllbllbl = new QLabel(dockWidgetContents);
+        clllbllbl->setObjectName(QString::fromUtf8("clllbllbl"));
 
-        formLayout_3->setItem(13, QFormLayout::FieldRole, verticalSpacer);
+        formLayout_3->setWidget(14, QFormLayout::LabelRole, clllbllbl);
+
+        candellightinglbl = new QLabel(dockWidgetContents);
+        candellightinglbl->setObjectName(QString::fromUtf8("candellightinglbl"));
+
+        formLayout_3->setWidget(14, QFormLayout::FieldRole, candellightinglbl);
 
 
         verticalLayout_3->addLayout(formLayout_3);
@@ -746,12 +873,14 @@ public:
         dockWidget->setWidget(dockWidgetContents);
         MainWindow->addDockWidget(static_cast<Qt::DockWidgetArea>(1), dockWidget);
 
-        menuBar->addAction(menu->menuAction());
-        menuBar->addAction(menu_3->menuAction());
         menuBar->addAction(menu_2->menuAction());
+        menuBar->addAction(menu_3->menuAction());
+        menuBar->addAction(menu->menuAction());
         menu->addAction(changelocationaction);
+        menu_2->addAction(aboutaction);
         menu_2->addAction(exitaction);
         menu_3->addAction(gdateaction);
+        menu_3->addAction(zmanimpanelaction);
 
         retranslateUi(MainWindow);
 
@@ -765,6 +894,8 @@ public:
         changelocationaction->setText(QApplication::translate("MainWindow", "\327\251\327\231\327\240\327\225\327\231 \327\236\327\231\327\247\327\225\327\235", 0, QApplication::UnicodeUTF8));
         exitaction->setText(QApplication::translate("MainWindow", "\327\231\327\246\327\231\327\220\327\224", 0, QApplication::UnicodeUTF8));
         gdateaction->setText(QApplication::translate("MainWindow", "\327\224\327\246\327\222 \327\252\327\220\327\250\327\231\327\232 \327\234\327\225\327\242\327\226\327\231", 0, QApplication::UnicodeUTF8));
+        zmanimpanelaction->setText(QApplication::translate("MainWindow", "\327\224\327\246\327\222 \327\250\327\251\327\231\327\236\327\252 \327\226\327\236\327\240\327\231\327\235", 0, QApplication::UnicodeUTF8));
+        aboutaction->setText(QApplication::translate("MainWindow", "\327\220\327\225\327\223\327\225\327\252", 0, QApplication::UnicodeUTF8));
         backDayBTN->setText(QApplication::translate("MainWindow", "...", 0, QApplication::UnicodeUTF8));
         daylabel->setText(QApplication::translate("MainWindow", "\327\231\327\225\327\235", 0, QApplication::UnicodeUTF8));
         nextDayBTN->setText(QApplication::translate("MainWindow", "...", 0, QApplication::UnicodeUTF8));
@@ -778,9 +909,17 @@ public:
         doublenextYearBTN->setText(QApplication::translate("MainWindow", "...", 0, QApplication::UnicodeUTF8));
         hmonthlbl->setText(QApplication::translate("MainWindow", "TextLabel", 0, QApplication::UnicodeUTF8));
         gmonthlbl->setText(QApplication::translate("MainWindow", "TextLabel", 0, QApplication::UnicodeUTF8));
+        backgdayBTN->setText(QApplication::translate("MainWindow", "...", 0, QApplication::UnicodeUTF8));
         engdaylbl->setText(QApplication::translate("MainWindow", "TextLabel", 0, QApplication::UnicodeUTF8));
+        nextgdayBTN->setText(QApplication::translate("MainWindow", "...", 0, QApplication::UnicodeUTF8));
+        backgmonthBTN->setText(QApplication::translate("MainWindow", "...", 0, QApplication::UnicodeUTF8));
         engmonthlbl->setText(QApplication::translate("MainWindow", "TextLabel", 0, QApplication::UnicodeUTF8));
+        nextgmonthBTN->setText(QApplication::translate("MainWindow", "...", 0, QApplication::UnicodeUTF8));
+        doublebackgYearBTN->setText(QApplication::translate("MainWindow", "...", 0, QApplication::UnicodeUTF8));
+        backgYearBTN->setText(QApplication::translate("MainWindow", "...", 0, QApplication::UnicodeUTF8));
         engyearlbl->setText(QApplication::translate("MainWindow", "TextLabel", 0, QApplication::UnicodeUTF8));
+        nextgYearBTN->setText(QApplication::translate("MainWindow", "...", 0, QApplication::UnicodeUTF8));
+        doublenextgYearBTN->setText(QApplication::translate("MainWindow", "...", 0, QApplication::UnicodeUTF8));
         menu->setTitle(QApplication::translate("MainWindow", "\327\224\327\222\327\223\327\250\327\225\327\252", 0, QApplication::UnicodeUTF8));
         menu_2->setTitle(QApplication::translate("MainWindow", "\327\247\327\225\327\221\327\245", 0, QApplication::UnicodeUTF8));
         menu_3->setTitle(QApplication::translate("MainWindow", "\327\252\327\246\327\225\327\222\327\224", 0, QApplication::UnicodeUTF8));
@@ -790,22 +929,22 @@ public:
         label->setText(QApplication::translate("MainWindow", "\327\226\327\250\327\231\327\227\327\224", 0, QApplication::UnicodeUTF8));
         sunriselabel->setText(QApplication::translate("MainWindow", "\327\226\327\250\327\231\327\227\327\224", 0, QApplication::UnicodeUTF8));
         label_3->setText(QApplication::translate("MainWindow", "\327\241\327\225\327\243 \327\226\327\236\327\237 \327\247\"\327\251 \327\236\327\222\"\327\220", 0, QApplication::UnicodeUTF8));
+        shmamgalbl->setText(QApplication::translate("MainWindow", "\327\247\"\327\251 \327\236\327\222\"\327\220", 0, QApplication::UnicodeUTF8));
         label_5->setText(QApplication::translate("MainWindow", "\327\241\327\225\327\243 \327\226\327\236\327\237 \327\247\"\327\251 \327\222\327\250\"\327\220", 0, QApplication::UnicodeUTF8));
+        shmagralbl->setText(QApplication::translate("MainWindow", "\327\247\"\327\251 \327\222\327\250\"\327\220", 0, QApplication::UnicodeUTF8));
         label_6->setText(QApplication::translate("MainWindow", "\327\241\327\225\327\243 \327\226\327\236\327\237 \327\252\327\244\327\231\327\234\327\224 \327\236\327\222\"\327\220", 0, QApplication::UnicodeUTF8));
+        tfilamgalbl->setText(QApplication::translate("MainWindow", "\327\252\327\244\327\231\327\234\327\224 \327\236\327\222\"\327\220", 0, QApplication::UnicodeUTF8));
         label_7->setText(QApplication::translate("MainWindow", "\327\241\327\225\327\243 \327\226\327\236\327\237 \327\252\327\244\327\231\327\234\327\224 \327\222\327\250\"\327\220", 0, QApplication::UnicodeUTF8));
+        tfilagralbl->setText(QApplication::translate("MainWindow", "\327\252\327\244\327\231\327\234\327\224 \327\222\327\250\"\327\220", 0, QApplication::UnicodeUTF8));
         label_8->setText(QApplication::translate("MainWindow", "\327\227\327\246\327\225\327\252", 0, QApplication::UnicodeUTF8));
+        hatzotlbl->setText(QApplication::translate("MainWindow", "\327\227\327\246\327\225\327\252", 0, QApplication::UnicodeUTF8));
         label_9->setText(QApplication::translate("MainWindow", "\327\236\327\240\327\227\327\224 \327\222\327\223\327\225\327\234\327\224", 0, QApplication::UnicodeUTF8));
         minchagdolalbl->setText(QApplication::translate("MainWindow", "\327\236\327\240\327\227\327\224 \327\222\327\223\327\225\327\234\327\224", 0, QApplication::UnicodeUTF8));
         label_10->setText(QApplication::translate("MainWindow", "\327\236\327\240\327\227\327\224 \327\247\327\230\327\240\327\224", 0, QApplication::UnicodeUTF8));
-        shmamgalbl->setText(QApplication::translate("MainWindow", "\327\247\"\327\251 \327\236\327\222\"\327\220", 0, QApplication::UnicodeUTF8));
-        shmagralbl->setText(QApplication::translate("MainWindow", "\327\247\"\327\251 \327\222\327\250\"\327\220", 0, QApplication::UnicodeUTF8));
-        tfilamgalbl->setText(QApplication::translate("MainWindow", "\327\252\327\244\327\231\327\234\327\224 \327\236\327\222\"\327\220", 0, QApplication::UnicodeUTF8));
-        tfilagralbl->setText(QApplication::translate("MainWindow", "\327\252\327\244\327\231\327\234\327\224 \327\222\327\250\"\327\220", 0, QApplication::UnicodeUTF8));
-        hatzotlbl->setText(QApplication::translate("MainWindow", "\327\227\327\246\327\225\327\252", 0, QApplication::UnicodeUTF8));
         minchaktanalbl->setText(QApplication::translate("MainWindow", "\327\236\327\240\327\227\327\224 \327\247\327\230\327\240\327\224", 0, QApplication::UnicodeUTF8));
         label_11->setText(QApplication::translate("MainWindow", "\327\244\327\234\327\222 \327\224\327\236\327\240\327\227\327\224", 0, QApplication::UnicodeUTF8));
-        label_12->setText(QApplication::translate("MainWindow", "\327\251\327\247\327\231\327\242\327\224", 0, QApplication::UnicodeUTF8));
         plaglbl->setText(QApplication::translate("MainWindow", "\327\244\327\234\327\222 \327\224\327\236\327\240\327\227\327\224", 0, QApplication::UnicodeUTF8));
+        label_12->setText(QApplication::translate("MainWindow", "\327\251\327\247\327\231\327\242\327\224", 0, QApplication::UnicodeUTF8));
         skialbl->setText(QApplication::translate("MainWindow", "\327\251\327\247\327\231\327\242\327\224", 0, QApplication::UnicodeUTF8));
         label_21->setText(QApplication::translate("MainWindow", "\327\246\327\220\327\252 \327\224\327\233\327\225\327\233\327\221\327\231\327\235", 0, QApplication::UnicodeUTF8));
         tzitslbl->setText(QApplication::translate("MainWindow", "\327\246\327\224\"\327\233", 0, QApplication::UnicodeUTF8));
@@ -813,6 +952,8 @@ public:
         tzits72lbl->setText(QApplication::translate("MainWindow", "\327\246\327\224\"\327\233 \327\250\"\327\252", 0, QApplication::UnicodeUTF8));
         dafyomislbllbl->setText(QApplication::translate("MainWindow", "\327\223\327\243 \327\231\327\225\327\236\327\231", 0, QApplication::UnicodeUTF8));
         dafyomilbl->setText(QApplication::translate("MainWindow", "\327\223\327\243", 0, QApplication::UnicodeUTF8));
+        clllbllbl->setText(QApplication::translate("MainWindow", "\327\224\327\223\327\234\327\247\327\252 \327\240\327\250\327\225\327\252", 0, QApplication::UnicodeUTF8));
+        candellightinglbl->setText(QApplication::translate("MainWindow", "\327\224\327\223\327\224\"\327\240", 0, QApplication::UnicodeUTF8));
     } // retranslateUi
 
 };

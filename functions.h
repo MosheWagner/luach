@@ -18,11 +18,13 @@
 #define FUNCTIONS_H
 
 #include <QString>
+#include <QStringList>
 #include <QFile>
 #include <QTextStream>
 #include <QTextCodec>
 #include <string>
 #include <iostream>
+#include <hdatepp.h>
 
 using namespace std;
 
@@ -44,5 +46,8 @@ void print(int);
 //Writes the given data to the given file path with the given encoding
 void writetofile(QString filename, QString data, bool overwrite = true);
 
+//Returns the Daf Yomi of a day by it's given julian day
+/* Function written by Yonatan Shiftan, Shlita. Thanks! */
+QString dafYomi(int jd);
 
 #endif // FUNCTIONS_H

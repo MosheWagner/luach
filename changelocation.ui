@@ -148,9 +148,22 @@
     </layout>
    </item>
    <item>
-    <widget class="QCheckBox" name="checkBox">
+    <spacer name="verticalSpacer_2">
+     <property name="orientation">
+      <enum>Qt::Vertical</enum>
+     </property>
+     <property name="sizeHint" stdset="0">
+      <size>
+       <width>20</width>
+       <height>40</height>
+      </size>
+     </property>
+    </spacer>
+   </item>
+   <item>
+    <widget class="QLabel" name="label_7">
      <property name="text">
-      <string>חישוב זמן כניסת שבת שונה</string>
+      <string>זמן כניסת שבת:</string>
      </property>
     </widget>
    </item>
@@ -172,7 +185,7 @@
      <item>
       <widget class="QDoubleSpinBox" name="offsetLine">
        <property name="enabled">
-        <bool>false</bool>
+        <bool>true</bool>
        </property>
        <property name="sizePolicy">
         <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
@@ -184,7 +197,7 @@
         <enum>Qt::LeftToRight</enum>
        </property>
        <property name="decimals">
-        <number>4</number>
+        <number>1</number>
        </property>
        <property name="maximum">
         <double>99999999.000000000000000</double>
@@ -194,7 +207,7 @@
      <item>
       <widget class="QLabel" name="label_6">
        <property name="enabled">
-        <bool>false</bool>
+        <bool>true</bool>
        </property>
        <property name="text">
         <string> - דקות לפני שקיעה</string>

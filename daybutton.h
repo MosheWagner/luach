@@ -14,6 +14,20 @@
 * Author: Moshe Wagner. <moshe.wagner@gmail.com>
 */
 
+
+/*
+  Widget representing a day in the calendar;
+
+  Shows the hebrew date, english date, reading, and event.
+
+
+  Changes color by state - Unslected, Selected, and MouseOver.
+
+
+  Emmits a "clicked" signal when clicked (duh).
+
+*/
+
 #ifndef DAYBUTTON_H
 #define DAYBUTTON_H
 
@@ -24,7 +38,6 @@
 #include <QLabel>
 
 #include <hdatepp.h>
-using namespace hdate;
 
 #include "functions.h"
 
@@ -37,12 +50,13 @@ public:
     ~dayButton();
 
 private:
-    Hdate date;
+    hdate::Hdate date;
 
     bool selected;
     bool today;
 
-    void updateStyle ();
+    //Updates the style sheet (changes the color if selected, etc')
+    void updateStyle();
 
     //Widgets:
     QVBoxLayout *vbox;
@@ -52,10 +66,9 @@ private:
 public slots:
     void Select();
     void Unselect();
-
     void setToday();
 
-    Hdate *getHDate();
+    hdate::Hdate *getHDate();
 
 private slots:
     void mousePressEvent(QMouseEvent *event);

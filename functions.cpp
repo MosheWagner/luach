@@ -29,18 +29,22 @@ QString stringify(double x)
 // You can tell it weather to add quote signs (Geresh or Gershaiim) or not
 QString NumberToGematria (int num, bool addquotes)
 {
-    QString str;
+    QString hundredChars[] = {"ק","ר","ש","ת"};
+    QString tenChars[] = {"י","כ","ל","מ","נ","ס","ע","פ","צ"};
+    QString oneChars[] = {"א","ב","ג","ד","ה","ו","ז","ח","ט"};
+
+    QString str = "";
+
     while (num > 400)
     {
         str += "ת";
         num = num - 400;
     }
+
     int hundreds = (int)(num / 100);
     num = num % 100;
-    if (hundreds == 4) str += "ת";
-    else if (hundreds == 3) str += "ש";
-    else if (hundreds == 2) str += "ר";
-    else if (hundreds == 1) str += "ק";
+
+    if (hundreds > 0 ) str += hundredChars[hundreds - 1];
 
     if (num == 16) str += "טז";
     else if (num == 15) str += "טו";
@@ -48,33 +52,19 @@ QString NumberToGematria (int num, bool addquotes)
     {
         int tens = (int)(num / 10);
         num = num % 10;
-        if (tens == 9) str += "צ";
-        else if (tens == 8) str += "פ";
-        else if (tens == 7) str += "ע";
-        else if (tens == 6) str += "ס";
-        else if (tens == 5) str += "נ";
-        else if (tens == 4) str += "מ";
-        else if (tens == 3) str += "ל";
-        else if (tens == 2) str += "כ";
-        else if (tens == 1) str += "י";
+        if (tens > 0) str += tenChars[tens-1];
 
-        if (num == 9) str += "ט";
-        else if (num == 8) str += "ח";
-        else if (num == 7) str += "ז";
-        else if (num == 6) str += "ו";
-        else if (num == 5) str += "ה";
-        else if (num == 4) str += "ד";
-        else if (num == 3) str += "ג";
-        else if (num == 2) str += "ב";
-        else if (num == 1) str += "א";
+        if (num > 0) str += oneChars[num -1];
+
     }
+
     if (addquotes)
     {
+        // '
         if (str.length() == 1)
-            // '
             str += "'";
+        // ""
         else
-            // ""
         {
             QChar c = str[str.length() - 1];
             str[str.length() - 1] = '\"';
@@ -112,8 +102,7 @@ void writetofile(QString filename, QString data, bool overwrite)
 
     QFlag *mode;
     if (overwrite == false) mode = new QFlag(QIODevice::WriteOnly | QIODevice::Append);
-    //TODO: haw?
-    else mode = mode = new QFlag(QIODevice::WriteOnly);
+    else mode = new QFlag(QIODevice::WriteOnly);
 
     //Write the data to the file
     if (outfile.open(*mode))
@@ -125,5 +114,34 @@ void writetofile(QString filename, QString data, bool overwrite)
     delete mode;
 }
 
+//Returns the Daf Yomi of a day by it's given julian day
+QString dafYomi(int jd)
+{
+    QStringList masehtot;
 
+    masehtot << "ברכות" << "שבת" << "עירובין" << "פסחים" << "שקלים" << "יומא" << "סוכה" << "ביצה" << "ראש השנה" << "תענית" << "מגילה" << "מועד קטן" << "חגיגה" << "יבמות" << "כתובות" << "נדרים" << "נזיר" << "סוטה" << "גיטין" << "קידושין" << "בבא קמא" << "בבא מציעא" << "בבא בתרא" << "סנהדרין" << "מכות" << "שבועות" << "עבודה זרה" << "הוריות" << "זבחים" << "מנחות" << "חולין" << "בכורות" << "ערכין" << "תמורה" << "כריתות" << "מעילה" << "נידה";
+
+    QList <int> dapim;
+    dapim << 64 << 157 << 105 << 121 << 22 << 88 << 56 << 40 << 35 << 31 << 32 << 29 << 27 << /*Yevamot*/122 << 112 << 91 << 66 << 49 << 90 << 82 << /*Bava Kama*/119 << 119 << 176 << 113 << 24 << 49 << 76 << 14 << /*Zevahim*/120 << 110 << 142 << 61 << 34 << 34 << 28 << 37 << 73;
+
+    int numDapim = 0;
+    for (int i=0; i<dapim.size(); i++) numDapim += dapim[i] - 1;
+
+    hdate::Hdate d; d.set_hdate(26,10,5683);
+
+    int i=(jd - d.get_julian()+1) % numDapim;
+
+    if ( i < 0 ) return "";
+    else if (i==0) i = numDapim;
+
+    int masehet=0;
+
+    while (dapim[masehet]-1 < i)
+    {
+        i-=dapim[masehet++]-1;
+
+    }
+
+    return masehtot[masehet] + ' ' + NumberToGematria(i+1, false);
+}
 

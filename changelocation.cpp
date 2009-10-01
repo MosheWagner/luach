@@ -14,11 +14,9 @@
 * Author: Moshe Wagner. <moshe.wagner@gmail.com>
 */
 
-
 #include "changelocation.h"
 #include "ui_changelocation.h"
 
-#include <QProcess>
 
 QProcess *tzproc;
 
@@ -27,15 +25,16 @@ ChangeLocation::ChangeLocation(QWidget *parent, QString *locationName, double *l
 {
     m_ui->setupUi(this);
 
+    setWindowIcon(QIcon(":/Icons/location.png"));
 
-    //m_ui->comboBox->addItem("Israel");
-
+    //Invoke a call to ZmanimCLI telling is to print available timezones so we can list them
     tzproc = new QProcess(this);
 
     QStringList args;
     args << "-jar" << "/usr/bin/ZmanimCLI.jar" << "-tzl";
     tzproc->start("java", args);
     connect(tzproc, SIGNAL(readyReadStandardOutput()), this, SLOT(gotTZ()));
+
 
 
     locationNameptr = locationName;
@@ -52,26 +51,8 @@ ChangeLocation::ChangeLocation(QWidget *parent, QString *locationName, double *l
     elavationeptr = elavation;
     m_ui->elavationLine->setValue(*elavationeptr);
 
-
     candleoffsetptr = candleoffset;
-    if (*candleoffset != 18.0) m_ui->offsetLine->setValue(*candleoffset);
-}
-
-
-void ChangeLocation::gotTZ()
-{
-    QString str = tzproc->readAllStandardOutput();
-    //TODO: fix empty lines that still get through
-    if ( str != "" && str != "\n" && str != " " && str != " \n")
-    {
-        QStringList tz = str.split('\n');
-        for( int i=0; i<tz.size(); i++)
-        {
-            if (tz[i] != "List of valid TimeZones:") m_ui->comboBox->addItem(tz[i]);
-        }
-    }
-
-    m_ui->comboBox->setCurrentIndex(m_ui->comboBox->findText(*timeZoneptr));
+    m_ui->offsetLine->setValue(*candleoffset);
 }
 
 ChangeLocation::~ChangeLocation()
@@ -79,46 +60,48 @@ ChangeLocation::~ChangeLocation()
     delete m_ui;
 }
 
-void ChangeLocation::changeEvent(QEvent *e)
+//Called when the TimeZone name's are recieved from ZmanimCLI
+void ChangeLocation::gotTZ()
 {
-    QDialog::changeEvent(e);
-    switch (e->type()) {
-    case QEvent::LanguageChange:
-        m_ui->retranslateUi(this);
-        break;
-    default:
-        break;
+    QString str = tzproc->readAllStandardOutput();
+    if ( str != "")
+    {
+        QStringList tz = str.split('\n');
+        for( int i=0; i<tz.size(); i++)
+        {
+            if (tz[i] != "List of valid TimeZones:" && tz[i] != "" && tz[i] != "\n" && tz[i] != " ")
+            {
+                //Add the location to the combo box
+                m_ui->comboBox->addItem(tz[i]);
+            }
+        }
     }
+
+    //Make sure the current location is focused
+    m_ui->comboBox->setCurrentIndex(m_ui->comboBox->findText(*timeZoneptr));
 }
 
 void ChangeLocation::on_exitBTN_clicked()
-{
-    close();
-}
+{    close();   }
 
 void ChangeLocation::on_okBTN_clicked()
 {
 
     *locationNameptr = m_ui->locationLine->text();
+    *timeZoneptr = m_ui->comboBox->currentText();
 
     *latitudeptr = m_ui->latitudeLine->value();
     *longitudeptr = m_ui->longitudeLine->value();
     *elavationeptr = m_ui->elavationLine->value();
     *candleoffsetptr = m_ui->offsetLine->value();
 
-    *timeZoneptr = m_ui->comboBox->currentText();
 
+    //Tell the mainwindow to update times
     emit changed();
 
 
-    //Save changes:
+    //Tell the mainwindow to save changes:
     if (m_ui->saveCheckBox->isChecked()) emit save();
 
     close();
-}
-
-void ChangeLocation::on_checkBox_clicked(bool checked)
-{
-    m_ui->label_6->setEnabled(checked);
-    m_ui->offsetLine->setEnabled(checked);
 }

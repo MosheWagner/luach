@@ -15,10 +15,31 @@
 */
 
 
+/*
+  Change location form;
+
+  Gets all paramets as pointers, so it just changes them directly.
+
+
+  Emmits "save()" if the new location should be saved to a file,
+    and "changed()" on any change (so the times can be re-calculated).
+
+
+  Deals with:
+    location name,
+    latitude,
+    longitude,
+    candle lighting offset,
+    time zone,
+    elavation
+*/
+
 #ifndef CHANGELOCATION_H
 #define CHANGELOCATION_H
 
+
 #include <QtGui/QDialog>
+#include <QProcess>
 
 #include "functions.h"
 
@@ -32,12 +53,10 @@ public:
     ChangeLocation(QWidget *parent, QString *locationName, double *latitude, double *longitude, double *candleoffset, QString *timeZone, double *elavation);
     ~ChangeLocation();
 
-protected:
-    void changeEvent(QEvent *e);
-
 private:
     Ui::ChangeLocation *m_ui;
 
+    //Pointers to the given program's parameters:
     QString *locationNameptr;
     double *latitudeptr;
     double *longitudeptr;
@@ -50,9 +69,9 @@ signals:
     void save();
 
 private slots:
-    void on_checkBox_clicked(bool checked);
     void on_okBTN_clicked();
     void on_exitBTN_clicked();
+    //Called when the TimeZone name's are recieved from ZmanimCLI
     void gotTZ();
 };
 

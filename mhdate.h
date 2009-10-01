@@ -14,18 +14,6 @@
 * Author: Moshe Wagner. <moshe.wagner@gmail.com>
 */
 
-#ifndef MHDATE_H
-#define MHDATE_H
-
-#include <QtGui/QMainWindow>
-#include <QtCore/QObject>
-
-#include <hdatepp.h>
-
-#include "functions.h"
-
-using namespace hdate;
-
 
 /*
     Simple class I wrote that improves the basic Hdate class.
@@ -36,9 +24,18 @@ using namespace hdate;
 
 */
 
+#ifndef MHDATE_H
+#define MHDATE_H
+
+#include <QtGui/QMainWindow>
+#include <QtCore/QObject>
+
+#include <hdatepp.h>
+
+#include "functions.h"
 
 
-class mHdate : public QObject, public Hdate
+class mHdate : public QObject, public hdate::Hdate
 {
    Q_OBJECT
 

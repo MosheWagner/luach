@@ -23,14 +23,13 @@
 #include <QTime>
 
 #include <locale.h>
-#include <hdatepp.h>
+
+#include "mhdate.h"
 
 #include "daybutton.h"
 #include "functions.h"
-#include "mhdate.h"
 #include "changelocation.h"
-
-using namespace hdate;
+#include "about.h"
 
 namespace Ui
 {
@@ -47,6 +46,15 @@ public:
 
 private slots:
 
+    void on_doublenextgYearBTN_clicked();
+    void on_doublebackgYearBTN_clicked();
+    void on_nextgYearBTN_clicked();
+    void on_backgYearBTN_clicked();
+    void on_nextgmonthBTN_clicked();
+    void on_backgmonthBTN_clicked();
+    void on_nextgdayBTN_clicked();
+    void on_backgdayBTN_clicked();
+    void on_dockWidget_visibilityChanged(bool visible);
     void on_doublebackYearBTN_clicked();
     void on_doublenextYearBTN_clicked();
     void on_nextDayBTN_clicked();
@@ -56,10 +64,11 @@ private slots:
     void on_nextMonthBTN_clicked();
     void on_backMonthBTN_clicked();
 
+    //Destroys all existing daybuttons
     void clearMonth();
-    void showMonth(Hdate *firstday);
-
-    void readFromStdout();
+    
+    //Rebuild the calendar from the given first day of the month
+    void showMonth(hdate::Hdate *dayinmonth);
 
     void dayClicked(dayButton * day);
 
@@ -71,17 +80,20 @@ private slots:
     void saveDispConfs();
     void loadConfs();
 
-    void toggleGDate(bool yes);
+    void toggleGDate(bool show);
+    void toggleZmanimPanel(bool show);
 
     void updateLabels(mHdate *date);
 
     void gotTimes();
 
+    //Show change location form
     void changeLocationForm();
+    void aboutForm();
 
-    QString dafYomi(int jd);
 
 private:
+    //Holds current (selected) date
     mHdate current;
 
     //Deals with keyboard events

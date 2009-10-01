@@ -21,34 +21,31 @@
 
   Kaluach clone:
 
-  Should have some day:
 
-    - Basic "calandar" like interface ( custom widget )
+  Provides:
+    - Basic calandar interface:
         - Hebrew / English date
         - Change date, location, timezone
-        - Events?
-    - Connection to "ZmanimCLI"
-    - Daf yomi (shiftan?), eventually add other "yomi" stuff
-    - Print snapshots?
+
+    - Zmanim obainted from ZmanimCLI
+
+    - Daf yomi , (eventually should have other "yomi" stuff)
+
+  Stuff to add:
+    - Print snapshots
 
     - Other cool features of course
 
 */
 
-//TODO: Candle lighting
-
-//TODO: finish Load/Save confs - candle lighting
 
 
-//TODO: g_date navagation
-//TODO: Make g_date smaller
+//TODO: finish Candle lighting for other holidays too
 
-//TODO: Align holidays to center
+
 //TODO: Sfirat Haomer
 //TODO: Days of חנוכה וחול המועד
-//TODO: Knisat shabat in the luach
 //TODO: ברכת החמה
-
 
 //TODO: OK, clean all this mess up...
 //TODO: Comments! comments, comments comments!
@@ -63,9 +60,6 @@ QStringList weekdays;
 QStringList engmonths;
 
 QProcess *zmanimproc;
-
-///
-ChangeLocation *cl;
 
 
 QString locationName;
@@ -88,6 +82,10 @@ MainWindow::MainWindow(QWidget *parent)
 
     //Set all QString to work with unicode
     QTextCodec::setCodecForCStrings(QTextCodec::codecForName("utf8"));
+
+
+    //
+    zmanimproc = new QProcess(this);
 
 
     setWindowIcon(QIcon(":/Icons/calendar.png"));
@@ -115,6 +113,8 @@ MainWindow::MainWindow(QWidget *parent)
     connect(ui->exitaction, SIGNAL(triggered()), this, SLOT(close()));
     connect(ui->changelocationaction, SIGNAL(triggered()), this, SLOT(changeLocationForm()));
     connect(ui->gdateaction, SIGNAL(toggled(bool)), this, SLOT(toggleGDate(bool)));
+    connect(ui->zmanimpanelaction, SIGNAL(toggled(bool)), this, SLOT(toggleZmanimPanel(bool)));
+    connect(ui->aboutaction, SIGNAL(triggered()), this, SLOT(aboutForm()));
 
     //Add weekday labels
     for (int i=0; i<7; i++)
@@ -131,12 +131,11 @@ MainWindow::MainWindow(QWidget *parent)
     }
 
     //A defualt Hdate class has today's date
-    Hdate today, d;
+    hdate::Hdate today, d;
 
     current.set_hd(today.get_hday(), today.get_hmonth(), today.get_hyear());
 
-    d.set_hdate(1, today.get_hmonth(), today.get_hyear());
-    showMonth(&d);
+    showMonth(&current);
 
     //Current time (do something with this):
     QTime t;
@@ -144,29 +143,22 @@ MainWindow::MainWindow(QWidget *parent)
 
 }
 
-
-void MainWindow::changeLocationForm()
-{
-    cl = new ChangeLocation (this, &locationName, &latitude, &longitude, &candleLightingOffset, &TimeZone, &elavation);
-
-    connect(cl, SIGNAL(changed()), this, SLOT(redraw()));
-    connect(cl, SIGNAL(save()), this, SLOT(saveConfs()));
-
-    cl->show();
-}
-
 //Rebuild the calendar from the given first day of the month
-void MainWindow::showMonth(Hdate *firstday)
+void MainWindow::showMonth(hdate::Hdate *dayinmonth)
 {
+    //Go to first day of the month
+    hdate::Hdate *firstday = new hdate::Hdate();
+    firstday->set_hdate(1, dayinmonth->get_hmonth(), dayinmonth->get_hyear());
+
     //Clear last month
     clearMonth();
 
     updateLabels(&current);
 
     //A defualt Hdate class has today's date
-    Hdate today;
+    hdate::Hdate today;
 
-    Hdate tmpday;
+    hdate::Hdate tmpday;
     tmpday.set_hdate(firstday->get_hday(), firstday->get_hmonth(), firstday->get_hyear());
 
     int jd = tmpday.get_julian();
@@ -218,15 +210,15 @@ void MainWindow::clearMonth()
         if (dayList[i] != NULL) delete dayList[i];
     }
     dayList.clear();
+
+    lastselected = NULL;
 }
 
 void MainWindow::redraw()
 {
     lastselected = NULL;
 
-    Hdate d;
-    d.set_hdate(1, current.get_hmonth(),  current.get_hyear());
-    showMonth(&d);
+    showMonth(&current);
 }
 
 void MainWindow::dayClicked(dayButton * day)
@@ -241,11 +233,6 @@ void MainWindow::dayClicked(dayButton * day)
     updateLabels(&current);
 }
 
-void MainWindow::readFromStdout()
-{
-    //print( QString(proc->readAllStandardOutput()) );
-}
-
 MainWindow::~MainWindow()
 {
     saveDispConfs();
@@ -255,17 +242,11 @@ MainWindow::~MainWindow()
     delete ui;
 }
 
-//TODO:
+//Change the current day by the given offset
 void MainWindow::changeDay(int i)
 {
-    if (i < 0)
-    {
-        for (int j=0; j > i; j--) current.removeDay();
-    }
-    else
-    {
-        for (int j=0; j < i; j++) current.addDay();
-    }
+    if (i < 0) for (int j=0; j > i; j--) current.removeDay();
+    else for (int j=0; j < i; j++) current.addDay();
 
     if (lastselected != NULL) lastselected->Unselect();
 
@@ -273,46 +254,6 @@ void MainWindow::changeDay(int i)
     lastselected = dayList[current.get_julian() - dayList[0]->getHDate()->get_julian()];
 
     updateLabels(&current);
-}
-
-void MainWindow::on_backMonthBTN_clicked()
-{
-    current.removeMonth();
-}
-
-void MainWindow::on_nextMonthBTN_clicked()
-{
-    current.addMonth();
-}
-
-void MainWindow::on_backYearBTN_clicked()
-{
-    current.removeYear();
-}
-
-void MainWindow::on_nextYearBTN_clicked()
-{
-    current.addYear();
-}
-
-void MainWindow::on_backDayBTN_clicked()
-{
-    changeDay(-1);
-}
-
-void MainWindow::on_nextDayBTN_clicked()
-{
-    changeDay(1);
-}
-
-void MainWindow::on_doublenextYearBTN_clicked()
-{
-    current.addYear(10);
-}
-
-void MainWindow::on_doublebackYearBTN_clicked()
-{
-    current.removeYear(10);
 }
 
 void MainWindow::updateLabels(mHdate *date)
@@ -327,7 +268,7 @@ void MainWindow::updateLabels(mHdate *date)
     ui->engdaylbl->setText(stringify(current.get_gday()));
     ui->engmonthlbl->setText(engmonths[current.get_gmonth() - 1]);
 
-    Hdate e;
+    hdate::Hdate e;
 
     e.set_hdate(1, date->get_hmonth(), date->get_hyear());
     QString gmonths = engmonths[e.get_gmonth() - 1];
@@ -350,8 +291,12 @@ void MainWindow::updateLabels(mHdate *date)
 
     //Show times:
 
-    delete zmanimproc;
-    zmanimproc = new QProcess(this);
+    /* Invokes an istance of ZmanimCLI, telling it to give a list of times for our location and date;
+       The output is sent to "gotTimes()" which updates the time labels by that. */
+
+    //delete zmanimproc;
+    //zmanimproc = new QProcess(this);
+    zmanimproc->kill();
 
     QStringList args;
 
@@ -371,7 +316,7 @@ void MainWindow::gotTimes()
 
     for (int i=0; i<times.size(); i++)
     {
-        QString t = times[i].mid(times[i].lastIndexOf(" "));
+        QString t = times[i].mid(times[i].lastIndexOf(" ") + 1);
         //A time
         if (times[i][0] == '*')
         {
@@ -435,6 +380,25 @@ void MainWindow::gotTimes()
             if (times[i].startsWith("* Sunset:") == true)
             {
                 ui->skialbl->setText(t);
+
+                //TODO: rest of the חגים too
+                //Candel lighting:
+                if (current.get_day_of_the_week() == 7 || current.get_holyday_type() == 3)
+                {
+                    ui->clllbllbl->show();
+                    ui->candellightinglbl->show();
+
+                    QTime sunset = QTime::fromString(t, "h:mm:ss");
+
+                    QTime cl = sunset.addSecs(-1 * (candleLightingOffset * 60));
+
+                    ui->candellightinglbl->setText(cl.toString("h:mm:ss"));
+                }
+                else
+                {
+                    ui->clllbllbl->hide();
+                    ui->candellightinglbl->hide();
+                }
             }
             if (times[i].startsWith("* Tzais:") == true)
             {
@@ -447,63 +411,6 @@ void MainWindow::gotTimes()
         }
     }
 }
-
-
-QString MainWindow::dafYomi(int jd)
-{
-    QStringList masehtot;
-
-    masehtot << "ברכות" << "שבת" << "עירובין" << "פסחים" << "שקלים" << "יומא" << "סוכה" << "ביצה" << "ראש השנה" << "תענית" << "מגילה" << "מועד קטן" << "חגיגה" << "יבמות" << "כתובות" << "נדרים" << "נזיר" << "סוטה" << "גיטין" << "קידושין" << "בבא קמא" << "בבא מציעא" << "בבא בתרא" << "סנהדרין" << "מכות" << "שבועות" << "עבודה זרה" << "הוריות" << "זבחים" << "מנחות" << "חולין" << "בכורות" << "ערכין" << "תמורה" << "כריתות" << "מעילה" << "נידה";
-
-    QList <int> dapim;
-    dapim << 64 << 157 << 105 << 121 << 22 << 88 << 56 << 40 << 35 << 31 << 32 << 29 << 27 << /*Yevamot*/122 << 112 << 91 << 66 << 49 << 90 << 82 << /*Bava Kama*/119 << 119 << 176 << 113 << 24 << 49 << 76 << 14 << /*Zevahim*/120 << 110 << 142 << 61 << 34 << 34 << 28 << 37 << 73;
-
-    int numDapim = 0;
-    for (int i=0; i<dapim.size(); i++) numDapim += dapim[i] - 1;
-
-    Hdate d; d.set_hdate(26,10,5683);
-
-    int i=(jd - d.get_julian()+1) % numDapim;
-
-    if ( i < 0 ) return "";
-    else if (i==0) i = numDapim;
-
-    int masehet=0;
-
-    while (dapim[masehet]-1 < i)
-    {
-        i-=dapim[masehet++]-1;
-
-    }
-    
-    return masehtot[masehet] + ' ' + NumberToGematria(i+1, false);
-
-}
-
-
-
-void MainWindow::keyPressEvent( QKeyEvent *keyEvent )
-{
-    if ( keyEvent->key() == Qt::Key_Left)
-    {
-        changeDay(1);
-    }
-    else if ( keyEvent->key() == Qt::Key_Right)
-    {
-        changeDay(-1);
-    }
-    else if ( keyEvent->key() == Qt::Key_Up)
-    {
-        //Move week back:
-         changeDay(-7);
-    }
-    else if ( keyEvent->key() == Qt::Key_Down)
-    {
-        //Move week ahead:
-         changeDay(7);
-    }
-}
-
 
 void MainWindow::saveConfs()
 {
@@ -601,6 +508,15 @@ void MainWindow::loadConfs()
                         ui->engyearlbl->setVisible(false);
                         ui->gmonthlbl->setVisible(false);
                         ui->hmonthlbl->setVisible(false);
+                        
+                        ui->nextgdayBTN->setVisible(false);
+                        ui->backgdayBTN->setVisible(false);
+                        ui->nextgmonthBTN->setVisible(false);
+                        ui->backgmonthBTN->setVisible(false);
+                        ui->nextgYearBTN->setVisible(false);
+                        ui->doublenextgYearBTN->setVisible(false);
+                        ui->backgYearBTN->setVisible(false);
+                        ui->doublebackgYearBTN->setVisible(false);
 
                         for (int i=3; i<7; i++) ui->gridLayout_2->setColumnStretch(i,0);
                     }
@@ -611,17 +527,166 @@ void MainWindow::loadConfs()
 
 }
 
-void MainWindow::toggleGDate(bool yes)
+void MainWindow::toggleGDate(bool show)
 {
-    ShowGDate = yes;
+    ShowGDate = show;
     redraw();
 
-    ui->engdaylbl->setVisible(yes);
-    ui->engmonthlbl->setVisible(yes);
-    ui->engyearlbl->setVisible(yes);
-    ui->gmonthlbl->setVisible(yes);
-    ui->hmonthlbl->setVisible(yes);
+    ui->engdaylbl->setVisible(show);
+    ui->engmonthlbl->setVisible(show);
+    ui->engyearlbl->setVisible(show);
+    ui->gmonthlbl->setVisible(show);
+    ui->hmonthlbl->setVisible(show);
+    
+    ui->nextgdayBTN->setVisible(show);
+    ui->backgdayBTN->setVisible(show);
+    ui->nextgmonthBTN->setVisible(show);
+    ui->backgmonthBTN->setVisible(show);
+    ui->nextgYearBTN->setVisible(show);
+    ui->doublenextgYearBTN->setVisible(show);
+    ui->backgYearBTN->setVisible(show);
+    ui->doublebackgYearBTN->setVisible(show);
 
-    if (yes == false) for (int i=3; i<7; i++) ui->gridLayout_2->setColumnStretch(i,0);
+    if (show == false) for (int i=3; i<7; i++) ui->gridLayout_2->setColumnStretch(i,0);
     else for (int i=0; i<7; i++) ui->gridLayout_2->setColumnStretch(i,100);
+}
+
+void MainWindow::toggleZmanimPanel(bool show)
+{
+    ui->dockWidget->setVisible(show);
+}
+
+void MainWindow::on_dockWidget_visibilityChanged(bool visible)
+{
+    ui->zmanimpanelaction->setChecked(visible);
+}
+
+ChangeLocation *cl;
+void MainWindow::changeLocationForm()
+{
+    cl = new ChangeLocation (this, &locationName, &latitude, &longitude, &candleLightingOffset, &TimeZone, &elavation);
+
+    connect(cl, SIGNAL(changed()), this, SLOT(redraw()));
+    connect(cl, SIGNAL(save()), this, SLOT(saveConfs()));
+
+    cl->show();
+}
+
+About *about;
+void MainWindow::aboutForm()
+{
+    about = new About();
+    about->show();
+}
+
+void MainWindow::keyPressEvent( QKeyEvent *keyEvent )
+{
+    if ( keyEvent->key() == Qt::Key_Left)
+    {
+        changeDay(1);
+    }
+    else if ( keyEvent->key() == Qt::Key_Right)
+    {
+        changeDay(-1);
+    }
+    else if ( keyEvent->key() == Qt::Key_Up)
+    {
+        //Move week back:
+         changeDay(-7);
+    }
+    else if ( keyEvent->key() == Qt::Key_Down)
+    {
+        //Move week ahead:
+         changeDay(7);
+    }
+}
+
+void MainWindow::on_backMonthBTN_clicked()
+{
+    current.removeMonth();
+}
+
+void MainWindow::on_nextMonthBTN_clicked()
+{
+    current.addMonth();
+}
+
+void MainWindow::on_backYearBTN_clicked()
+{
+    current.removeYear();
+}
+
+void MainWindow::on_nextYearBTN_clicked()
+{
+    current.addYear();
+}
+
+void MainWindow::on_backDayBTN_clicked()
+{
+    changeDay(-1);
+}
+
+void MainWindow::on_nextDayBTN_clicked()
+{
+    changeDay(1);
+}
+
+void MainWindow::on_doublenextYearBTN_clicked()
+{
+    current.addYear(10);
+}
+
+void MainWindow::on_doublebackYearBTN_clicked()
+{
+    current.removeYear(10);
+}
+
+void MainWindow::on_backgdayBTN_clicked()
+{
+    changeDay(-1);
+}
+
+void MainWindow::on_nextgdayBTN_clicked()
+{
+    changeDay(1);
+}
+
+void MainWindow::on_backgmonthBTN_clicked()
+{
+    if (current.get_gmonth() > 1) current.set_gdate(current.get_gday(), current.get_gmonth()-1, current.get_gyear());
+    else current.set_gdate(current.get_gday(), 12, current.get_gyear()-1);
+
+    showMonth(&current);
+}
+
+void MainWindow::on_nextgmonthBTN_clicked()
+{
+    if (current.get_gmonth() < 12) current.set_gdate(current.get_gday(), current.get_gmonth()+1, current.get_gyear());
+    else current.set_gdate(current.get_gday(), 1, current.get_gyear()+1);
+
+    showMonth(&current);
+}
+
+void MainWindow::on_backgYearBTN_clicked()
+{
+    current.set_gdate(current.get_gday(), current.get_gmonth(), current.get_gyear()-1);
+    showMonth(&current);
+}
+
+void MainWindow::on_nextgYearBTN_clicked()
+{
+    current.set_gdate(current.get_gday(), current.get_gmonth(), current.get_gyear()+1);
+    showMonth(&current);
+}
+
+void MainWindow::on_doublebackgYearBTN_clicked()
+{
+    current.set_gdate(current.get_gday(), current.get_gmonth(), current.get_gyear()-10);
+    showMonth(&current);
+}
+
+void MainWindow::on_doublenextgYearBTN_clicked()
+{
+    current.set_gdate(current.get_gday(), current.get_gmonth(), current.get_gyear()+10);
+    showMonth(&current);
 }

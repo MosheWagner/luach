@@ -21,6 +21,7 @@
 #include <QProcess>
 #include <QTextCodec>
 #include <QTime>
+#include <QDir>
 #include <QPrinter>
 #include <QPrintDialog>
 #include <QPainter>

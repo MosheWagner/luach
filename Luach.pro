@@ -2,7 +2,7 @@
 # Project created by QtCreator
 # Author: moshe.wagner@gmail.com
 # -------------------------------------------------
-TARGET = QLuach
+TARGET = Luach
 TEMPLATE = app
 SOURCES += main.cpp \
     mainwindow.cpp \
@@ -21,4 +21,4 @@ FORMS += mainwindow.ui \
     changelocation.ui \
     about.ui
 LIBS += -lhdate
-RESOURCES += QLuach.qrc
+RESOURCES += Luach.qrc

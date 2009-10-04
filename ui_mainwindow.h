@@ -1,7 +1,7 @@
 /********************************************************************************
 ** Form generated from reading ui file 'mainwindow.ui'
 **
-** Created: Sun Oct 4 11:00:07 2009
+** Created: Sun Oct 4 12:55:59 2009
 **      by: Qt User Interface Compiler version 4.5.2
 **
 ** WARNING! All changes made in this file will be lost when recompiling ui file!
@@ -884,8 +884,9 @@ public:
         menuBar->addAction(menu->menuAction());
         menu->addAction(changelocationaction);
         menu_2->addAction(aboutaction);
-        menu_2->addAction(exitaction);
         menu_2->addAction(printaction);
+        menu_2->addSeparator();
+        menu_2->addAction(exitaction);
         menu_3->addAction(gdateaction);
         menu_3->addAction(zmanimpanelaction);
 

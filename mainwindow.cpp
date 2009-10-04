@@ -31,18 +31,24 @@
 
     - Daf yomi , (eventually should have other "yomi" stuff)
 
-  Stuff to add:
     - Print snapshots
 
-    - Other cool features of course
+  Stuff to add:
+
+    - Events
+    - Haftarot
+    - Dalvening calculation
+    - Other cool features ;-)
 
 */
+
+//TODO: README file
+//TODO: try to compile on windows
 
 //TODO: Sfirat Haomer
 //TODO: Days of חנוכה וחול המועד
 //TODO: ברכת החמה
 
-//TODO: OK, clean all this mess up...
 //TODO: Comments! comments, comments comments!
 
 
@@ -68,8 +74,9 @@ double candleLightingOffset = 18.0;
 
 bool ShowGDate = true;
 
-#define LOCATIONCONFPATH ".locationconf"
-#define DISPCONFPATH ".dispconf"
+QString LOCATIONCONFPATH = ".locationconf";
+QString DISPCONFPATH = ".dispconf";
+QString ZMANIMCLIPATH = "ZmanimCLI.jar";
 
 
 MainWindow::MainWindow(QWidget *parent)
@@ -79,6 +86,31 @@ MainWindow::MainWindow(QWidget *parent)
 
     //Set all QString to work with unicode
     QTextCodec::setCodecForCStrings(QTextCodec::codecForName("utf8"));
+
+
+
+    //Configure paths:
+    QFile f("ZmanimCLI.jar");
+
+    if (!f.exists()) //Files are not in this dir (such as after installation in *nix)
+    {
+        if (!f.exists("/usr/bin/ZmanimCLI.jar"))
+        {
+            print ("Can't find ZmanimCLI! Hiding Zmanim!");
+
+            //Hide times:
+            ui->zmanimpanelaction->setVisible(false);
+            toggleZmanimPanel(false);
+        }
+
+        ZMANIMCLIPATH = "/usr/bin/ZmanimCLI.jar";
+
+        QDir dir;
+        dir.mkdir(QDir::homePath() + "/.Luach/");
+
+        LOCATIONCONFPATH = QDir::homePath() + "/.Luach/locationconf";
+        DISPCONFPATH = QDir::homePath() + "/.Luach/dispconf";
+    }
 
 
     setWindowIcon(QIcon(":/Icons/calendar.png"));
@@ -93,6 +125,8 @@ MainWindow::MainWindow(QWidget *parent)
     
     lastselected = NULL;
 
+
+    toggleGDate(false);
 
     //Force the locale to hebrew, so Hdate will give Hebrew strings. Yup, I don't like this either.
     // TODO: test on windows
@@ -134,8 +168,6 @@ MainWindow::MainWindow(QWidget *parent)
     //Hide candel lighting labels
     ui->clllbllbl->hide();
     ui->candellightinglbl->hide();
-
-    toggleGDate(false);
 
 }
 
@@ -293,7 +325,7 @@ void MainWindow::updateLabels(mHdate *date)
 
     QString dstr = stringify(date->get_gyear()) + "/" + stringify(date->get_gmonth()) + "/" + stringify(date->get_gday());
 
-    args << "-jar" << "/usr/bin/ZmanimCLI.jar" << "-d" << dstr << "-lat" << stringify(latitude) << "-lon" << stringify(longitude) << "-e" << stringify(elavation) << "-tz" << TimeZone;
+    args << "-jar" << ZMANIMCLIPATH << "-d" << dstr << "-lat" << stringify(latitude) << "-lon" << stringify(longitude) << "-e" << stringify(elavation) << "-tz" << TimeZone;
     zmanimproc->start("java", args);
 
     connect(zmanimproc, SIGNAL(readyReadStandardOutput()), this, SLOT(gotTimes()));

@@ -1018,8 +1018,9 @@
      <string>קובץ</string>
     </property>
     <addaction name="aboutaction"/>
-    <addaction name="exitaction"/>
     <addaction name="printaction"/>
+    <addaction name="separator"/>
+    <addaction name="exitaction"/>
    </widget>
    <widget class="QMenu" name="menu_3">
     <property name="layoutDirection">

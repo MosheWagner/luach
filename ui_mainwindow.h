@@ -1,7 +1,7 @@
 /********************************************************************************
 ** Form generated from reading ui file 'mainwindow.ui'
 **
-** Created: Thu Oct 1 10:38:56 2009
+** Created: Sun Oct 4 11:00:07 2009
 **      by: Qt User Interface Compiler version 4.5.2
 **
 ** WARNING! All changes made in this file will be lost when recompiling ui file!
@@ -39,6 +39,7 @@ public:
     QAction *gdateaction;
     QAction *zmanimpanelaction;
     QAction *aboutaction;
+    QAction *printaction;
     QWidget *centralWidget;
     QVBoxLayout *verticalLayout;
     QGridLayout *gridLayout_2;
@@ -210,6 +211,11 @@ public:
         QIcon icon2;
         icon2.addFile(QString::fromUtf8(":/Icons/help-about.png"), QSize(), QIcon::Normal, QIcon::Off);
         aboutaction->setIcon(icon2);
+        printaction = new QAction(MainWindow);
+        printaction->setObjectName(QString::fromUtf8("printaction"));
+        QIcon icon3;
+        icon3.addFile(QString::fromUtf8(":/Icons/document-print.png"), QSize(), QIcon::Normal, QIcon::Off);
+        printaction->setIcon(icon3);
         centralWidget = new QWidget(MainWindow);
         centralWidget->setObjectName(QString::fromUtf8("centralWidget"));
         verticalLayout = new QVBoxLayout(centralWidget);
@@ -228,9 +234,9 @@ public:
         backDayBTN = new QToolButton(centralWidget);
         backDayBTN->setObjectName(QString::fromUtf8("backDayBTN"));
         backDayBTN->setFocusPolicy(Qt::NoFocus);
-        QIcon icon3;
-        icon3.addFile(QString::fromUtf8(":/Icons/arrow-right.png"), QSize(), QIcon::Normal, QIcon::Off);
-        backDayBTN->setIcon(icon3);
+        QIcon icon4;
+        icon4.addFile(QString::fromUtf8(":/Icons/arrow-right.png"), QSize(), QIcon::Normal, QIcon::Off);
+        backDayBTN->setIcon(icon4);
         backDayBTN->setAutoRaise(true);
 
         horizontalLayout_4->addWidget(backDayBTN);
@@ -254,9 +260,9 @@ public:
         nextDayBTN = new QToolButton(centralWidget);
         nextDayBTN->setObjectName(QString::fromUtf8("nextDayBTN"));
         nextDayBTN->setFocusPolicy(Qt::NoFocus);
-        QIcon icon4;
-        icon4.addFile(QString::fromUtf8(":/Icons/arrow-left.png"), QSize(), QIcon::Normal, QIcon::Off);
-        nextDayBTN->setIcon(icon4);
+        QIcon icon5;
+        icon5.addFile(QString::fromUtf8(":/Icons/arrow-left.png"), QSize(), QIcon::Normal, QIcon::Off);
+        nextDayBTN->setIcon(icon5);
         nextDayBTN->setAutoRaise(true);
 
         horizontalLayout_4->addWidget(nextDayBTN);
@@ -271,7 +277,7 @@ public:
         backMonthBTN = new QToolButton(centralWidget);
         backMonthBTN->setObjectName(QString::fromUtf8("backMonthBTN"));
         backMonthBTN->setFocusPolicy(Qt::NoFocus);
-        backMonthBTN->setIcon(icon3);
+        backMonthBTN->setIcon(icon4);
         backMonthBTN->setAutoRaise(true);
 
         horizontalLayout_3->addWidget(backMonthBTN);
@@ -288,7 +294,7 @@ public:
         nextMonthBTN = new QToolButton(centralWidget);
         nextMonthBTN->setObjectName(QString::fromUtf8("nextMonthBTN"));
         nextMonthBTN->setFocusPolicy(Qt::NoFocus);
-        nextMonthBTN->setIcon(icon4);
+        nextMonthBTN->setIcon(icon5);
         nextMonthBTN->setCheckable(false);
         nextMonthBTN->setAutoRaise(true);
 
@@ -304,9 +310,9 @@ public:
         doublebackYearBTN = new QToolButton(centralWidget);
         doublebackYearBTN->setObjectName(QString::fromUtf8("doublebackYearBTN"));
         doublebackYearBTN->setFocusPolicy(Qt::NoFocus);
-        QIcon icon5;
-        icon5.addFile(QString::fromUtf8(":/Icons/arrow-right-double.png"), QSize(), QIcon::Normal, QIcon::Off);
-        doublebackYearBTN->setIcon(icon5);
+        QIcon icon6;
+        icon6.addFile(QString::fromUtf8(":/Icons/arrow-right-double.png"), QSize(), QIcon::Normal, QIcon::Off);
+        doublebackYearBTN->setIcon(icon6);
         doublebackYearBTN->setAutoRaise(true);
 
         horizontalLayout_2->addWidget(doublebackYearBTN);
@@ -314,7 +320,7 @@ public:
         backYearBTN = new QToolButton(centralWidget);
         backYearBTN->setObjectName(QString::fromUtf8("backYearBTN"));
         backYearBTN->setFocusPolicy(Qt::NoFocus);
-        backYearBTN->setIcon(icon3);
+        backYearBTN->setIcon(icon4);
         backYearBTN->setAutoRaise(true);
 
         horizontalLayout_2->addWidget(backYearBTN);
@@ -331,7 +337,7 @@ public:
         nextYearBTN = new QToolButton(centralWidget);
         nextYearBTN->setObjectName(QString::fromUtf8("nextYearBTN"));
         nextYearBTN->setFocusPolicy(Qt::NoFocus);
-        nextYearBTN->setIcon(icon4);
+        nextYearBTN->setIcon(icon5);
         nextYearBTN->setAutoRaise(true);
 
         horizontalLayout_2->addWidget(nextYearBTN);
@@ -339,9 +345,9 @@ public:
         doublenextYearBTN = new QToolButton(centralWidget);
         doublenextYearBTN->setObjectName(QString::fromUtf8("doublenextYearBTN"));
         doublenextYearBTN->setFocusPolicy(Qt::NoFocus);
-        QIcon icon6;
-        icon6.addFile(QString::fromUtf8(":/Icons/arrow-left-double.png"), QSize(), QIcon::Normal, QIcon::Off);
-        doublenextYearBTN->setIcon(icon6);
+        QIcon icon7;
+        icon7.addFile(QString::fromUtf8(":/Icons/arrow-left-double.png"), QSize(), QIcon::Normal, QIcon::Off);
+        doublenextYearBTN->setIcon(icon7);
         doublenextYearBTN->setAutoRaise(true);
 
         horizontalLayout_2->addWidget(doublenextYearBTN);
@@ -387,7 +393,7 @@ public:
         backgdayBTN = new QToolButton(centralWidget);
         backgdayBTN->setObjectName(QString::fromUtf8("backgdayBTN"));
         backgdayBTN->setFocusPolicy(Qt::NoFocus);
-        backgdayBTN->setIcon(icon3);
+        backgdayBTN->setIcon(icon4);
         backgdayBTN->setAutoRaise(true);
 
         horizontalLayout->addWidget(backgdayBTN);
@@ -408,7 +414,7 @@ public:
         nextgdayBTN = new QToolButton(centralWidget);
         nextgdayBTN->setObjectName(QString::fromUtf8("nextgdayBTN"));
         nextgdayBTN->setFocusPolicy(Qt::NoFocus);
-        nextgdayBTN->setIcon(icon4);
+        nextgdayBTN->setIcon(icon5);
         nextgdayBTN->setAutoRaise(true);
 
         horizontalLayout->addWidget(nextgdayBTN);
@@ -423,7 +429,7 @@ public:
         backgmonthBTN = new QToolButton(centralWidget);
         backgmonthBTN->setObjectName(QString::fromUtf8("backgmonthBTN"));
         backgmonthBTN->setFocusPolicy(Qt::NoFocus);
-        backgmonthBTN->setIcon(icon3);
+        backgmonthBTN->setIcon(icon4);
         backgmonthBTN->setAutoRaise(true);
 
         horizontalLayout_5->addWidget(backgmonthBTN);
@@ -440,7 +446,7 @@ public:
         nextgmonthBTN = new QToolButton(centralWidget);
         nextgmonthBTN->setObjectName(QString::fromUtf8("nextgmonthBTN"));
         nextgmonthBTN->setFocusPolicy(Qt::NoFocus);
-        nextgmonthBTN->setIcon(icon4);
+        nextgmonthBTN->setIcon(icon5);
         nextgmonthBTN->setAutoRaise(true);
 
         horizontalLayout_5->addWidget(nextgmonthBTN);
@@ -455,7 +461,7 @@ public:
         doublebackgYearBTN = new QToolButton(centralWidget);
         doublebackgYearBTN->setObjectName(QString::fromUtf8("doublebackgYearBTN"));
         doublebackgYearBTN->setFocusPolicy(Qt::NoFocus);
-        doublebackgYearBTN->setIcon(icon5);
+        doublebackgYearBTN->setIcon(icon6);
         doublebackgYearBTN->setAutoRaise(true);
 
         horizontalLayout_6->addWidget(doublebackgYearBTN);
@@ -463,7 +469,7 @@ public:
         backgYearBTN = new QToolButton(centralWidget);
         backgYearBTN->setObjectName(QString::fromUtf8("backgYearBTN"));
         backgYearBTN->setFocusPolicy(Qt::NoFocus);
-        backgYearBTN->setIcon(icon3);
+        backgYearBTN->setIcon(icon4);
         backgYearBTN->setAutoRaise(true);
 
         horizontalLayout_6->addWidget(backgYearBTN);
@@ -480,7 +486,7 @@ public:
         nextgYearBTN = new QToolButton(centralWidget);
         nextgYearBTN->setObjectName(QString::fromUtf8("nextgYearBTN"));
         nextgYearBTN->setFocusPolicy(Qt::NoFocus);
-        nextgYearBTN->setIcon(icon4);
+        nextgYearBTN->setIcon(icon5);
         nextgYearBTN->setAutoRaise(true);
 
         horizontalLayout_6->addWidget(nextgYearBTN);
@@ -488,7 +494,7 @@ public:
         doublenextgYearBTN = new QToolButton(centralWidget);
         doublenextgYearBTN->setObjectName(QString::fromUtf8("doublenextgYearBTN"));
         doublenextgYearBTN->setFocusPolicy(Qt::NoFocus);
-        doublenextgYearBTN->setIcon(icon6);
+        doublenextgYearBTN->setIcon(icon7);
         doublenextgYearBTN->setAutoRaise(true);
 
         horizontalLayout_6->addWidget(doublenextgYearBTN);
@@ -879,6 +885,7 @@ public:
         menu->addAction(changelocationaction);
         menu_2->addAction(aboutaction);
         menu_2->addAction(exitaction);
+        menu_2->addAction(printaction);
         menu_3->addAction(gdateaction);
         menu_3->addAction(zmanimpanelaction);
 
@@ -896,6 +903,7 @@ public:
         gdateaction->setText(QApplication::translate("MainWindow", "\327\224\327\246\327\222 \327\252\327\220\327\250\327\231\327\232 \327\234\327\225\327\242\327\226\327\231", 0, QApplication::UnicodeUTF8));
         zmanimpanelaction->setText(QApplication::translate("MainWindow", "\327\224\327\246\327\222 \327\250\327\251\327\231\327\236\327\252 \327\226\327\236\327\240\327\231\327\235", 0, QApplication::UnicodeUTF8));
         aboutaction->setText(QApplication::translate("MainWindow", "\327\220\327\225\327\223\327\225\327\252", 0, QApplication::UnicodeUTF8));
+        printaction->setText(QApplication::translate("MainWindow", "\327\224\327\223\327\244\327\241 \327\234\327\225\327\227", 0, QApplication::UnicodeUTF8));
         backDayBTN->setText(QApplication::translate("MainWindow", "...", 0, QApplication::UnicodeUTF8));
         daylabel->setText(QApplication::translate("MainWindow", "\327\231\327\225\327\235", 0, QApplication::UnicodeUTF8));
         nextDayBTN->setText(QApplication::translate("MainWindow", "...", 0, QApplication::UnicodeUTF8));

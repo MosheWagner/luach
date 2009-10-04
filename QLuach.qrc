@@ -9,5 +9,6 @@
         <file>Icons/calendar.png</file>
         <file>Icons/exit.png</file>
         <file>Icons/help-about.png</file>
+        <file>Icons/document-print.png</file>
     </qresource>
 </RCC>

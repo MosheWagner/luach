@@ -21,6 +21,9 @@
 #include <QProcess>
 #include <QTextCodec>
 #include <QTime>
+#include <QPrinter>
+#include <QPrintDialog>
+#include <QPainter>
 
 #include <locale.h>
 
@@ -91,7 +94,7 @@ private slots:
     void changeLocationForm();
     void aboutForm();
 
-
+    void printSnap();
 private:
     //Holds current (selected) date
     mHdate current;

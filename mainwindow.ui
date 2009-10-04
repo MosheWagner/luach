@@ -443,7 +443,7 @@
      <number>25</number>
     </property>
     <item>
-     <layout class="QGridLayout" name="gridLayout_2" columnstretch="100,100,100,100,100,100,100,0,0,0,0,0">
+     <layout class="QGridLayout" name="gridLayout_2" columnstretch="100,100,100,100,100,100,100">
       <property name="horizontalSpacing">
        <number>20</number>
       </property>
@@ -1019,6 +1019,7 @@
     </property>
     <addaction name="aboutaction"/>
     <addaction name="exitaction"/>
+    <addaction name="printaction"/>
    </widget>
    <widget class="QMenu" name="menu_3">
     <property name="layoutDirection">
@@ -1814,6 +1815,15 @@
    </property>
    <property name="text">
     <string>אודות</string>
+   </property>
+  </action>
+  <action name="printaction">
+   <property name="icon">
+    <iconset resource="QLuach.qrc">
+     <normaloff>:/Icons/document-print.png</normaloff>:/Icons/document-print.png</iconset>
+   </property>
+   <property name="text">
+    <string>הדפס לוח</string>
    </property>
   </action>
  </widget>

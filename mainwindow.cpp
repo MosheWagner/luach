@@ -108,6 +108,7 @@ MainWindow::MainWindow(QWidget *parent)
     connect(ui->gdateaction, SIGNAL(toggled(bool)), this, SLOT(toggleGDate(bool)));
     connect(ui->zmanimpanelaction, SIGNAL(toggled(bool)), this, SLOT(toggleZmanimPanel(bool)));
     connect(ui->aboutaction, SIGNAL(triggered()), this, SLOT(aboutForm()));
+    connect(ui->printaction, SIGNAL(triggered()), this, SLOT(printSnap()));
 
     //Add weekday labels
     for (int i=0; i<7; i++)
@@ -376,10 +377,7 @@ void MainWindow::gotTimes()
 
 
                 //Candel lighting:
-                int mon = current.get_hmonth();
-                int day = current.get_hday();
-
-                if (current.get_day_of_the_week() == 6 || ( mon == 1 && ( day == 9 || day == 14 || day == 21) ) || (mon==7 && (day==14 || day==20)) || (mon==9 && day==5))
+                if (current.get_day_of_the_week() == 6 || current.isErevYomTov())
                 {
                     ui->clllbllbl->show();
                     ui->candellightinglbl->show();
@@ -592,12 +590,22 @@ void MainWindow::keyPressEvent( QKeyEvent *keyEvent )
     else if ( keyEvent->key() == Qt::Key_Up)
     {
         //Move week back:
-         changeDay(-7);
+        changeDay(-7);
     }
     else if ( keyEvent->key() == Qt::Key_Down)
     {
         //Move week ahead:
-         changeDay(7);
+        changeDay(7);
+    }
+    else if ( keyEvent->key() == Qt::Key_PageUp)
+    {
+        //Move month back:
+        current.removeMonth();
+    }
+    else if ( keyEvent->key() == Qt::Key_PageDown)
+    {
+        //Move month ahead:
+        current.addMonth();
     }
 }
 
@@ -689,4 +697,25 @@ void MainWindow::on_doublenextgYearBTN_clicked()
 {
     current.set_gdate(current.get_gday(), current.get_gmonth(), current.get_gyear()+10);
     showMonth(&current);
+}
+
+void MainWindow::printSnap()
+{
+    QPixmap pix = QPixmap::grabWidget(this);
+
+    QPrinter printer;
+    QPrintDialog *dialog = new QPrintDialog(&printer, this);
+    dialog->setWindowTitle("הדפס ספר");
+    if (dialog->exec() != QDialog::Accepted)
+        return;
+    else
+    {
+        printer.setOrientation(QPrinter::Landscape);
+        printer.setPageMargins(0,0,0,0,QPrinter::Inch);
+
+        QPainter painter;
+        painter.begin(&printer);
+        painter.drawPixmap (0, 0, pix);
+        painter.end();
+    }
 }

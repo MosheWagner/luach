@@ -1,7 +1,7 @@
 /****************************************************************************
 ** Meta object code from reading C++ file 'mainwindow.h'
 **
-** Created: Thu Oct 1 09:46:16 2009
+** Created: Sun Oct 4 10:49:46 2009
 **      by: The Qt Meta Object Compiler version 61 (Qt 4.5.2)
 **
 ** WARNING! All changes made in this file will be lost!
@@ -23,7 +23,7 @@ static const uint qt_meta_data_MainWindow[] = {
        2,       // revision
        0,       // classname
        0,    0, // classinfo
-      31,   12, // methods
+      32,   12, // methods
        0,    0, // properties
        0,    0, // enums/sets
        0,    0, // constructors
@@ -60,6 +60,7 @@ static const uint qt_meta_data_MainWindow[] = {
      706,   11,   11,   11, 0x08,
      717,   11,   11,   11, 0x08,
      738,   11,   11,   11, 0x08,
+     750,   11,   11,   11, 0x08,
 
        0        // eod
 };
@@ -88,6 +89,7 @@ static const char qt_meta_stringdata_MainWindow[] = {
     "toggleGDate(bool)\0toggleZmanimPanel(bool)\0"
     "date\0updateLabels(mHdate*)\0gotTimes()\0"
     "changeLocationForm()\0aboutForm()\0"
+    "printSnap()\0"
 };
 
 const QMetaObject MainWindow::staticMetaObject = {
@@ -146,9 +148,10 @@ int MainWindow::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
         case 28: gotTimes(); break;
         case 29: changeLocationForm(); break;
         case 30: aboutForm(); break;
+        case 31: printSnap(); break;
         default: ;
         }
-        _id -= 31;
+        _id -= 32;
     }
     return _id;
 }

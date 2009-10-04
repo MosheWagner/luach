@@ -62,6 +62,8 @@ public:
     //Returns the Hebrew date's month length (29 or 30)
     int getMonthLength();
 
+    bool isErevYomTov();
+
 signals:
     //Emmited every time a month was changed, directly or indirectly.
     void month_changed();

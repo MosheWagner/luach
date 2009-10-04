@@ -167,4 +167,16 @@ void mHdate::addDay()
     }
 }
 
+bool mHdate::isErevYomTov()
+{
+    int mon = get_hmonth();
+    int day = get_hday();
+    if (( mon == 1 && ( day == 9 || day == 14 || day == 21) ) || (mon==7 && (day==14 || day==20)) || (mon==9 && day==5))
+    {
+        return true;
+    }
+
+    return false;
+}
+
 int mHdate::getMonthLength() { return month_length; }

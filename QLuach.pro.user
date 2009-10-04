@@ -54,7 +54,7 @@
   <valuemap type="QVariantMap" >
    <value key="ProjectExplorer.BuildConfiguration.DisplayName" type="QString" >Debug</value>
    <valuelist key="abstractProcess.Environment" type="QVariantList" >
-    <value type="QString" >DBUS_SESSION_BUS_ADDRESS=unix:abstract=/tmp/dbus-lE56GPMoI7,guid=b163c1f433efe35c2c47b6d24ac45781</value>
+    <value type="QString" >DBUS_SESSION_BUS_ADDRESS=unix:abstract=/tmp/dbus-spfGgow3Nm,guid=f171e9d22705b27864b3973f4ac47cb7</value>
     <value type="QString" >DESKTOP_SESSION=kde</value>
     <value type="QString" >DESKTOP_STARTUP_ID=</value>
     <value type="QString" >DISLIN=/home/moshe/dislin</value>
@@ -74,14 +74,14 @@
     <value type="QString" >PWD=/home/moshe</value>
     <value type="QString" >QTDIR=/home/moshe/qtsdk-2009.03/qt</value>
     <value type="QString" >SAL_GTK_USE_PIXMAPPAINT=1</value>
-    <value type="QString" >SESSION_MANAGER=local/debian:/tmp/.ICE-unix/3505</value>
+    <value type="QString" >SESSION_MANAGER=local/debian:/tmp/.ICE-unix/3460</value>
     <value type="QString" >SHELL=/bin/bash</value>
     <value type="QString" >SHLVL=1</value>
-    <value type="QString" >SSH_AGENT_PID=3407</value>
-    <value type="QString" >SSH_AUTH_SOCK=/tmp/ssh-aRkAfc3357/agent.3357</value>
+    <value type="QString" >SSH_AGENT_PID=3392</value>
+    <value type="QString" >SSH_AUTH_SOCK=/tmp/ssh-flcZtS3352/agent.3352</value>
     <value type="QString" >USER=moshe</value>
     <value type="QString" >XCURSOR_THEME=default</value>
-    <value type="QString" >XDG_SESSION_COOKIE=586cdda76773d2b6a9d8319e4a2f9e67-1254381439.574741-272183855</value>
+    <value type="QString" >XDG_SESSION_COOKIE=586cdda76773d2b6a9d8319e4a2f9e67-1254390965.929457-747106309</value>
     <value type="QString" >XDM_MANAGED=/var/run/xdmctl/xdmctl-:0,maysd,mayfn,sched,rsvd,method=classic,auto</value>
    </valuelist>
    <valuelist key="abstractProcess.arguments" type="QVariantList" >
@@ -103,7 +103,7 @@
   <valuemap type="QVariantMap" >
    <value key="ProjectExplorer.BuildConfiguration.DisplayName" type="QString" >Debug</value>
    <valuelist key="abstractProcess.Environment" type="QVariantList" >
-    <value type="QString" >DBUS_SESSION_BUS_ADDRESS=unix:abstract=/tmp/dbus-lE56GPMoI7,guid=b163c1f433efe35c2c47b6d24ac45781</value>
+    <value type="QString" >DBUS_SESSION_BUS_ADDRESS=unix:abstract=/tmp/dbus-spfGgow3Nm,guid=f171e9d22705b27864b3973f4ac47cb7</value>
     <value type="QString" >DESKTOP_SESSION=kde</value>
     <value type="QString" >DESKTOP_STARTUP_ID=</value>
     <value type="QString" >DISLIN=/home/moshe/dislin</value>
@@ -123,14 +123,14 @@
     <value type="QString" >PWD=/home/moshe</value>
     <value type="QString" >QTDIR=/home/moshe/qtsdk-2009.03/qt</value>
     <value type="QString" >SAL_GTK_USE_PIXMAPPAINT=1</value>
-    <value type="QString" >SESSION_MANAGER=local/debian:/tmp/.ICE-unix/3505</value>
+    <value type="QString" >SESSION_MANAGER=local/debian:/tmp/.ICE-unix/3460</value>
     <value type="QString" >SHELL=/bin/bash</value>
     <value type="QString" >SHLVL=1</value>
-    <value type="QString" >SSH_AGENT_PID=3407</value>
-    <value type="QString" >SSH_AUTH_SOCK=/tmp/ssh-aRkAfc3357/agent.3357</value>
+    <value type="QString" >SSH_AGENT_PID=3392</value>
+    <value type="QString" >SSH_AUTH_SOCK=/tmp/ssh-flcZtS3352/agent.3352</value>
     <value type="QString" >USER=moshe</value>
     <value type="QString" >XCURSOR_THEME=default</value>
-    <value type="QString" >XDG_SESSION_COOKIE=586cdda76773d2b6a9d8319e4a2f9e67-1254381439.574741-272183855</value>
+    <value type="QString" >XDG_SESSION_COOKIE=586cdda76773d2b6a9d8319e4a2f9e67-1254390965.929457-747106309</value>
     <value type="QString" >XDM_MANAGED=/var/run/xdmctl/xdmctl-:0,maysd,mayfn,sched,rsvd,method=classic,auto</value>
    </valuelist>
    <valuelist key="abstractProcess.arguments" type="QVariantList" >

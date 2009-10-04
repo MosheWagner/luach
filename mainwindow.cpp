@@ -38,11 +38,6 @@
 
 */
 
-
-
-//TODO: finish Candle lighting for other holidays too
-
-
 //TODO: Sfirat Haomer
 //TODO: Days of חנוכה וחול המועד
 //TODO: ברכת החמה
@@ -62,6 +57,7 @@ QStringList engmonths;
 QProcess *zmanimproc;
 
 
+//ברירת המחדל מכוונת לירושלים
 QString locationName;
 double latitude = 31.77805; //קו רוחב
 double longitude = 35.235149; //קו אורך
@@ -75,6 +71,7 @@ bool ShowGDate = true;
 #define LOCATIONCONFPATH ".locationconf"
 #define DISPCONFPATH ".dispconf"
 
+
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent), ui(new Ui::MainWindow)
 {
@@ -82,10 +79,6 @@ MainWindow::MainWindow(QWidget *parent)
 
     //Set all QString to work with unicode
     QTextCodec::setCodecForCStrings(QTextCodec::codecForName("utf8"));
-
-
-    //
-    zmanimproc = new QProcess(this);
 
 
     setWindowIcon(QIcon(":/Icons/calendar.png"));
@@ -126,47 +119,44 @@ MainWindow::MainWindow(QWidget *parent)
 
         QFont q; q.setBold(true); q.setPixelSize(20);
         lbl->setFont(q);
+
         //lbl->setStyleSheet("QLabel { background-color: blue }");
-        //lbl->setBackgroundRole(QPalette::Highlight);
     }
 
-    //A defualt Hdate class has today's date
-    hdate::Hdate today, d;
-
-    current.set_hd(today.get_hday(), today.get_hmonth(), today.get_hyear());
-
+    //A Hdate starts with todays date, so "current" is set to today
     showMonth(&current);
 
     //Current time (do something with this):
     QTime t;
-    print (t.currentTime ().toString());
+    print (t.currentTime().toString());
+
+    //Hide candel lighting labels
+    ui->clllbllbl->hide();
+    ui->candellightinglbl->hide();
+
+    toggleGDate(false);
 
 }
 
 //Rebuild the calendar from the given first day of the month
 void MainWindow::showMonth(hdate::Hdate *dayinmonth)
 {
-    //Go to first day of the month
-    hdate::Hdate *firstday = new hdate::Hdate();
-    firstday->set_hdate(1, dayinmonth->get_hmonth(), dayinmonth->get_hyear());
-
     //Clear last month
     clearMonth();
 
-    updateLabels(&current);
-
-    //A defualt Hdate class has today's date
-    hdate::Hdate today;
+    //Go to first day of the month
+    hdate::Hdate firstday;
+    firstday.set_hdate(1, dayinmonth->get_hmonth(), dayinmonth->get_hyear());
 
     hdate::Hdate tmpday;
-    tmpday.set_hdate(firstday->get_hday(), firstday->get_hmonth(), firstday->get_hyear());
+    tmpday.set_hdate(firstday.get_hday(), firstday.get_hmonth(), firstday.get_hyear());
 
     int jd = tmpday.get_julian();
-    int firstweekday = tmpday.get_day_of_the_week()-1;
+    int firstweekday = firstday.get_day_of_the_week()-1;
 
     QSize widest(0,0);
 
-    for (int i = firstweekday; tmpday.get_hmonth() == firstday->get_hmonth(); i++)
+    for (int i = firstweekday; tmpday.get_hmonth() == firstday.get_hmonth(); i++)
     {
         //
         //print (tmpday.get_format_date(0));
@@ -194,21 +184,24 @@ void MainWindow::showMonth(hdate::Hdate *dayinmonth)
         dayList[i]->setMinimumSize(widest);
     }
 
-    if (current.get_julian() - firstday->get_julian() >= 0 && current.get_julian() - firstday->get_julian() < dayList.size())
+    if (current.get_julian() - firstday.get_julian() >= 0 && current.get_julian() - firstday.get_julian() < dayList.size())
     {
-        dayList[current.get_julian() - firstday->get_julian()]->Select();
-        lastselected = dayList[current.get_julian() - firstday->get_julian()];
+        dayList[current.get_julian() - firstday.get_julian()]->Select();
+        lastselected = dayList[current.get_julian() - firstday.get_julian()];
     }
 
-    if (firstday->get_hmonth() == today.get_hmonth() && firstday->get_hyear() == today.get_hyear()) dayList[today.get_julian() - firstday->get_julian()]->setToday();
+    //A defualt Hdate class has today's date
+    hdate::Hdate today;
+    //Mark today
+    if (firstday.get_hmonth() == today.get_hmonth() && firstday.get_hyear() == today.get_hyear()) dayList[today.get_julian() - firstday.get_julian()]->setToday();
+
+    updateLabels(&current);
 }
 
 void MainWindow::clearMonth()
 {
-    for (int i = 0; i<dayList.size(); i++)
-    {
-        if (dayList[i] != NULL) delete dayList[i];
-    }
+    for (int i = 0; i<dayList.size(); i++) delete dayList[i];
+
     dayList.clear();
 
     lastselected = NULL;
@@ -216,8 +209,6 @@ void MainWindow::clearMonth()
 
 void MainWindow::redraw()
 {
-    lastselected = NULL;
-
     showMonth(&current);
 }
 
@@ -294,9 +285,8 @@ void MainWindow::updateLabels(mHdate *date)
     /* Invokes an istance of ZmanimCLI, telling it to give a list of times for our location and date;
        The output is sent to "gotTimes()" which updates the time labels by that. */
 
-    //delete zmanimproc;
-    //zmanimproc = new QProcess(this);
-    zmanimproc->kill();
+    delete zmanimproc;
+    zmanimproc = new QProcess(this);
 
     QStringList args;
 
@@ -322,20 +312,23 @@ void MainWindow::gotTimes()
         {
             if (times[i].startsWith("* AlosHashachar:") == true)
             {
+                /*
                 //Clear all labels, as this is the first time:
                 // (Maybe unneccesary: )
-                ui->sunriselabel->setText("");
-                ui->shmamgalbl->setText("");
-                ui->shmagralbl->setText("");
-                ui->tfilamgalbl->setText("");
-                ui->tfilagralbl->setText("");
-                ui->hatzotlbl->setText("");
-                ui->minchagdolalbl->setText("");
-                ui->minchaktanalbl->setText("");
-                ui->plaglbl->setText("");
-                ui->skialbl->setText("");
-                ui->tzitslbl->setText("");
-                ui->tzits72lbl->setText("");
+                ui->aloslabel->hide();
+                ui->sunriselabel->hide();
+                ui->shmamgalbl->hide();
+                ui->shmagralbl->hide();
+                ui->tfilamgalbl->hide();
+                ui->tfilagralbl->hide();
+                ui->hatzotlbl->hide();
+                ui->minchagdolalbl->hide();
+                ui->minchaktanalbl->hide();
+                ui->plaglbl->hide();
+                ui->skialbl->hide();
+                ui->tzitslbl->hide();
+                ui->tzits72lbl->hide();
+                */
 
 
                 //Show alos
@@ -381,9 +374,12 @@ void MainWindow::gotTimes()
             {
                 ui->skialbl->setText(t);
 
-                //TODO: rest of the חגים too
+
                 //Candel lighting:
-                if (current.get_day_of_the_week() == 7 || current.get_holyday_type() == 3)
+                int mon = current.get_hmonth();
+                int day = current.get_hday();
+
+                if (current.get_day_of_the_week() == 6 || ( mon == 1 && ( day == 9 || day == 14 || day == 21) ) || (mon==7 && (day==14 || day==20)) || (mon==9 && day==5))
                 {
                     ui->clllbllbl->show();
                     ui->candellightinglbl->show();
@@ -407,6 +403,26 @@ void MainWindow::gotTimes()
             if (times[i].startsWith("* Tzais72:") == true)
             {
                 ui->tzits72lbl->setText(t);
+
+
+                /*
+                //This is the last time given:
+
+                //TODO: not amazing, but ok....
+                ui->aloslabel->show();
+                ui->sunriselabel->show();
+                ui->shmamgalbl->show();
+                ui->shmagralbl->show();
+                ui->tfilamgalbl->show();
+                ui->tfilagralbl->show();
+                ui->hatzotlbl->show();
+                ui->minchagdolalbl->show();
+                ui->minchaktanalbl->show();
+                ui->plaglbl->show();
+                ui->skialbl->show();
+                ui->tzitslbl->show();
+                ui->tzits72lbl->show();
+                */
             }
         }
     }
@@ -498,28 +514,8 @@ void MainWindow::loadConfs()
             {
                 if (p[0] == "ShowGDate")
                 {
-                    if (p[1] == "False")
-                    {
-                        ui->gdateaction->setChecked(false);
-
-                        ShowGDate = false;
-                        ui->engdaylbl->setVisible(false);
-                        ui->engmonthlbl->setVisible(false);
-                        ui->engyearlbl->setVisible(false);
-                        ui->gmonthlbl->setVisible(false);
-                        ui->hmonthlbl->setVisible(false);
-                        
-                        ui->nextgdayBTN->setVisible(false);
-                        ui->backgdayBTN->setVisible(false);
-                        ui->nextgmonthBTN->setVisible(false);
-                        ui->backgmonthBTN->setVisible(false);
-                        ui->nextgYearBTN->setVisible(false);
-                        ui->doublenextgYearBTN->setVisible(false);
-                        ui->backgYearBTN->setVisible(false);
-                        ui->doublebackgYearBTN->setVisible(false);
-
-                        for (int i=3; i<7; i++) ui->gridLayout_2->setColumnStretch(i,0);
-                    }
+                    if (p[1] == "True") toggleGDate(true);
+                    else toggleGDate(false);
                 }
             }
         }
@@ -530,7 +526,11 @@ void MainWindow::loadConfs()
 void MainWindow::toggleGDate(bool show)
 {
     ShowGDate = show;
-    redraw();
+
+    //In case this was triggred from somewhere else
+    ui->gdateaction->setChecked(show);
+
+    if (!dayList.isEmpty()) redraw();
 
     ui->engdaylbl->setVisible(show);
     ui->engmonthlbl->setVisible(show);

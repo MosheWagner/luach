@@ -16,7 +16,23 @@
 
 #include "mhdate.h"
 
-mHdate::mHdate() {}
+mHdate::mHdate()
+{
+    //Find month length:
+    month_length = 0;
+
+    Hdate tmpday;
+    tmpday.set_hdate(1, get_hmonth(), get_hyear());
+    int jd = tmpday.get_julian();
+
+    while( tmpday.get_hmonth() == get_hmonth() )
+    {
+        month_length++;
+
+        jd++;
+        tmpday.set_jd(jd);
+    }
+}
 
 /*
 mHdate::mHdate(Hdate *d)

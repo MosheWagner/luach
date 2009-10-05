@@ -26,6 +26,7 @@
 #include <QPrintDialog>
 #include <QPainter>
 
+#include <QLocale>
 #include <locale.h>
 
 #include "mhdate.h"

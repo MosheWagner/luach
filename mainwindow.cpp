@@ -130,9 +130,17 @@ MainWindow::MainWindow(QWidget *parent)
 
     //Force the locale to hebrew, so Hdate will give Hebrew strings. Yup, I don't like this either.
     // TODO: test on windows
+
     setlocale (LC_ALL, "he_IL.UTF-8");
     setlocale (LC_ALL, "he_IL.utf8");
+
     
+    //QLocale::setDefault(QLocale("he_IL.UTF-8"));
+
+    //string str = (QLocale(QLocale::Hebrew, QLocale::Israel).name()).toStdString();
+    //setlocale (LC_ALL, str.c_str());
+
+
     locationName = "ירושלים";
 
     loadConfs();

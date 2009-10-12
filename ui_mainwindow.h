@@ -1,7 +1,7 @@
 /********************************************************************************
 ** Form generated from reading ui file 'mainwindow.ui'
 **
-** Created: Mon Oct 12 22:08:03 2009
+** Created: Mon Oct 12 22:39:42 2009
 **      by: Qt User Interface Compiler version 4.5.3
 **
 ** WARNING! All changes made in this file will be lost when recompiling ui file!
@@ -40,7 +40,7 @@ public:
     QAction *zmanimpanelaction;
     QAction *aboutaction;
     QAction *printaction;
-    QAction *viewsettings;
+    QAction *timeformat;
     QAction *viewsettings_2;
     QWidget *centralWidget;
     QVBoxLayout *verticalLayout;
@@ -219,13 +219,14 @@ public:
         QIcon icon3;
         icon3.addFile(QString::fromUtf8(":/Icons/document-print.png"), QSize(), QIcon::Normal, QIcon::Off);
         printaction->setIcon(icon3);
-        viewsettings = new QAction(MainWindow);
-        viewsettings->setObjectName(QString::fromUtf8("viewsettings"));
-        QIcon icon4;
-        icon4.addFile(QString::fromUtf8(":/Icons/configure.png"), QSize(), QIcon::Normal, QIcon::Off);
-        viewsettings->setIcon(icon4);
+        timeformat = new QAction(MainWindow);
+        timeformat->setObjectName(QString::fromUtf8("timeformat"));
+        timeformat->setCheckable(true);
+        timeformat->setChecked(false);
         viewsettings_2 = new QAction(MainWindow);
         viewsettings_2->setObjectName(QString::fromUtf8("viewsettings_2"));
+        QIcon icon4;
+        icon4.addFile(QString::fromUtf8(":/Icons/configure.png"), QSize(), QIcon::Normal, QIcon::Off);
         viewsettings_2->setIcon(icon4);
         centralWidget = new QWidget(MainWindow);
         centralWidget->setObjectName(QString::fromUtf8("centralWidget"));
@@ -903,15 +904,12 @@ public:
         menuBar->addAction(menu_3->menuAction());
         menuBar->addAction(menu->menuAction());
         menu->addAction(changelocationaction);
-        menu->addAction(viewsettings_2);
         menu_2->addAction(aboutaction);
         menu_2->addAction(printaction);
         menu_2->addSeparator();
         menu_2->addAction(exitaction);
         menu_3->addAction(gdateaction);
         menu_3->addAction(zmanimpanelaction);
-        menu_3->addSeparator();
-        menu_3->addAction(viewsettings);
 
         retranslateUi(MainWindow);
 
@@ -928,7 +926,7 @@ public:
         zmanimpanelaction->setText(QApplication::translate("MainWindow", "\327\224\327\246\327\222 \327\250\327\251\327\231\327\236\327\252 \327\226\327\236\327\240\327\231\327\235", 0, QApplication::UnicodeUTF8));
         aboutaction->setText(QApplication::translate("MainWindow", "\327\220\327\225\327\223\327\225\327\252", 0, QApplication::UnicodeUTF8));
         printaction->setText(QApplication::translate("MainWindow", "\327\224\327\223\327\244\327\241 \327\234\327\225\327\227", 0, QApplication::UnicodeUTF8));
-        viewsettings->setText(QApplication::translate("MainWindow", "\327\224\327\222\327\223\327\250\327\225\327\252 \327\252\327\246\327\225\327\222\327\224", 0, QApplication::UnicodeUTF8));
+        timeformat->setText(QApplication::translate("MainWindow", "\327\224\327\246\327\222 \327\251\327\242\327\225\327\252 \327\221\327\246\327\225\327\250\327\252 AM/PM", 0, QApplication::UnicodeUTF8));
         viewsettings_2->setText(QApplication::translate("MainWindow", "\327\224\327\222\327\223\327\250\327\225\327\252 \327\252\327\246\327\225\327\222\327\224", 0, QApplication::UnicodeUTF8));
         backDayBTN->setText(QApplication::translate("MainWindow", "...", 0, QApplication::UnicodeUTF8));
         daylabel->setText(QApplication::translate("MainWindow", "\327\231\327\225\327\235", 0, QApplication::UnicodeUTF8));

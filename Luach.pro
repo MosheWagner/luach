@@ -10,19 +10,16 @@ SOURCES += main.cpp \
     functions.cpp \
     mhdate.cpp \
     changelocation.cpp \
-    about.cpp \
-    viewsettingsform.cpp
+    about.cpp
 HEADERS += mainwindow.h \
     daybutton.h \
     functions.h \
     mhdate.h \
     changelocation.h \
-    about.h \
-    viewsettingsform.h
+    about.h
 FORMS += mainwindow.ui \
     changelocation.ui \
-    about.ui \
-    viewsettingsform.ui
+    about.ui
 LIBS += -lhdate
 win32 { 
     LIBS += -lintl \
@@ -38,5 +35,18 @@ binary.files = Luach
 # Install ZmanimCLI
 zmanim.path = /usr/local/bin/
 zmanim.files = ZmanimCLI.jar
+
+# Install Icons:
+icon.path = /usr/share/Luach/
+icon.files = Icons/calendar.png
+
+# Install shortcut
+menu.path = /usr/share/applications
+menu.files = Luach.desktop
+
 INSTALLS += binary
 INSTALLS += zmanim
+INSTALLS += icon
+
+INSTALLS += menu
+

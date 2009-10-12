@@ -1,0 +1,15 @@
+[Desktop Entry]
+Categories=Office
+Comment=
+Comment[en_US]=
+Exec=/usr/local/bin/Luach
+GenericName=
+GenericName[en_US]=
+Icon=/usr/share/Luach/calendar.png
+MimeType=
+Name=לוח
+Name[en_US]=Luach
+StartupNotify=true
+Terminal=false
+TerminalOptions=
+Type=Application

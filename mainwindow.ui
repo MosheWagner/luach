@@ -1015,7 +1015,6 @@
      <string>הגדרות</string>
     </property>
     <addaction name="changelocationaction"/>
-    <addaction name="viewsettings_2"/>
    </widget>
    <widget class="QMenu" name="menu_2">
     <property name="layoutDirection">
@@ -1038,8 +1037,6 @@
     </property>
     <addaction name="gdateaction"/>
     <addaction name="zmanimpanelaction"/>
-    <addaction name="separator"/>
-    <addaction name="viewsettings"/>
    </widget>
    <addaction name="menu_2"/>
    <addaction name="menu_3"/>
@@ -1848,13 +1845,15 @@
     <string>הדפס לוח</string>
    </property>
   </action>
-  <action name="viewsettings">
-   <property name="icon">
-    <iconset resource="Luach.qrc">
-     <normaloff>:/Icons/configure.png</normaloff>:/Icons/configure.png</iconset>
+  <action name="timeformat">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="checked">
+    <bool>false</bool>
    </property>
    <property name="text">
-    <string>הגדרות תצוגה</string>
+    <string>הצג שעות בצורת AM/PM</string>
    </property>
   </action>
   <action name="viewsettings_2">

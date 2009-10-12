@@ -1,0 +1,28 @@
+
+ "לוח" הוא (עוד) לוח שנה עברי עם זמני היום ההלכתיים.
+
+חישובי התאריכים מתבססים על ספרית libhdate, וחישובי הזמנים על Kosher Java's Zmanim API.
+
+התוכנה נועדה להדמות לתוכנת החלונות הידועה "קלוח", אך הינה קוד פתוח, ורצה גם על לינוקס.
+
+התוכנה נכתבה על ידי משה וגנר (moshe.wagner@gmail.com) , ומופצת תחת רשיון ה GPL גירסא 2 ומעלה.
+
+
+
+בלינוקס ניתן לקמפל ולהתקין את התוכנה על ידי הרצת
+qmake
+make
+וכמנהל מערכת
+make install 
+
+
+
+Luach is (Yet another) Hebrew calendar showing Hebrew dates, Holidays, and halachic day times.
+
+The Hebrew dates are obtained from libhdate, and the times by Kosher Java's Zmanim API.
+
+The program is similar to the known windows program "Kaluach", but cross-platform and open source.
+
+This program was written by Moshe Wagner (moshe.wagner@gmail.com), and is licensed under GPLv2.
+
+Bug reports, ideas, and comments are greatly welcome at my e-mail, at: moshe.wagner@gmail.com

@@ -467,7 +467,7 @@
            <string>...</string>
           </property>
           <property name="icon">
-           <iconset resource="QLuach.qrc">
+           <iconset resource="Luach.qrc">
             <normaloff>:/Icons/arrow-right.png</normaloff>:/Icons/arrow-right.png</iconset>
           </property>
           <property name="autoRaise">
@@ -507,7 +507,7 @@
            <string>...</string>
           </property>
           <property name="icon">
-           <iconset resource="QLuach.qrc">
+           <iconset resource="Luach.qrc">
             <normaloff>:/Icons/arrow-left.png</normaloff>:/Icons/arrow-left.png</iconset>
           </property>
           <property name="autoRaise">
@@ -534,7 +534,7 @@
            <string>...</string>
           </property>
           <property name="icon">
-           <iconset resource="QLuach.qrc">
+           <iconset resource="Luach.qrc">
             <normaloff>:/Icons/arrow-right.png</normaloff>:/Icons/arrow-right.png</iconset>
           </property>
           <property name="autoRaise">
@@ -574,7 +574,7 @@
            <string>...</string>
           </property>
           <property name="icon">
-           <iconset resource="QLuach.qrc">
+           <iconset resource="Luach.qrc">
             <normaloff>:/Icons/arrow-left.png</normaloff>:/Icons/arrow-left.png</iconset>
           </property>
           <property name="checkable">
@@ -604,7 +604,7 @@
            <string>...</string>
           </property>
           <property name="icon">
-           <iconset resource="QLuach.qrc">
+           <iconset resource="Luach.qrc">
             <normaloff>:/Icons/arrow-right-double.png</normaloff>:/Icons/arrow-right-double.png</iconset>
           </property>
           <property name="autoRaise">
@@ -621,7 +621,7 @@
            <string>...</string>
           </property>
           <property name="icon">
-           <iconset resource="QLuach.qrc">
+           <iconset resource="Luach.qrc">
             <normaloff>:/Icons/arrow-right.png</normaloff>:/Icons/arrow-right.png</iconset>
           </property>
           <property name="autoRaise">
@@ -661,7 +661,7 @@
            <string>...</string>
           </property>
           <property name="icon">
-           <iconset resource="QLuach.qrc">
+           <iconset resource="Luach.qrc">
             <normaloff>:/Icons/arrow-left.png</normaloff>:/Icons/arrow-left.png</iconset>
           </property>
           <property name="autoRaise">
@@ -678,7 +678,7 @@
            <string>...</string>
           </property>
           <property name="icon">
-           <iconset resource="QLuach.qrc">
+           <iconset resource="Luach.qrc">
             <normaloff>:/Icons/arrow-left-double.png</normaloff>:/Icons/arrow-left-double.png</iconset>
           </property>
           <property name="autoRaise">
@@ -748,7 +748,7 @@
            <string>...</string>
           </property>
           <property name="icon">
-           <iconset resource="QLuach.qrc">
+           <iconset resource="Luach.qrc">
             <normaloff>:/Icons/arrow-right.png</normaloff>:/Icons/arrow-right.png</iconset>
           </property>
           <property name="autoRaise">
@@ -788,7 +788,7 @@
            <string>...</string>
           </property>
           <property name="icon">
-           <iconset resource="QLuach.qrc">
+           <iconset resource="Luach.qrc">
             <normaloff>:/Icons/arrow-left.png</normaloff>:/Icons/arrow-left.png</iconset>
           </property>
           <property name="autoRaise">
@@ -815,7 +815,7 @@
            <string>...</string>
           </property>
           <property name="icon">
-           <iconset resource="QLuach.qrc">
+           <iconset resource="Luach.qrc">
             <normaloff>:/Icons/arrow-right.png</normaloff>:/Icons/arrow-right.png</iconset>
           </property>
           <property name="autoRaise">
@@ -855,7 +855,7 @@
            <string>...</string>
           </property>
           <property name="icon">
-           <iconset resource="QLuach.qrc">
+           <iconset resource="Luach.qrc">
             <normaloff>:/Icons/arrow-left.png</normaloff>:/Icons/arrow-left.png</iconset>
           </property>
           <property name="autoRaise">
@@ -882,7 +882,7 @@
            <string>...</string>
           </property>
           <property name="icon">
-           <iconset resource="QLuach.qrc">
+           <iconset resource="Luach.qrc">
             <normaloff>:/Icons/arrow-right-double.png</normaloff>:/Icons/arrow-right-double.png</iconset>
           </property>
           <property name="autoRaise">
@@ -899,7 +899,7 @@
            <string>...</string>
           </property>
           <property name="icon">
-           <iconset resource="QLuach.qrc">
+           <iconset resource="Luach.qrc">
             <normaloff>:/Icons/arrow-right.png</normaloff>:/Icons/arrow-right.png</iconset>
           </property>
           <property name="autoRaise">
@@ -939,7 +939,7 @@
            <string>...</string>
           </property>
           <property name="icon">
-           <iconset resource="QLuach.qrc">
+           <iconset resource="Luach.qrc">
             <normaloff>:/Icons/arrow-left.png</normaloff>:/Icons/arrow-left.png</iconset>
           </property>
           <property name="autoRaise">
@@ -956,7 +956,7 @@
            <string>...</string>
           </property>
           <property name="icon">
-           <iconset resource="QLuach.qrc">
+           <iconset resource="Luach.qrc">
             <normaloff>:/Icons/arrow-left-double.png</normaloff>:/Icons/arrow-left-double.png</iconset>
           </property>
           <property name="autoRaise">
@@ -1069,6 +1069,18 @@
        </property>
        <property name="alignment">
         <set>Qt::AlignCenter</set>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QLabel" name="dayandlocationlbl">
+       <property name="font">
+        <font>
+         <pointsize>8</pointsize>
+        </font>
+       </property>
+       <property name="text">
+        <string>תאריך, מיקום</string>
        </property>
       </widget>
      </item>
@@ -1677,6 +1689,20 @@
          </property>
         </spacer>
        </item>
+       <item row="14" column="0">
+        <widget class="QLabel" name="clllbllbl">
+         <property name="text">
+          <string>הדלקת נרות</string>
+         </property>
+        </widget>
+       </item>
+       <item row="14" column="1">
+        <widget class="QLabel" name="candellightinglbl">
+         <property name="text">
+          <string>הדה&quot;נ</string>
+         </property>
+        </widget>
+       </item>
        <item row="15" column="1">
         <spacer name="verticalSpacer">
          <property name="orientation">
@@ -1750,20 +1776,6 @@
          </property>
         </widget>
        </item>
-       <item row="14" column="0">
-        <widget class="QLabel" name="clllbllbl">
-         <property name="text">
-          <string>הדלקת נרות</string>
-         </property>
-        </widget>
-       </item>
-       <item row="14" column="1">
-        <widget class="QLabel" name="candellightinglbl">
-         <property name="text">
-          <string>הדה&quot;נ</string>
-         </property>
-        </widget>
-       </item>
       </layout>
      </item>
     </layout>
@@ -1771,7 +1783,7 @@
   </widget>
   <action name="changelocationaction">
    <property name="icon">
-    <iconset resource="QLuach.qrc">
+    <iconset resource="Luach.qrc">
      <normaloff>:/Icons/location.png</normaloff>:/Icons/location.png</iconset>
    </property>
    <property name="text">
@@ -1780,7 +1792,7 @@
   </action>
   <action name="exitaction">
    <property name="icon">
-    <iconset resource="QLuach.qrc">
+    <iconset resource="Luach.qrc">
      <normaloff>:/Icons/exit.png</normaloff>:/Icons/exit.png</iconset>
    </property>
    <property name="text">
@@ -1811,7 +1823,7 @@
   </action>
   <action name="aboutaction">
    <property name="icon">
-    <iconset resource="QLuach.qrc">
+    <iconset resource="Luach.qrc">
      <normaloff>:/Icons/help-about.png</normaloff>:/Icons/help-about.png</iconset>
    </property>
    <property name="text">
@@ -1820,7 +1832,7 @@
   </action>
   <action name="printaction">
    <property name="icon">
-    <iconset resource="QLuach.qrc">
+    <iconset resource="Luach.qrc">
      <normaloff>:/Icons/document-print.png</normaloff>:/Icons/document-print.png</iconset>
    </property>
    <property name="text">
@@ -1830,7 +1842,7 @@
  </widget>
  <layoutdefault spacing="6" margin="11"/>
  <resources>
-  <include location="QLuach.qrc"/>
+  <include location="Luach.qrc"/>
  </resources>
  <connections/>
 </ui>

@@ -1,4 +1,4 @@
-*   QT Luach is free software, written by Moshe Wagner < moshe.wagner@gmail.com >.
+*   Luach is free software, written by Moshe Wagner < moshe.wagner@gmail.com >.
 *   you can redistribute it and/or modify it under the terms of the GNU General Public License
 *   as published by the Free Software Foundation, either version 2 of the License, or
 *   (at your option) any later version.
@@ -14,3 +14,10 @@
 *   The icons provided with QT Luach are from the "Oxygen" icon packages,
 *   Licensed under the  LGPL license.
 *   See "www.oxygen-icons.org" for further details.
+
+*   ZmanimCLI is a small wrapper for KosherJava's
+*   Zmanim API (http://www.kosherjava.com/zmanim-project/) library.
+*   ZmanimCLI, and the Zmanim API are free software too. 
+*   You can redistribute them and/or modify them under the terms of the GNU General Public License
+*   as published by the Free Software Foundation, either version 2 of the License, or
+*   (at your option) any later version.

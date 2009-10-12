@@ -20,5 +20,24 @@ HEADERS += mainwindow.h \
 FORMS += mainwindow.ui \
     changelocation.ui \
     about.ui
+
 LIBS += -lhdate
+
+win32 {
+    LIBS += -lintl -LC:\libhdate\lib
+    INCLUDEPATH += C:\libhdate\include
+}
+
 RESOURCES += Luach.qrc
+
+
+# Install binaries
+binary.path = /usr/local/bin/
+binary.files = Luach
+
+# Install ZmanimCLI
+zmanim.path = /usr/local/bin/
+zmanim.files = ZmanimCLI.jar
+
+INSTALLS += binary
+INSTALLS += zmanim

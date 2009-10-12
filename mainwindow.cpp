@@ -12,6 +12,12 @@
 * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307 USA
 *
 * Author: Moshe Wagner. <moshe.wagner@gmail.com>
+
+
+*
+*   Special thanks given to ארתיום בייליס, for the great help with gettext on windows. Thanks.
+*
+
 */
 
 #include "mainwindow.h"
@@ -43,7 +49,12 @@
 */
 
 //TODO: README file
-//TODO: try to compile on windows
+
+//TODO: icon + install
+
+//TODO: System tray icon
+
+//TODO: צאת שבת
 
 //TODO: Sfirat Haomer
 //TODO: Days of חנוכה וחול המועד
@@ -64,7 +75,7 @@ QProcess *zmanimproc;
 
 
 //ברירת המחדל מכוונת לירושלים
-QString locationName;
+QString locationName = "Jerusalem, Israel";
 double latitude = 31.77805; //קו רוחב
 double longitude = 35.235149; //קו אורך
 QString TimeZone = "Israel";
@@ -94,7 +105,7 @@ MainWindow::MainWindow(QWidget *parent)
 
     if (!f.exists()) //Files are not in this dir (such as after installation in *nix)
     {
-        if (!f.exists("/usr/bin/ZmanimCLI.jar"))
+        if (!f.exists("/usr/local/bin/ZmanimCLI.jar"))
         {
             print ("Can't find ZmanimCLI! Hiding Zmanim!");
 
@@ -103,7 +114,7 @@ MainWindow::MainWindow(QWidget *parent)
             toggleZmanimPanel(false);
         }
 
-        ZMANIMCLIPATH = "/usr/bin/ZmanimCLI.jar";
+        ZMANIMCLIPATH = "/usr/local/bin/ZmanimCLI.jar";
 
         QDir dir;
         dir.mkdir(QDir::homePath() + "/.Luach/");
@@ -128,11 +139,13 @@ MainWindow::MainWindow(QWidget *parent)
 
     toggleGDate(false);
 
-    //Force the locale to hebrew, so Hdate will give Hebrew strings. Yup, I don't like this either.
-    // TODO: test on windows
 
+    //Force the locale to hebrew, so Hdate will give Hebrew strings. Yup, I don't like this either.
     setlocale (LC_ALL, "he_IL.UTF-8");
     setlocale (LC_ALL, "he_IL.utf8");
+
+    //Set Env variable LANGUAGE to "he_IL", to force Hebrew year numbers, etc'
+    putenv("LANGUAGE=he_IL");
 
     
     //QLocale::setDefault(QLocale("he_IL.UTF-8"));
@@ -442,6 +455,13 @@ void MainWindow::gotTimes()
             {
                 ui->tzits72lbl->setText(t);
 
+
+                //This is the last time given:
+                QString d = current.get_day_of_week_string(0);
+                d += ", ";
+                d += current.get_format_date(1);
+                d += " - " + locationName;
+                ui->dayandlocationlbl->setText(d);
 
                 /*
                 //This is the last time given:

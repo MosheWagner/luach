@@ -46,7 +46,7 @@ class dayButton : public QFrame
         Q_OBJECT
 
 public:
-    dayButton(QWidget * parent, int jd, bool showGDate);
+    dayButton(QWidget * parent, int jd, bool showGDate, bool hool);
     ~dayButton();
 
 private:

@@ -183,13 +183,22 @@ void mHdate::addDay()
     }
 }
 
-bool mHdate::isErevYomTov()
+bool mHdate::isErevYomTov(bool hool)
 {
     int mon = get_hmonth();
     int day = get_hday();
-    if (( mon == 1 && ( day == 9 || day == 14 || day == 21) ) || (mon==7 && (day==14 || day==20)) || (mon==9 && day==5))
+    if (( mon == 1 && ( day == 1 || day == 9 || day == 14 || day == 21) ) || (mon==7 && (day==14 || day==20)) || (mon==9 && day==5))
     {
         return true;
+    }
+
+    //
+    if (hool)
+    {
+        if (( mon == 1 && ( day == 1 || day == 10 || day == 15 || day == 22) ) || (mon==7 && (day==15 || day==21)) || (mon==9 && day==6))
+        {
+            return true;
+        }
     }
 
     return false;

@@ -20,7 +20,9 @@
 
 QProcess *tzproc;
 
-ChangeLocation::ChangeLocation(QWidget *parent, QString *locationName, double *latitude, double *longitude, double *candleoffset, QString *timeZone, double *elavation)
+extern QString ZMANIMCLIPATH;
+
+ChangeLocation::ChangeLocation(QWidget *parent, QString *locationName, double *latitude, double *longitude, double *candleoffset, QString *timeZone, double *elavation, bool *hool)
         : QDialog(parent),  m_ui(new Ui::ChangeLocation)
 {
     m_ui->setupUi(this);
@@ -31,7 +33,7 @@ ChangeLocation::ChangeLocation(QWidget *parent, QString *locationName, double *l
     tzproc = new QProcess(this);
 
     QStringList args;
-    args << "-jar" << "/usr/bin/ZmanimCLI.jar" << "-tzl";
+    args << "-jar" << ZMANIMCLIPATH << "-tzl";
     tzproc->start("java", args);
     connect(tzproc, SIGNAL(readyReadStandardOutput()), this, SLOT(gotTZ()));
 
@@ -53,6 +55,19 @@ ChangeLocation::ChangeLocation(QWidget *parent, QString *locationName, double *l
 
     candleoffsetptr = candleoffset;
     m_ui->offsetLine->setValue(*candleoffset);
+
+
+    if (*hool)
+    {
+        m_ui->isHool->setChecked(true);
+        m_ui->isIl->setChecked(false);
+    }
+    else
+    {
+        m_ui->isHool->setChecked(false);
+        m_ui->isIl->setChecked(true);
+    }
+    hoolptr = hool;
 }
 
 ChangeLocation::~ChangeLocation()
@@ -64,6 +79,7 @@ ChangeLocation::~ChangeLocation()
 void ChangeLocation::gotTZ()
 {
     QString str = tzproc->readAllStandardOutput();
+
     if ( str != "")
     {
         QStringList tz = str.split('\n');
@@ -95,6 +111,8 @@ void ChangeLocation::on_okBTN_clicked()
     *elavationeptr = m_ui->elavationLine->value();
     *candleoffsetptr = m_ui->offsetLine->value();
 
+
+    *hoolptr = m_ui->isHool->isChecked();
 
     //Tell the mainwindow to update times
     emit changed();

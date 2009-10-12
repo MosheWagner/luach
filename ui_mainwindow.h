@@ -1,8 +1,8 @@
 /********************************************************************************
 ** Form generated from reading ui file 'mainwindow.ui'
 **
-** Created: Sun Oct 4 12:55:59 2009
-**      by: Qt User Interface Compiler version 4.5.2
+** Created: Mon Oct 12 22:08:03 2009
+**      by: Qt User Interface Compiler version 4.5.3
 **
 ** WARNING! All changes made in this file will be lost when recompiling ui file!
 ********************************************************************************/
@@ -40,6 +40,8 @@ public:
     QAction *zmanimpanelaction;
     QAction *aboutaction;
     QAction *printaction;
+    QAction *viewsettings;
+    QAction *viewsettings_2;
     QWidget *centralWidget;
     QVBoxLayout *verticalLayout;
     QGridLayout *gridLayout_2;
@@ -84,6 +86,7 @@ public:
     QWidget *dockWidgetContents;
     QVBoxLayout *verticalLayout_3;
     QLabel *label_4;
+    QLabel *dayandlocationlbl;
     QFormLayout *formLayout_3;
     QLabel *label_2;
     QLabel *aloslabel;
@@ -112,11 +115,11 @@ public:
     QLabel *label_22;
     QLabel *tzits72lbl;
     QSpacerItem *verticalSpacer_2;
+    QLabel *clllbllbl;
+    QLabel *candellightinglbl;
     QSpacerItem *verticalSpacer;
     QLabel *dafyomislbllbl;
     QLabel *dafyomilbl;
-    QLabel *clllbllbl;
-    QLabel *candellightinglbl;
 
     void setupUi(QMainWindow *MainWindow)
     {
@@ -216,12 +219,21 @@ public:
         QIcon icon3;
         icon3.addFile(QString::fromUtf8(":/Icons/document-print.png"), QSize(), QIcon::Normal, QIcon::Off);
         printaction->setIcon(icon3);
+        viewsettings = new QAction(MainWindow);
+        viewsettings->setObjectName(QString::fromUtf8("viewsettings"));
+        QIcon icon4;
+        icon4.addFile(QString::fromUtf8(":/Icons/configure.png"), QSize(), QIcon::Normal, QIcon::Off);
+        viewsettings->setIcon(icon4);
+        viewsettings_2 = new QAction(MainWindow);
+        viewsettings_2->setObjectName(QString::fromUtf8("viewsettings_2"));
+        viewsettings_2->setIcon(icon4);
         centralWidget = new QWidget(MainWindow);
         centralWidget->setObjectName(QString::fromUtf8("centralWidget"));
         verticalLayout = new QVBoxLayout(centralWidget);
-        verticalLayout->setSpacing(25);
+        verticalLayout->setSpacing(5);
         verticalLayout->setMargin(11);
         verticalLayout->setObjectName(QString::fromUtf8("verticalLayout"));
+        verticalLayout->setContentsMargins(-1, 5, -1, 0);
         gridLayout_2 = new QGridLayout();
         gridLayout_2->setSpacing(6);
         gridLayout_2->setObjectName(QString::fromUtf8("gridLayout_2"));
@@ -234,9 +246,9 @@ public:
         backDayBTN = new QToolButton(centralWidget);
         backDayBTN->setObjectName(QString::fromUtf8("backDayBTN"));
         backDayBTN->setFocusPolicy(Qt::NoFocus);
-        QIcon icon4;
-        icon4.addFile(QString::fromUtf8(":/Icons/arrow-right.png"), QSize(), QIcon::Normal, QIcon::Off);
-        backDayBTN->setIcon(icon4);
+        QIcon icon5;
+        icon5.addFile(QString::fromUtf8(":/Icons/arrow-right.png"), QSize(), QIcon::Normal, QIcon::Off);
+        backDayBTN->setIcon(icon5);
         backDayBTN->setAutoRaise(true);
 
         horizontalLayout_4->addWidget(backDayBTN);
@@ -260,9 +272,9 @@ public:
         nextDayBTN = new QToolButton(centralWidget);
         nextDayBTN->setObjectName(QString::fromUtf8("nextDayBTN"));
         nextDayBTN->setFocusPolicy(Qt::NoFocus);
-        QIcon icon5;
-        icon5.addFile(QString::fromUtf8(":/Icons/arrow-left.png"), QSize(), QIcon::Normal, QIcon::Off);
-        nextDayBTN->setIcon(icon5);
+        QIcon icon6;
+        icon6.addFile(QString::fromUtf8(":/Icons/arrow-left.png"), QSize(), QIcon::Normal, QIcon::Off);
+        nextDayBTN->setIcon(icon6);
         nextDayBTN->setAutoRaise(true);
 
         horizontalLayout_4->addWidget(nextDayBTN);
@@ -277,7 +289,7 @@ public:
         backMonthBTN = new QToolButton(centralWidget);
         backMonthBTN->setObjectName(QString::fromUtf8("backMonthBTN"));
         backMonthBTN->setFocusPolicy(Qt::NoFocus);
-        backMonthBTN->setIcon(icon4);
+        backMonthBTN->setIcon(icon5);
         backMonthBTN->setAutoRaise(true);
 
         horizontalLayout_3->addWidget(backMonthBTN);
@@ -294,7 +306,7 @@ public:
         nextMonthBTN = new QToolButton(centralWidget);
         nextMonthBTN->setObjectName(QString::fromUtf8("nextMonthBTN"));
         nextMonthBTN->setFocusPolicy(Qt::NoFocus);
-        nextMonthBTN->setIcon(icon5);
+        nextMonthBTN->setIcon(icon6);
         nextMonthBTN->setCheckable(false);
         nextMonthBTN->setAutoRaise(true);
 
@@ -310,9 +322,9 @@ public:
         doublebackYearBTN = new QToolButton(centralWidget);
         doublebackYearBTN->setObjectName(QString::fromUtf8("doublebackYearBTN"));
         doublebackYearBTN->setFocusPolicy(Qt::NoFocus);
-        QIcon icon6;
-        icon6.addFile(QString::fromUtf8(":/Icons/arrow-right-double.png"), QSize(), QIcon::Normal, QIcon::Off);
-        doublebackYearBTN->setIcon(icon6);
+        QIcon icon7;
+        icon7.addFile(QString::fromUtf8(":/Icons/arrow-right-double.png"), QSize(), QIcon::Normal, QIcon::Off);
+        doublebackYearBTN->setIcon(icon7);
         doublebackYearBTN->setAutoRaise(true);
 
         horizontalLayout_2->addWidget(doublebackYearBTN);
@@ -320,7 +332,7 @@ public:
         backYearBTN = new QToolButton(centralWidget);
         backYearBTN->setObjectName(QString::fromUtf8("backYearBTN"));
         backYearBTN->setFocusPolicy(Qt::NoFocus);
-        backYearBTN->setIcon(icon4);
+        backYearBTN->setIcon(icon5);
         backYearBTN->setAutoRaise(true);
 
         horizontalLayout_2->addWidget(backYearBTN);
@@ -337,7 +349,7 @@ public:
         nextYearBTN = new QToolButton(centralWidget);
         nextYearBTN->setObjectName(QString::fromUtf8("nextYearBTN"));
         nextYearBTN->setFocusPolicy(Qt::NoFocus);
-        nextYearBTN->setIcon(icon5);
+        nextYearBTN->setIcon(icon6);
         nextYearBTN->setAutoRaise(true);
 
         horizontalLayout_2->addWidget(nextYearBTN);
@@ -345,9 +357,9 @@ public:
         doublenextYearBTN = new QToolButton(centralWidget);
         doublenextYearBTN->setObjectName(QString::fromUtf8("doublenextYearBTN"));
         doublenextYearBTN->setFocusPolicy(Qt::NoFocus);
-        QIcon icon7;
-        icon7.addFile(QString::fromUtf8(":/Icons/arrow-left-double.png"), QSize(), QIcon::Normal, QIcon::Off);
-        doublenextYearBTN->setIcon(icon7);
+        QIcon icon8;
+        icon8.addFile(QString::fromUtf8(":/Icons/arrow-left-double.png"), QSize(), QIcon::Normal, QIcon::Off);
+        doublenextYearBTN->setIcon(icon8);
         doublenextYearBTN->setAutoRaise(true);
 
         horizontalLayout_2->addWidget(doublenextYearBTN);
@@ -393,7 +405,7 @@ public:
         backgdayBTN = new QToolButton(centralWidget);
         backgdayBTN->setObjectName(QString::fromUtf8("backgdayBTN"));
         backgdayBTN->setFocusPolicy(Qt::NoFocus);
-        backgdayBTN->setIcon(icon4);
+        backgdayBTN->setIcon(icon5);
         backgdayBTN->setAutoRaise(true);
 
         horizontalLayout->addWidget(backgdayBTN);
@@ -414,7 +426,7 @@ public:
         nextgdayBTN = new QToolButton(centralWidget);
         nextgdayBTN->setObjectName(QString::fromUtf8("nextgdayBTN"));
         nextgdayBTN->setFocusPolicy(Qt::NoFocus);
-        nextgdayBTN->setIcon(icon5);
+        nextgdayBTN->setIcon(icon6);
         nextgdayBTN->setAutoRaise(true);
 
         horizontalLayout->addWidget(nextgdayBTN);
@@ -429,7 +441,7 @@ public:
         backgmonthBTN = new QToolButton(centralWidget);
         backgmonthBTN->setObjectName(QString::fromUtf8("backgmonthBTN"));
         backgmonthBTN->setFocusPolicy(Qt::NoFocus);
-        backgmonthBTN->setIcon(icon4);
+        backgmonthBTN->setIcon(icon5);
         backgmonthBTN->setAutoRaise(true);
 
         horizontalLayout_5->addWidget(backgmonthBTN);
@@ -446,7 +458,7 @@ public:
         nextgmonthBTN = new QToolButton(centralWidget);
         nextgmonthBTN->setObjectName(QString::fromUtf8("nextgmonthBTN"));
         nextgmonthBTN->setFocusPolicy(Qt::NoFocus);
-        nextgmonthBTN->setIcon(icon5);
+        nextgmonthBTN->setIcon(icon6);
         nextgmonthBTN->setAutoRaise(true);
 
         horizontalLayout_5->addWidget(nextgmonthBTN);
@@ -461,7 +473,7 @@ public:
         doublebackgYearBTN = new QToolButton(centralWidget);
         doublebackgYearBTN->setObjectName(QString::fromUtf8("doublebackgYearBTN"));
         doublebackgYearBTN->setFocusPolicy(Qt::NoFocus);
-        doublebackgYearBTN->setIcon(icon6);
+        doublebackgYearBTN->setIcon(icon7);
         doublebackgYearBTN->setAutoRaise(true);
 
         horizontalLayout_6->addWidget(doublebackgYearBTN);
@@ -469,7 +481,7 @@ public:
         backgYearBTN = new QToolButton(centralWidget);
         backgYearBTN->setObjectName(QString::fromUtf8("backgYearBTN"));
         backgYearBTN->setFocusPolicy(Qt::NoFocus);
-        backgYearBTN->setIcon(icon4);
+        backgYearBTN->setIcon(icon5);
         backgYearBTN->setAutoRaise(true);
 
         horizontalLayout_6->addWidget(backgYearBTN);
@@ -486,7 +498,7 @@ public:
         nextgYearBTN = new QToolButton(centralWidget);
         nextgYearBTN->setObjectName(QString::fromUtf8("nextgYearBTN"));
         nextgYearBTN->setFocusPolicy(Qt::NoFocus);
-        nextgYearBTN->setIcon(icon5);
+        nextgYearBTN->setIcon(icon6);
         nextgYearBTN->setAutoRaise(true);
 
         horizontalLayout_6->addWidget(nextgYearBTN);
@@ -494,7 +506,7 @@ public:
         doublenextgYearBTN = new QToolButton(centralWidget);
         doublenextgYearBTN->setObjectName(QString::fromUtf8("doublenextgYearBTN"));
         doublenextgYearBTN->setFocusPolicy(Qt::NoFocus);
-        doublenextgYearBTN->setIcon(icon7);
+        doublenextgYearBTN->setIcon(icon8);
         doublenextgYearBTN->setAutoRaise(true);
 
         horizontalLayout_6->addWidget(doublenextgYearBTN);
@@ -513,7 +525,7 @@ public:
         verticalLayout->addLayout(gridLayout_2);
 
         gridLayout = new QGridLayout();
-        gridLayout->setSpacing(3);
+        gridLayout->setSpacing(2);
         gridLayout->setObjectName(QString::fromUtf8("gridLayout"));
         gridLayout->setSizeConstraint(QLayout::SetDefaultConstraint);
         gridLayout->setContentsMargins(0, 0, 0, -1);
@@ -559,6 +571,14 @@ public:
         label_4->setAlignment(Qt::AlignCenter);
 
         verticalLayout_3->addWidget(label_4);
+
+        dayandlocationlbl = new QLabel(dockWidgetContents);
+        dayandlocationlbl->setObjectName(QString::fromUtf8("dayandlocationlbl"));
+        QFont font5;
+        font5.setPointSize(8);
+        dayandlocationlbl->setFont(font5);
+
+        verticalLayout_3->addWidget(dayandlocationlbl);
 
         formLayout_3 = new QFormLayout();
         formLayout_3->setSpacing(6);
@@ -832,24 +852,34 @@ public:
 
         formLayout_3->setItem(13, QFormLayout::FieldRole, verticalSpacer_2);
 
+        clllbllbl = new QLabel(dockWidgetContents);
+        clllbllbl->setObjectName(QString::fromUtf8("clllbllbl"));
+
+        formLayout_3->setWidget(14, QFormLayout::LabelRole, clllbllbl);
+
+        candellightinglbl = new QLabel(dockWidgetContents);
+        candellightinglbl->setObjectName(QString::fromUtf8("candellightinglbl"));
+
+        formLayout_3->setWidget(14, QFormLayout::FieldRole, candellightinglbl);
+
         verticalSpacer = new QSpacerItem(20, 40, QSizePolicy::Minimum, QSizePolicy::Expanding);
 
         formLayout_3->setItem(15, QFormLayout::FieldRole, verticalSpacer);
 
         dafyomislbllbl = new QLabel(dockWidgetContents);
         dafyomislbllbl->setObjectName(QString::fromUtf8("dafyomislbllbl"));
-        QFont font5;
-        font5.setPointSize(10);
-        dafyomislbllbl->setFont(font5);
+        QFont font6;
+        font6.setPointSize(10);
+        dafyomislbllbl->setFont(font6);
         dafyomislbllbl->setTextInteractionFlags(Qt::TextSelectableByKeyboard|Qt::TextSelectableByMouse);
 
         formLayout_3->setWidget(16, QFormLayout::LabelRole, dafyomislbllbl);
 
         dafyomilbl = new QLabel(dockWidgetContents);
         dafyomilbl->setObjectName(QString::fromUtf8("dafyomilbl"));
-        QFont font6;
-        font6.setPointSize(9);
-        dafyomilbl->setFont(font6);
+        QFont font7;
+        font7.setPointSize(9);
+        dafyomilbl->setFont(font7);
         dafyomilbl->setFrameShape(QFrame::NoFrame);
         dafyomilbl->setFrameShadow(QFrame::Plain);
         dafyomilbl->setLineWidth(1);
@@ -863,16 +893,6 @@ public:
 
         formLayout_3->setWidget(16, QFormLayout::FieldRole, dafyomilbl);
 
-        clllbllbl = new QLabel(dockWidgetContents);
-        clllbllbl->setObjectName(QString::fromUtf8("clllbllbl"));
-
-        formLayout_3->setWidget(14, QFormLayout::LabelRole, clllbllbl);
-
-        candellightinglbl = new QLabel(dockWidgetContents);
-        candellightinglbl->setObjectName(QString::fromUtf8("candellightinglbl"));
-
-        formLayout_3->setWidget(14, QFormLayout::FieldRole, candellightinglbl);
-
 
         verticalLayout_3->addLayout(formLayout_3);
 
@@ -883,12 +903,15 @@ public:
         menuBar->addAction(menu_3->menuAction());
         menuBar->addAction(menu->menuAction());
         menu->addAction(changelocationaction);
+        menu->addAction(viewsettings_2);
         menu_2->addAction(aboutaction);
         menu_2->addAction(printaction);
         menu_2->addSeparator();
         menu_2->addAction(exitaction);
         menu_3->addAction(gdateaction);
         menu_3->addAction(zmanimpanelaction);
+        menu_3->addSeparator();
+        menu_3->addAction(viewsettings);
 
         retranslateUi(MainWindow);
 
@@ -905,6 +928,8 @@ public:
         zmanimpanelaction->setText(QApplication::translate("MainWindow", "\327\224\327\246\327\222 \327\250\327\251\327\231\327\236\327\252 \327\226\327\236\327\240\327\231\327\235", 0, QApplication::UnicodeUTF8));
         aboutaction->setText(QApplication::translate("MainWindow", "\327\220\327\225\327\223\327\225\327\252", 0, QApplication::UnicodeUTF8));
         printaction->setText(QApplication::translate("MainWindow", "\327\224\327\223\327\244\327\241 \327\234\327\225\327\227", 0, QApplication::UnicodeUTF8));
+        viewsettings->setText(QApplication::translate("MainWindow", "\327\224\327\222\327\223\327\250\327\225\327\252 \327\252\327\246\327\225\327\222\327\224", 0, QApplication::UnicodeUTF8));
+        viewsettings_2->setText(QApplication::translate("MainWindow", "\327\224\327\222\327\223\327\250\327\225\327\252 \327\252\327\246\327\225\327\222\327\224", 0, QApplication::UnicodeUTF8));
         backDayBTN->setText(QApplication::translate("MainWindow", "...", 0, QApplication::UnicodeUTF8));
         daylabel->setText(QApplication::translate("MainWindow", "\327\231\327\225\327\235", 0, QApplication::UnicodeUTF8));
         nextDayBTN->setText(QApplication::translate("MainWindow", "...", 0, QApplication::UnicodeUTF8));
@@ -933,6 +958,7 @@ public:
         menu_2->setTitle(QApplication::translate("MainWindow", "\327\247\327\225\327\221\327\245", 0, QApplication::UnicodeUTF8));
         menu_3->setTitle(QApplication::translate("MainWindow", "\327\252\327\246\327\225\327\222\327\224", 0, QApplication::UnicodeUTF8));
         label_4->setText(QApplication::translate("MainWindow", "\327\226\327\236\327\240\327\231 \327\224\327\231\327\225\327\235:", 0, QApplication::UnicodeUTF8));
+        dayandlocationlbl->setText(QApplication::translate("MainWindow", "\327\252\327\220\327\250\327\231\327\232, \327\236\327\231\327\247\327\225\327\235", 0, QApplication::UnicodeUTF8));
         label_2->setText(QApplication::translate("MainWindow", "\327\242\327\234\327\225\327\252 \327\224\327\251\327\227\327\250", 0, QApplication::UnicodeUTF8));
         aloslabel->setText(QApplication::translate("MainWindow", "\327\242\327\234\327\225\327\224\"\327\251", 0, QApplication::UnicodeUTF8));
         label->setText(QApplication::translate("MainWindow", "\327\226\327\250\327\231\327\227\327\224", 0, QApplication::UnicodeUTF8));
@@ -959,10 +985,10 @@ public:
         tzitslbl->setText(QApplication::translate("MainWindow", "\327\246\327\224\"\327\233", 0, QApplication::UnicodeUTF8));
         label_22->setText(QApplication::translate("MainWindow", "\327\246\327\220\327\252 \327\224\327\233\327\225\327\233\327\221\327\231\327\235 \327\250\"\327\252", 0, QApplication::UnicodeUTF8));
         tzits72lbl->setText(QApplication::translate("MainWindow", "\327\246\327\224\"\327\233 \327\250\"\327\252", 0, QApplication::UnicodeUTF8));
-        dafyomislbllbl->setText(QApplication::translate("MainWindow", "\327\223\327\243 \327\231\327\225\327\236\327\231", 0, QApplication::UnicodeUTF8));
-        dafyomilbl->setText(QApplication::translate("MainWindow", "\327\223\327\243", 0, QApplication::UnicodeUTF8));
         clllbllbl->setText(QApplication::translate("MainWindow", "\327\224\327\223\327\234\327\247\327\252 \327\240\327\250\327\225\327\252", 0, QApplication::UnicodeUTF8));
         candellightinglbl->setText(QApplication::translate("MainWindow", "\327\224\327\223\327\224\"\327\240", 0, QApplication::UnicodeUTF8));
+        dafyomislbllbl->setText(QApplication::translate("MainWindow", "\327\223\327\243 \327\231\327\225\327\236\327\231", 0, QApplication::UnicodeUTF8));
+        dafyomilbl->setText(QApplication::translate("MainWindow", "\327\223\327\243", 0, QApplication::UnicodeUTF8));
     } // retranslateUi
 
 };

@@ -48,7 +48,7 @@
 
 */
 
-//TODO: README file
+//TODO: חוץ לארץ!!!
 
 //TODO: icon + install
 
@@ -81,6 +81,7 @@ double longitude = 35.235149; //קו אורך
 QString TimeZone = "Israel";
 double elavation = 800;
 double candleLightingOffset = 18.0;
+bool hool = false;
 
 
 bool ShowGDate = true;
@@ -111,6 +112,7 @@ MainWindow::MainWindow(QWidget *parent)
 
             //Hide times:
             ui->zmanimpanelaction->setVisible(false);
+            ui->changelocationaction->setVisible(false);
             toggleZmanimPanel(false);
         }
 
@@ -125,7 +127,7 @@ MainWindow::MainWindow(QWidget *parent)
 
 
     setWindowIcon(QIcon(":/Icons/calendar.png"));
-    setWindowTitle("QT Luach");
+    setWindowTitle("Luach");
 
     connect( &current, SIGNAL(month_changed()), this, SLOT(redraw()));
 
@@ -215,7 +217,7 @@ void MainWindow::showMonth(hdate::Hdate *dayinmonth)
         //
         //print (tmpday.get_format_date(0));
 
-        dayButton *d = new dayButton(this, jd, ShowGDate);
+        dayButton *d = new dayButton(this, jd, ShowGDate, hool);
         dayList << d;
 
         ui->gridLayout->addWidget(d, 1+(i/7), (i%7));
@@ -430,7 +432,7 @@ void MainWindow::gotTimes()
 
 
                 //Candel lighting:
-                if (current.get_day_of_the_week() == 6 || current.isErevYomTov())
+                if (current.get_day_of_the_week() == 6 || current.isErevYomTov(hool))
                 {
                     ui->clllbllbl->show();
                     ui->candellightinglbl->show();
@@ -497,6 +499,8 @@ void MainWindow::saveConfs()
     confs += "Elavation=" + stringify(elavation) + "\n";
     confs += "CandleLightingOffset=" + stringify(candleLightingOffset) + "\n";
 
+    if (hool) confs += "Hool=true\n";
+
     writetofile(LOCATIONCONFPATH, confs, true);
 }
 
@@ -549,6 +553,10 @@ void MainWindow::loadConfs()
                 {
                     bool ok; p[1].toDouble(&ok);
                     if (ok) candleLightingOffset = p[1].toDouble(&ok);
+                }
+                if (p[0] == "Hool")
+                {
+                    if (p[1] == "true") hool = true;
                 }
             }
         }
@@ -622,7 +630,7 @@ void MainWindow::on_dockWidget_visibilityChanged(bool visible)
 ChangeLocation *cl;
 void MainWindow::changeLocationForm()
 {
-    cl = new ChangeLocation (this, &locationName, &latitude, &longitude, &candleLightingOffset, &TimeZone, &elavation);
+    cl = new ChangeLocation (this, &locationName, &latitude, &longitude, &candleLightingOffset, &TimeZone, &elavation, &hool);
 
     connect(cl, SIGNAL(changed()), this, SLOT(redraw()));
     connect(cl, SIGNAL(save()), this, SLOT(saveConfs()));
@@ -771,7 +779,12 @@ void MainWindow::printSnap()
     else
     {
         printer.setOrientation(QPrinter::Landscape);
-        printer.setPageMargins(0,0,0,0,QPrinter::Inch);
+        //printer.setPageMargins(0,0,0,0,QPrinter::Inch);
+
+        if (pix.width() > printer.width())
+        {
+            pix = pix.scaledToWidth(printer.width(), Qt::SmoothTransformation);
+        }
 
         QPainter painter;
         painter.begin(&printer);

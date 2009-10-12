@@ -15,6 +15,10 @@ make
 וכמנהל מערכת
 make install 
 
+ - יש צורך בספריות הפיתוח
+libhdate-dev
+libqt4-dev
+
 
 
 Luach is (Yet another) Hebrew calendar showing Hebrew dates, Holidays, and halachic day times.

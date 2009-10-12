@@ -16,11 +16,14 @@
 
 #include "daybutton.h"
 
-dayButton::dayButton(QWidget * parent, int jd, bool showGDate)
+dayButton::dayButton(QWidget * parent, int jd, bool showGDate, bool hool)
 {
     setParent(parent);
 
     date.set_jd(jd);
+
+    //
+    if (hool) date.set_diaspora();
 
     selected = false;
     today = false;

@@ -10,5 +10,6 @@
         <file>Icons/exit.png</file>
         <file>Icons/help-about.png</file>
         <file>Icons/document-print.png</file>
+        <file>Icons/configure.png</file>
     </qresource>
 </RCC>

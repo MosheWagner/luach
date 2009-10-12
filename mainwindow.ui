@@ -440,7 +440,13 @@
   <widget class="QWidget" name="centralWidget">
    <layout class="QVBoxLayout" name="verticalLayout">
     <property name="spacing">
-     <number>25</number>
+     <number>5</number>
+    </property>
+    <property name="topMargin">
+     <number>5</number>
+    </property>
+    <property name="bottomMargin">
+     <number>0</number>
     </property>
     <item>
      <layout class="QGridLayout" name="gridLayout_2" columnstretch="100,100,100,100,100,100,100">
@@ -983,7 +989,7 @@
        <number>0</number>
       </property>
       <property name="spacing">
-       <number>3</number>
+       <number>2</number>
       </property>
      </layout>
     </item>
@@ -1009,6 +1015,7 @@
      <string>הגדרות</string>
     </property>
     <addaction name="changelocationaction"/>
+    <addaction name="viewsettings_2"/>
    </widget>
    <widget class="QMenu" name="menu_2">
     <property name="layoutDirection">
@@ -1031,6 +1038,8 @@
     </property>
     <addaction name="gdateaction"/>
     <addaction name="zmanimpanelaction"/>
+    <addaction name="separator"/>
+    <addaction name="viewsettings"/>
    </widget>
    <addaction name="menu_2"/>
    <addaction name="menu_3"/>
@@ -1837,6 +1846,24 @@
    </property>
    <property name="text">
     <string>הדפס לוח</string>
+   </property>
+  </action>
+  <action name="viewsettings">
+   <property name="icon">
+    <iconset resource="Luach.qrc">
+     <normaloff>:/Icons/configure.png</normaloff>:/Icons/configure.png</iconset>
+   </property>
+   <property name="text">
+    <string>הגדרות תצוגה</string>
+   </property>
+  </action>
+  <action name="viewsettings_2">
+   <property name="icon">
+    <iconset resource="Luach.qrc">
+     <normaloff>:/Icons/configure.png</normaloff>:/Icons/configure.png</iconset>
+   </property>
+   <property name="text">
+    <string>הגדרות תצוגה</string>
    </property>
   </action>
  </widget>

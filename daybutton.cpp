@@ -16,12 +16,16 @@
 
 #include "daybutton.h"
 
+QFont fs, fb;
 
 dayButton::dayButton(QWidget * parent, int jd, bool showGDate, bool hool)
 {
     setParent(parent);
 
     setDate(jd, hool);
+
+    fs.setPixelSize(13);
+    fb.setPixelSize(14);
 
 
     vbox = new QVBoxLayout();
@@ -34,13 +38,7 @@ dayButton::dayButton(QWidget * parent, int jd, bool showGDate, bool hool)
     //hebday = new QLabel(date.get_hebrew_day_string());
     hebday = new QLabel();
 
-    engday = new QLabel("");
-    /*
-    if (showGDate)
-    {
-        engday->setText(stringify(date.get_gday()));
-    }
-    */
+    engday = new QLabel();
 
 
     hbox->addWidget(hebday);
@@ -48,20 +46,14 @@ dayButton::dayButton(QWidget * parent, int jd, bool showGDate, bool hool)
 
     hbox->addWidget(engday);
 
-    /*
-    QString holiday = date.get_holyday_string(0);
-    //No politics or anything, these are just not holidays...
-    if (holiday == "יום הזכרון ליצחק רבין" || holiday == "יום המשפחה" || holiday == "יום זאב זבוטינסקי" ) holiday = "";
 
-    //event = new QLabel(holiday);
-    */
     event = new QLabel();
     vbox->addWidget(event);
     event->setAlignment(Qt::AlignCenter);
+    event->setFont(fs);
 
     reading = new QLabel();
-
-    //if (QString(date.get_parasha_string(0)) != "חסר") reading->setText(date.get_parasha_string(0));
+    reading->setFont(fs);
 
     vbox->addWidget(reading);
     reading->setAlignment(Qt::AlignCenter);
@@ -127,9 +119,8 @@ void dayButton::resetDate(int jd, bool hool, bool showGDate)
     showInfo(showGDate);
 
     //Unmark "today"
-    QFont q; q.setPixelSize(16);
-    hebday->setFont(q);
-    engday->setFont(q);
+    hebday->setFont(fb);
+    engday->setFont(fb);
 
     updateStyle();
 }
@@ -156,7 +147,7 @@ void dayButton::Unselect()
 
 void dayButton::setToday()
 {
-    QFont q; q.setBold(true); q.setPixelSize(17);
+    QFont q; q.setBold(true); q.setPixelSize(15);
     hebday->setFont(q);
     engday->setFont(q);
     

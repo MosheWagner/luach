@@ -1,7 +1,7 @@
 /********************************************************************************
 ** Form generated from reading ui file 'mainwindow.ui'
 **
-** Created: Wed Oct 14 12:53:42 2009
+** Created: Wed Oct 14 13:23:36 2009
 **      by: Qt User Interface Compiler version 4.5.3
 **
 ** WARNING! All changes made in this file will be lost when recompiling ui file!
@@ -572,7 +572,7 @@ public:
         label_4 = new QLabel(dockWidgetContents);
         label_4->setObjectName(QString::fromUtf8("label_4"));
         QFont font4;
-        font4.setPointSize(16);
+        font4.setPointSize(14);
         font4.setBold(true);
         font4.setWeight(75);
         label_4->setFont(font4);

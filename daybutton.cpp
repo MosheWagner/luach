@@ -111,6 +111,7 @@ void dayButton::showInfo(bool showGDate)
     event->setText(holiday);
 
     if (QString(date.get_parasha_string(0)) != "חסר") reading->setText(date.get_parasha_string(0));
+    else reading->setText("");
 }
 
 void dayButton::resetDate(int jd, bool hool, bool showGDate)

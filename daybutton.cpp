@@ -59,6 +59,7 @@ dayButton::dayButton(QWidget * parent, int jd, bool showGDate, bool hool)
     event->setAlignment(Qt::AlignCenter);
 
     reading = new QLabel();
+
     if (QString(date.get_parasha_string(0)) != "חסר") reading->setText(date.get_parasha_string(0));
     vbox->addWidget(reading);
     reading->setAlignment(Qt::AlignCenter);

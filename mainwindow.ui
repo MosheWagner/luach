@@ -1053,6 +1053,9 @@
    <property name="allowedAreas">
     <set>Qt::LeftDockWidgetArea</set>
    </property>
+   <property name="windowTitle">
+    <string>זמני היום</string>
+   </property>
    <attribute name="dockWidgetArea">
     <number>1</number>
    </attribute>

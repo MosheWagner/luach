@@ -52,6 +52,8 @@
 
 //TODO: icon + install
 
+//TODO: Speed up month display (don't rebuild daybuttons, just hide and update)
+
 //TODO: System tray icon
 
 //TODO: צאת שבת
@@ -98,8 +100,6 @@ MainWindow::MainWindow(QWidget *parent)
 
     //Set all QString to work with unicode
     QTextCodec::setCodecForCStrings(QTextCodec::codecForName("utf8"));
-
-
 
     //Configure paths:
     QFile f("ZmanimCLI.jar");
@@ -212,6 +212,7 @@ void MainWindow::showMonth(hdate::Hdate *dayinmonth)
 
     QSize widest(0,0);
 
+    
     for (int i = firstweekday; tmpday.get_hmonth() == firstday.get_hmonth(); i++)
     {
         //

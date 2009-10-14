@@ -86,6 +86,7 @@ void dayButton::setDate(int jd, bool hool)
 
     //
     if (hool) date.set_diaspora();
+    else date.set_israel();
 
     selected = false;
     today = false;

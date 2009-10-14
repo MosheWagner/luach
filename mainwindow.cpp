@@ -48,9 +48,7 @@
 
 */
 
-//TODO: חוץ לארץ!!!
-
-//TODO: icon + install
+//TODO: חוץ לארץ reading fix (only pesach?)
 
 //TODO: System tray icon
 
@@ -235,7 +233,6 @@ void MainWindow::showMonth(hdate::Hdate *dayinmonth)
         //print (tmpday.get_format_date(0));
 
         dayButton *d = dayList[i-firstweekday];
-
         
         d->resetDate(jd, hool, ShowGDate);
         d->show();
@@ -787,7 +784,7 @@ void MainWindow::on_doublenextgYearBTN_clicked()
 
 void MainWindow::printSnap()
 {
-    QPixmap pix = QPixmap::grabWidget(this);
+    QPixmap pix = QPixmap::grabWidget(this, 0, ui->menuBar->height(), this->width(), this->height());
 
     QPrinter printer;
     QPrintDialog *dialog = new QPrintDialog(&printer, this);

@@ -784,7 +784,9 @@ void MainWindow::on_doublenextgYearBTN_clicked()
 
 void MainWindow::printSnap()
 {
-    QPixmap pix = QPixmap::grabWidget(this, 0, ui->menuBar->height(), this->width(), this->height());
+    ui->dockWidget->setFeatures(QDockWidget::NoDockWidgetFeatures);
+
+    QPixmap pix = QPixmap::grabWidget(this, 10, ui->menuBar->height(), this->width(), this->height());
 
     QPrinter printer;
     QPrintDialog *dialog = new QPrintDialog(&printer, this);
@@ -806,4 +808,6 @@ void MainWindow::printSnap()
         painter.drawPixmap (0, 0, pix);
         painter.end();
     }
+
+    ui->dockWidget->setFeatures(QDockWidget::DockWidgetClosable);
 }

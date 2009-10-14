@@ -473,7 +473,7 @@
            <string>...</string>
           </property>
           <property name="icon">
-           <iconset resource="Luach.qrc">
+           <iconset>
             <normaloff>:/Icons/arrow-right.png</normaloff>:/Icons/arrow-right.png</iconset>
           </property>
           <property name="autoRaise">
@@ -513,7 +513,7 @@
            <string>...</string>
           </property>
           <property name="icon">
-           <iconset resource="Luach.qrc">
+           <iconset>
             <normaloff>:/Icons/arrow-left.png</normaloff>:/Icons/arrow-left.png</iconset>
           </property>
           <property name="autoRaise">
@@ -540,7 +540,7 @@
            <string>...</string>
           </property>
           <property name="icon">
-           <iconset resource="Luach.qrc">
+           <iconset>
             <normaloff>:/Icons/arrow-right.png</normaloff>:/Icons/arrow-right.png</iconset>
           </property>
           <property name="autoRaise">
@@ -580,7 +580,7 @@
            <string>...</string>
           </property>
           <property name="icon">
-           <iconset resource="Luach.qrc">
+           <iconset>
             <normaloff>:/Icons/arrow-left.png</normaloff>:/Icons/arrow-left.png</iconset>
           </property>
           <property name="checkable">
@@ -610,7 +610,7 @@
            <string>...</string>
           </property>
           <property name="icon">
-           <iconset resource="Luach.qrc">
+           <iconset>
             <normaloff>:/Icons/arrow-right-double.png</normaloff>:/Icons/arrow-right-double.png</iconset>
           </property>
           <property name="autoRaise">
@@ -627,7 +627,7 @@
            <string>...</string>
           </property>
           <property name="icon">
-           <iconset resource="Luach.qrc">
+           <iconset>
             <normaloff>:/Icons/arrow-right.png</normaloff>:/Icons/arrow-right.png</iconset>
           </property>
           <property name="autoRaise">
@@ -667,7 +667,7 @@
            <string>...</string>
           </property>
           <property name="icon">
-           <iconset resource="Luach.qrc">
+           <iconset>
             <normaloff>:/Icons/arrow-left.png</normaloff>:/Icons/arrow-left.png</iconset>
           </property>
           <property name="autoRaise">
@@ -684,7 +684,7 @@
            <string>...</string>
           </property>
           <property name="icon">
-           <iconset resource="Luach.qrc">
+           <iconset>
             <normaloff>:/Icons/arrow-left-double.png</normaloff>:/Icons/arrow-left-double.png</iconset>
           </property>
           <property name="autoRaise">
@@ -754,7 +754,7 @@
            <string>...</string>
           </property>
           <property name="icon">
-           <iconset resource="Luach.qrc">
+           <iconset>
             <normaloff>:/Icons/arrow-right.png</normaloff>:/Icons/arrow-right.png</iconset>
           </property>
           <property name="autoRaise">
@@ -794,7 +794,7 @@
            <string>...</string>
           </property>
           <property name="icon">
-           <iconset resource="Luach.qrc">
+           <iconset>
             <normaloff>:/Icons/arrow-left.png</normaloff>:/Icons/arrow-left.png</iconset>
           </property>
           <property name="autoRaise">
@@ -821,7 +821,7 @@
            <string>...</string>
           </property>
           <property name="icon">
-           <iconset resource="Luach.qrc">
+           <iconset>
             <normaloff>:/Icons/arrow-right.png</normaloff>:/Icons/arrow-right.png</iconset>
           </property>
           <property name="autoRaise">
@@ -861,7 +861,7 @@
            <string>...</string>
           </property>
           <property name="icon">
-           <iconset resource="Luach.qrc">
+           <iconset>
             <normaloff>:/Icons/arrow-left.png</normaloff>:/Icons/arrow-left.png</iconset>
           </property>
           <property name="autoRaise">
@@ -888,7 +888,7 @@
            <string>...</string>
           </property>
           <property name="icon">
-           <iconset resource="Luach.qrc">
+           <iconset>
             <normaloff>:/Icons/arrow-right-double.png</normaloff>:/Icons/arrow-right-double.png</iconset>
           </property>
           <property name="autoRaise">
@@ -905,7 +905,7 @@
            <string>...</string>
           </property>
           <property name="icon">
-           <iconset resource="Luach.qrc">
+           <iconset>
             <normaloff>:/Icons/arrow-right.png</normaloff>:/Icons/arrow-right.png</iconset>
           </property>
           <property name="autoRaise">
@@ -945,7 +945,7 @@
            <string>...</string>
           </property>
           <property name="icon">
-           <iconset resource="Luach.qrc">
+           <iconset>
             <normaloff>:/Icons/arrow-left.png</normaloff>:/Icons/arrow-left.png</iconset>
           </property>
           <property name="autoRaise">
@@ -962,7 +962,7 @@
            <string>...</string>
           </property>
           <property name="icon">
-           <iconset resource="Luach.qrc">
+           <iconset>
             <normaloff>:/Icons/arrow-left-double.png</normaloff>:/Icons/arrow-left-double.png</iconset>
           </property>
           <property name="autoRaise">
@@ -2007,7 +2007,7 @@
   </widget>
   <action name="changelocationaction">
    <property name="icon">
-    <iconset resource="Luach.qrc">
+    <iconset>
      <normaloff>:/Icons/location.png</normaloff>:/Icons/location.png</iconset>
    </property>
    <property name="text">
@@ -2016,7 +2016,7 @@
   </action>
   <action name="exitaction">
    <property name="icon">
-    <iconset resource="Luach.qrc">
+    <iconset>
      <normaloff>:/Icons/exit.png</normaloff>:/Icons/exit.png</iconset>
    </property>
    <property name="text">
@@ -2047,7 +2047,7 @@
   </action>
   <action name="aboutaction">
    <property name="icon">
-    <iconset resource="Luach.qrc">
+    <iconset>
      <normaloff>:/Icons/help-about.png</normaloff>:/Icons/help-about.png</iconset>
    </property>
    <property name="text">
@@ -2056,7 +2056,7 @@
   </action>
   <action name="printaction">
    <property name="icon">
-    <iconset resource="Luach.qrc">
+    <iconset>
      <normaloff>:/Icons/document-print.png</normaloff>:/Icons/document-print.png</iconset>
    </property>
    <property name="text">
@@ -2076,7 +2076,7 @@
   </action>
   <action name="viewsettings_2">
    <property name="icon">
-    <iconset resource="Luach.qrc">
+    <iconset>
      <normaloff>:/Icons/configure.png</normaloff>:/Icons/configure.png</iconset>
    </property>
    <property name="text">
@@ -2085,8 +2085,6 @@
   </action>
  </widget>
  <layoutdefault spacing="6" margin="11"/>
- <resources>
-  <include location="Luach.qrc"/>
- </resources>
+ <resources/>
  <connections/>
 </ui>

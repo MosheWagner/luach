@@ -49,8 +49,13 @@ public:
     dayButton(QWidget * parent, int jd, bool showGDate, bool hool);
     ~dayButton();
 
+    void resetDate(int jd, bool hool, bool showGDate);
+
 private:
     hdate::Hdate date;
+
+    void setDate(int jd, bool hool);
+    void showInfo(bool showGDate);
 
     bool selected;
     bool today;

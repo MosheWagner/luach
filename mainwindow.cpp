@@ -52,8 +52,6 @@
 
 //TODO: icon + install
 
-//TODO: Speed up month display (don't rebuild daybuttons, just hide and update)
-
 //TODO: System tray icon
 
 //TODO: צאת שבת
@@ -106,7 +104,7 @@ MainWindow::MainWindow(QWidget *parent)
 
     if (!f.exists()) //Files are not in this dir (such as after installation in *nix)
     {
-        if (!f.exists("/usr/local/bin/ZmanimCLI.jar"))
+        if (!f.exists("/usr/share/Luach/ZmanimCLI.jar"))
         {
             print ("Can't find ZmanimCLI! Hiding Zmanim!");
 
@@ -116,7 +114,7 @@ MainWindow::MainWindow(QWidget *parent)
             toggleZmanimPanel(false);
         }
 
-        ZMANIMCLIPATH = "/usr/local/bin/ZmanimCLI.jar";
+        ZMANIMCLIPATH = "/usr/share/Luach/ZmanimCLI.jar";
 
         QDir dir;
         dir.mkdir(QDir::homePath() + "/.Luach/");
@@ -181,6 +179,19 @@ MainWindow::MainWindow(QWidget *parent)
         //lbl->setStyleSheet("QLabel { background-color: blue }");
     }
 
+
+    //Create the day buttons: (Invisible for now)
+    for (int i = 0; i<30; i++)
+    {
+        dayButton *d = new dayButton(this, 0, ShowGDate, hool);
+        dayList << d;
+
+        d->hide();
+
+        connect(d, SIGNAL(clicked(dayButton*)), this, SLOT(dayClicked(dayButton*)));
+    }
+
+
     //A Hdate starts with todays date, so "current" is set to today
     showMonth(&current);
 
@@ -198,7 +209,11 @@ MainWindow::MainWindow(QWidget *parent)
 void MainWindow::showMonth(hdate::Hdate *dayinmonth)
 {
     //Clear last month
-    clearMonth();
+    for (int i = 0; i<30; i++)
+    {
+        ui->gridLayout->removeWidget(dayList[i]);
+        dayList[i]->hide();
+    }
 
     //Go to first day of the month
     hdate::Hdate firstday;
@@ -212,18 +227,20 @@ void MainWindow::showMonth(hdate::Hdate *dayinmonth)
 
     QSize widest(0,0);
 
-    
+
+    //Set and add all dayButtons to where they should be:
     for (int i = firstweekday; tmpday.get_hmonth() == firstday.get_hmonth(); i++)
     {
         //
         //print (tmpday.get_format_date(0));
 
-        dayButton *d = new dayButton(this, jd, ShowGDate, hool);
-        dayList << d;
+        dayButton *d = dayList[i-firstweekday];
+
+        
+        d->resetDate(jd, hool, ShowGDate);
+        d->show();
 
         ui->gridLayout->addWidget(d, 1+(i/7), (i%7));
-
-        connect(d, SIGNAL(clicked(dayButton*)), this, SLOT(dayClicked(dayButton*)));
 
         jd++;
         tmpday.set_jd(jd);

@@ -2,7 +2,7 @@
 # Project created by QtCreator
 # Author: moshe.wagner@gmail.com
 # -------------------------------------------------
-TARGET = Luach
+TARGET = luach
 TEMPLATE = app
 SOURCES += main.cpp \
     mainwindow.cpp \
@@ -29,11 +29,11 @@ win32 {
 RESOURCES += Luach.qrc
 
 # Install binaries
-binary.path = /usr/local/bin/
-binary.files = Luach
+binary.path = /usr/bin/
+binary.files = luach
 
 # Install ZmanimCLI
-zmanim.path = /usr/local/bin/
+zmanim.path = /usr/share/Luach/
 zmanim.files = ZmanimCLI.jar
 
 # Install Icons:

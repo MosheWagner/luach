@@ -16,19 +16,13 @@
 
 #include "daybutton.h"
 
+
 dayButton::dayButton(QWidget * parent, int jd, bool showGDate, bool hool)
 {
     setParent(parent);
 
-    date.set_jd(jd);
+    setDate(jd, hool);
 
-    //
-    if (hool) date.set_diaspora();
-
-    selected = false;
-    today = false;
-
-    updateStyle();
 
     vbox = new QVBoxLayout();
     setLayout(vbox);
@@ -37,13 +31,16 @@ dayButton::dayButton(QWidget * parent, int jd, bool showGDate, bool hool)
 
     vbox->addLayout(hbox);
 
-    hebday = new QLabel(date.get_hebrew_day_string());
+    //hebday = new QLabel(date.get_hebrew_day_string());
+    hebday = new QLabel();
 
     engday = new QLabel("");
+    /*
     if (showGDate)
     {
         engday->setText(stringify(date.get_gday()));
     }
+    */
 
 
     hbox->addWidget(hebday);
@@ -51,16 +48,21 @@ dayButton::dayButton(QWidget * parent, int jd, bool showGDate, bool hool)
 
     hbox->addWidget(engday);
 
+    /*
     QString holiday = date.get_holyday_string(0);
     //No politics or anything, these are just not holidays...
     if (holiday == "יום הזכרון ליצחק רבין" || holiday == "יום המשפחה" || holiday == "יום זאב זבוטינסקי" ) holiday = "";
-    event = new QLabel(holiday);
+
+    //event = new QLabel(holiday);
+    */
+    event = new QLabel();
     vbox->addWidget(event);
     event->setAlignment(Qt::AlignCenter);
 
     reading = new QLabel();
 
-    if (QString(date.get_parasha_string(0)) != "חסר") reading->setText(date.get_parasha_string(0));
+    //if (QString(date.get_parasha_string(0)) != "חסר") reading->setText(date.get_parasha_string(0));
+
     vbox->addWidget(reading);
     reading->setAlignment(Qt::AlignCenter);
 
@@ -70,6 +72,9 @@ dayButton::dayButton(QWidget * parent, int jd, bool showGDate, bool hool)
     vbox->setSpacing(7);
 
     setSizePolicy(QSizePolicy::Minimum, QSizePolicy::Minimum);
+
+
+    showInfo(showGDate);
 }
 
 dayButton::~dayButton()
@@ -83,6 +88,51 @@ dayButton::~dayButton()
     delete vbox;
 }
 
+void dayButton::setDate(int jd, bool hool)
+{
+    date.set_jd(jd);
+
+    //
+    if (hool) date.set_diaspora();
+
+    selected = false;
+    today = false;
+
+    updateStyle();
+}
+
+
+void dayButton::showInfo(bool showGDate)
+{
+    hebday->setText(date.get_hebrew_day_string());
+
+    if (showGDate)
+    {
+        engday->setText(stringify(date.get_gday()));
+    }
+
+
+    QString holiday = date.get_holyday_string(0);
+    //No politics or anything, these are just not holidays...
+    if (holiday == "יום הזכרון ליצחק רבין" || holiday == "יום המשפחה" || holiday == "יום זאב זבוטינסקי" ) holiday = "";
+
+    event->setText(holiday);
+
+    if (QString(date.get_parasha_string(0)) != "חסר") reading->setText(date.get_parasha_string(0));
+}
+
+void dayButton::resetDate(int jd, bool hool, bool showGDate)
+{
+    setDate(jd, hool);
+    showInfo(showGDate);
+
+    //Unmark "today"
+    QFont q; q.setPixelSize(16);
+    hebday->setFont(q);
+    engday->setFont(q);
+
+    updateStyle();
+}
 
 void dayButton::mousePressEvent(QMouseEvent *event)
 {

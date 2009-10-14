@@ -2,7 +2,7 @@
 Categories=Office
 Comment=Jewish Calendar
 Comment[he]=לוח שנה עברי עם זמני היום ההלכתיים
-Exec=Luach
+Exec=luach
 Icon=/usr/share/Luach/calendar.png
 Name=Luach
 Name[he]=לוח

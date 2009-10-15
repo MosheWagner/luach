@@ -48,8 +48,6 @@
 
 */
 
-//TODO: חוץ לארץ reading fix (only pesach?)
-
 //TODO: System tray icon
 
 //TODO: צאת שבת
@@ -372,31 +370,14 @@ void MainWindow::gotTimes()
 
     for (int i=0; i<times.size(); i++)
     {
+        times[i].replace('\r',"");
+
         QString t = times[i].mid(times[i].lastIndexOf(" ") + 1);
         //A time
         if (times[i][0] == '*')
         {
             if (times[i].startsWith("* AlosHashachar:") == true)
             {
-                /*
-                //Clear all labels, as this is the first time:
-                // (Maybe unneccesary: )
-                ui->aloslabel->hide();
-                ui->sunriselabel->hide();
-                ui->shmamgalbl->hide();
-                ui->shmagralbl->hide();
-                ui->tfilamgalbl->hide();
-                ui->tfilagralbl->hide();
-                ui->hatzotlbl->hide();
-                ui->minchagdolalbl->hide();
-                ui->minchaktanalbl->hide();
-                ui->plaglbl->hide();
-                ui->skialbl->hide();
-                ui->tzitslbl->hide();
-                ui->tzits72lbl->hide();
-                */
-
-
                 //Show alos
                 ui->aloslabel->setText(t);
             }
@@ -474,25 +455,6 @@ void MainWindow::gotTimes()
                 d += current.get_format_date(1);
                 d += " - " + locationName;
                 ui->dayandlocationlbl->setText(d);
-
-                /*
-                //This is the last time given:
-
-                //TODO: not amazing, but ok....
-                ui->aloslabel->show();
-                ui->sunriselabel->show();
-                ui->shmamgalbl->show();
-                ui->shmagralbl->show();
-                ui->tfilamgalbl->show();
-                ui->tfilagralbl->show();
-                ui->hatzotlbl->show();
-                ui->minchagdolalbl->show();
-                ui->minchaktanalbl->show();
-                ui->plaglbl->show();
-                ui->skialbl->show();
-                ui->tzitslbl->show();
-                ui->tzits72lbl->show();
-                */
             }
         }
     }
@@ -531,7 +493,11 @@ void MainWindow::loadConfs()
 
     if ((infile.open(QIODevice::ReadOnly)))
     {
-        QString text = infile.readAll();
+        QTextStream t( &infile );
+        t.setCodec(QTextCodec::codecForName("utf8"));
+
+
+        QString text = t.readAll();
         infile.close();
 
         QStringList lines = text.split('\n');

@@ -100,6 +100,8 @@ void writetofile(QString filename, QString data, bool overwrite)
     //Set a TextStream to it
     QTextStream outstream( &outfile );
 
+    outstream.setCodec(QTextCodec::codecForName("utf8"));
+
     QFlag *mode;
     if (overwrite == false) mode = new QFlag(QIODevice::WriteOnly | QIODevice::Append);
     else mode = new QFlag(QIODevice::WriteOnly);

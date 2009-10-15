@@ -72,8 +72,6 @@ signals:
 private slots:
     void on_okBTN_clicked();
     void on_exitBTN_clicked();
-    //Called when the TimeZone name's are recieved from ZmanimCLI
-    void gotTZ();
 };
 
 #endif // CHANGELOCATION_H

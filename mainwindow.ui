@@ -473,7 +473,7 @@
            <string>...</string>
           </property>
           <property name="icon">
-           <iconset>
+           <iconset resource="Luach.qrc">
             <normaloff>:/Icons/arrow-right.png</normaloff>:/Icons/arrow-right.png</iconset>
           </property>
           <property name="autoRaise">
@@ -513,7 +513,7 @@
            <string>...</string>
           </property>
           <property name="icon">
-           <iconset>
+           <iconset resource="Luach.qrc">
             <normaloff>:/Icons/arrow-left.png</normaloff>:/Icons/arrow-left.png</iconset>
           </property>
           <property name="autoRaise">
@@ -540,7 +540,7 @@
            <string>...</string>
           </property>
           <property name="icon">
-           <iconset>
+           <iconset resource="Luach.qrc">
             <normaloff>:/Icons/arrow-right.png</normaloff>:/Icons/arrow-right.png</iconset>
           </property>
           <property name="autoRaise">
@@ -580,7 +580,7 @@
            <string>...</string>
           </property>
           <property name="icon">
-           <iconset>
+           <iconset resource="Luach.qrc">
             <normaloff>:/Icons/arrow-left.png</normaloff>:/Icons/arrow-left.png</iconset>
           </property>
           <property name="checkable">
@@ -610,7 +610,7 @@
            <string>...</string>
           </property>
           <property name="icon">
-           <iconset>
+           <iconset resource="Luach.qrc">
             <normaloff>:/Icons/arrow-right-double.png</normaloff>:/Icons/arrow-right-double.png</iconset>
           </property>
           <property name="autoRaise">
@@ -627,7 +627,7 @@
            <string>...</string>
           </property>
           <property name="icon">
-           <iconset>
+           <iconset resource="Luach.qrc">
             <normaloff>:/Icons/arrow-right.png</normaloff>:/Icons/arrow-right.png</iconset>
           </property>
           <property name="autoRaise">
@@ -667,7 +667,7 @@
            <string>...</string>
           </property>
           <property name="icon">
-           <iconset>
+           <iconset resource="Luach.qrc">
             <normaloff>:/Icons/arrow-left.png</normaloff>:/Icons/arrow-left.png</iconset>
           </property>
           <property name="autoRaise">
@@ -684,7 +684,7 @@
            <string>...</string>
           </property>
           <property name="icon">
-           <iconset>
+           <iconset resource="Luach.qrc">
             <normaloff>:/Icons/arrow-left-double.png</normaloff>:/Icons/arrow-left-double.png</iconset>
           </property>
           <property name="autoRaise">
@@ -754,7 +754,7 @@
            <string>...</string>
           </property>
           <property name="icon">
-           <iconset>
+           <iconset resource="Luach.qrc">
             <normaloff>:/Icons/arrow-right.png</normaloff>:/Icons/arrow-right.png</iconset>
           </property>
           <property name="autoRaise">
@@ -794,7 +794,7 @@
            <string>...</string>
           </property>
           <property name="icon">
-           <iconset>
+           <iconset resource="Luach.qrc">
             <normaloff>:/Icons/arrow-left.png</normaloff>:/Icons/arrow-left.png</iconset>
           </property>
           <property name="autoRaise">
@@ -821,7 +821,7 @@
            <string>...</string>
           </property>
           <property name="icon">
-           <iconset>
+           <iconset resource="Luach.qrc">
             <normaloff>:/Icons/arrow-right.png</normaloff>:/Icons/arrow-right.png</iconset>
           </property>
           <property name="autoRaise">
@@ -861,7 +861,7 @@
            <string>...</string>
           </property>
           <property name="icon">
-           <iconset>
+           <iconset resource="Luach.qrc">
             <normaloff>:/Icons/arrow-left.png</normaloff>:/Icons/arrow-left.png</iconset>
           </property>
           <property name="autoRaise">
@@ -888,7 +888,7 @@
            <string>...</string>
           </property>
           <property name="icon">
-           <iconset>
+           <iconset resource="Luach.qrc">
             <normaloff>:/Icons/arrow-right-double.png</normaloff>:/Icons/arrow-right-double.png</iconset>
           </property>
           <property name="autoRaise">
@@ -905,7 +905,7 @@
            <string>...</string>
           </property>
           <property name="icon">
-           <iconset>
+           <iconset resource="Luach.qrc">
             <normaloff>:/Icons/arrow-right.png</normaloff>:/Icons/arrow-right.png</iconset>
           </property>
           <property name="autoRaise">
@@ -945,7 +945,7 @@
            <string>...</string>
           </property>
           <property name="icon">
-           <iconset>
+           <iconset resource="Luach.qrc">
             <normaloff>:/Icons/arrow-left.png</normaloff>:/Icons/arrow-left.png</iconset>
           </property>
           <property name="autoRaise">
@@ -962,7 +962,7 @@
            <string>...</string>
           </property>
           <property name="icon">
-           <iconset>
+           <iconset resource="Luach.qrc">
             <normaloff>:/Icons/arrow-left-double.png</normaloff>:/Icons/arrow-left-double.png</iconset>
           </property>
           <property name="autoRaise">
@@ -1050,6 +1050,11 @@
      <verstretch>0</verstretch>
     </sizepolicy>
    </property>
+   <property name="font">
+    <font>
+     <pointsize>16</pointsize>
+    </font>
+   </property>
    <property name="layoutDirection">
     <enum>Qt::RightToLeft</enum>
    </property>
@@ -1060,7 +1065,7 @@
     <set>Qt::LeftDockWidgetArea</set>
    </property>
    <property name="windowTitle">
-    <string>זמני היום</string>
+    <string>זמני היום:</string>
    </property>
    <attribute name="dockWidgetArea">
     <number>1</number>
@@ -1076,23 +1081,6 @@
      <property name="spacing">
       <number>8</number>
      </property>
-     <item>
-      <widget class="QLabel" name="label_4">
-       <property name="font">
-        <font>
-         <pointsize>14</pointsize>
-         <weight>75</weight>
-         <bold>true</bold>
-        </font>
-       </property>
-       <property name="text">
-        <string>זמני היום:</string>
-       </property>
-       <property name="alignment">
-        <set>Qt::AlignCenter</set>
-       </property>
-      </widget>
-     </item>
      <item>
       <widget class="QLabel" name="dayandlocationlbl">
        <property name="font">
@@ -1117,12 +1105,18 @@
         <set>Qt::AlignRight|Qt::AlignTop|Qt::AlignTrailing</set>
        </property>
        <property name="horizontalSpacing">
-        <number>10</number>
+        <number>11</number>
+       </property>
+       <property name="verticalSpacing">
+        <number>4</number>
        </property>
        <property name="leftMargin">
-        <number>0</number>
+        <number>4</number>
        </property>
        <property name="topMargin">
+        <number>0</number>
+       </property>
+       <property name="rightMargin">
         <number>0</number>
        </property>
        <item row="0" column="0">
@@ -1924,12 +1918,9 @@
         </widget>
        </item>
        <item row="15" column="1">
-        <spacer name="verticalSpacer">
+        <spacer name="verticalSpacer_3">
          <property name="orientation">
           <enum>Qt::Vertical</enum>
-         </property>
-         <property name="sizeType">
-          <enum>QSizePolicy::Expanding</enum>
          </property>
          <property name="sizeHint" stdset="0">
           <size>
@@ -1939,75 +1930,71 @@
          </property>
         </spacer>
        </item>
-       <item row="16" column="0">
-        <widget class="QLabel" name="dafyomislbllbl">
-         <property name="font">
-          <font>
-           <pointsize>9</pointsize>
-           <weight>50</weight>
-           <bold>false</bold>
-          </font>
-         </property>
-         <property name="text">
-          <string>דף יומי</string>
-         </property>
-         <property name="textInteractionFlags">
-          <set>Qt::TextSelectableByKeyboard|Qt::TextSelectableByMouse</set>
-         </property>
-        </widget>
-       </item>
-       <item row="16" column="1">
-        <widget class="QLabel" name="dafyomilbl">
-         <property name="font">
-          <font>
-           <pointsize>9</pointsize>
-           <weight>50</weight>
-           <bold>false</bold>
-          </font>
-         </property>
-         <property name="frameShape">
-          <enum>QFrame::NoFrame</enum>
-         </property>
-         <property name="frameShadow">
-          <enum>QFrame::Plain</enum>
-         </property>
-         <property name="lineWidth">
-          <number>1</number>
-         </property>
-         <property name="midLineWidth">
-          <number>0</number>
-         </property>
-         <property name="text">
-          <string>דף</string>
-         </property>
-         <property name="scaledContents">
-          <bool>false</bool>
-         </property>
-         <property name="alignment">
-          <set>Qt::AlignCenter</set>
-         </property>
-         <property name="wordWrap">
-          <bool>true</bool>
-         </property>
-         <property name="margin">
-          <number>0</number>
-         </property>
-         <property name="indent">
-          <number>0</number>
-         </property>
-         <property name="textInteractionFlags">
-          <set>Qt::TextSelectableByKeyboard|Qt::TextSelectableByMouse</set>
-         </property>
-        </widget>
-       </item>
       </layout>
+     </item>
+     <item>
+      <widget class="QLabel" name="dafyomilbl">
+       <property name="font">
+        <font>
+         <pointsize>9</pointsize>
+         <weight>50</weight>
+         <bold>false</bold>
+        </font>
+       </property>
+       <property name="frameShape">
+        <enum>QFrame::NoFrame</enum>
+       </property>
+       <property name="frameShadow">
+        <enum>QFrame::Plain</enum>
+       </property>
+       <property name="lineWidth">
+        <number>1</number>
+       </property>
+       <property name="midLineWidth">
+        <number>0</number>
+       </property>
+       <property name="text">
+        <string>דף</string>
+       </property>
+       <property name="scaledContents">
+        <bool>false</bool>
+       </property>
+       <property name="alignment">
+        <set>Qt::AlignCenter</set>
+       </property>
+       <property name="wordWrap">
+        <bool>true</bool>
+       </property>
+       <property name="margin">
+        <number>0</number>
+       </property>
+       <property name="indent">
+        <number>0</number>
+       </property>
+       <property name="textInteractionFlags">
+        <set>Qt::TextSelectableByKeyboard|Qt::TextSelectableByMouse</set>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <spacer name="verticalSpacer">
+       <property name="orientation">
+        <enum>Qt::Vertical</enum>
+       </property>
+       <property name="sizeHint" stdset="0">
+        <size>
+         <width>20</width>
+         <height>40</height>
+        </size>
+       </property>
+      </spacer>
      </item>
     </layout>
    </widget>
   </widget>
   <action name="changelocationaction">
    <property name="icon">
-    <iconset>
+    <iconset resource="Luach.qrc">
      <normaloff>:/Icons/location.png</normaloff>:/Icons/location.png</iconset>
    </property>
    <property name="text">
@@ -2016,7 +2003,7 @@
   </action>
   <action name="exitaction">
    <property name="icon">
-    <iconset>
+    <iconset resource="Luach.qrc">
      <normaloff>:/Icons/exit.png</normaloff>:/Icons/exit.png</iconset>
    </property>
    <property name="text">
@@ -2047,7 +2034,7 @@
   </action>
   <action name="aboutaction">
    <property name="icon">
-    <iconset>
+    <iconset resource="Luach.qrc">
      <normaloff>:/Icons/help-about.png</normaloff>:/Icons/help-about.png</iconset>
    </property>
    <property name="text">
@@ -2056,7 +2043,7 @@
   </action>
   <action name="printaction">
    <property name="icon">
-    <iconset>
+    <iconset resource="Luach.qrc">
      <normaloff>:/Icons/document-print.png</normaloff>:/Icons/document-print.png</iconset>
    </property>
    <property name="text">
@@ -2076,7 +2063,7 @@
   </action>
   <action name="viewsettings_2">
    <property name="icon">
-    <iconset>
+    <iconset resource="Luach.qrc">
      <normaloff>:/Icons/configure.png</normaloff>:/Icons/configure.png</iconset>
    </property>
    <property name="text">
@@ -2085,6 +2072,8 @@
   </action>
  </widget>
  <layoutdefault spacing="6" margin="11"/>
- <resources/>
+ <resources>
+  <include location="Luach.qrc"/>
+ </resources>
  <connections/>
 </ui>

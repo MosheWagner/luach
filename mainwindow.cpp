@@ -341,15 +341,10 @@ void MainWindow::updateLabels(mHdate *date)
 
     if (dafYomi(current.get_julian()) != "")
     {
-        ui->dafyomislbllbl->show();
         ui->dafyomilbl->show();
-        ui->dafyomilbl->setText(dafYomi(current.get_julian()));
+        ui->dafyomilbl->setText("דף יומי - " + dafYomi(current.get_julian()));
     }
-    else
-    {
-        ui->dafyomilbl->hide();
-        ui->dafyomislbllbl->hide();
-    }
+    else ui->dafyomilbl->hide();
 
     //Show times:
 

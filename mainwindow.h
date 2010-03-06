@@ -25,16 +25,23 @@
 #include <QPrinter>
 #include <QPrintDialog>
 #include <QPainter>
-
-#include <QLocale>
-#include <locale.h>
+#include <QSystemTrayIcon>
+#include <QToolTip>
+#include <QDir>
+#include <QDesktopWidget>
 
 #include "mhdate.h"
+
+#include "mtranslator.h"
 
 #include "daybutton.h"
 #include "functions.h"
 #include "changelocation.h"
 #include "about.h"
+
+
+extern QString LANG;
+
 
 namespace Ui
 {
@@ -49,7 +56,16 @@ public:
     MainWindow(QWidget *parent = 0);
     ~MainWindow();
 
+
+protected:
+    //Overrides the normal "closeEvent", so it can save tha window's state before quiting
+    void closeEvent(QCloseEvent *event);
+    //Restores the window's state from the last run
+    void restoreWindowState();
+
 private slots:
+
+    void translateGUI();
 
     void on_doublenextgYearBTN_clicked();
     void on_doublebackgYearBTN_clicked();
@@ -68,6 +84,8 @@ private slots:
     void on_backYearBTN_clicked();
     void on_nextMonthBTN_clicked();
     void on_backMonthBTN_clicked();
+
+    void translateAction();
 
     //Destroys all existing daybuttons
     void clearMonth();
@@ -97,6 +115,7 @@ private slots:
     void aboutForm();
 
     void printSnap();
+
 private:
     //Holds current (selected) date
     mHdate current;
@@ -106,6 +125,20 @@ private:
 
 
     Ui::MainWindow *ui;
+
+    QSystemTrayIcon *trayIcon;
+    QMenu *trayIconMenu;
+
+    /*
+    QAction *minimizeAction;
+    QAction *maximizeAction;
+    QAction *restoreAction;
+    QAction *quitAction;
+
+    void createActions();
+    void createTrayIcon();
+    */
+
 };
 
 #endif // MAINWINDOW_H

@@ -183,8 +183,32 @@ void mHdate::addDay()
     }
 }
 
+//Return The day in the omer, starting from 1
+int mHdate::getOmerDay()
+{
+   hdate::Hdate sixteen_nissan;
+   sixteen_nissan.set_hdate(16, 7, get_hyear());
+
+   int d = get_julian() - sixteen_nissan.get_julian() + 1;
+
+   if ((d > 49) || (d<0))  d=0;
+
+   return d;
+}
+
+
 bool mHdate::isErevYomTov(bool hool)
 {
+
+    hdate::Hdate tomorrow;
+    tomorrow.set_jd(get_julian() + 1);
+    if (hool) tomorrow.set_diaspora();
+
+    if (tomorrow.get_holyday_type() == 1) return true;
+
+    return false;
+
+    /*
     int mon = get_hmonth();
     int day = get_hday();
     if (( mon == 1 && ( day == 1 || day == 9 || day == 14 || day == 21) ) || (mon==7 && (day==14 || day==20)) || (mon==9 && day==5))
@@ -202,6 +226,7 @@ bool mHdate::isErevYomTov(bool hool)
     }
 
     return false;
+    */
 }
 
 int mHdate::getMonthLength() { return month_length; }

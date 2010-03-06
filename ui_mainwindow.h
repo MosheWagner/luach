@@ -1,8 +1,8 @@
 /********************************************************************************
 ** Form generated from reading ui file 'mainwindow.ui'
 **
-** Created: Wed Oct 14 14:47:11 2009
-**      by: Qt User Interface Compiler version 4.5.3
+** Created: Fri Mar 5 14:24:56 2010
+**      by: Qt User Interface Compiler version 4.5.2
 **
 ** WARNING! All changes made in this file will be lost when recompiling ui file!
 ********************************************************************************/
@@ -42,6 +42,7 @@ public:
     QAction *printaction;
     QAction *timeformat;
     QAction *viewsettings_2;
+    QAction *translateaction;
     QWidget *centralWidget;
     QVBoxLayout *verticalLayout;
     QGridLayout *gridLayout_2;
@@ -66,16 +67,16 @@ public:
     QToolButton *backgdayBTN;
     QLabel *engdaylbl;
     QToolButton *nextgdayBTN;
-    QHBoxLayout *horizontalLayout_5;
-    QToolButton *backgmonthBTN;
-    QLabel *engmonthlbl;
-    QToolButton *nextgmonthBTN;
     QHBoxLayout *horizontalLayout_6;
     QToolButton *doublebackgYearBTN;
     QToolButton *backgYearBTN;
     QLabel *engyearlbl;
     QToolButton *nextgYearBTN;
     QToolButton *doublenextgYearBTN;
+    QHBoxLayout *horizontalLayout_5;
+    QToolButton *backgmonthBTN;
+    QLabel *engmonthlbl;
+    QToolButton *nextgmonthBTN;
     QGridLayout *gridLayout;
     QMenuBar *menuBar;
     QMenu *menu;
@@ -85,7 +86,6 @@ public:
     QDockWidget *dockWidget;
     QWidget *dockWidgetContents;
     QVBoxLayout *verticalLayout_3;
-    QLabel *label_4;
     QLabel *dayandlocationlbl;
     QFormLayout *formLayout_3;
     QLabel *label_2;
@@ -117,9 +117,9 @@ public:
     QSpacerItem *verticalSpacer_2;
     QLabel *clllbllbl;
     QLabel *candellightinglbl;
-    QSpacerItem *verticalSpacer;
-    QLabel *dafyomislbllbl;
+    QSpacerItem *verticalSpacer_3;
     QLabel *dafyomilbl;
+    QSpacerItem *verticalSpacer;
 
     void setupUi(QMainWindow *MainWindow)
     {
@@ -228,6 +228,9 @@ public:
         QIcon icon4;
         icon4.addFile(QString::fromUtf8(":/Icons/configure.png"), QSize(), QIcon::Normal, QIcon::Off);
         viewsettings_2->setIcon(icon4);
+        translateaction = new QAction(MainWindow);
+        translateaction->setObjectName(QString::fromUtf8("translateaction"));
+        translateaction->setCheckable(false);
         centralWidget = new QWidget(MainWindow);
         centralWidget->setObjectName(QString::fromUtf8("centralWidget"));
         verticalLayout = new QVBoxLayout(centralWidget);
@@ -435,38 +438,6 @@ public:
 
         gridLayout_2->addLayout(horizontalLayout, 0, 4, 1, 1);
 
-        horizontalLayout_5 = new QHBoxLayout();
-        horizontalLayout_5->setSpacing(0);
-        horizontalLayout_5->setObjectName(QString::fromUtf8("horizontalLayout_5"));
-        horizontalLayout_5->setContentsMargins(0, -1, -1, -1);
-        backgmonthBTN = new QToolButton(centralWidget);
-        backgmonthBTN->setObjectName(QString::fromUtf8("backgmonthBTN"));
-        backgmonthBTN->setFocusPolicy(Qt::NoFocus);
-        backgmonthBTN->setIcon(icon5);
-        backgmonthBTN->setAutoRaise(true);
-
-        horizontalLayout_5->addWidget(backgmonthBTN);
-
-        engmonthlbl = new QLabel(centralWidget);
-        engmonthlbl->setObjectName(QString::fromUtf8("engmonthlbl"));
-        sizePolicy.setHeightForWidth(engmonthlbl->sizePolicy().hasHeightForWidth());
-        engmonthlbl->setSizePolicy(sizePolicy);
-        engmonthlbl->setFont(font3);
-        engmonthlbl->setLayoutDirection(Qt::LeftToRight);
-
-        horizontalLayout_5->addWidget(engmonthlbl);
-
-        nextgmonthBTN = new QToolButton(centralWidget);
-        nextgmonthBTN->setObjectName(QString::fromUtf8("nextgmonthBTN"));
-        nextgmonthBTN->setFocusPolicy(Qt::NoFocus);
-        nextgmonthBTN->setIcon(icon6);
-        nextgmonthBTN->setAutoRaise(true);
-
-        horizontalLayout_5->addWidget(nextgmonthBTN);
-
-
-        gridLayout_2->addLayout(horizontalLayout_5, 0, 5, 1, 1);
-
         horizontalLayout_6 = new QHBoxLayout();
         horizontalLayout_6->setSpacing(0);
         horizontalLayout_6->setObjectName(QString::fromUtf8("horizontalLayout_6"));
@@ -515,13 +486,39 @@ public:
 
         gridLayout_2->addLayout(horizontalLayout_6, 0, 6, 1, 1);
 
+        horizontalLayout_5 = new QHBoxLayout();
+        horizontalLayout_5->setSpacing(0);
+        horizontalLayout_5->setObjectName(QString::fromUtf8("horizontalLayout_5"));
+        horizontalLayout_5->setContentsMargins(0, -1, -1, -1);
+        backgmonthBTN = new QToolButton(centralWidget);
+        backgmonthBTN->setObjectName(QString::fromUtf8("backgmonthBTN"));
+        backgmonthBTN->setFocusPolicy(Qt::NoFocus);
+        backgmonthBTN->setIcon(icon5);
+        backgmonthBTN->setAutoRaise(true);
+
+        horizontalLayout_5->addWidget(backgmonthBTN);
+
+        engmonthlbl = new QLabel(centralWidget);
+        engmonthlbl->setObjectName(QString::fromUtf8("engmonthlbl"));
+        sizePolicy.setHeightForWidth(engmonthlbl->sizePolicy().hasHeightForWidth());
+        engmonthlbl->setSizePolicy(sizePolicy);
+        engmonthlbl->setFont(font3);
+        engmonthlbl->setLayoutDirection(Qt::LeftToRight);
+
+        horizontalLayout_5->addWidget(engmonthlbl);
+
+        nextgmonthBTN = new QToolButton(centralWidget);
+        nextgmonthBTN->setObjectName(QString::fromUtf8("nextgmonthBTN"));
+        nextgmonthBTN->setFocusPolicy(Qt::NoFocus);
+        nextgmonthBTN->setIcon(icon6);
+        nextgmonthBTN->setAutoRaise(true);
+
+        horizontalLayout_5->addWidget(nextgmonthBTN);
+
+
+        gridLayout_2->addLayout(horizontalLayout_5, 0, 5, 1, 1);
+
         gridLayout_2->setColumnStretch(0, 100);
-        gridLayout_2->setColumnStretch(1, 100);
-        gridLayout_2->setColumnStretch(2, 100);
-        gridLayout_2->setColumnStretch(3, 100);
-        gridLayout_2->setColumnStretch(4, 100);
-        gridLayout_2->setColumnStretch(5, 100);
-        gridLayout_2->setColumnStretch(6, 100);
 
         verticalLayout->addLayout(gridLayout_2);
 
@@ -536,17 +533,215 @@ public:
         MainWindow->setCentralWidget(centralWidget);
         menuBar = new QMenuBar(MainWindow);
         menuBar->setObjectName(QString::fromUtf8("menuBar"));
-        menuBar->setGeometry(QRect(0, 0, 1296, 29));
-        menuBar->setLayoutDirection(Qt::RightToLeft);
+        menuBar->setGeometry(QRect(0, 0, 1296, 28));
+        QPalette palette1;
+        palette1.setBrush(QPalette::Active, QPalette::WindowText, brush);
+        QBrush brush8(QColor(250, 250, 250, 255));
+        brush8.setStyle(Qt::SolidPattern);
+        palette1.setBrush(QPalette::Active, QPalette::Button, brush8);
+        palette1.setBrush(QPalette::Active, QPalette::Light, brush2);
+        palette1.setBrush(QPalette::Active, QPalette::Midlight, brush6);
+        QBrush brush9(QColor(125, 125, 125, 255));
+        brush9.setStyle(Qt::SolidPattern);
+        palette1.setBrush(QPalette::Active, QPalette::Dark, brush9);
+        QBrush brush10(QColor(167, 167, 167, 255));
+        brush10.setStyle(Qt::SolidPattern);
+        palette1.setBrush(QPalette::Active, QPalette::Mid, brush10);
+        palette1.setBrush(QPalette::Active, QPalette::Text, brush);
+        palette1.setBrush(QPalette::Active, QPalette::BrightText, brush2);
+        palette1.setBrush(QPalette::Active, QPalette::ButtonText, brush);
+        palette1.setBrush(QPalette::Active, QPalette::Base, brush2);
+        palette1.setBrush(QPalette::Active, QPalette::Window, brush8);
+        palette1.setBrush(QPalette::Active, QPalette::Shadow, brush);
+        palette1.setBrush(QPalette::Active, QPalette::AlternateBase, brush6);
+        palette1.setBrush(QPalette::Active, QPalette::ToolTipBase, brush7);
+        palette1.setBrush(QPalette::Active, QPalette::ToolTipText, brush);
+        palette1.setBrush(QPalette::Inactive, QPalette::WindowText, brush);
+        palette1.setBrush(QPalette::Inactive, QPalette::Button, brush8);
+        palette1.setBrush(QPalette::Inactive, QPalette::Light, brush2);
+        palette1.setBrush(QPalette::Inactive, QPalette::Midlight, brush6);
+        palette1.setBrush(QPalette::Inactive, QPalette::Dark, brush9);
+        palette1.setBrush(QPalette::Inactive, QPalette::Mid, brush10);
+        palette1.setBrush(QPalette::Inactive, QPalette::Text, brush);
+        palette1.setBrush(QPalette::Inactive, QPalette::BrightText, brush2);
+        palette1.setBrush(QPalette::Inactive, QPalette::ButtonText, brush);
+        palette1.setBrush(QPalette::Inactive, QPalette::Base, brush2);
+        palette1.setBrush(QPalette::Inactive, QPalette::Window, brush8);
+        palette1.setBrush(QPalette::Inactive, QPalette::Shadow, brush);
+        palette1.setBrush(QPalette::Inactive, QPalette::AlternateBase, brush6);
+        palette1.setBrush(QPalette::Inactive, QPalette::ToolTipBase, brush7);
+        palette1.setBrush(QPalette::Inactive, QPalette::ToolTipText, brush);
+        palette1.setBrush(QPalette::Disabled, QPalette::WindowText, brush9);
+        palette1.setBrush(QPalette::Disabled, QPalette::Button, brush8);
+        palette1.setBrush(QPalette::Disabled, QPalette::Light, brush2);
+        palette1.setBrush(QPalette::Disabled, QPalette::Midlight, brush6);
+        palette1.setBrush(QPalette::Disabled, QPalette::Dark, brush9);
+        palette1.setBrush(QPalette::Disabled, QPalette::Mid, brush10);
+        palette1.setBrush(QPalette::Disabled, QPalette::Text, brush9);
+        palette1.setBrush(QPalette::Disabled, QPalette::BrightText, brush2);
+        palette1.setBrush(QPalette::Disabled, QPalette::ButtonText, brush9);
+        palette1.setBrush(QPalette::Disabled, QPalette::Base, brush8);
+        palette1.setBrush(QPalette::Disabled, QPalette::Window, brush8);
+        palette1.setBrush(QPalette::Disabled, QPalette::Shadow, brush);
+        palette1.setBrush(QPalette::Disabled, QPalette::AlternateBase, brush8);
+        palette1.setBrush(QPalette::Disabled, QPalette::ToolTipBase, brush7);
+        palette1.setBrush(QPalette::Disabled, QPalette::ToolTipText, brush);
+        menuBar->setPalette(palette1);
+        menuBar->setLayoutDirection(Qt::LeftToRight);
         menu = new QMenu(menuBar);
         menu->setObjectName(QString::fromUtf8("menu"));
-        menu->setLayoutDirection(Qt::RightToLeft);
+        QPalette palette2;
+        palette2.setBrush(QPalette::Active, QPalette::WindowText, brush);
+        palette2.setBrush(QPalette::Active, QPalette::Button, brush2);
+        palette2.setBrush(QPalette::Active, QPalette::Light, brush2);
+        palette2.setBrush(QPalette::Active, QPalette::Midlight, brush2);
+        QBrush brush11(QColor(127, 127, 127, 255));
+        brush11.setStyle(Qt::SolidPattern);
+        palette2.setBrush(QPalette::Active, QPalette::Dark, brush11);
+        QBrush brush12(QColor(170, 170, 170, 255));
+        brush12.setStyle(Qt::SolidPattern);
+        palette2.setBrush(QPalette::Active, QPalette::Mid, brush12);
+        palette2.setBrush(QPalette::Active, QPalette::Text, brush);
+        palette2.setBrush(QPalette::Active, QPalette::BrightText, brush2);
+        palette2.setBrush(QPalette::Active, QPalette::ButtonText, brush);
+        palette2.setBrush(QPalette::Active, QPalette::Base, brush2);
+        palette2.setBrush(QPalette::Active, QPalette::Window, brush2);
+        palette2.setBrush(QPalette::Active, QPalette::Shadow, brush);
+        palette2.setBrush(QPalette::Active, QPalette::AlternateBase, brush2);
+        palette2.setBrush(QPalette::Active, QPalette::ToolTipBase, brush7);
+        palette2.setBrush(QPalette::Active, QPalette::ToolTipText, brush);
+        palette2.setBrush(QPalette::Inactive, QPalette::WindowText, brush);
+        palette2.setBrush(QPalette::Inactive, QPalette::Button, brush2);
+        palette2.setBrush(QPalette::Inactive, QPalette::Light, brush2);
+        palette2.setBrush(QPalette::Inactive, QPalette::Midlight, brush2);
+        palette2.setBrush(QPalette::Inactive, QPalette::Dark, brush11);
+        palette2.setBrush(QPalette::Inactive, QPalette::Mid, brush12);
+        palette2.setBrush(QPalette::Inactive, QPalette::Text, brush);
+        palette2.setBrush(QPalette::Inactive, QPalette::BrightText, brush2);
+        palette2.setBrush(QPalette::Inactive, QPalette::ButtonText, brush);
+        palette2.setBrush(QPalette::Inactive, QPalette::Base, brush2);
+        palette2.setBrush(QPalette::Inactive, QPalette::Window, brush2);
+        palette2.setBrush(QPalette::Inactive, QPalette::Shadow, brush);
+        palette2.setBrush(QPalette::Inactive, QPalette::AlternateBase, brush2);
+        palette2.setBrush(QPalette::Inactive, QPalette::ToolTipBase, brush7);
+        palette2.setBrush(QPalette::Inactive, QPalette::ToolTipText, brush);
+        palette2.setBrush(QPalette::Disabled, QPalette::WindowText, brush11);
+        palette2.setBrush(QPalette::Disabled, QPalette::Button, brush2);
+        palette2.setBrush(QPalette::Disabled, QPalette::Light, brush2);
+        palette2.setBrush(QPalette::Disabled, QPalette::Midlight, brush2);
+        palette2.setBrush(QPalette::Disabled, QPalette::Dark, brush11);
+        palette2.setBrush(QPalette::Disabled, QPalette::Mid, brush12);
+        palette2.setBrush(QPalette::Disabled, QPalette::Text, brush11);
+        palette2.setBrush(QPalette::Disabled, QPalette::BrightText, brush2);
+        palette2.setBrush(QPalette::Disabled, QPalette::ButtonText, brush11);
+        palette2.setBrush(QPalette::Disabled, QPalette::Base, brush2);
+        palette2.setBrush(QPalette::Disabled, QPalette::Window, brush2);
+        palette2.setBrush(QPalette::Disabled, QPalette::Shadow, brush);
+        palette2.setBrush(QPalette::Disabled, QPalette::AlternateBase, brush2);
+        palette2.setBrush(QPalette::Disabled, QPalette::ToolTipBase, brush7);
+        palette2.setBrush(QPalette::Disabled, QPalette::ToolTipText, brush);
+        menu->setPalette(palette2);
+        menu->setLayoutDirection(Qt::LeftToRight);
         menu_2 = new QMenu(menuBar);
         menu_2->setObjectName(QString::fromUtf8("menu_2"));
-        menu_2->setLayoutDirection(Qt::RightToLeft);
+        QPalette palette3;
+        palette3.setBrush(QPalette::Active, QPalette::WindowText, brush);
+        palette3.setBrush(QPalette::Active, QPalette::Button, brush2);
+        palette3.setBrush(QPalette::Active, QPalette::Light, brush2);
+        palette3.setBrush(QPalette::Active, QPalette::Midlight, brush2);
+        palette3.setBrush(QPalette::Active, QPalette::Dark, brush11);
+        palette3.setBrush(QPalette::Active, QPalette::Mid, brush12);
+        palette3.setBrush(QPalette::Active, QPalette::Text, brush);
+        palette3.setBrush(QPalette::Active, QPalette::BrightText, brush2);
+        palette3.setBrush(QPalette::Active, QPalette::ButtonText, brush);
+        palette3.setBrush(QPalette::Active, QPalette::Base, brush2);
+        palette3.setBrush(QPalette::Active, QPalette::Window, brush2);
+        palette3.setBrush(QPalette::Active, QPalette::Shadow, brush);
+        palette3.setBrush(QPalette::Active, QPalette::AlternateBase, brush2);
+        palette3.setBrush(QPalette::Active, QPalette::ToolTipBase, brush7);
+        palette3.setBrush(QPalette::Active, QPalette::ToolTipText, brush);
+        palette3.setBrush(QPalette::Inactive, QPalette::WindowText, brush);
+        palette3.setBrush(QPalette::Inactive, QPalette::Button, brush2);
+        palette3.setBrush(QPalette::Inactive, QPalette::Light, brush2);
+        palette3.setBrush(QPalette::Inactive, QPalette::Midlight, brush2);
+        palette3.setBrush(QPalette::Inactive, QPalette::Dark, brush11);
+        palette3.setBrush(QPalette::Inactive, QPalette::Mid, brush12);
+        palette3.setBrush(QPalette::Inactive, QPalette::Text, brush);
+        palette3.setBrush(QPalette::Inactive, QPalette::BrightText, brush2);
+        palette3.setBrush(QPalette::Inactive, QPalette::ButtonText, brush);
+        palette3.setBrush(QPalette::Inactive, QPalette::Base, brush2);
+        palette3.setBrush(QPalette::Inactive, QPalette::Window, brush2);
+        palette3.setBrush(QPalette::Inactive, QPalette::Shadow, brush);
+        palette3.setBrush(QPalette::Inactive, QPalette::AlternateBase, brush2);
+        palette3.setBrush(QPalette::Inactive, QPalette::ToolTipBase, brush7);
+        palette3.setBrush(QPalette::Inactive, QPalette::ToolTipText, brush);
+        palette3.setBrush(QPalette::Disabled, QPalette::WindowText, brush11);
+        palette3.setBrush(QPalette::Disabled, QPalette::Button, brush2);
+        palette3.setBrush(QPalette::Disabled, QPalette::Light, brush2);
+        palette3.setBrush(QPalette::Disabled, QPalette::Midlight, brush2);
+        palette3.setBrush(QPalette::Disabled, QPalette::Dark, brush11);
+        palette3.setBrush(QPalette::Disabled, QPalette::Mid, brush12);
+        palette3.setBrush(QPalette::Disabled, QPalette::Text, brush11);
+        palette3.setBrush(QPalette::Disabled, QPalette::BrightText, brush2);
+        palette3.setBrush(QPalette::Disabled, QPalette::ButtonText, brush11);
+        palette3.setBrush(QPalette::Disabled, QPalette::Base, brush2);
+        palette3.setBrush(QPalette::Disabled, QPalette::Window, brush2);
+        palette3.setBrush(QPalette::Disabled, QPalette::Shadow, brush);
+        palette3.setBrush(QPalette::Disabled, QPalette::AlternateBase, brush2);
+        palette3.setBrush(QPalette::Disabled, QPalette::ToolTipBase, brush7);
+        palette3.setBrush(QPalette::Disabled, QPalette::ToolTipText, brush);
+        menu_2->setPalette(palette3);
+        menu_2->setLayoutDirection(Qt::LeftToRight);
         menu_3 = new QMenu(menuBar);
         menu_3->setObjectName(QString::fromUtf8("menu_3"));
-        menu_3->setLayoutDirection(Qt::RightToLeft);
+        QPalette palette4;
+        palette4.setBrush(QPalette::Active, QPalette::WindowText, brush);
+        palette4.setBrush(QPalette::Active, QPalette::Button, brush2);
+        palette4.setBrush(QPalette::Active, QPalette::Light, brush2);
+        palette4.setBrush(QPalette::Active, QPalette::Midlight, brush2);
+        palette4.setBrush(QPalette::Active, QPalette::Dark, brush11);
+        palette4.setBrush(QPalette::Active, QPalette::Mid, brush12);
+        palette4.setBrush(QPalette::Active, QPalette::Text, brush);
+        palette4.setBrush(QPalette::Active, QPalette::BrightText, brush2);
+        palette4.setBrush(QPalette::Active, QPalette::ButtonText, brush);
+        palette4.setBrush(QPalette::Active, QPalette::Base, brush2);
+        palette4.setBrush(QPalette::Active, QPalette::Window, brush2);
+        palette4.setBrush(QPalette::Active, QPalette::Shadow, brush);
+        palette4.setBrush(QPalette::Active, QPalette::AlternateBase, brush2);
+        palette4.setBrush(QPalette::Active, QPalette::ToolTipBase, brush7);
+        palette4.setBrush(QPalette::Active, QPalette::ToolTipText, brush);
+        palette4.setBrush(QPalette::Inactive, QPalette::WindowText, brush);
+        palette4.setBrush(QPalette::Inactive, QPalette::Button, brush2);
+        palette4.setBrush(QPalette::Inactive, QPalette::Light, brush2);
+        palette4.setBrush(QPalette::Inactive, QPalette::Midlight, brush2);
+        palette4.setBrush(QPalette::Inactive, QPalette::Dark, brush11);
+        palette4.setBrush(QPalette::Inactive, QPalette::Mid, brush12);
+        palette4.setBrush(QPalette::Inactive, QPalette::Text, brush);
+        palette4.setBrush(QPalette::Inactive, QPalette::BrightText, brush2);
+        palette4.setBrush(QPalette::Inactive, QPalette::ButtonText, brush);
+        palette4.setBrush(QPalette::Inactive, QPalette::Base, brush2);
+        palette4.setBrush(QPalette::Inactive, QPalette::Window, brush2);
+        palette4.setBrush(QPalette::Inactive, QPalette::Shadow, brush);
+        palette4.setBrush(QPalette::Inactive, QPalette::AlternateBase, brush2);
+        palette4.setBrush(QPalette::Inactive, QPalette::ToolTipBase, brush7);
+        palette4.setBrush(QPalette::Inactive, QPalette::ToolTipText, brush);
+        palette4.setBrush(QPalette::Disabled, QPalette::WindowText, brush11);
+        palette4.setBrush(QPalette::Disabled, QPalette::Button, brush2);
+        palette4.setBrush(QPalette::Disabled, QPalette::Light, brush2);
+        palette4.setBrush(QPalette::Disabled, QPalette::Midlight, brush2);
+        palette4.setBrush(QPalette::Disabled, QPalette::Dark, brush11);
+        palette4.setBrush(QPalette::Disabled, QPalette::Mid, brush12);
+        palette4.setBrush(QPalette::Disabled, QPalette::Text, brush11);
+        palette4.setBrush(QPalette::Disabled, QPalette::BrightText, brush2);
+        palette4.setBrush(QPalette::Disabled, QPalette::ButtonText, brush11);
+        palette4.setBrush(QPalette::Disabled, QPalette::Base, brush2);
+        palette4.setBrush(QPalette::Disabled, QPalette::Window, brush2);
+        palette4.setBrush(QPalette::Disabled, QPalette::Shadow, brush);
+        palette4.setBrush(QPalette::Disabled, QPalette::AlternateBase, brush2);
+        palette4.setBrush(QPalette::Disabled, QPalette::ToolTipBase, brush7);
+        palette4.setBrush(QPalette::Disabled, QPalette::ToolTipText, brush);
+        menu_3->setPalette(palette4);
+        menu_3->setLayoutDirection(Qt::LeftToRight);
         MainWindow->setMenuBar(menuBar);
         statusBar = new QStatusBar(MainWindow);
         statusBar->setObjectName(QString::fromUtf8("statusBar"));
@@ -558,6 +753,9 @@ public:
         sizePolicy2.setVerticalStretch(0);
         sizePolicy2.setHeightForWidth(dockWidget->sizePolicy().hasHeightForWidth());
         dockWidget->setSizePolicy(sizePolicy2);
+        QFont font4;
+        font4.setPointSize(16);
+        dockWidget->setFont(font4);
         dockWidget->setLayoutDirection(Qt::RightToLeft);
         dockWidget->setFeatures(QDockWidget::DockWidgetClosable);
         dockWidget->setAllowedAreas(Qt::LeftDockWidgetArea);
@@ -569,17 +767,7 @@ public:
         verticalLayout_3->setSpacing(8);
         verticalLayout_3->setMargin(11);
         verticalLayout_3->setObjectName(QString::fromUtf8("verticalLayout_3"));
-        label_4 = new QLabel(dockWidgetContents);
-        label_4->setObjectName(QString::fromUtf8("label_4"));
-        QFont font4;
-        font4.setPointSize(14);
-        font4.setBold(true);
-        font4.setWeight(75);
-        label_4->setFont(font4);
-        label_4->setAlignment(Qt::AlignCenter);
-
-        verticalLayout_3->addWidget(label_4);
-
+        verticalLayout_3->setContentsMargins(9, -1, -1, -1);
         dayandlocationlbl = new QLabel(dockWidgetContents);
         dayandlocationlbl->setObjectName(QString::fromUtf8("dayandlocationlbl"));
         QFont font5;
@@ -594,8 +782,9 @@ public:
         formLayout_3->setFieldGrowthPolicy(QFormLayout::FieldsStayAtSizeHint);
         formLayout_3->setLabelAlignment(Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter);
         formLayout_3->setFormAlignment(Qt::AlignRight|Qt::AlignTop|Qt::AlignTrailing);
-        formLayout_3->setHorizontalSpacing(10);
-        formLayout_3->setContentsMargins(0, 0, -1, -1);
+        formLayout_3->setHorizontalSpacing(5);
+        formLayout_3->setVerticalSpacing(5);
+        formLayout_3->setContentsMargins(4, 0, 0, -1);
         label_2 = new QLabel(dockWidgetContents);
         label_2->setObjectName(QString::fromUtf8("label_2"));
         sizePolicy.setHeightForWidth(label_2->sizePolicy().hasHeightForWidth());
@@ -903,16 +1092,12 @@ public:
 
         formLayout_3->setWidget(14, QFormLayout::FieldRole, candellightinglbl);
 
-        verticalSpacer = new QSpacerItem(20, 40, QSizePolicy::Minimum, QSizePolicy::Expanding);
+        verticalSpacer_3 = new QSpacerItem(20, 40, QSizePolicy::Minimum, QSizePolicy::Expanding);
 
-        formLayout_3->setItem(15, QFormLayout::FieldRole, verticalSpacer);
+        formLayout_3->setItem(15, QFormLayout::FieldRole, verticalSpacer_3);
 
-        dafyomislbllbl = new QLabel(dockWidgetContents);
-        dafyomislbllbl->setObjectName(QString::fromUtf8("dafyomislbllbl"));
-        dafyomislbllbl->setFont(font6);
-        dafyomislbllbl->setTextInteractionFlags(Qt::TextSelectableByKeyboard|Qt::TextSelectableByMouse);
 
-        formLayout_3->setWidget(16, QFormLayout::LabelRole, dafyomislbllbl);
+        verticalLayout_3->addLayout(formLayout_3);
 
         dafyomilbl = new QLabel(dockWidgetContents);
         dafyomilbl->setObjectName(QString::fromUtf8("dafyomilbl"));
@@ -928,10 +1113,11 @@ public:
         dafyomilbl->setIndent(0);
         dafyomilbl->setTextInteractionFlags(Qt::TextSelectableByKeyboard|Qt::TextSelectableByMouse);
 
-        formLayout_3->setWidget(16, QFormLayout::FieldRole, dafyomilbl);
+        verticalLayout_3->addWidget(dafyomilbl);
 
+        verticalSpacer = new QSpacerItem(20, 40, QSizePolicy::Minimum, QSizePolicy::Expanding);
 
-        verticalLayout_3->addLayout(formLayout_3);
+        verticalLayout_3->addItem(verticalSpacer);
 
         dockWidget->setWidget(dockWidgetContents);
         MainWindow->addDockWidget(static_cast<Qt::DockWidgetArea>(1), dockWidget);
@@ -946,6 +1132,7 @@ public:
         menu_2->addAction(exitaction);
         menu_3->addAction(gdateaction);
         menu_3->addAction(zmanimpanelaction);
+        menu_3->addAction(translateaction);
 
         retranslateUi(MainWindow);
 
@@ -956,14 +1143,15 @@ public:
     {
         MainWindow->setWindowTitle(QApplication::translate("MainWindow", "MainWindow", 0, QApplication::UnicodeUTF8));
         MainWindow->setStyleSheet(QString());
-        changelocationaction->setText(QApplication::translate("MainWindow", "\327\251\327\231\327\240\327\225\327\231 \327\236\327\231\327\247\327\225\327\235", 0, QApplication::UnicodeUTF8));
-        exitaction->setText(QApplication::translate("MainWindow", "\327\231\327\246\327\231\327\220\327\224", 0, QApplication::UnicodeUTF8));
-        gdateaction->setText(QApplication::translate("MainWindow", "\327\224\327\246\327\222 \327\252\327\220\327\250\327\231\327\232 \327\234\327\225\327\242\327\226\327\231", 0, QApplication::UnicodeUTF8));
-        zmanimpanelaction->setText(QApplication::translate("MainWindow", "\327\224\327\246\327\222 \327\250\327\251\327\231\327\236\327\252 \327\226\327\236\327\240\327\231\327\235", 0, QApplication::UnicodeUTF8));
-        aboutaction->setText(QApplication::translate("MainWindow", "\327\220\327\225\327\223\327\225\327\252", 0, QApplication::UnicodeUTF8));
-        printaction->setText(QApplication::translate("MainWindow", "\327\224\327\223\327\244\327\241 \327\234\327\225\327\227", 0, QApplication::UnicodeUTF8));
+        changelocationaction->setText(QApplication::translate("MainWindow", "Change Location", 0, QApplication::UnicodeUTF8));
+        exitaction->setText(QApplication::translate("MainWindow", "Quit", 0, QApplication::UnicodeUTF8));
+        gdateaction->setText(QApplication::translate("MainWindow", "Show English Date", 0, QApplication::UnicodeUTF8));
+        zmanimpanelaction->setText(QApplication::translate("MainWindow", "Show Time List", 0, QApplication::UnicodeUTF8));
+        aboutaction->setText(QApplication::translate("MainWindow", "About", 0, QApplication::UnicodeUTF8));
+        printaction->setText(QApplication::translate("MainWindow", "Print Luach", 0, QApplication::UnicodeUTF8));
         timeformat->setText(QApplication::translate("MainWindow", "\327\224\327\246\327\222 \327\251\327\242\327\225\327\252 \327\221\327\246\327\225\327\250\327\252 AM/PM", 0, QApplication::UnicodeUTF8));
         viewsettings_2->setText(QApplication::translate("MainWindow", "\327\224\327\222\327\223\327\250\327\225\327\252 \327\252\327\246\327\225\327\222\327\224", 0, QApplication::UnicodeUTF8));
+        translateaction->setText(QApplication::translate("MainWindow", "Hebrew GUI", 0, QApplication::UnicodeUTF8));
         backDayBTN->setText(QApplication::translate("MainWindow", "...", 0, QApplication::UnicodeUTF8));
         daylabel->setText(QApplication::translate("MainWindow", "\327\231\327\225\327\235", 0, QApplication::UnicodeUTF8));
         nextDayBTN->setText(QApplication::translate("MainWindow", "...", 0, QApplication::UnicodeUTF8));
@@ -980,49 +1168,47 @@ public:
         backgdayBTN->setText(QApplication::translate("MainWindow", "...", 0, QApplication::UnicodeUTF8));
         engdaylbl->setText(QApplication::translate("MainWindow", "TextLabel", 0, QApplication::UnicodeUTF8));
         nextgdayBTN->setText(QApplication::translate("MainWindow", "...", 0, QApplication::UnicodeUTF8));
-        backgmonthBTN->setText(QApplication::translate("MainWindow", "...", 0, QApplication::UnicodeUTF8));
-        engmonthlbl->setText(QApplication::translate("MainWindow", "TextLabel", 0, QApplication::UnicodeUTF8));
-        nextgmonthBTN->setText(QApplication::translate("MainWindow", "...", 0, QApplication::UnicodeUTF8));
         doublebackgYearBTN->setText(QApplication::translate("MainWindow", "...", 0, QApplication::UnicodeUTF8));
         backgYearBTN->setText(QApplication::translate("MainWindow", "...", 0, QApplication::UnicodeUTF8));
         engyearlbl->setText(QApplication::translate("MainWindow", "TextLabel", 0, QApplication::UnicodeUTF8));
         nextgYearBTN->setText(QApplication::translate("MainWindow", "...", 0, QApplication::UnicodeUTF8));
         doublenextgYearBTN->setText(QApplication::translate("MainWindow", "...", 0, QApplication::UnicodeUTF8));
-        menu->setTitle(QApplication::translate("MainWindow", "\327\224\327\222\327\223\327\250\327\225\327\252", 0, QApplication::UnicodeUTF8));
-        menu_2->setTitle(QApplication::translate("MainWindow", "\327\247\327\225\327\221\327\245", 0, QApplication::UnicodeUTF8));
-        menu_3->setTitle(QApplication::translate("MainWindow", "\327\252\327\246\327\225\327\222\327\224", 0, QApplication::UnicodeUTF8));
-        dockWidget->setWindowTitle(QApplication::translate("MainWindow", "\327\226\327\236\327\240\327\231 \327\224\327\231\327\225\327\235", 0, QApplication::UnicodeUTF8));
-        label_4->setText(QApplication::translate("MainWindow", "\327\226\327\236\327\240\327\231 \327\224\327\231\327\225\327\235:", 0, QApplication::UnicodeUTF8));
+        backgmonthBTN->setText(QApplication::translate("MainWindow", "...", 0, QApplication::UnicodeUTF8));
+        engmonthlbl->setText(QApplication::translate("MainWindow", "TextLabel", 0, QApplication::UnicodeUTF8));
+        nextgmonthBTN->setText(QApplication::translate("MainWindow", "...", 0, QApplication::UnicodeUTF8));
+        menu->setTitle(QApplication::translate("MainWindow", "Settings", 0, QApplication::UnicodeUTF8));
+        menu_2->setTitle(QApplication::translate("MainWindow", "File", 0, QApplication::UnicodeUTF8));
+        menu_3->setTitle(QApplication::translate("MainWindow", "Display", 0, QApplication::UnicodeUTF8));
+        dockWidget->setWindowTitle(QApplication::translate("MainWindow", "Zmanim", 0, QApplication::UnicodeUTF8));
         dayandlocationlbl->setText(QApplication::translate("MainWindow", "\327\252\327\220\327\250\327\231\327\232, \327\236\327\231\327\247\327\225\327\235", 0, QApplication::UnicodeUTF8));
-        label_2->setText(QApplication::translate("MainWindow", "\327\242\327\234\327\225\327\252 \327\224\327\251\327\227\327\250", 0, QApplication::UnicodeUTF8));
+        label_2->setText(QApplication::translate("MainWindow", "Alos", 0, QApplication::UnicodeUTF8));
         aloslabel->setText(QApplication::translate("MainWindow", "\327\242\327\234\327\225\327\224\"\327\251", 0, QApplication::UnicodeUTF8));
-        label->setText(QApplication::translate("MainWindow", "\327\226\327\250\327\231\327\227\327\224", 0, QApplication::UnicodeUTF8));
+        label->setText(QApplication::translate("MainWindow", "Sunrise", 0, QApplication::UnicodeUTF8));
         sunriselabel->setText(QApplication::translate("MainWindow", "\327\226\327\250\327\231\327\227\327\224", 0, QApplication::UnicodeUTF8));
-        label_3->setText(QApplication::translate("MainWindow", "\327\241\327\225\327\243 \327\226\327\236\327\237 \327\247\"\327\251 \327\236\327\222\"\327\220", 0, QApplication::UnicodeUTF8));
+        label_3->setText(QApplication::translate("MainWindow", "Shma MGA", 0, QApplication::UnicodeUTF8));
         shmamgalbl->setText(QApplication::translate("MainWindow", "\327\247\"\327\251 \327\236\327\222\"\327\220", 0, QApplication::UnicodeUTF8));
-        label_5->setText(QApplication::translate("MainWindow", "\327\241\327\225\327\243 \327\226\327\236\327\237 \327\247\"\327\251 \327\222\327\250\"\327\220", 0, QApplication::UnicodeUTF8));
+        label_5->setText(QApplication::translate("MainWindow", "Shma GRA", 0, QApplication::UnicodeUTF8));
         shmagralbl->setText(QApplication::translate("MainWindow", "\327\247\"\327\251 \327\222\327\250\"\327\220", 0, QApplication::UnicodeUTF8));
-        label_6->setText(QApplication::translate("MainWindow", "\327\241\327\225\327\243 \327\226\327\236\327\237 \327\252\327\244\327\231\327\234\327\224 \327\236\327\222\"\327\220", 0, QApplication::UnicodeUTF8));
+        label_6->setText(QApplication::translate("MainWindow", "Tfila MGA", 0, QApplication::UnicodeUTF8));
         tfilamgalbl->setText(QApplication::translate("MainWindow", "\327\252\327\244\327\231\327\234\327\224 \327\236\327\222\"\327\220", 0, QApplication::UnicodeUTF8));
-        label_7->setText(QApplication::translate("MainWindow", "\327\241\327\225\327\243 \327\226\327\236\327\237 \327\252\327\244\327\231\327\234\327\224 \327\222\327\250\"\327\220", 0, QApplication::UnicodeUTF8));
+        label_7->setText(QApplication::translate("MainWindow", "Tfila GRA", 0, QApplication::UnicodeUTF8));
         tfilagralbl->setText(QApplication::translate("MainWindow", "\327\252\327\244\327\231\327\234\327\224 \327\222\327\250\"\327\220", 0, QApplication::UnicodeUTF8));
-        label_8->setText(QApplication::translate("MainWindow", "\327\227\327\246\327\225\327\252", 0, QApplication::UnicodeUTF8));
+        label_8->setText(QApplication::translate("MainWindow", "Chatzos", 0, QApplication::UnicodeUTF8));
         hatzotlbl->setText(QApplication::translate("MainWindow", "\327\227\327\246\327\225\327\252", 0, QApplication::UnicodeUTF8));
-        label_9->setText(QApplication::translate("MainWindow", "\327\236\327\240\327\227\327\224 \327\222\327\223\327\225\327\234\327\224", 0, QApplication::UnicodeUTF8));
+        label_9->setText(QApplication::translate("MainWindow", "Mincha Gedola", 0, QApplication::UnicodeUTF8));
         minchagdolalbl->setText(QApplication::translate("MainWindow", "\327\236\327\240\327\227\327\224 \327\222\327\223\327\225\327\234\327\224", 0, QApplication::UnicodeUTF8));
-        label_10->setText(QApplication::translate("MainWindow", "\327\236\327\240\327\227\327\224 \327\247\327\230\327\240\327\224", 0, QApplication::UnicodeUTF8));
+        label_10->setText(QApplication::translate("MainWindow", "Mincha Ktana", 0, QApplication::UnicodeUTF8));
         minchaktanalbl->setText(QApplication::translate("MainWindow", "\327\236\327\240\327\227\327\224 \327\247\327\230\327\240\327\224", 0, QApplication::UnicodeUTF8));
-        label_11->setText(QApplication::translate("MainWindow", "\327\244\327\234\327\222 \327\224\327\236\327\240\327\227\327\224", 0, QApplication::UnicodeUTF8));
+        label_11->setText(QApplication::translate("MainWindow", "Plag Hamincha", 0, QApplication::UnicodeUTF8));
         plaglbl->setText(QApplication::translate("MainWindow", "\327\244\327\234\327\222 \327\224\327\236\327\240\327\227\327\224", 0, QApplication::UnicodeUTF8));
-        label_12->setText(QApplication::translate("MainWindow", "\327\251\327\247\327\231\327\242\327\224", 0, QApplication::UnicodeUTF8));
+        label_12->setText(QApplication::translate("MainWindow", "Sunset", 0, QApplication::UnicodeUTF8));
         skialbl->setText(QApplication::translate("MainWindow", "\327\251\327\247\327\231\327\242\327\224", 0, QApplication::UnicodeUTF8));
-        label_21->setText(QApplication::translate("MainWindow", "\327\246\327\220\327\252 \327\224\327\233\327\225\327\233\327\221\327\231\327\235", 0, QApplication::UnicodeUTF8));
+        label_21->setText(QApplication::translate("MainWindow", "Tzais", 0, QApplication::UnicodeUTF8));
         tzitslbl->setText(QApplication::translate("MainWindow", "\327\246\327\224\"\327\233", 0, QApplication::UnicodeUTF8));
-        label_22->setText(QApplication::translate("MainWindow", "\327\246\327\220\327\252 \327\224\327\233\327\225\327\233\327\221\327\231\327\235 \327\250\"\327\252", 0, QApplication::UnicodeUTF8));
+        label_22->setText(QApplication::translate("MainWindow", "Tzais 72", 0, QApplication::UnicodeUTF8));
         tzits72lbl->setText(QApplication::translate("MainWindow", "\327\246\327\224\"\327\233 \327\250\"\327\252", 0, QApplication::UnicodeUTF8));
-        clllbllbl->setText(QApplication::translate("MainWindow", "\327\224\327\223\327\234\327\247\327\252 \327\240\327\250\327\225\327\252", 0, QApplication::UnicodeUTF8));
+        clllbllbl->setText(QApplication::translate("MainWindow", "Candle Lighting", 0, QApplication::UnicodeUTF8));
         candellightinglbl->setText(QApplication::translate("MainWindow", "\327\224\327\223\327\224\"\327\240", 0, QApplication::UnicodeUTF8));
-        dafyomislbllbl->setText(QApplication::translate("MainWindow", "\327\223\327\243 \327\231\327\225\327\236\327\231", 0, QApplication::UnicodeUTF8));
         dafyomilbl->setText(QApplication::translate("MainWindow", "\327\223\327\243", 0, QApplication::UnicodeUTF8));
     } // retranslateUi
 

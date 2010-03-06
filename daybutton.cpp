@@ -16,7 +16,7 @@
 
 #include "daybutton.h"
 
-QFont fs, fb;
+QFont sfs, fs, fb;
 
 dayButton::dayButton(QWidget * parent, int jd, bool showGDate, bool hool)
 {
@@ -24,8 +24,9 @@ dayButton::dayButton(QWidget * parent, int jd, bool showGDate, bool hool)
 
     setDate(jd, hool);
 
+    sfs.setPixelSize(11);
     fs.setPixelSize(13);
-    fb.setPixelSize(14);
+    fb.setPixelSize(15);
 
 
     vbox = new QVBoxLayout();
@@ -37,11 +38,22 @@ dayButton::dayButton(QWidget * parent, int jd, bool showGDate, bool hool)
 
     //hebday = new QLabel(date.get_hebrew_day_string());
     hebday = new QLabel();
+    hebday->setStyleSheet("QLabel { color: purple }");
 
     engday = new QLabel();
 
 
     hbox->addWidget(hebday);
+
+
+    hbox->addStretch(1);
+
+    omer =  new QLabel();
+    omer->setWordWrap(true);
+    omer->hide();
+    omer->setFont(sfs);
+    hbox->addWidget(omer);
+
     hbox->addStretch(1);
 
     hbox->addWidget(engday);
@@ -65,7 +77,6 @@ dayButton::dayButton(QWidget * parent, int jd, bool showGDate, bool hool)
 
     setSizePolicy(QSizePolicy::Minimum, QSizePolicy::Minimum);
 
-
     showInfo(showGDate);
 }
 
@@ -84,7 +95,7 @@ void dayButton::setDate(int jd, bool hool)
 {
     date.set_jd(jd);
 
-    //
+    ishool = hool;
     if (hool) date.set_diaspora();
     else date.set_israel();
 
@@ -97,17 +108,55 @@ void dayButton::setDate(int jd, bool hool)
 
 void dayButton::showInfo(bool showGDate)
 {
-    hebday->setText(date.get_hebrew_day_string());
+    hebday->setText(QString(date.get_hebrew_day_string()).replace("'","").replace("\"",""));
 
     if (showGDate)
     {
         engday->setText(stringify(date.get_gday()));
+        engday->show();
+    }
+    else engday->hide();
+
+
+    if (date.getOmerDay() != 0)
+    {
+        omer->show();
+        omer->setText(NumberToGematria(date.getOmerDay()) + " בעומר");
+    }
+    else
+    {
+        omer->hide();
+        omer->setText("");
     }
 
-
     QString holiday = date.get_holyday_string(0);
+
     //No politics or anything, these are just not holidays...
-    if (holiday == "יום הזכרון ליצחק רבין" || holiday == "יום המשפחה" || holiday == "יום זאב זבוטינסקי" ) holiday = "";
+    if (date.get_holyday_type() == 9) holiday = "";
+
+    //Add number to hol hamoed
+    if (date.get_holyday_type() == 3)
+    {
+        int d = date.get_hday() - 15;
+
+        //Hol hamoed starts a day late in hool
+        if (ishool) d--;
+
+        //Besides hoshana raba
+        if (date.get_hmonth() == 1 && date.get_hday() == 21) d = 0;
+
+        if (d > 0) holiday = NumberToGematria(d, false) + " " + holiday;
+    }
+
+    //Hanuka
+    if (date.get_holyday_type() == 4 && (date.get_hmonth() == 3 || date.get_hmonth() == 4))
+    {
+        hdate::Hdate t;
+        t.set_hdate(25, 3, date.get_hyear());
+        int d = date.get_julian() - t.get_julian() + 1;
+
+        if (d > 0) holiday = NumberToGematria(d, false) + " " + holiday;
+    }
 
     event->setText(holiday);
 

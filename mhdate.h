@@ -62,6 +62,9 @@ public:
     //Returns the Hebrew date's month length (29 or 30)
     int getMonthLength();
 
+    //Return The day in the omer, starting from 1
+    int getOmerDay();
+
     bool isErevYomTov(bool hool);
 
 signals:

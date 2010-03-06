@@ -17,8 +17,9 @@
 #include "about.h"
 #include "ui_about.h"
 
-#define VERSION "0.001"
+#define VERSION "0.02"
 
+extern QString LANG;
 
 About::About(QWidget *parent) :
     QDialog(parent),
@@ -28,18 +29,41 @@ About::About(QWidget *parent) :
 
     setWindowIcon(QIcon(":/Icons/ToratEmet.png"));
 
-    QString text = "<center><b> QT Luach, (עוד) לוח שנה עברי - ";
-    text += VERSION;
-    text += "<br> </b></center>";
+    QString text = "";
 
-    text += "   <a href=\"http://luach.googlecode.com\">http://luach.googlecode.com</a> <br><br>";
+    if (LANG == "Hebrew")
+    {
+        text = "<center><b> QT Luach, (עוד) לוח שנה עברי - ";
+        text += VERSION;
+        text += "<br> </b></center>";
 
-    text += "<br>";
-    text += "התוכנה כאן מובאת ללא כל התחייבות הלכתית. <br> כל שימוש בנתונים המובאים כאן נעשה על אחריו המשתמש בלבד.";
+        text += "   <a href=\"http://luach.googlecode.com\">http://luach.googlecode.com</a> <br><br>";
 
-    text += "<br><br>";
-    text += "   משה וגנר - ";
-    text += "   moshe.wagner@gmail.com, תש''ע";
+        text += "<br>";
+        text += "התוכנה כאן מובאת ללא כל התחייבות הלכתית. <br> כל שימוש בנתונים המובאים כאן נעשה על אחריו המשתמש בלבד.";
+
+        text += "<br><br>";
+        text += "   משה וגנר - ";
+        text += "   moshe.wagner@gmail.com, תש''ע";
+    }
+    else
+    {
+        setLayoutDirection(Qt::LeftToRight);
+
+        text = "<center><b> QT Luach (Yet another Hebrew calander) - ";
+        text += VERSION;
+        text += "<br> </b>";
+
+        text += "<a href=\"http://luach.googlecode.com\">http://luach.googlecode.com</a> <br><br>";
+
+        text += "<br>";
+
+        text += "This program comes with absolutly no Halachic warrenty. <br> Use it at your own risk.";
+
+        text += "<br><br>";
+        text += "Comments, complaints and gifts are greatlt welcome at -<br>";
+        text += "   moshe.wagner@gmail.com";
+    }
 
     m_ui->label->setText(text);
 

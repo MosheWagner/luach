@@ -37,7 +37,7 @@
 #include <QLayout>
 #include <QLabel>
 
-#include <hdatepp.h>
+#include "mhdate.h"
 
 #include "functions.h"
 
@@ -52,7 +52,7 @@ public:
     void resetDate(int jd, bool hool, bool showGDate);
 
 private:
-    hdate::Hdate date;
+    mHdate date;
 
     void setDate(int jd, bool hool);
     void showInfo(bool showGDate);
@@ -60,13 +60,15 @@ private:
     bool selected;
     bool today;
 
+    bool ishool;
+
     //Updates the style sheet (changes the color if selected, etc')
     void updateStyle();
 
     //Widgets:
     QVBoxLayout *vbox;
-    QHBoxLayout *hbox;
-    QLabel *hebday, *engday, *event, *reading;
+    QHBoxLayout *hbox, *hbox2;
+    QLabel *hebday, *engday, *event, *reading, *omer;
 
 public slots:
     void Select();

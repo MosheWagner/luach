@@ -6,10 +6,10 @@
         <file>Icons/arrow-left-double.png</file>
         <file>Icons/arrow-right-double.png</file>
         <file>Icons/location.png</file>
-        <file>Icons/calendar.png</file>
         <file>Icons/exit.png</file>
         <file>Icons/help-about.png</file>
         <file>Icons/document-print.png</file>
         <file>Icons/configure.png</file>
+        <file>Icons/calendar.png</file>
     </qresource>
 </RCC>

@@ -41,6 +41,8 @@
 
   Stuff to add:
 
+
+
     - Events
     - Haftarot
     - Dalvening calculation
@@ -48,15 +50,18 @@
 
 */
 
+//TODO: Fix bug when language switched a few times
+//TODO: DockWidget direction change
+
 //TODO: System tray icon
 
 //TODO: צאת שבת
 
-//TODO: Sfirat Haomer
-//TODO: Days of חנוכה וחול המועד
+//TODO: Special shabatot
+
 //TODO: ברכת החמה
 
-//TODO: Comments! comments, comments comments!
+//TODO: Comments!!!
 
 
 //List of all day button shown
@@ -65,6 +70,7 @@ QList <dayButton *> dayList;
 dayButton * lastselected;
 
 QStringList weekdays;
+vector <QLabel *>  weekdaylbls;
 QStringList engmonths;
 
 QProcess *zmanimproc;
@@ -85,12 +91,17 @@ bool ShowGDate = true;
 QString LOCATIONCONFPATH = ".locationconf";
 QString DISPCONFPATH = ".dispconf";
 QString ZMANIMCLIPATH = "ZmanimCLI.jar";
+QString WINDOWSTATEPATH = ".windowstate";
 
+QString LANG = "English";
 
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent), ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
+    
+    //Restores the window's state from the last run
+    restoreWindowState();
 
     //Set all QString to work with unicode
     QTextCodec::setCodecForCStrings(QTextCodec::codecForName("utf8"));
@@ -117,6 +128,7 @@ MainWindow::MainWindow(QWidget *parent)
 
         LOCATIONCONFPATH = QDir::homePath() + "/.Luach/locationconf";
         DISPCONFPATH = QDir::homePath() + "/.Luach/dispconf";
+        WINDOWSTATEPATH = QDir::homePath() + "/.Luach/windowstatepath";
     }
 
 
@@ -125,39 +137,23 @@ MainWindow::MainWindow(QWidget *parent)
 
     connect( &current, SIGNAL(month_changed()), this, SLOT(redraw()));
 
+    loadConfs();
 
-    weekdays << "ראשון" << "שני" << "שלישי" << "רביעי" << "חמישי" << "שישי" << "שבת";
+    //LANG="Hebrew";
 
-    engmonths << "ינואר" << "פברואר" << "מרס" << "אפריל" << "מאי" << "יוני" << "יולי" << "אוגוסט" << "ספטמבר" << "אוקטובר" << "נובמבר" << "דצמבר";
-    
+    BuildHebrewTranslationList();
+    translateGUI();
+
+
     lastselected = NULL;
 
 
-    toggleGDate(false);
-
-
-    //Force the locale to hebrew, so Hdate will give Hebrew strings. Yup, I don't like this either.
-    setlocale (LC_ALL, "he_IL.UTF-8");
-    setlocale (LC_ALL, "he_IL.utf8");
-
-    //Set Env variable LANGUAGE to "he_IL", to force Hebrew year numbers, etc'
-    putenv("LANGUAGE=he_IL");
-
-    
-    //QLocale::setDefault(QLocale("he_IL.UTF-8"));
-
-    //string str = (QLocale(QLocale::Hebrew, QLocale::Israel).name()).toStdString();
-    //setlocale (LC_ALL, str.c_str());
-
-
-    locationName = "ירושלים";
-
-    loadConfs();
 
     connect(ui->exitaction, SIGNAL(triggered()), this, SLOT(close()));
     connect(ui->changelocationaction, SIGNAL(triggered()), this, SLOT(changeLocationForm()));
     connect(ui->gdateaction, SIGNAL(toggled(bool)), this, SLOT(toggleGDate(bool)));
     connect(ui->zmanimpanelaction, SIGNAL(toggled(bool)), this, SLOT(toggleZmanimPanel(bool)));
+    connect(ui->translateaction, SIGNAL(triggered()), this, SLOT(translateAction()));
     connect(ui->aboutaction, SIGNAL(triggered()), this, SLOT(aboutForm()));
     connect(ui->printaction, SIGNAL(triggered()), this, SLOT(printSnap()));
 
@@ -169,9 +165,10 @@ MainWindow::MainWindow(QWidget *parent)
         lbl->setAlignment(Qt::AlignCenter);
         ui->gridLayout->addWidget(lbl, 0, i);
 
-        QFont q; q.setBold(true); q.setPixelSize(20);
+        QFont q; /*q.setBold(true);*/ q.setPixelSize(20);
         lbl->setFont(q);
 
+        weekdaylbls.push_back(lbl);
         //lbl->setStyleSheet("QLabel { background-color: blue }");
     }
 
@@ -192,14 +189,163 @@ MainWindow::MainWindow(QWidget *parent)
     showMonth(&current);
 
     //Current time (do something with this):
-    QTime t;
-    print (t.currentTime().toString());
+    //QTime t;
+    //print (t.currentTime().toString());
 
     //Hide candel lighting labels
     ui->clllbllbl->hide();
     ui->candellightinglbl->hide();
 
+
+    //createActions();
+    //createTrayIcon();
+    //trayIcon->show();
+
+
+    //ui->dockWidget->hide();
+
+    //ui->dockWidget->setFeatures (QDockWidget::DockWidgetMovable);
+    //ui->dockWidget->setAllowedAreas(Qt::RightDockWidgetArea);
+    //ui->dockWidget->setLayoutDirection(Qt::LeftToRight);
+
+    //ui->dockWidget->show();
 }
+
+
+//Restores the window's state from the last run
+void MainWindow::restoreWindowState()
+{
+    QFile windowStateFile(WINDOWSTATEPATH);
+
+    if(windowStateFile.open(QIODevice::ReadOnly))
+    {
+        QByteArray bytes = windowStateFile.readAll();
+        restoreState(bytes);
+        windowStateFile.close();
+    }
+}
+
+//Overrides the normal "closeEvent", so it can save tha window's state before quiting
+void MainWindow::closeEvent(QCloseEvent *event)
+{
+    QByteArray state = saveState();
+
+    QFile windowStateFile(WINDOWSTATEPATH);
+
+    if(windowStateFile.open(QIODevice::WriteOnly))
+    {
+        windowStateFile.write(state);
+        windowStateFile.close();
+    }
+}
+
+void MainWindow::translateAction()
+{
+    if (LANG == "Hebrew") LANG = "English";
+    else if (LANG == "English") LANG = "Hebrew";
+
+    translateGUI();
+
+    redraw();
+}
+
+
+void MainWindow::translateGUI()
+{
+    if (LANG == "Hebrew")
+    {
+        //toggleGDate(false);
+
+        setLayoutDirection(Qt::RightToLeft);
+
+        ui->horizontalLayout->setDirection(QBoxLayout::LeftToRight);
+        ui->horizontalLayout_2->setDirection(QBoxLayout::LeftToRight);
+        ui->horizontalLayout_3->setDirection(QBoxLayout::LeftToRight);
+        ui->horizontalLayout_4->setDirection(QBoxLayout::LeftToRight);
+        ui->horizontalLayout_5->setDirection(QBoxLayout::LeftToRight);
+        ui->horizontalLayout_6->setDirection(QBoxLayout::LeftToRight);
+
+        ui->dockWidget->setLayoutDirection(Qt::RightToLeft);
+
+        ui->menu->setLayoutDirection(Qt::RightToLeft);
+        ui->menu_2->setLayoutDirection(Qt::RightToLeft);
+        ui->menu_3->setLayoutDirection(Qt::RightToLeft);
+        ui->menuBar->setLayoutDirection(Qt::RightToLeft);
+
+        //Force the locale to hebrew, so Hdate will give Hebrew strings. Yup, I don't like this either.
+        setlocale (LC_ALL, "he_IL.UTF-8");
+        setlocale (LC_ALL, "he_IL.utf8");
+
+        //Set Env variable LANGUAGE to "he_IL", to force Hebrew year numbers, etc'
+        putenv("LANGUAGE=he_IL");
+    }
+    else
+    {
+        //English:
+        setLayoutDirection(Qt::LeftToRight);
+
+        ui->horizontalLayout->setDirection(QBoxLayout::RightToLeft);
+        ui->horizontalLayout_2->setDirection(QBoxLayout::RightToLeft);
+        ui->horizontalLayout_3->setDirection(QBoxLayout::RightToLeft);
+        ui->horizontalLayout_4->setDirection(QBoxLayout::RightToLeft);
+        ui->horizontalLayout_5->setDirection(QBoxLayout::RightToLeft);
+        ui->horizontalLayout_6->setDirection(QBoxLayout::RightToLeft);
+
+        ui->dockWidget->setLayoutDirection(Qt::LeftToRight);
+
+        ui->menu->setLayoutDirection(Qt::LeftToRight);
+        ui->menu_2->setLayoutDirection(Qt::LeftToRight);
+        ui->menu_3->setLayoutDirection(Qt::LeftToRight);
+        ui->menuBar->setLayoutDirection(Qt::LeftToRight);
+
+        //Force the locale to english
+        setlocale (LC_ALL, "C");
+
+        putenv("LANGUAGE=C");
+    }
+
+    weekdays << mTr("Sunday") << mTr("Monday") << mTr("Tuesday") << mTr("Wednesday") << mTr("Thursday") << mTr("Friday") << mTr("Saturday");
+
+    engmonths << mTr("January") << mTr("February") << mTr("March") << mTr("April") << mTr("May") << mTr("June") << mTr("July") << mTr("August") << mTr("September") << mTr("October") << mTr("November") << mTr("December");
+
+
+    //A bit funny, but should work.
+    for (int i=0; i<weekdaylbls.size(); i++)
+    {
+        weekdaylbls[i]->setText(mTr(weekdaylbls[i]->text()));
+    }
+
+    ui->aboutaction->setText(mTr(ui->aboutaction->text()));
+    ui->gdateaction->setText(mTr(ui->gdateaction->text()));
+    ui->printaction->setText(mTr(ui->printaction->text()));
+    ui->translateaction->setText(mTr(ui->translateaction->text()));
+    ui->exitaction->setText(mTr(ui->exitaction->text()));
+    ui->zmanimpanelaction->setText(mTr(ui->zmanimpanelaction->text()));
+    ui->changelocationaction->setText(mTr(ui->changelocationaction->text()));
+
+
+    ui->menu->setTitle(mTr(ui->menu->title()));
+    ui->menu_3->setTitle(mTr(ui->menu_3->title()));
+    ui->menu_2->setTitle(mTr(ui->menu_2->title()));
+
+    ui->label_2->setText(mTr(ui->label_2->text()));
+    ui->label->setText(mTr(ui->label->text()));
+    ui->label_3->setText(mTr(ui->label_3->text()));
+    ui->label_5->setText(mTr(ui->label_5->text()));
+    ui->label_6->setText(mTr(ui->label_6->text()));
+    ui->label_7->setText(mTr(ui->label_7->text()));
+    ui->label_8->setText(mTr(ui->label_8->text()));
+    ui->label_9->setText(mTr(ui->label_9->text()));
+    ui->label_10->setText(mTr(ui->label_10->text()));
+    ui->label_11->setText(mTr(ui->label_11->text()));
+    ui->label_12->setText(mTr(ui->label_12->text()));
+    ui->label_21->setText(mTr(ui->label_21->text()));
+    ui->label_22->setText(mTr(ui->label_22->text()));
+    ui->clllbllbl->setText(mTr(ui->clllbllbl->text()));
+
+    ui->dockWidget->setWindowTitle(mTr(ui->dockWidget->windowTitle()));
+}
+
 
 //Rebuild the calendar from the given first day of the month
 void MainWindow::showMonth(hdate::Hdate *dayinmonth)
@@ -340,7 +486,8 @@ void MainWindow::updateLabels(mHdate *date)
     if (dafYomi(current.get_julian()) != "")
     {
         ui->dafyomilbl->show();
-        ui->dafyomilbl->setText("דף יומי - " + dafYomi(current.get_julian()));
+        if (LANG == "Hebrew") ui->dafyomilbl->setText("דף יומי - " + dafYomi(current.get_julian()));
+        else  ui->dafyomilbl->setText("Day Yomi - " + dafYomi(current.get_julian()));
     }
     else ui->dafyomilbl->hide();
 
@@ -349,6 +496,7 @@ void MainWindow::updateLabels(mHdate *date)
     /* Invokes an istance of ZmanimCLI, telling it to give a list of times for our location and date;
        The output is sent to "gotTimes()" which updates the time labels by that. */
 
+    if (zmanimproc) zmanimproc->kill();
     delete zmanimproc;
     zmanimproc = new QProcess(this);
 
@@ -453,7 +601,7 @@ void MainWindow::gotTimes()
                 QString d = current.get_day_of_week_string(0);
                 d += ", ";
                 d += current.get_format_date(1);
-                d += " - " + locationName;
+                d += "\n    " + locationName;
                 ui->dayandlocationlbl->setText(d);
             }
         }
@@ -625,11 +773,13 @@ void MainWindow::keyPressEvent( QKeyEvent *keyEvent )
 {
     if ( keyEvent->key() == Qt::Key_Left)
     {
-        changeDay(1);
+        if (LANG=="Hebrew") changeDay(1);
+        else changeDay(-1);
     }
     else if ( keyEvent->key() == Qt::Key_Right)
     {
-        changeDay(-1);
+        if (LANG=="Hebrew") changeDay(-1);
+        else changeDay(1);
     }
     else if ( keyEvent->key() == Qt::Key_Up)
     {
@@ -655,91 +805,124 @@ void MainWindow::keyPressEvent( QKeyEvent *keyEvent )
 
 void MainWindow::on_backMonthBTN_clicked()
 {
-    current.removeMonth();
+    if (LANG=="Hebrew") current.removeMonth();
+    else current.addMonth();
 }
 
 void MainWindow::on_nextMonthBTN_clicked()
 {
-    current.addMonth();
+    if (LANG=="Hebrew") current.addMonth();
+    else current.removeMonth();
 }
 
 void MainWindow::on_backYearBTN_clicked()
 {
-    current.removeYear();
+    if (LANG=="Hebrew") current.removeYear();
+    else current.addYear();
 }
 
 void MainWindow::on_nextYearBTN_clicked()
 {
-    current.addYear();
+    if (LANG=="Hebrew") current.addYear();
+    else current.removeYear();
 }
 
 void MainWindow::on_backDayBTN_clicked()
 {
-    changeDay(-1);
+    if (LANG=="Hebrew") changeDay(-1);
+    else changeDay(1);
 }
 
 void MainWindow::on_nextDayBTN_clicked()
 {
-    changeDay(1);
+    if (LANG=="Hebrew") changeDay(1);
+    else changeDay(-1);
 }
 
 void MainWindow::on_doublenextYearBTN_clicked()
 {
-    current.addYear(10);
+    if (LANG=="Hebrew") current.addYear(10);
+    else current.removeYear(10);
 }
 
 void MainWindow::on_doublebackYearBTN_clicked()
 {
-    current.removeYear(10);
+    if (LANG=="Hebrew") current.removeYear(10);
+    else current.addYear(10);
 }
 
 void MainWindow::on_backgdayBTN_clicked()
 {
-    changeDay(-1);
+    if (LANG=="Hebrew") changeDay(-1);
+    else changeDay(1);
 }
 
 void MainWindow::on_nextgdayBTN_clicked()
 {
-    changeDay(1);
+    if (LANG=="Hebrew") changeDay(1);
+    else changeDay(-1);
 }
 
 void MainWindow::on_backgmonthBTN_clicked()
 {
-    if (current.get_gmonth() > 1) current.set_gdate(current.get_gday(), current.get_gmonth()-1, current.get_gyear());
-    else current.set_gdate(current.get_gday(), 12, current.get_gyear()-1);
-
+    if (LANG=="Hebrew")
+    {
+        if (current.get_gmonth() > 1) current.set_gdate(current.get_gday(), current.get_gmonth()-1, current.get_gyear());
+        else current.set_gdate(current.get_gday(), 12, current.get_gyear()-1);
+    }
+    else
+    {
+        if (current.get_gmonth() < 12) current.set_gdate(current.get_gday(), current.get_gmonth()+1, current.get_gyear());
+        else current.set_gdate(current.get_gday(), 1, current.get_gyear()+1);
+    }
     showMonth(&current);
 }
 
 void MainWindow::on_nextgmonthBTN_clicked()
 {
-    if (current.get_gmonth() < 12) current.set_gdate(current.get_gday(), current.get_gmonth()+1, current.get_gyear());
-    else current.set_gdate(current.get_gday(), 1, current.get_gyear()+1);
+    if (LANG=="Hebrew")
+    {
+        if (current.get_gmonth() < 12) current.set_gdate(current.get_gday(), current.get_gmonth()+1, current.get_gyear());
+        else current.set_gdate(current.get_gday(), 1, current.get_gyear()+1);
+    }
+    else
+    {
+        if (current.get_gmonth() > 1) current.set_gdate(current.get_gday(), current.get_gmonth()-1, current.get_gyear());
+        else current.set_gdate(current.get_gday(), 12, current.get_gyear()-1);
+    }
 
     showMonth(&current);
 }
 
 void MainWindow::on_backgYearBTN_clicked()
 {
-    current.set_gdate(current.get_gday(), current.get_gmonth(), current.get_gyear()-1);
+    if (LANG=="Hebrew") current.set_gdate(current.get_gday(), current.get_gmonth(), current.get_gyear()-1);
+    else current.set_gdate(current.get_gday(), current.get_gmonth(), current.get_gyear()+1);
+
     showMonth(&current);
 }
 
 void MainWindow::on_nextgYearBTN_clicked()
 {
-    current.set_gdate(current.get_gday(), current.get_gmonth(), current.get_gyear()+1);
+    if (LANG=="Hebrew") current.set_gdate(current.get_gday(), current.get_gmonth(), current.get_gyear()+1);
+    else current.set_gdate(current.get_gday(), current.get_gmonth(), current.get_gyear()-1);
+
     showMonth(&current);
 }
 
 void MainWindow::on_doublebackgYearBTN_clicked()
 {
-    current.set_gdate(current.get_gday(), current.get_gmonth(), current.get_gyear()-10);
+    if (LANG=="Hebrew") current.set_gdate(current.get_gday(), current.get_gmonth(), current.get_gyear()-10);
+    else current.set_gdate(current.get_gday(), current.get_gmonth(), current.get_gyear()+10);
+
     showMonth(&current);
 }
 
 void MainWindow::on_doublenextgYearBTN_clicked()
 {
-    current.set_gdate(current.get_gday(), current.get_gmonth(), current.get_gyear()+10);
+    if (LANG=="Hebrew") current.set_gdate(current.get_gday(), current.get_gmonth(), current.get_gyear()+10);
+    else current.set_gdate(current.get_gday(), current.get_gmonth(), current.get_gyear()-10);
+
     showMonth(&current);
 }
 
@@ -757,7 +940,6 @@ void MainWindow::printSnap()
     else
     {
         printer.setOrientation(QPrinter::Landscape);
-        //printer.setPageMargins(0,0,0,0,QPrinter::Inch);
 
         if (pix.width() > printer.width())
         {
@@ -772,3 +954,29 @@ void MainWindow::printSnap()
 
     ui->dockWidget->setFeatures(QDockWidget::DockWidgetClosable);
 }
+
+/*
+void MainWindow::createTrayIcon()
+{
+    trayIconMenu = new QMenu(this);
+    trayIconMenu->addAction(quitAction);
+
+    trayIcon = new QSystemTrayIcon(this);
+    trayIcon->setContextMenu(trayIconMenu);
+
+    trayIcon->setIcon(QIcon(":/Icons/calendar.png"));
+
+
+    QString info;
+    info += current.get_format_date(0) + QString("\n");
+
+    trayIcon->setToolTip(info);
+}
+
+void MainWindow::createActions()
+{
+    quitAction = new QAction(QIcon(":Icons/exit.png"), "יציאה", this);
+    connect(quitAction, SIGNAL(triggered()), qApp, SLOT(quit()));
+}
+*/
+

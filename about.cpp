@@ -17,7 +17,7 @@
 #include "about.h"
 #include "ui_about.h"
 
-#define VERSION "0.02"
+#define VERSION "0.05"
 
 extern QString LANG;
 

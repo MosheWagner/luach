@@ -473,7 +473,7 @@
            <string>...</string>
           </property>
           <property name="icon">
-           <iconset resource="Luach.qrc">
+           <iconset>
             <normaloff>:/Icons/arrow-right.png</normaloff>:/Icons/arrow-right.png</iconset>
           </property>
           <property name="autoRaise">
@@ -513,7 +513,7 @@
            <string>...</string>
           </property>
           <property name="icon">
-           <iconset resource="Luach.qrc">
+           <iconset>
             <normaloff>:/Icons/arrow-left.png</normaloff>:/Icons/arrow-left.png</iconset>
           </property>
           <property name="autoRaise">
@@ -540,7 +540,7 @@
            <string>...</string>
           </property>
           <property name="icon">
-           <iconset resource="Luach.qrc">
+           <iconset>
             <normaloff>:/Icons/arrow-right.png</normaloff>:/Icons/arrow-right.png</iconset>
           </property>
           <property name="autoRaise">
@@ -580,7 +580,7 @@
            <string>...</string>
           </property>
           <property name="icon">
-           <iconset resource="Luach.qrc">
+           <iconset>
             <normaloff>:/Icons/arrow-left.png</normaloff>:/Icons/arrow-left.png</iconset>
           </property>
           <property name="checkable">
@@ -610,7 +610,7 @@
            <string>...</string>
           </property>
           <property name="icon">
-           <iconset resource="Luach.qrc">
+           <iconset>
             <normaloff>:/Icons/arrow-right-double.png</normaloff>:/Icons/arrow-right-double.png</iconset>
           </property>
           <property name="autoRaise">
@@ -627,7 +627,7 @@
            <string>...</string>
           </property>
           <property name="icon">
-           <iconset resource="Luach.qrc">
+           <iconset>
             <normaloff>:/Icons/arrow-right.png</normaloff>:/Icons/arrow-right.png</iconset>
           </property>
           <property name="autoRaise">
@@ -667,7 +667,7 @@
            <string>...</string>
           </property>
           <property name="icon">
-           <iconset resource="Luach.qrc">
+           <iconset>
             <normaloff>:/Icons/arrow-left.png</normaloff>:/Icons/arrow-left.png</iconset>
           </property>
           <property name="autoRaise">
@@ -684,7 +684,7 @@
            <string>...</string>
           </property>
           <property name="icon">
-           <iconset resource="Luach.qrc">
+           <iconset>
             <normaloff>:/Icons/arrow-left-double.png</normaloff>:/Icons/arrow-left-double.png</iconset>
           </property>
           <property name="autoRaise">
@@ -754,7 +754,7 @@
            <string>...</string>
           </property>
           <property name="icon">
-           <iconset resource="Luach.qrc">
+           <iconset>
             <normaloff>:/Icons/arrow-right.png</normaloff>:/Icons/arrow-right.png</iconset>
           </property>
           <property name="autoRaise">
@@ -794,109 +794,8 @@
            <string>...</string>
           </property>
           <property name="icon">
-           <iconset resource="Luach.qrc">
+           <iconset>
             <normaloff>:/Icons/arrow-left.png</normaloff>:/Icons/arrow-left.png</iconset>
-          </property>
-          <property name="autoRaise">
-           <bool>true</bool>
-          </property>
-         </widget>
-        </item>
-       </layout>
-      </item>
-      <item row="0" column="6">
-       <layout class="QHBoxLayout" name="horizontalLayout_6">
-        <property name="spacing">
-         <number>0</number>
-        </property>
-        <property name="leftMargin">
-         <number>0</number>
-        </property>
-        <item>
-         <widget class="QToolButton" name="doublebackgYearBTN">
-          <property name="focusPolicy">
-           <enum>Qt::NoFocus</enum>
-          </property>
-          <property name="text">
-           <string>...</string>
-          </property>
-          <property name="icon">
-           <iconset resource="Luach.qrc">
-            <normaloff>:/Icons/arrow-right-double.png</normaloff>:/Icons/arrow-right-double.png</iconset>
-          </property>
-          <property name="autoRaise">
-           <bool>true</bool>
-          </property>
-         </widget>
-        </item>
-        <item>
-         <widget class="QToolButton" name="backgYearBTN">
-          <property name="focusPolicy">
-           <enum>Qt::NoFocus</enum>
-          </property>
-          <property name="text">
-           <string>...</string>
-          </property>
-          <property name="icon">
-           <iconset resource="Luach.qrc">
-            <normaloff>:/Icons/arrow-right.png</normaloff>:/Icons/arrow-right.png</iconset>
-          </property>
-          <property name="autoRaise">
-           <bool>true</bool>
-          </property>
-         </widget>
-        </item>
-        <item>
-         <widget class="QLabel" name="engyearlbl">
-          <property name="sizePolicy">
-           <sizepolicy hsizetype="Maximum" vsizetype="Maximum">
-            <horstretch>0</horstretch>
-            <verstretch>0</verstretch>
-           </sizepolicy>
-          </property>
-          <property name="font">
-           <font>
-            <pointsize>11</pointsize>
-            <weight>50</weight>
-            <bold>false</bold>
-           </font>
-          </property>
-          <property name="layoutDirection">
-           <enum>Qt::LeftToRight</enum>
-          </property>
-          <property name="text">
-           <string>TextLabel</string>
-          </property>
-         </widget>
-        </item>
-        <item>
-         <widget class="QToolButton" name="nextgYearBTN">
-          <property name="focusPolicy">
-           <enum>Qt::NoFocus</enum>
-          </property>
-          <property name="text">
-           <string>...</string>
-          </property>
-          <property name="icon">
-           <iconset resource="Luach.qrc">
-            <normaloff>:/Icons/arrow-left.png</normaloff>:/Icons/arrow-left.png</iconset>
-          </property>
-          <property name="autoRaise">
-           <bool>true</bool>
-          </property>
-         </widget>
-        </item>
-        <item>
-         <widget class="QToolButton" name="doublenextgYearBTN">
-          <property name="focusPolicy">
-           <enum>Qt::NoFocus</enum>
-          </property>
-          <property name="text">
-           <string>...</string>
-          </property>
-          <property name="icon">
-           <iconset resource="Luach.qrc">
-            <normaloff>:/Icons/arrow-left-double.png</normaloff>:/Icons/arrow-left-double.png</iconset>
           </property>
           <property name="autoRaise">
            <bool>true</bool>
@@ -922,7 +821,7 @@
            <string>...</string>
           </property>
           <property name="icon">
-           <iconset resource="Luach.qrc">
+           <iconset>
             <normaloff>:/Icons/arrow-right.png</normaloff>:/Icons/arrow-right.png</iconset>
           </property>
           <property name="autoRaise">
@@ -962,8 +861,109 @@
            <string>...</string>
           </property>
           <property name="icon">
-           <iconset resource="Luach.qrc">
+           <iconset>
             <normaloff>:/Icons/arrow-left.png</normaloff>:/Icons/arrow-left.png</iconset>
+          </property>
+          <property name="autoRaise">
+           <bool>true</bool>
+          </property>
+         </widget>
+        </item>
+       </layout>
+      </item>
+      <item row="0" column="6">
+       <layout class="QHBoxLayout" name="horizontalLayout_6">
+        <property name="spacing">
+         <number>0</number>
+        </property>
+        <property name="leftMargin">
+         <number>0</number>
+        </property>
+        <item>
+         <widget class="QToolButton" name="doublebackgYearBTN">
+          <property name="focusPolicy">
+           <enum>Qt::NoFocus</enum>
+          </property>
+          <property name="text">
+           <string>...</string>
+          </property>
+          <property name="icon">
+           <iconset>
+            <normaloff>:/Icons/arrow-right-double.png</normaloff>:/Icons/arrow-right-double.png</iconset>
+          </property>
+          <property name="autoRaise">
+           <bool>true</bool>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QToolButton" name="backgYearBTN">
+          <property name="focusPolicy">
+           <enum>Qt::NoFocus</enum>
+          </property>
+          <property name="text">
+           <string>...</string>
+          </property>
+          <property name="icon">
+           <iconset>
+            <normaloff>:/Icons/arrow-right.png</normaloff>:/Icons/arrow-right.png</iconset>
+          </property>
+          <property name="autoRaise">
+           <bool>true</bool>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QLabel" name="engyearlbl">
+          <property name="sizePolicy">
+           <sizepolicy hsizetype="Maximum" vsizetype="Maximum">
+            <horstretch>0</horstretch>
+            <verstretch>0</verstretch>
+           </sizepolicy>
+          </property>
+          <property name="font">
+           <font>
+            <pointsize>11</pointsize>
+            <weight>50</weight>
+            <bold>false</bold>
+           </font>
+          </property>
+          <property name="layoutDirection">
+           <enum>Qt::LeftToRight</enum>
+          </property>
+          <property name="text">
+           <string>TextLabel</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QToolButton" name="nextgYearBTN">
+          <property name="focusPolicy">
+           <enum>Qt::NoFocus</enum>
+          </property>
+          <property name="text">
+           <string>...</string>
+          </property>
+          <property name="icon">
+           <iconset>
+            <normaloff>:/Icons/arrow-left.png</normaloff>:/Icons/arrow-left.png</iconset>
+          </property>
+          <property name="autoRaise">
+           <bool>true</bool>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QToolButton" name="doublenextgYearBTN">
+          <property name="focusPolicy">
+           <enum>Qt::NoFocus</enum>
+          </property>
+          <property name="text">
+           <string>...</string>
+          </property>
+          <property name="icon">
+           <iconset>
+            <normaloff>:/Icons/arrow-left-double.png</normaloff>:/Icons/arrow-left-double.png</iconset>
           </property>
           <property name="autoRaise">
            <bool>true</bool>
@@ -3553,7 +3553,35 @@
          </property>
         </spacer>
        </item>
-       <item row="14" column="0">
+       <item row="15" column="0">
+        <widget class="QLabel" name="tslbllbl">
+         <property name="font">
+          <font>
+           <pointsize>9</pointsize>
+           <weight>50</weight>
+           <bold>false</bold>
+          </font>
+         </property>
+         <property name="text">
+          <string>Shabbos ends</string>
+         </property>
+        </widget>
+       </item>
+       <item row="15" column="1">
+        <widget class="QLabel" name="tslbl">
+         <property name="font">
+          <font>
+           <pointsize>9</pointsize>
+           <weight>50</weight>
+           <bold>false</bold>
+          </font>
+         </property>
+         <property name="text">
+          <string>צאת שבת</string>
+         </property>
+        </widget>
+       </item>
+       <item row="18" column="0">
         <widget class="QLabel" name="clllbllbl">
          <property name="font">
           <font>
@@ -3567,7 +3595,7 @@
          </property>
         </widget>
        </item>
-       <item row="14" column="1">
+       <item row="18" column="1">
         <widget class="QLabel" name="candellightinglbl">
          <property name="font">
           <font>
@@ -3581,7 +3609,7 @@
          </property>
         </widget>
        </item>
-       <item row="15" column="1">
+       <item row="19" column="1">
         <spacer name="verticalSpacer_3">
          <property name="orientation">
           <enum>Qt::Vertical</enum>
@@ -3658,7 +3686,7 @@
   </widget>
   <action name="changelocationaction">
    <property name="icon">
-    <iconset resource="Luach.qrc">
+    <iconset>
      <normaloff>:/Icons/location.png</normaloff>:/Icons/location.png</iconset>
    </property>
    <property name="text">
@@ -3667,7 +3695,7 @@
   </action>
   <action name="exitaction">
    <property name="icon">
-    <iconset resource="Luach.qrc">
+    <iconset>
      <normaloff>:/Icons/exit.png</normaloff>:/Icons/exit.png</iconset>
    </property>
    <property name="text">
@@ -3698,7 +3726,7 @@
   </action>
   <action name="aboutaction">
    <property name="icon">
-    <iconset resource="Luach.qrc">
+    <iconset>
      <normaloff>:/Icons/help-about.png</normaloff>:/Icons/help-about.png</iconset>
    </property>
    <property name="text">
@@ -3707,7 +3735,7 @@
   </action>
   <action name="printaction">
    <property name="icon">
-    <iconset resource="Luach.qrc">
+    <iconset>
      <normaloff>:/Icons/document-print.png</normaloff>:/Icons/document-print.png</iconset>
    </property>
    <property name="text">
@@ -3727,7 +3755,7 @@
   </action>
   <action name="viewsettings_2">
    <property name="icon">
-    <iconset resource="Luach.qrc">
+    <iconset>
      <normaloff>:/Icons/configure.png</normaloff>:/Icons/configure.png</iconset>
    </property>
    <property name="text">
@@ -3744,8 +3772,6 @@
   </action>
  </widget>
  <layoutdefault spacing="6" margin="11"/>
- <resources>
-  <include location="Luach.qrc"/>
- </resources>
+ <resources/>
  <connections/>
 </ui>

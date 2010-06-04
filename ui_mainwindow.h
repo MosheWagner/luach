@@ -1,7 +1,7 @@
 /********************************************************************************
 ** Form generated from reading ui file 'mainwindow.ui'
 **
-** Created: Fri Mar 5 14:24:56 2010
+** Created: Fri Jun 4 14:00:52 2010
 **      by: Qt User Interface Compiler version 4.5.2
 **
 ** WARNING! All changes made in this file will be lost when recompiling ui file!
@@ -115,9 +115,11 @@ public:
     QLabel *label_22;
     QLabel *tzits72lbl;
     QSpacerItem *verticalSpacer_2;
-    QLabel *clllbllbl;
     QLabel *candellightinglbl;
     QSpacerItem *verticalSpacer_3;
+    QLabel *clllbllbl;
+    QLabel *tslbllbl;
+    QLabel *tslbl;
     QLabel *dafyomilbl;
     QSpacerItem *verticalSpacer;
 
@@ -1080,21 +1082,33 @@ public:
 
         formLayout_3->setItem(13, QFormLayout::FieldRole, verticalSpacer_2);
 
-        clllbllbl = new QLabel(dockWidgetContents);
-        clllbllbl->setObjectName(QString::fromUtf8("clllbllbl"));
-        clllbllbl->setFont(font6);
-
-        formLayout_3->setWidget(14, QFormLayout::LabelRole, clllbllbl);
-
         candellightinglbl = new QLabel(dockWidgetContents);
         candellightinglbl->setObjectName(QString::fromUtf8("candellightinglbl"));
         candellightinglbl->setFont(font6);
 
-        formLayout_3->setWidget(14, QFormLayout::FieldRole, candellightinglbl);
+        formLayout_3->setWidget(18, QFormLayout::FieldRole, candellightinglbl);
 
         verticalSpacer_3 = new QSpacerItem(20, 40, QSizePolicy::Minimum, QSizePolicy::Expanding);
 
-        formLayout_3->setItem(15, QFormLayout::FieldRole, verticalSpacer_3);
+        formLayout_3->setItem(19, QFormLayout::FieldRole, verticalSpacer_3);
+
+        clllbllbl = new QLabel(dockWidgetContents);
+        clllbllbl->setObjectName(QString::fromUtf8("clllbllbl"));
+        clllbllbl->setFont(font6);
+
+        formLayout_3->setWidget(18, QFormLayout::LabelRole, clllbllbl);
+
+        tslbllbl = new QLabel(dockWidgetContents);
+        tslbllbl->setObjectName(QString::fromUtf8("tslbllbl"));
+        tslbllbl->setFont(font6);
+
+        formLayout_3->setWidget(15, QFormLayout::LabelRole, tslbllbl);
+
+        tslbl = new QLabel(dockWidgetContents);
+        tslbl->setObjectName(QString::fromUtf8("tslbl"));
+        tslbl->setFont(font6);
+
+        formLayout_3->setWidget(15, QFormLayout::FieldRole, tslbl);
 
 
         verticalLayout_3->addLayout(formLayout_3);
@@ -1207,8 +1221,10 @@ public:
         tzitslbl->setText(QApplication::translate("MainWindow", "\327\246\327\224\"\327\233", 0, QApplication::UnicodeUTF8));
         label_22->setText(QApplication::translate("MainWindow", "Tzais 72", 0, QApplication::UnicodeUTF8));
         tzits72lbl->setText(QApplication::translate("MainWindow", "\327\246\327\224\"\327\233 \327\250\"\327\252", 0, QApplication::UnicodeUTF8));
-        clllbllbl->setText(QApplication::translate("MainWindow", "Candle Lighting", 0, QApplication::UnicodeUTF8));
         candellightinglbl->setText(QApplication::translate("MainWindow", "\327\224\327\223\327\224\"\327\240", 0, QApplication::UnicodeUTF8));
+        clllbllbl->setText(QApplication::translate("MainWindow", "Candle Lighting", 0, QApplication::UnicodeUTF8));
+        tslbllbl->setText(QApplication::translate("MainWindow", "Shabbos ends", 0, QApplication::UnicodeUTF8));
+        tslbl->setText(QApplication::translate("MainWindow", "\327\246\327\220\327\252 \327\251\327\221\327\252", 0, QApplication::UnicodeUTF8));
         dafyomilbl->setText(QApplication::translate("MainWindow", "\327\223\327\243", 0, QApplication::UnicodeUTF8));
     } // retranslateUi
 

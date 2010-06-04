@@ -197,6 +197,17 @@ int mHdate::getOmerDay()
 }
 
 
+bool mHdate::isYomTov(bool hool)
+{
+    hdate::Hdate todayclone;
+    todayclone.set_jd(get_julian());
+
+    if (hool) todayclone.set_diaspora();
+
+    if (todayclone.get_holyday_type() == 1) return true;
+    return false;
+}
+
 bool mHdate::isErevYomTov(bool hool)
 {
 

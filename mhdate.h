@@ -66,7 +66,7 @@ public:
     int getOmerDay();
 
     bool isErevYomTov(bool hool);
-
+    bool isYomTov(bool hool);
 signals:
     //Emmited every time a month was changed, directly or indirectly.
     void month_changed();

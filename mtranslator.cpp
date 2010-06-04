@@ -76,6 +76,7 @@ void BuildHebrewTranslationList()
     addToList("Tzais", "צאת הכוכבים");
     addToList("Tzais 72", "צאת הכוכבים ר\"ת");
     addToList("Candle Lighting", "הדלקת נרות");
+    addToList("Shabbos ends", "צאת שבת");
 
     addToList("Zmanim", "זמני היום:");
 

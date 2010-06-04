@@ -54,7 +54,7 @@
 
 //TODO: System tray icon
 
-//TODO:    צאת שבת  -- TzaisGeonim8Point5Degrees
+//TODO: Bring back candle lighting for yom tov. after upgrading libhdate
 
 //TODO: Special shabatot
 
@@ -87,6 +87,7 @@ double candleLightingOffset;
 bool hool;
 
 bool ShowGDate;
+bool ShowZmanim;
 QString LANG;
 
 
@@ -140,6 +141,7 @@ MainWindow::MainWindow(QWidget *parent)
 
     connect( &current, SIGNAL(month_changed()), this, SLOT(redraw()));
 
+
     loadConfs();
 
 
@@ -151,7 +153,7 @@ MainWindow::MainWindow(QWidget *parent)
     connect(ui->exitaction, SIGNAL(triggered()), this, SLOT(close()));
     connect(ui->changelocationaction, SIGNAL(triggered()), this, SLOT(changeLocationForm()));
     connect(ui->gdateaction, SIGNAL(toggled(bool)), this, SLOT(toggleGDate(bool)));
-    connect(ui->zmanimpanelaction, SIGNAL(toggled(bool)), this, SLOT(toggleZmanimPanel(bool)));
+    connect(ui->zmanimpanelaction, SIGNAL(triggered(bool)), this, SLOT(toggleZmanimPanel(bool)));
     connect(ui->translateaction, SIGNAL(triggered()), this, SLOT(translateAction()));
     connect(ui->aboutaction, SIGNAL(triggered()), this, SLOT(aboutForm()));
     connect(ui->printaction, SIGNAL(triggered()), this, SLOT(printSnap()));
@@ -196,6 +198,9 @@ MainWindow::MainWindow(QWidget *parent)
     //Hide candel lighting labels
     ui->clllbllbl->hide();
     ui->candellightinglbl->hide();
+
+    ui->tslbl->hide();
+    ui->tslbllbl->hide();
 }
 
 
@@ -264,10 +269,9 @@ void MainWindow::translateGUI()
 
         ui->dockWidget->setLayoutDirection(Qt::RightToLeft);
 
-        bool wasshown = ui->dockWidget->isVisible();
         removeDockWidget(ui->dockWidget);
         addDockWidget(Qt::RightDockWidgetArea, ui->dockWidget);
-        if (wasshown) ui->dockWidget->show();
+        if (ShowZmanim) ui->dockWidget->show();
 
         ui->menu->setLayoutDirection(Qt::RightToLeft);
         ui->menu_2->setLayoutDirection(Qt::RightToLeft);
@@ -294,10 +298,9 @@ void MainWindow::translateGUI()
 
         ui->dockWidget->setLayoutDirection(Qt::LeftToRight);
 
-        bool wasshown = ui->dockWidget->isVisible();
         removeDockWidget(ui->dockWidget);
         addDockWidget(Qt::LeftDockWidgetArea, ui->dockWidget);
-        if (wasshown) ui->dockWidget->show();
+        if (ShowZmanim) ui->dockWidget->show();
 
         ui->menu->setLayoutDirection(Qt::LeftToRight);
         ui->menu_2->setLayoutDirection(Qt::LeftToRight);
@@ -348,6 +351,7 @@ void MainWindow::translateGUI()
     ui->label_21->setText(mTr(ui->label_21->text()));
     ui->label_22->setText(mTr(ui->label_22->text()));
     ui->clllbllbl->setText(mTr(ui->clllbllbl->text()));
+    ui->tslbllbl->setText(mTr(ui->tslbllbl->text()));
 
     ui->dockWidget->setWindowTitle(mTr(ui->dockWidget->windowTitle()));
 }
@@ -513,6 +517,7 @@ void MainWindow::updateLabels(mHdate *date)
     QString dstr = stringify(date->get_gyear()) + "/" + stringify(date->get_gmonth()) + "/" + stringify(date->get_gday());
 
     args << "-jar" << ZMANIMCLIPATH << "-d" << dstr << "-lat" << stringify(latitude) << "-lon" << stringify(longitude) << "-e" << stringify(elavation) << "-tz" << TimeZone;
+
     zmanimproc->start("java", args);
 
     connect(zmanimproc, SIGNAL(readyReadStandardOutput()), this, SLOT(gotTimes()));
@@ -579,7 +584,7 @@ void MainWindow::gotTimes()
 
 
                 //Candel lighting:
-                if (current.get_day_of_the_week() == 6 || current.isErevYomTov(hool))
+                if (current.get_day_of_the_week() == 6 /*|| current.isErevYomTov(hool)*/)
                 {
                     ui->clllbllbl->show();
                     ui->candellightinglbl->show();
@@ -594,6 +599,30 @@ void MainWindow::gotTimes()
                 {
                     ui->clllbllbl->hide();
                     ui->candellightinglbl->hide();
+                }
+
+                //מוצאי שבת או חג
+                if (current.get_day_of_the_week() == 7  /*|| current.isYomTov(hool)*/)
+                {
+                    ui->tslbllbl->show();
+                    ui->tslbl->show();
+
+                    QProcess tzais;
+                    QString dstr = stringify(current.get_gyear()) + "/" + stringify(current.get_gmonth()) + "/" + stringify(current.get_gday());
+                    QStringList args;
+                    args << "-jar" << ZMANIMCLIPATH << "-d" << dstr << "-lat" << stringify(latitude) << "-lon" << stringify(longitude) << "-e" << stringify(elavation) << "-tz" << TimeZone << "TzaisGeonim8Point5Degrees";
+
+                    tzais.start("java", args);
+
+                    tzais.waitForFinished();
+                    QByteArray result = tzais.readAllStandardOutput();
+
+                    ui->tslbl->setText(QString(result));
+                }
+                else
+                {
+                    ui->tslbllbl->hide();
+                    ui->tslbl->hide();
                 }
             }
             if (times[i].startsWith("* Tzais:") == true)
@@ -633,7 +662,7 @@ void MainWindow::saveDispConfs()
 {
     QSettings settings("Luach", "user");
     settings.setValue("ShowGDate", ShowGDate);
-
+    settings.setValue("ShowZmanim", ShowZmanim);
     settings.setValue("Language", LANG);
 }
 
@@ -652,6 +681,7 @@ void MainWindow::loadConfs()
     hool = settings.value("isHool",false).toBool();
 
     ShowGDate = settings.value("ShowGDate", true).toBool();
+    ShowZmanim = settings.value("ShowZmanim", true).toBool();
     LANG = settings.value("Language", "English").toString();
 }
 
@@ -685,6 +715,7 @@ void MainWindow::toggleGDate(bool show)
 
 void MainWindow::toggleZmanimPanel(bool show)
 {
+    ShowZmanim = show;
     ui->dockWidget->setVisible(show);
 }
 

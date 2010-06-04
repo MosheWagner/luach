@@ -20,6 +20,7 @@ QFont sfs, fs, fb;
 
 dayButton::dayButton(QWidget * parent, int jd, bool showGDate, bool hool)
 {
+
     setParent(parent);
 
     setDate(jd, hool);
@@ -40,8 +41,11 @@ dayButton::dayButton(QWidget * parent, int jd, bool showGDate, bool hool)
     hebday = new QLabel();
     hebday->setStyleSheet("QLabel { color: purple }");
 
+
     engday = new QLabel();
 
+
+    engday->adjustSize();
 
     hbox->addWidget(hebday);
 
@@ -49,9 +53,10 @@ dayButton::dayButton(QWidget * parent, int jd, bool showGDate, bool hool)
     hbox->addStretch(1);
 
     omer =  new QLabel();
-    omer->setWordWrap(true);
     omer->hide();
     omer->setFont(sfs);
+
+
     hbox->addWidget(omer);
 
     hbox->addStretch(1);
@@ -64,8 +69,10 @@ dayButton::dayButton(QWidget * parent, int jd, bool showGDate, bool hool)
     event->setAlignment(Qt::AlignCenter);
     event->setFont(fs);
 
+
     reading = new QLabel();
     reading->setFont(fs);
+
 
     vbox->addWidget(reading);
     reading->setAlignment(Qt::AlignCenter);
@@ -204,6 +211,11 @@ void dayButton::setToday()
     
     today = true;
     updateStyle();
+}
+
+QSize dayButton::sizeHint() const
+{
+  return (QSize(0,0));
 }
 
 

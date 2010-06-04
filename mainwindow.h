@@ -29,6 +29,8 @@
 #include <QToolTip>
 #include <QDir>
 #include <QDesktopWidget>
+#include <QSettings>
+#include <QMessageBox>
 
 #include "mhdate.h"
 
@@ -125,19 +127,6 @@ private:
 
 
     Ui::MainWindow *ui;
-
-    QSystemTrayIcon *trayIcon;
-    QMenu *trayIconMenu;
-
-    /*
-    QAction *minimizeAction;
-    QAction *maximizeAction;
-    QAction *restoreAction;
-    QAction *quitAction;
-
-    void createActions();
-    void createTrayIcon();
-    */
 
 };
 

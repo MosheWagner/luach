@@ -31,17 +31,17 @@
   Provides:
     - Basic calandar interface:
         - Hebrew / English date
+        - Hebrew / English interface
         - Change date, location, timezone
 
     - Zmanim obainted from ZmanimCLI
 
-    - Daf yomi , (eventually should have other "yomi" stuff)
+    - Daf yomi , (eventually should have other "yomi" stuff too)
 
     - Print snapshots
 
+
   Stuff to add:
-
-
 
     - Events
     - Haftarot
@@ -50,14 +50,15 @@
 
 */
 
-//TODO: Fix bug when language switched a few times
-//TODO: DockWidget direction change
+//TODO: Switch to normall translation
 
 //TODO: System tray icon
 
-//TODO: צאת שבת
+//TODO:    צאת שבת  -- TzaisGeonim8Point5Degrees
 
 //TODO: Special shabatot
+
+//TODO: Candle lighting on מוצאי חג
 
 //TODO: ברכת החמה
 
@@ -76,24 +77,22 @@ QStringList engmonths;
 QProcess *zmanimproc;
 
 
-//ברירת המחדל מכוונת לירושלים
-QString locationName = "Jerusalem, Israel";
-double latitude = 31.77805; //קו רוחב
-double longitude = 35.235149; //קו אורך
-QString TimeZone = "Israel";
-double elavation = 800;
-double candleLightingOffset = 18.0;
-bool hool = false;
+//Default is Jerusalem
+QString locationName;
+double latitude; //קו רוחב
+double longitude; //קו אורך
+QString TimeZone;
+double elavation;
+double candleLightingOffset;
+bool hool;
+
+bool ShowGDate;
+QString LANG;
 
 
-bool ShowGDate = true;
-
-QString LOCATIONCONFPATH = ".locationconf";
-QString DISPCONFPATH = ".dispconf";
 QString ZMANIMCLIPATH = "ZmanimCLI.jar";
-QString WINDOWSTATEPATH = ".windowstate";
 
-QString LANG = "English";
+QString HEBLOCALE = "";
 
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent), ui(new Ui::MainWindow)
@@ -106,6 +105,18 @@ MainWindow::MainWindow(QWidget *parent)
     //Set all QString to work with unicode
     QTextCodec::setCodecForCStrings(QTextCodec::codecForName("utf8"));
 
+
+    //Find hebrew locale
+    QProcess localetest;
+    localetest.start("locale", QStringList() << "-a");
+    localetest.waitForFinished();
+    QByteArray result = localetest.readAllStandardOutput();
+
+    QStringList locales = QString(result).split('\n');
+
+    for (int i=0; i<locales.size(); i++) if (locales[i].contains("he")) HEBLOCALE = locales[i];
+
+
     //Configure paths:
     QFile f("ZmanimCLI.jar");
 
@@ -113,7 +124,7 @@ MainWindow::MainWindow(QWidget *parent)
     {
         if (!f.exists("/usr/share/Luach/ZmanimCLI.jar"))
         {
-            print ("Can't find ZmanimCLI! Hiding Zmanim!");
+            QMessageBox::warning (this,tr("ZmanimCLI not found!") ,tr("Can't find ZmanimCLI! Hiding Zmanim!"));
 
             //Hide times:
             ui->zmanimpanelaction->setVisible(false);
@@ -122,32 +133,20 @@ MainWindow::MainWindow(QWidget *parent)
         }
 
         ZMANIMCLIPATH = "/usr/share/Luach/ZmanimCLI.jar";
-
-        QDir dir;
-        dir.mkdir(QDir::homePath() + "/.Luach/");
-
-        LOCATIONCONFPATH = QDir::homePath() + "/.Luach/locationconf";
-        DISPCONFPATH = QDir::homePath() + "/.Luach/dispconf";
-        WINDOWSTATEPATH = QDir::homePath() + "/.Luach/windowstatepath";
     }
 
-
     setWindowIcon(QIcon(":/Icons/calendar.png"));
-    setWindowTitle("Luach");
+    setWindowTitle(tr("Luach"));
 
     connect( &current, SIGNAL(month_changed()), this, SLOT(redraw()));
 
     loadConfs();
 
-    //LANG="Hebrew";
 
     BuildHebrewTranslationList();
     translateGUI();
 
-
     lastselected = NULL;
-
-
 
     connect(ui->exitaction, SIGNAL(triggered()), this, SLOT(close()));
     connect(ui->changelocationaction, SIGNAL(triggered()), this, SLOT(changeLocationForm()));
@@ -185,6 +184,8 @@ MainWindow::MainWindow(QWidget *parent)
     }
 
 
+    for (int i=0; i<ui->gridLayout->count(); i++) ui->gridLayout->setRowStretch(i,1);
+
     //A Hdate starts with todays date, so "current" is set to today
     showMonth(&current);
 
@@ -195,49 +196,42 @@ MainWindow::MainWindow(QWidget *parent)
     //Hide candel lighting labels
     ui->clllbllbl->hide();
     ui->candellightinglbl->hide();
-
-
-    //createActions();
-    //createTrayIcon();
-    //trayIcon->show();
-
-
-    //ui->dockWidget->hide();
-
-    //ui->dockWidget->setFeatures (QDockWidget::DockWidgetMovable);
-    //ui->dockWidget->setAllowedAreas(Qt::RightDockWidgetArea);
-    //ui->dockWidget->setLayoutDirection(Qt::LeftToRight);
-
-    //ui->dockWidget->show();
 }
 
 
 //Restores the window's state from the last run
 void MainWindow::restoreWindowState()
 {
-    QFile windowStateFile(WINDOWSTATEPATH);
+    QSettings settings("Luach", "user");
 
-    if(windowStateFile.open(QIODevice::ReadOnly))
-    {
-        QByteArray bytes = windowStateFile.readAll();
-        restoreState(bytes);
-        windowStateFile.close();
-    }
+    settings.beginGroup("MainWindow");
+
+        QDesktopWidget *widget = QApplication::desktop();
+        int desktop_width = widget->width();
+        int desktop_height = widget->height();
+
+        restoreState(settings.value("state", "").toByteArray());
+
+        resize(settings.value("size", QSize(desktop_width, desktop_height-50)).toSize());
+        move(settings.value("pos", QPoint(0, 0)).toPoint());
+
+    settings.endGroup();
 }
 
 //Overrides the normal "closeEvent", so it can save tha window's state before quiting
 void MainWindow::closeEvent(QCloseEvent *event)
 {
-    QByteArray state = saveState();
+    QSettings settings("Luach", "user");
 
-    QFile windowStateFile(WINDOWSTATEPATH);
+    settings.beginGroup("MainWindow");
 
-    if(windowStateFile.open(QIODevice::WriteOnly))
-    {
-        windowStateFile.write(state);
-        windowStateFile.close();
-    }
+        settings.setValue("size", size());
+        settings.setValue("pos", pos());
+        settings.setValue("state", saveState());
+
+    settings.endGroup();
 }
+
 
 void MainWindow::translateAction()
 {
@@ -256,6 +250,9 @@ void MainWindow::translateGUI()
     {
         //toggleGDate(false);
 
+        if (HEBLOCALE == "") QMessageBox::critical (this, tr("No hebrew locale!"), tr("No hebrew locale installed! You won't be able to get any dates in hebrew..."));
+
+
         setLayoutDirection(Qt::RightToLeft);
 
         ui->horizontalLayout->setDirection(QBoxLayout::LeftToRight);
@@ -267,14 +264,18 @@ void MainWindow::translateGUI()
 
         ui->dockWidget->setLayoutDirection(Qt::RightToLeft);
 
+        bool wasshown = ui->dockWidget->isVisible();
+        removeDockWidget(ui->dockWidget);
+        addDockWidget(Qt::RightDockWidgetArea, ui->dockWidget);
+        if (wasshown) ui->dockWidget->show();
+
         ui->menu->setLayoutDirection(Qt::RightToLeft);
         ui->menu_2->setLayoutDirection(Qt::RightToLeft);
         ui->menu_3->setLayoutDirection(Qt::RightToLeft);
         ui->menuBar->setLayoutDirection(Qt::RightToLeft);
 
         //Force the locale to hebrew, so Hdate will give Hebrew strings. Yup, I don't like this either.
-        setlocale (LC_ALL, "he_IL.UTF-8");
-        setlocale (LC_ALL, "he_IL.utf8");
+        setlocale (LC_ALL, HEBLOCALE.toStdString().c_str());
 
         //Set Env variable LANGUAGE to "he_IL", to force Hebrew year numbers, etc'
         putenv("LANGUAGE=he_IL");
@@ -292,6 +293,11 @@ void MainWindow::translateGUI()
         ui->horizontalLayout_6->setDirection(QBoxLayout::RightToLeft);
 
         ui->dockWidget->setLayoutDirection(Qt::LeftToRight);
+
+        bool wasshown = ui->dockWidget->isVisible();
+        removeDockWidget(ui->dockWidget);
+        addDockWidget(Qt::LeftDockWidgetArea, ui->dockWidget);
+        if (wasshown) ui->dockWidget->show();
 
         ui->menu->setLayoutDirection(Qt::LeftToRight);
         ui->menu_2->setLayoutDirection(Qt::LeftToRight);
@@ -393,11 +399,13 @@ void MainWindow::showMonth(hdate::Hdate *dayinmonth)
 
     if (lastselected != NULL) lastselected->Unselect();
 
+    /*
     //Force all buttons to the size of the biggest one
     for (int i = 0; i<dayList.size(); i++)
     {
         dayList[i]->setMinimumSize(widest);
     }
+*/
 
     if (current.get_julian() - firstday.get_julian() >= 0 && current.get_julian() - firstday.get_julian() < dayList.size())
     {
@@ -610,107 +618,41 @@ void MainWindow::gotTimes()
 
 void MainWindow::saveConfs()
 {
-    QString confs = "";
+    QSettings settings("Luach", "user");
 
-    confs += "LocationName=" + locationName + "\n";
-    confs += "Latitude=" + stringify(latitude) + "\n";
-    confs += "Longitude=" + stringify(longitude) + "\n";
-    confs += "TimeZone=" + TimeZone + "\n";
-    confs += "Elavation=" + stringify(elavation) + "\n";
-    confs += "CandleLightingOffset=" + stringify(candleLightingOffset) + "\n";
-
-    if (hool) confs += "Hool=true\n";
-
-    writetofile(LOCATIONCONFPATH, confs, true);
+    settings.setValue("LocationName", locationName);
+    settings.setValue("Latitude", latitude);
+    settings.setValue("Longitude", longitude);
+    settings.setValue("TimeZone", TimeZone);
+    settings.setValue("Elavation", elavation);
+    settings.setValue("CandleLightingOffset", candleLightingOffset);
+    settings.setValue("isHool", hool);
 }
 
 void MainWindow::saveDispConfs()
 {
-    QString confs = "";
+    QSettings settings("Luach", "user");
+    settings.setValue("ShowGDate", ShowGDate);
 
-    if (ShowGDate) confs += "ShowGDate=True\n";
-    else confs += "ShowGDate=False\n";
-
-    writetofile(DISPCONFPATH, confs, true);
+    settings.setValue("Language", LANG);
 }
 
 
 void MainWindow::loadConfs()
 {
-    QFile infile(LOCATIONCONFPATH);
+    QSettings settings("Luach", "user");
 
-    if ((infile.open(QIODevice::ReadOnly)))
-    {
-        QTextStream t( &infile );
-        t.setCodec(QTextCodec::codecForName("utf8"));
+    //Default is Jerusalem
+    locationName = settings.value("LocationName", tr("Jerusalem, Israel")).toString();
+    latitude = settings.value("Latitude", 31.77805).toDouble();
+    longitude = settings.value("Longitude", 35.235149).toDouble();
+    TimeZone = settings.value("TimeZone", "Israel").toString();
+    elavation = settings.value("Elavation", 800).toDouble();
+    candleLightingOffset = settings.value("CandleLightingOffset", 18.0).toDouble();
+    hool = settings.value("isHool",false).toBool();
 
-
-        QString text = t.readAll();
-        infile.close();
-
-        QStringList lines = text.split('\n');
-
-        for (int i=0; i<lines.size(); i++)
-        {
-            QStringList p = lines[i].split('=');
-
-            if (p.size() == 2)
-            {
-                if (p[0] == "LocationName") locationName = p[1];
-                if (p[0] == "Latitude")
-                {
-                    bool ok; p[1].toDouble(&ok);
-                    if (ok) latitude = p[1].toDouble(&ok);
-                }
-                if (p[0] == "Longitude")
-                {
-                    bool ok; p[1].toDouble(&ok);
-                    if (ok) longitude = p[1].toDouble(&ok);
-                }
-                if (p[0] == "TimeZone") TimeZone = p[1];
-                if (p[0] == "Elavation")
-                {
-                    bool ok; p[1].toDouble(&ok);
-                    if (ok) elavation = p[1].toDouble(&ok);
-                }
-                if (p[0] == "CandleLightingOffset")
-                {
-                    bool ok; p[1].toDouble(&ok);
-                    if (ok) candleLightingOffset = p[1].toDouble(&ok);
-                }
-                if (p[0] == "Hool")
-                {
-                    if (p[1] == "true") hool = true;
-                }
-            }
-        }
-    }
-
-    //Display Confs
-
-    infile.setFileName(DISPCONFPATH);
-    if ((infile.open(QIODevice::ReadOnly)))
-    {
-        QString text = infile.readAll();
-        infile.close();
-
-        QStringList lines = text.split('\n');
-
-        for (int i=0; i<lines.size(); i++)
-        {
-            QStringList p = lines[i].split('=');
-
-            if (p.size() == 2)
-            {
-                if (p[0] == "ShowGDate")
-                {
-                    if (p[1] == "True") toggleGDate(true);
-                    else toggleGDate(false);
-                }
-            }
-        }
-    }
-
+    ShowGDate = settings.value("ShowGDate", true).toBool();
+    LANG = settings.value("Language", "English").toString();
 }
 
 void MainWindow::toggleGDate(bool show)
@@ -954,29 +896,3 @@ void MainWindow::printSnap()
 
     ui->dockWidget->setFeatures(QDockWidget::DockWidgetClosable);
 }
-
-/*
-void MainWindow::createTrayIcon()
-{
-    trayIconMenu = new QMenu(this);
-    trayIconMenu->addAction(quitAction);
-
-    trayIcon = new QSystemTrayIcon(this);
-    trayIcon->setContextMenu(trayIconMenu);
-
-    trayIcon->setIcon(QIcon(":/Icons/calendar.png"));
-
-
-    QString info;
-    info += current.get_format_date(0) + QString("\n");
-
-    trayIcon->setToolTip(info);
-}
-
-void MainWindow::createActions()
-{
-    quitAction = new QAction(QIcon(":Icons/exit.png"), "יציאה", this);
-    connect(quitAction, SIGNAL(triggered()), qApp, SLOT(quit()));
-}
-*/
-

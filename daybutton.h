@@ -20,12 +20,9 @@
 
   Shows the hebrew date, english date, reading, and event.
 
-
   Changes color by state - Unslected, Selected, and MouseOver.
 
-
   Emmits a "clicked" signal when clicked (duh).
-
 */
 
 #ifndef DAYBUTTON_H
@@ -38,7 +35,6 @@
 #include <QLabel>
 
 #include "mhdate.h"
-
 #include "functions.h"
 
 class dayButton : public QFrame
@@ -50,6 +46,9 @@ public:
     ~dayButton();
 
     void resetDate(int jd, bool hool, bool showGDate);
+
+    QSize sizeHint() const;
+
 
 private:
     mHdate date;

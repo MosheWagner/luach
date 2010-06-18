@@ -16,7 +16,6 @@
 
 #include "changelocation.h"
 #include "ui_changelocation.h"
-#include "mtranslator.h"
 
 extern QString LANG;
 
@@ -567,8 +566,7 @@ const QString timezonelist[] = {
 
 
 
-ChangeLocation::ChangeLocation(QWidget *parent, QString *locationName, double *latitude, double *longitude, double *candleoffset, QString *timeZone, double *elavation, bool *hool)
-        : QDialog(parent),  m_ui(new Ui::ChangeLocation)
+ChangeLocation::ChangeLocation(QWidget *parent, QString *locationName, double *latitude, double *longitude, double *candleoffset, QString *timeZone, double *elavation, bool *hool) : QDialog(parent),  m_ui(new Ui::ChangeLocation)
 {
     m_ui->setupUi(this);
 
@@ -615,25 +613,8 @@ ChangeLocation::ChangeLocation(QWidget *parent, QString *locationName, double *l
     }
     hoolptr = hool;
 
-
-    if (LANG == "English")
-    {
-        setLayoutDirection(Qt::LeftToRight);
-    }
-
-    m_ui->label->setText(mTr(m_ui->label->text()));
-    m_ui->label_2->setText(mTr(m_ui->label_2->text()));
-    m_ui->label_3->setText(mTr(m_ui->label_3->text()));
-    m_ui->label_4->setText(mTr(m_ui->label_4->text()));
-    m_ui->label_5->setText(mTr(m_ui->label_5->text()));
-    m_ui->label_6->setText(mTr(m_ui->label_6->text()));
-    m_ui->label_7->setText(mTr(m_ui->label_7->text()));
-    m_ui->isHool->setText(mTr(m_ui->isHool->text()));
-    m_ui->isIl->setText(mTr(m_ui->isIl->text()));
-
-    m_ui->exitBTN->setText(mTr(m_ui->exitBTN->text()));
-    m_ui->okBTN->setText(mTr(m_ui->okBTN->text()));
-    m_ui->saveCheckBox->setText(mTr(m_ui->saveCheckBox->text()));
+    //Adjust for hebrew if needed
+    if (LANG == "Hebrew") toRTL();
 }
 
 ChangeLocation::~ChangeLocation()
@@ -641,6 +622,11 @@ ChangeLocation::~ChangeLocation()
     delete m_ui;
 }
 
+
+void ChangeLocation::toRTL()
+{
+    setLayoutDirection(Qt::RightToLeft);
+}
 
 void ChangeLocation::on_exitBTN_clicked()
 {    close();   }

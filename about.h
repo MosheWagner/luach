@@ -31,9 +31,6 @@ public:
     About(QWidget *parent = 0);
     ~About();
 
-protected:
-    void changeEvent(QEvent *e);
-
 private:
     Ui::About *m_ui;
 

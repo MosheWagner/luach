@@ -17,6 +17,7 @@
 #ifndef MAINWINDOW_H
 #define MAINWINDOW_H
 
+#include <QtGui/QApplication>
 #include <QtGui/QMainWindow>
 #include <QProcess>
 #include <QTextCodec>
@@ -31,10 +32,9 @@
 #include <QDesktopWidget>
 #include <QSettings>
 #include <QMessageBox>
+#include <QTranslator>
 
 #include "mhdate.h"
-
-#include "mtranslator.h"
 
 #include "daybutton.h"
 #include "functions.h"
@@ -67,7 +67,8 @@ protected:
 
 private slots:
 
-    void translateGUI();
+    void toRTL();
+    //void translateGUI();
 
     void on_doublenextgYearBTN_clicked();
     void on_doublebackgYearBTN_clicked();

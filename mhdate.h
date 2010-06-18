@@ -67,6 +67,10 @@ public:
 
     bool isErevYomTov(bool hool);
     bool isYomTov(bool hool);
+
+    //Returns the holiday type (see inside for details)
+    int holidayType();
+
 signals:
     //Emmited every time a month was changed, directly or indirectly.
     void month_changed();

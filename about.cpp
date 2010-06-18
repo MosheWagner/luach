@@ -17,7 +17,7 @@
 #include "about.h"
 #include "ui_about.h"
 
-#define VERSION "0.05"
+#define VERSION "0.07"
 
 extern QString LANG;
 
@@ -31,6 +31,7 @@ About::About(QWidget *parent) :
 
     QString text = "";
 
+    /*
     if (LANG == "Hebrew")
     {
         text = "<center><b> QT Luach, (עוד) לוח שנה עברי - ";
@@ -46,24 +47,21 @@ About::About(QWidget *parent) :
         text += "   משה וגנר - ";
         text += "   moshe.wagner@gmail.com, תש''ע";
     }
-    else
-    {
-        setLayoutDirection(Qt::LeftToRight);
+    */
 
-        text = "<center><b> QT Luach (Yet another Hebrew calander) - ";
-        text += VERSION;
-        text += "<br> </b>";
+    text = tr("<center><b> QT Luach (Yet another Hebrew calander) - ");
+    text += VERSION;
+    text += "<br> </b>";
 
-        text += "<a href=\"http://luach.googlecode.com\">http://luach.googlecode.com</a> <br><br>";
+    text += "<a href=\"http://luach.googlecode.com\">http://luach.googlecode.com</a> <br><br>";
 
-        text += "<br>";
+    text += "<br>";
 
-        text += "This program comes with absolutly no Halachic warrenty. <br> Use it at your own risk.";
+    text += tr("This program comes with absolutly no Halachic warrenty. <br> Use it at your own risk.");
 
-        text += "<br><br>";
-        text += "Comments, complaints and gifts are greatlt welcome at -<br>";
-        text += "   moshe.wagner@gmail.com";
-    }
+    text += "<br><br>";
+    text += tr("Comments, complaints and gifts are greatly welcome at -<br>");
+    text += tr("   moshe.wagner@gmail.com");
 
     m_ui->label->setText(text);
 
@@ -72,18 +70,6 @@ About::About(QWidget *parent) :
 About::~About()
 {
     delete m_ui;
-}
-
-void About::changeEvent(QEvent *e)
-{
-    QDialog::changeEvent(e);
-    switch (e->type()) {
-    case QEvent::LanguageChange:
-        m_ui->retranslateUi(this);
-        break;
-    default:
-        break;
-    }
 }
 
 void About::on_label_linkActivated(QString link)

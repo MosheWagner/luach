@@ -14,13 +14,25 @@
 * Author: Moshe Wagner. <moshe.wagner@gmail.com>
 */
 
-#include <QtGui/QApplication>
 #include "mainwindow.h"
 
 int main(int argc, char *argv[])
 {
-    QApplication a(argc, argv);
+    QApplication app(argc, argv);
+
+    //Read lang conf
+    QSettings settings("Luach", "user");
+    LANG = settings.value("Language", "Hebrew").toString();
+
+
+    QTranslator translator;
+
+    //Update path for installation
+    if (!translator.load(LANG + ".qm", ".")) translator.load(LANG + ".qm", "/usr/share/Luach/");
+    app.installTranslator( &translator );
+
+
     MainWindow w;
     w.show();
-    return a.exec();
+    return app.exec();
 }

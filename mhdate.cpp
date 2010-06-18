@@ -197,47 +197,114 @@ int mHdate::getOmerDay()
 }
 
 
+//TODO: Remove hool parameter?
+
 bool mHdate::isYomTov(bool hool)
 {
-    hdate::Hdate todayclone;
+    mHdate todayclone;
     todayclone.set_jd(get_julian());
 
     if (hool) todayclone.set_diaspora();
 
-    if (todayclone.get_holyday_type() == 1) return true;
+    if (todayclone.holidayType() == 1) return true;
     return false;
 }
 
 bool mHdate::isErevYomTov(bool hool)
 {
 
-    hdate::Hdate tomorrow;
+    mHdate tomorrow;
     tomorrow.set_jd(get_julian() + 1);
     if (hool) tomorrow.set_diaspora();
 
-    if (tomorrow.get_holyday_type() == 1) return true;
+    if (tomorrow.holidayType() == 1) return true;
 
     return false;
-
-    /*
-    int mon = get_hmonth();
-    int day = get_hday();
-    if (( mon == 1 && ( day == 1 || day == 9 || day == 14 || day == 21) ) || (mon==7 && (day==14 || day==20)) || (mon==9 && day==5))
-    {
-        return true;
-    }
-
-    //
-    if (hool)
-    {
-        if (( mon == 1 && ( day == 1 || day == 10 || day == 15 || day == 22) ) || (mon==7 && (day==15 || day==21)) || (mon==9 && day==6))
-        {
-            return true;
-        }
-    }
-
-    return false;
-    */
 }
 
 int mHdate::getMonthLength() { return month_length; }
+
+
+/*
+  This function is a copy of 'hdate_get_holyday_type' function
+   (from the 'hdate_holyday.c' file) - as it is in version 1.4.14 of libhdate.
+  The reason I did this, is because all linux distributions still use
+    older versions of libhdate, and I need the updated function.
+*/
+int mHdate::holidayType()
+{
+    int holyday = get_holyday();
+
+
+    int holyday_type = 0;
+
+    switch (holyday)
+    {
+    case 0: /* regular day */
+            holyday_type = 0;
+            break;
+
+    case 1:
+    case 2:
+    case 4:
+    case 5:
+    case 8:
+    case 15:
+    case 20:
+    case 27:
+    case 28:
+    case 29:
+    case 30:
+    case 31:
+    case 32: /* Yom tov, To find erev yom tov, check if tomorrow returns 1 */
+            holyday_type = 1;
+            break;
+
+    case 37: /* Erev yom kippur */
+            holyday_type = 2;
+            break;
+
+    case 6:
+    case 7:
+    case 16: /* Hol hamoed */
+            holyday_type = 3;
+            break;
+
+    case 9:
+    case 13:
+    case 14: /* Hanuka and purim */
+            holyday_type = 4;
+            break;
+
+    case 3:
+    case 10:
+    case 12:
+    case 21:
+    case 22: /* tzom */
+            holyday_type = 5;
+            break;
+
+    case 17:
+    case 26: /* Independance day and Yom yerushalaim */
+            holyday_type = 6;
+            break;
+
+    case 18:
+    case 23:
+    case 11: /* Lag baomer ,Tu beav, Tu beshvat */
+            holyday_type = 7;
+            break;
+
+    case 24:
+    case 25: /* Tzahal and Holocaust memorial days */
+            holyday_type = 8;
+            break;
+
+
+    default: /* National days */
+            holyday_type = 9;
+            break;
+    }
+
+    return holyday_type;
+}

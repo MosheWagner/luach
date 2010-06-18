@@ -54,6 +54,8 @@ public:
     ~ChangeLocation();
 
 private:
+    void toRTL();
+
     Ui::ChangeLocation *m_ui;
 
     //Pointers to the given program's parameters:

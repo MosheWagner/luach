@@ -50,15 +50,11 @@
 
 */
 
-//TODO: Switch to normall translation
+//TODO: Make libzmanim a seperate package
 
 //TODO: System tray icon
 
-//TODO: Bring back candle lighting for yom tov. after upgrading libhdate
-
 //TODO: Special shabatot
-
-//TODO: Candle lighting on מוצאי חג
 
 //TODO: ברכת החמה
 
@@ -93,7 +89,6 @@ QString LANG;
 
 QString ZMANIMCLIPATH = "ZmanimCLI.jar";
 
-QString HEBLOCALE = "";
 
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent), ui(new Ui::MainWindow)
@@ -105,18 +100,6 @@ MainWindow::MainWindow(QWidget *parent)
 
     //Set all QString to work with unicode
     QTextCodec::setCodecForCStrings(QTextCodec::codecForName("utf8"));
-
-
-    //Find hebrew locale
-    QProcess localetest;
-    localetest.start("locale", QStringList() << "-a");
-    localetest.waitForFinished();
-    QByteArray result = localetest.readAllStandardOutput();
-
-    QStringList locales = QString(result).split('\n');
-
-    for (int i=0; i<locales.size(); i++) if (locales[i].contains("he")) HEBLOCALE = locales[i];
-
 
     //Configure paths:
     QFile f("ZmanimCLI.jar");
@@ -142,11 +125,23 @@ MainWindow::MainWindow(QWidget *parent)
     connect( &current, SIGNAL(month_changed()), this, SLOT(redraw()));
 
 
+    removeDockWidget(ui->dockWidget);
+    addDockWidget(Qt::LeftDockWidgetArea, ui->dockWidget);
+    ui->dockWidget->show();
+
+
     loadConfs();
 
 
-    BuildHebrewTranslationList();
-    translateGUI();
+    weekdays << tr("Sunday") << tr("Monday") << tr("Tuesday") << tr("Wednesday") << tr("Thursday") << tr("Friday") << tr("Saturday");
+    engmonths << tr("January") << tr("February") << tr("March") << tr("April") << tr("May") << tr("June") << tr("July") << tr("August") << tr("September") << tr("October") << tr("November") << tr("December");
+
+
+    putenv("LANGUAGE=C");
+
+    //Adjust for hebrew if needed
+    if (LANG == "Hebrew") toRTL();
+
 
     lastselected = NULL;
 
@@ -158,6 +153,7 @@ MainWindow::MainWindow(QWidget *parent)
     connect(ui->aboutaction, SIGNAL(triggered()), this, SLOT(aboutForm()));
     connect(ui->printaction, SIGNAL(triggered()), this, SLOT(printSnap()));
 
+
     //Add weekday labels
     for (int i=0; i<7; i++)
     {
@@ -166,7 +162,8 @@ MainWindow::MainWindow(QWidget *parent)
         lbl->setAlignment(Qt::AlignCenter);
         ui->gridLayout->addWidget(lbl, 0, i);
 
-        QFont q; /*q.setBold(true);*/ q.setPixelSize(20);
+        QFont q;
+        q.setPixelSize(19);
         lbl->setFont(q);
 
         weekdaylbls.push_back(lbl);
@@ -184,6 +181,7 @@ MainWindow::MainWindow(QWidget *parent)
 
         connect(d, SIGNAL(clicked(dayButton*)), this, SLOT(dayClicked(dayButton*)));
     }
+
 
 
     for (int i=0; i<ui->gridLayout->count(); i++) ui->gridLayout->setRowStretch(i,1);
@@ -241,119 +239,47 @@ void MainWindow::closeEvent(QCloseEvent *event)
 void MainWindow::translateAction()
 {
     if (LANG == "Hebrew") LANG = "English";
-    else if (LANG == "English") LANG = "Hebrew";
+    else LANG = "Hebrew";
 
-    translateGUI();
+    QSettings settings("Luach", "user");
+    settings.setValue("Language", LANG);
 
-    redraw();
+    //Make sure the lang is saved before the reboot
+    QApplication::processEvents();
+
+    //Reboot the program
+    QProcess::startDetached("\"" + QApplication::applicationFilePath() + "\"");
+    exit(0);
 }
 
-
-void MainWindow::translateGUI()
+void MainWindow::toRTL()
 {
-    if (LANG == "Hebrew")
-    {
-        //toggleGDate(false);
-
-        if (HEBLOCALE == "") QMessageBox::critical (this, tr("No hebrew locale!"), tr("No hebrew locale installed! You won't be able to get any dates in hebrew..."));
+    setLayoutDirection(Qt::RightToLeft);
+    ui->centralWidget->setLayoutDirection(Qt::RightToLeft);
 
 
-        setLayoutDirection(Qt::RightToLeft);
+    ui->horizontalLayout->setDirection(QBoxLayout::RightToLeft);
+    ui->horizontalLayout_2->setDirection(QBoxLayout::RightToLeft);
+    ui->horizontalLayout_3->setDirection(QBoxLayout::RightToLeft);
+    ui->horizontalLayout_4->setDirection(QBoxLayout::RightToLeft);
+    ui->horizontalLayout_5->setDirection(QBoxLayout::RightToLeft);
+    ui->horizontalLayout_6->setDirection(QBoxLayout::RightToLeft);
 
-        ui->horizontalLayout->setDirection(QBoxLayout::LeftToRight);
-        ui->horizontalLayout_2->setDirection(QBoxLayout::LeftToRight);
-        ui->horizontalLayout_3->setDirection(QBoxLayout::LeftToRight);
-        ui->horizontalLayout_4->setDirection(QBoxLayout::LeftToRight);
-        ui->horizontalLayout_5->setDirection(QBoxLayout::LeftToRight);
-        ui->horizontalLayout_6->setDirection(QBoxLayout::LeftToRight);
+    ui->formLayout_3->layout()->setContentsMargins(0,0,0,0);
 
-        ui->dockWidget->setLayoutDirection(Qt::RightToLeft);
+    ui->dockWidget->setLayoutDirection(Qt::RightToLeft);
 
-        removeDockWidget(ui->dockWidget);
-        addDockWidget(Qt::RightDockWidgetArea, ui->dockWidget);
-        if (ShowZmanim) ui->dockWidget->show();
+    removeDockWidget(ui->dockWidget);
+    addDockWidget(Qt::RightDockWidgetArea, ui->dockWidget);
+    if (ShowZmanim) ui->dockWidget->show();
 
-        ui->menu->setLayoutDirection(Qt::RightToLeft);
-        ui->menu_2->setLayoutDirection(Qt::RightToLeft);
-        ui->menu_3->setLayoutDirection(Qt::RightToLeft);
-        ui->menuBar->setLayoutDirection(Qt::RightToLeft);
+    ui->menu->setLayoutDirection(Qt::RightToLeft);
+    ui->menu_2->setLayoutDirection(Qt::RightToLeft);
+    ui->menu_3->setLayoutDirection(Qt::RightToLeft);
+    ui->menuBar->setLayoutDirection(Qt::RightToLeft);
 
-        //Force the locale to hebrew, so Hdate will give Hebrew strings. Yup, I don't like this either.
-        setlocale (LC_ALL, HEBLOCALE.toStdString().c_str());
-
-        //Set Env variable LANGUAGE to "he_IL", to force Hebrew year numbers, etc'
-        putenv("LANGUAGE=he_IL");
-    }
-    else
-    {
-        //English:
-        setLayoutDirection(Qt::LeftToRight);
-
-        ui->horizontalLayout->setDirection(QBoxLayout::RightToLeft);
-        ui->horizontalLayout_2->setDirection(QBoxLayout::RightToLeft);
-        ui->horizontalLayout_3->setDirection(QBoxLayout::RightToLeft);
-        ui->horizontalLayout_4->setDirection(QBoxLayout::RightToLeft);
-        ui->horizontalLayout_5->setDirection(QBoxLayout::RightToLeft);
-        ui->horizontalLayout_6->setDirection(QBoxLayout::RightToLeft);
-
-        ui->dockWidget->setLayoutDirection(Qt::LeftToRight);
-
-        removeDockWidget(ui->dockWidget);
-        addDockWidget(Qt::LeftDockWidgetArea, ui->dockWidget);
-        if (ShowZmanim) ui->dockWidget->show();
-
-        ui->menu->setLayoutDirection(Qt::LeftToRight);
-        ui->menu_2->setLayoutDirection(Qt::LeftToRight);
-        ui->menu_3->setLayoutDirection(Qt::LeftToRight);
-        ui->menuBar->setLayoutDirection(Qt::LeftToRight);
-
-        //Force the locale to english
-        setlocale (LC_ALL, "C");
-
-        putenv("LANGUAGE=C");
-    }
-
-    weekdays << mTr("Sunday") << mTr("Monday") << mTr("Tuesday") << mTr("Wednesday") << mTr("Thursday") << mTr("Friday") << mTr("Saturday");
-
-    engmonths << mTr("January") << mTr("February") << mTr("March") << mTr("April") << mTr("May") << mTr("June") << mTr("July") << mTr("August") << mTr("September") << mTr("October") << mTr("November") << mTr("December");
-
-
-    //A bit funny, but should work.
-    for (int i=0; i<weekdaylbls.size(); i++)
-    {
-        weekdaylbls[i]->setText(mTr(weekdaylbls[i]->text()));
-    }
-
-    ui->aboutaction->setText(mTr(ui->aboutaction->text()));
-    ui->gdateaction->setText(mTr(ui->gdateaction->text()));
-    ui->printaction->setText(mTr(ui->printaction->text()));
-    ui->translateaction->setText(mTr(ui->translateaction->text()));
-    ui->exitaction->setText(mTr(ui->exitaction->text()));
-    ui->zmanimpanelaction->setText(mTr(ui->zmanimpanelaction->text()));
-    ui->changelocationaction->setText(mTr(ui->changelocationaction->text()));
-
-
-    ui->menu->setTitle(mTr(ui->menu->title()));
-    ui->menu_3->setTitle(mTr(ui->menu_3->title()));
-    ui->menu_2->setTitle(mTr(ui->menu_2->title()));
-
-    ui->label_2->setText(mTr(ui->label_2->text()));
-    ui->label->setText(mTr(ui->label->text()));
-    ui->label_3->setText(mTr(ui->label_3->text()));
-    ui->label_5->setText(mTr(ui->label_5->text()));
-    ui->label_6->setText(mTr(ui->label_6->text()));
-    ui->label_7->setText(mTr(ui->label_7->text()));
-    ui->label_8->setText(mTr(ui->label_8->text()));
-    ui->label_9->setText(mTr(ui->label_9->text()));
-    ui->label_10->setText(mTr(ui->label_10->text()));
-    ui->label_11->setText(mTr(ui->label_11->text()));
-    ui->label_12->setText(mTr(ui->label_12->text()));
-    ui->label_21->setText(mTr(ui->label_21->text()));
-    ui->label_22->setText(mTr(ui->label_22->text()));
-    ui->clllbllbl->setText(mTr(ui->clllbllbl->text()));
-    ui->tslbllbl->setText(mTr(ui->tslbllbl->text()));
-
-    ui->dockWidget->setWindowTitle(mTr(ui->dockWidget->windowTitle()));
+    //Set Env variable LANGUAGE to "he_IL", to force Hebrew year numbers, etc'
+    putenv("LANGUAGE=he_IL");
 }
 
 
@@ -584,7 +510,7 @@ void MainWindow::gotTimes()
 
 
                 //Candel lighting:
-                if (current.get_day_of_the_week() == 6 /*|| current.isErevYomTov(hool)*/)
+                if (current.get_day_of_the_week() == 6 || current.isErevYomTov(hool))
                 {
                     ui->clllbllbl->show();
                     ui->candellightinglbl->show();
@@ -602,9 +528,13 @@ void MainWindow::gotTimes()
                 }
 
                 //מוצאי שבת או חג
-                if (current.get_day_of_the_week() == 7  /*|| current.isYomTov(hool)*/)
+                if (current.get_day_of_the_week() == 7  || current.isYomTov(hool))
                 {
                     ui->tslbllbl->show();
+
+                    if ( current.isYomTov(hool)) ui->tslbllbl->setText(tr("Chag ends"));
+                    if (current.get_day_of_the_week() == 7) ui->tslbllbl->setText(tr("Shabbos ends"));
+
                     ui->tslbl->show();
 
                     QProcess tzais;
@@ -618,6 +548,14 @@ void MainWindow::gotTimes()
                     QByteArray result = tzais.readAllStandardOutput();
 
                     ui->tslbl->setText(QString(result));
+
+
+                    //If there is any candle lighting today, it should be at tzais shabat,
+                    // and not at the normal time. (unless it's a Yom tov on friday)
+                    if (current.get_day_of_the_week() != 6)
+                    {
+                        ui->candellightinglbl->setText(result);
+                    }
                 }
                 else
                 {
@@ -638,7 +576,7 @@ void MainWindow::gotTimes()
                 QString d = current.get_day_of_week_string(0);
                 d += ", ";
                 d += current.get_format_date(1);
-                d += "\n    " + locationName;
+                d += " - " + locationName;
                 ui->dayandlocationlbl->setText(d);
             }
         }
@@ -682,7 +620,6 @@ void MainWindow::loadConfs()
 
     ShowGDate = settings.value("ShowGDate", true).toBool();
     ShowZmanim = settings.value("ShowZmanim", true).toBool();
-    LANG = settings.value("Language", "English").toString();
 }
 
 void MainWindow::toggleGDate(bool show)

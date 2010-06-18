@@ -10,15 +10,13 @@ SOURCES += main.cpp \
     functions.cpp \
     mhdate.cpp \
     changelocation.cpp \
-    about.cpp \
-    mtranslator.cpp
+    about.cpp
 HEADERS += mainwindow.h \
     daybutton.h \
     functions.h \
     mhdate.h \
     changelocation.h \
-    about.h \
-    mtranslator.h
+    about.h
 FORMS += mainwindow.ui \
     changelocation.ui \
     about.ui
@@ -29,10 +27,10 @@ win32 {
     INCLUDEPATH += C:\libhdate\include
 }
 RESOURCES += Luach.qrc
+TRANSLATIONS = Hebrew.ts
 
 # Install binaries
-binary.path = /usr/bin/
-binary.files = luach
+target.path = /usr/bin/
 
 # Install ZmanimCLI
 zmanim.path = /usr/share/Luach/
@@ -45,7 +43,12 @@ icon.files = Icons/calendar.png
 # Install shortcut
 menu.path = /usr/share/applications
 menu.files = Luach.desktop
-INSTALLS += binary
+
+# Install translation
+trans.path = /usr/share/Luach/
+trans.files = Hebrew.qm
+INSTALLS += target
+INSTALLS += trans
 INSTALLS += zmanim
 INSTALLS += icon
 INSTALLS += menu

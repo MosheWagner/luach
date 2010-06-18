@@ -72,7 +72,7 @@ dayButton::dayButton(QWidget * parent, int jd, bool showGDate, bool hool)
 
     reading = new QLabel();
     reading->setFont(fs);
-
+    reading->setStyleSheet("QLabel { color: brown }");
 
     vbox->addWidget(reading);
     reading->setAlignment(Qt::AlignCenter);
@@ -139,10 +139,10 @@ void dayButton::showInfo(bool showGDate)
     QString holiday = date.get_holyday_string(0);
 
     //No politics or anything, these are just not holidays...
-    if (date.get_holyday_type() == 9) holiday = "";
+    if (date.holidayType() == 9) holiday = "";
 
     //Add number to hol hamoed
-    if (date.get_holyday_type() == 3)
+    if (date.holidayType() == 3)
     {
         int d = date.get_hday() - 15;
 
@@ -156,7 +156,7 @@ void dayButton::showInfo(bool showGDate)
     }
 
     //Hanuka
-    if (date.get_holyday_type() == 4 && (date.get_hmonth() == 3 || date.get_hmonth() == 4))
+    if (date.holidayType() == 4 && (date.get_hmonth() == 3 || date.get_hmonth() == 4))
     {
         hdate::Hdate t;
         t.set_hdate(25, 3, date.get_hyear());
@@ -167,7 +167,7 @@ void dayButton::showInfo(bool showGDate)
 
     event->setText(holiday);
 
-    if (QString(date.get_parasha_string(0)) != "חסר") reading->setText(date.get_parasha_string(0));
+    if (QString(date.get_parasha_string(0)) != tr("none")) reading->setText(date.get_parasha_string(0));
     else reading->setText("");
 }
 

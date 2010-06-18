@@ -7,20 +7,20 @@
     <x>0</x>
     <y>0</y>
     <width>279</width>
-    <height>341</height>
+    <height>354</height>
    </rect>
   </property>
   <property name="windowTitle">
-   <string>שינוי מיקום</string>
+   <string>Change location</string>
   </property>
   <property name="layoutDirection">
-   <enum>Qt::RightToLeft</enum>
+   <enum>Qt::LeftToRight</enum>
   </property>
   <layout class="QVBoxLayout" name="verticalLayout">
    <item>
     <widget class="QLabel" name="label">
      <property name="text">
-      <string>שם המיקום (משפיע על התצוגה בלבד):</string>
+      <string>Location Name (effects the title only):</string>
      </property>
     </widget>
    </item>
@@ -35,7 +35,7 @@
      <item>
       <widget class="QRadioButton" name="isIl">
        <property name="text">
-        <string>ארץ ישראל</string>
+        <string>Israel</string>
        </property>
        <property name="checked">
         <bool>true</bool>
@@ -45,7 +45,7 @@
      <item>
       <widget class="QRadioButton" name="isHool">
        <property name="text">
-        <string>חוץ לארץ</string>
+        <string>Diaspora</string>
        </property>
       </widget>
      </item>
@@ -65,21 +65,21 @@
      <item row="2" column="0">
       <widget class="QLabel" name="label_3">
        <property name="text">
-        <string>קו אורך:</string>
+        <string>Longitude:</string>
        </property>
       </widget>
      </item>
      <item row="3" column="0">
       <widget class="QLabel" name="label_4">
        <property name="text">
-        <string>אזור זמן:</string>
+        <string>Time Zone:</string>
        </property>
       </widget>
      </item>
      <item row="4" column="0">
       <widget class="QLabel" name="label_5">
        <property name="text">
-        <string>גובה:</string>
+        <string>Elavation:</string>
        </property>
       </widget>
      </item>
@@ -164,8 +164,11 @@
      </item>
      <item row="1" column="0">
       <widget class="QLabel" name="label_2">
+       <property name="frameShape">
+        <enum>QFrame::NoFrame</enum>
+       </property>
        <property name="text">
-        <string>קו רוחב:</string>
+        <string>Latitude:</string>
        </property>
       </widget>
      </item>
@@ -186,8 +189,11 @@
    </item>
    <item>
     <widget class="QLabel" name="label_7">
+     <property name="frameShape">
+      <enum>QFrame::NoFrame</enum>
+     </property>
      <property name="text">
-      <string>זמן כניסת שבת:</string>
+      <string>Candle Lighting Time:</string>
      </property>
     </widget>
    </item>
@@ -234,7 +240,7 @@
         <bool>true</bool>
        </property>
        <property name="text">
-        <string> - דקות לפני שקיעה</string>
+        <string>(Minutes before sunset)</string>
        </property>
       </widget>
      </item>
@@ -256,7 +262,7 @@
    <item>
     <widget class="QCheckBox" name="saveCheckBox">
      <property name="text">
-      <string>שמור מיקום להפעלה הבאה</string>
+      <string>Save Settings</string>
      </property>
      <property name="checked">
       <bool>true</bool>
@@ -271,7 +277,10 @@
      <item>
       <widget class="QPushButton" name="exitBTN">
        <property name="text">
-        <string>ביטול</string>
+        <string>Cancel</string>
+       </property>
+       <property name="autoDefault">
+        <bool>false</bool>
        </property>
       </widget>
      </item>
@@ -290,11 +299,17 @@
      </item>
      <item>
       <widget class="QPushButton" name="okBTN">
+       <property name="mouseTracking">
+        <bool>true</bool>
+       </property>
        <property name="layoutDirection">
         <enum>Qt::LeftToRight</enum>
        </property>
        <property name="text">
-        <string>שמור</string>
+        <string>OK</string>
+       </property>
+       <property name="default">
+        <bool>true</bool>
        </property>
       </widget>
      </item>

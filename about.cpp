@@ -31,24 +31,6 @@ About::About(QWidget *parent) :
 
     QString text = "";
 
-    /*
-    if (LANG == "Hebrew")
-    {
-        text = "<center><b> QT Luach, (עוד) לוח שנה עברי - ";
-        text += VERSION;
-        text += "<br> </b></center>";
-
-        text += "   <a href=\"http://luach.googlecode.com\">http://luach.googlecode.com</a> <br><br>";
-
-        text += "<br>";
-        text += "התוכנה כאן מובאת ללא כל התחייבות הלכתית. <br> כל שימוש בנתונים המובאים כאן נעשה על אחריו המשתמש בלבד.";
-
-        text += "<br><br>";
-        text += "   משה וגנר - ";
-        text += "   moshe.wagner@gmail.com, תש''ע";
-    }
-    */
-
     text = tr("<center><b> QT Luach (Yet another Hebrew calander) - ");
     text += VERSION;
     text += "<br> </b>";
@@ -57,7 +39,7 @@ About::About(QWidget *parent) :
 
     text += "<br>";
 
-    text += tr("This program comes with absolutly no Halachic warrenty. <br> Use it at your own risk.");
+    text += tr("This program comes with absolutely no Halachic warranty. <br> Use it at your own risk.");
 
     text += "<br><br>";
     text += tr("Comments, complaints and gifts are greatly welcome at -<br>");
@@ -76,4 +58,9 @@ void About::on_label_linkActivated(QString link)
 {
     //Open the project's site in a browser
     QDesktopServices::openUrl(QUrl(link));
+}
+
+void About::on_pushButton_clicked()
+{
+    close();
 }

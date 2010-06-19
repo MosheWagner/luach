@@ -566,7 +566,7 @@ const QString timezonelist[] = {
 
 
 
-ChangeLocation::ChangeLocation(QWidget *parent, QString *locationName, double *latitude, double *longitude, double *candleoffset, QString *timeZone, double *elavation, bool *hool) : QDialog(parent),  m_ui(new Ui::ChangeLocation)
+ChangeLocation::ChangeLocation(QWidget *parent, QString *locationName, double *latitude, double *longitude, double *candleoffset, QString *timeZone, double *elevation, bool *hool) : QDialog(parent),  m_ui(new Ui::ChangeLocation)
 {
     m_ui->setupUi(this);
 
@@ -594,8 +594,8 @@ ChangeLocation::ChangeLocation(QWidget *parent, QString *locationName, double *l
     longitudeptr = longitude;
     m_ui->longitudeLine->setValue(*longitude);
 
-    elavationeptr = elavation;
-    m_ui->elavationLine->setValue(*elavationeptr);
+    elevationeptr = elevation;
+    m_ui->elevationLine->setValue(*elevationeptr);
 
     candleoffsetptr = candleoffset;
     m_ui->offsetLine->setValue(*candleoffset);
@@ -639,7 +639,7 @@ void ChangeLocation::on_okBTN_clicked()
 
     *latitudeptr = m_ui->latitudeLine->value();
     *longitudeptr = m_ui->longitudeLine->value();
-    *elavationeptr = m_ui->elavationLine->value();
+    *elevationeptr = m_ui->elevationLine->value();
     *candleoffsetptr = m_ui->offsetLine->value();
 
 

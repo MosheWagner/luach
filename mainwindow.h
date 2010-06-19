@@ -119,6 +119,8 @@ private slots:
 
     void printSnap();
 
+    void todayAction();
+
 private:
     //Holds current (selected) date
     mHdate current;

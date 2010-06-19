@@ -50,6 +50,8 @@
 
 */
 
+//TODO: Add windows resource file
+
 //TODO: Make libzmanim a seperate package
 
 //TODO: System tray icon
@@ -78,7 +80,7 @@ QString locationName;
 double latitude; //קו רוחב
 double longitude; //קו אורך
 QString TimeZone;
-double elavation;
+double elevation;
 double candleLightingOffset;
 bool hool;
 
@@ -152,7 +154,7 @@ MainWindow::MainWindow(QWidget *parent)
     connect(ui->translateaction, SIGNAL(triggered()), this, SLOT(translateAction()));
     connect(ui->aboutaction, SIGNAL(triggered()), this, SLOT(aboutForm()));
     connect(ui->printaction, SIGNAL(triggered()), this, SLOT(printSnap()));
-
+    connect(ui->todayAction, SIGNAL(triggered()), this, SLOT(todayAction()));
 
     //Add weekday labels
     for (int i=0; i<7; i++)
@@ -377,6 +379,14 @@ void MainWindow::dayClicked(dayButton * day)
     updateLabels(&current);
 }
 
+void MainWindow::todayAction()
+{
+    hdate::Hdate today;
+    current.set_jd(today.get_julian());
+
+    showMonth(&current);
+}
+
 MainWindow::~MainWindow()
 {
     saveDispConfs();
@@ -442,7 +452,7 @@ void MainWindow::updateLabels(mHdate *date)
 
     QString dstr = stringify(date->get_gyear()) + "/" + stringify(date->get_gmonth()) + "/" + stringify(date->get_gday());
 
-    args << "-jar" << ZMANIMCLIPATH << "-d" << dstr << "-lat" << stringify(latitude) << "-lon" << stringify(longitude) << "-e" << stringify(elavation) << "-tz" << TimeZone;
+    args << "-jar" << ZMANIMCLIPATH << "-d" << dstr << "-lat" << stringify(latitude) << "-lon" << stringify(longitude) << "-e" << stringify(elevation) << "-tz" << TimeZone;
 
     zmanimproc->start("java", args);
 
@@ -540,7 +550,7 @@ void MainWindow::gotTimes()
                     QProcess tzais;
                     QString dstr = stringify(current.get_gyear()) + "/" + stringify(current.get_gmonth()) + "/" + stringify(current.get_gday());
                     QStringList args;
-                    args << "-jar" << ZMANIMCLIPATH << "-d" << dstr << "-lat" << stringify(latitude) << "-lon" << stringify(longitude) << "-e" << stringify(elavation) << "-tz" << TimeZone << "TzaisGeonim8Point5Degrees";
+                    args << "-jar" << ZMANIMCLIPATH << "-d" << dstr << "-lat" << stringify(latitude) << "-lon" << stringify(longitude) << "-e" << stringify(elevation) << "-tz" << TimeZone << "TzaisGeonim8Point5Degrees";
 
                     tzais.start("java", args);
 
@@ -591,7 +601,7 @@ void MainWindow::saveConfs()
     settings.setValue("Latitude", latitude);
     settings.setValue("Longitude", longitude);
     settings.setValue("TimeZone", TimeZone);
-    settings.setValue("Elavation", elavation);
+    settings.setValue("Elevation", elevation);
     settings.setValue("CandleLightingOffset", candleLightingOffset);
     settings.setValue("isHool", hool);
 }
@@ -614,7 +624,7 @@ void MainWindow::loadConfs()
     latitude = settings.value("Latitude", 31.77805).toDouble();
     longitude = settings.value("Longitude", 35.235149).toDouble();
     TimeZone = settings.value("TimeZone", "Israel").toString();
-    elavation = settings.value("Elavation", 800).toDouble();
+    elevation = settings.value("Elevation", 800).toDouble();
     candleLightingOffset = settings.value("CandleLightingOffset", 18.0).toDouble();
     hool = settings.value("isHool",false).toBool();
 
@@ -664,7 +674,7 @@ void MainWindow::on_dockWidget_visibilityChanged(bool visible)
 ChangeLocation *cl;
 void MainWindow::changeLocationForm()
 {
-    cl = new ChangeLocation (this, &locationName, &latitude, &longitude, &candleLightingOffset, &TimeZone, &elavation, &hool);
+    cl = new ChangeLocation (this, &locationName, &latitude, &longitude, &candleLightingOffset, &TimeZone, &elevation, &hool);
 
     connect(cl, SIGNAL(changed()), this, SLOT(redraw()));
     connect(cl, SIGNAL(save()), this, SLOT(saveConfs()));

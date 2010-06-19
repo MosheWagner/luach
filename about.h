@@ -35,6 +35,7 @@ private:
     Ui::About *m_ui;
 
 private slots:
+    void on_pushButton_clicked();
     void on_label_linkActivated(QString link);
 };
 

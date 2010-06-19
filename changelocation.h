@@ -31,7 +31,7 @@
     longitude,
     candle lighting offset,
     time zone,
-    elavation
+    elevation
 */
 
 #ifndef CHANGELOCATION_H
@@ -50,7 +50,7 @@ namespace Ui {
 class ChangeLocation : public QDialog {
     Q_OBJECT
 public:
-    ChangeLocation(QWidget *parent, QString *locationName, double *latitude, double *longitude, double *candleoffset, QString *timeZone, double *elavation, bool *hool);
+    ChangeLocation(QWidget *parent, QString *locationName, double *latitude, double *longitude, double *candleoffset, QString *timeZone, double *elevation, bool *hool);
     ~ChangeLocation();
 
 private:
@@ -62,7 +62,7 @@ private:
     QString *locationNameptr;
     double *latitudeptr;
     double *longitudeptr;
-    double *elavationeptr;
+    double *elevationeptr;
     double *candleoffsetptr;
     QString *timeZoneptr;
     bool *hoolptr;

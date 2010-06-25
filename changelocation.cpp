@@ -572,7 +572,6 @@ ChangeLocation::ChangeLocation(QWidget *parent, QString *locationName, double *l
 
     setWindowIcon(QIcon(":/Icons/location.png"));
 
-
     timeZoneptr = timeZone;
 
     for( int i=0; i<542; i++)

@@ -50,6 +50,11 @@
 
 */
 
+
+//TODO: Remove seconds from times
+
+//TODO: Add a list of pre-defined places
+
 //TODO: Add windows resource file
 
 //TODO: Make libzmanim a seperate package

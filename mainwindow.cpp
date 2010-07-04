@@ -94,9 +94,6 @@ bool ShowZmanim;
 QString LANG;
 
 
-QString ZMANIMCLIPATH = "ZmanimCLI.jar";
-
-
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent), ui(new Ui::MainWindow)
 {
@@ -107,24 +104,6 @@ MainWindow::MainWindow(QWidget *parent)
 
     //Set all QString to work with unicode
     QTextCodec::setCodecForCStrings(QTextCodec::codecForName("utf8"));
-
-    //Configure paths:
-    QFile f("ZmanimCLI.jar");
-
-    if (!f.exists()) //Files are not in this dir (such as after installation in *nix)
-    {
-        if (!f.exists("/usr/share/Luach/ZmanimCLI.jar"))
-        {
-            QMessageBox::warning (this,tr("ZmanimCLI not found!") ,tr("Can't find ZmanimCLI! Hiding Zmanim!"));
-
-            //Hide times:
-            ui->zmanimpanelaction->setVisible(false);
-            ui->changelocationaction->setVisible(false);
-            toggleZmanimPanel(false);
-        }
-
-        ZMANIMCLIPATH = "/usr/share/Luach/ZmanimCLI.jar";
-    }
 
     setWindowIcon(QIcon(":/Icons/calendar.png"));
     setWindowTitle(tr("Luach"));
@@ -457,9 +436,9 @@ void MainWindow::updateLabels(mHdate *date)
 
     QString dstr = stringify(date->get_gyear()) + "/" + stringify(date->get_gmonth()) + "/" + stringify(date->get_gday());
 
-    args << "-jar" << ZMANIMCLIPATH << "-d" << dstr << "-lat" << stringify(latitude) << "-lon" << stringify(longitude) << "-e" << stringify(elevation) << "-tz" << TimeZone;
+    args << "-d" << dstr << "-lat" << stringify(latitude) << "-lon" << stringify(longitude) << "-e" << stringify(elevation) << "-tz" << TimeZone;
 
-    zmanimproc->start("java", args);
+    zmanimproc->start("zmanimcli", args);
 
     connect(zmanimproc, SIGNAL(readyReadStandardOutput()), this, SLOT(gotTimes()));
 }
@@ -555,9 +534,9 @@ void MainWindow::gotTimes()
                     QProcess tzais;
                     QString dstr = stringify(current.get_gyear()) + "/" + stringify(current.get_gmonth()) + "/" + stringify(current.get_gday());
                     QStringList args;
-                    args << "-jar" << ZMANIMCLIPATH << "-d" << dstr << "-lat" << stringify(latitude) << "-lon" << stringify(longitude) << "-e" << stringify(elevation) << "-tz" << TimeZone << "TzaisGeonim8Point5Degrees";
+                    args << "-d" << dstr << "-lat" << stringify(latitude) << "-lon" << stringify(longitude) << "-e" << stringify(elevation) << "-tz" << TimeZone << "TzaisGeonim8Point5Degrees";
 
-                    tzais.start("java", args);
+                    tzais.start("zmanimcli", args);
 
                     tzais.waitForFinished();
                     QByteArray result = tzais.readAllStandardOutput();

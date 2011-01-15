@@ -23,6 +23,8 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
 
+
+
 /*
 
   Kaluach clone:
@@ -50,6 +52,8 @@
 
 */
 
+
+//TODO: Purim katan
 
 //TODO: Remove seconds from times
 

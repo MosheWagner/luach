@@ -33,8 +33,12 @@ TRANSLATIONS = Hebrew.ts
 target.path = /usr/bin/
 
 # Install ZmanimCLI
-zmanim.path = /usr/share/Luach/
+zmanim.path = /usr/bin/
 zmanim.files = ZmanimCLI.jar
+
+# Install zanimcli script
+zmanimcli.path = /usr/bin/
+zmanimcli.files = zmanimcli
 
 # Install Icons:
 icon.path = /usr/share/Luach/
@@ -50,5 +54,6 @@ trans.files = Hebrew.qm
 INSTALLS += target
 INSTALLS += trans
 INSTALLS += zmanim
+INSTALLS += zmanimcli
 INSTALLS += icon
 INSTALLS += menu

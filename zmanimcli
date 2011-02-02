@@ -1,0 +1,31 @@
+#! /bin/bash
+
+# ZmanimCLI.sh - Moshe Wagner, 5770 <moshe.waner@gmail.com>
+#	As far as I'm concerned, this could count as Public Domain.
+
+# Small bash script invoking ZmanimCLI.jar . 
+
+#This script should be in your path, and ZmanimCLI.jar must be installed in your system
+
+#Try to locate java
+java=`which java`
+
+#Shout if java isn't present
+if [ "$java" = "" ]
+then
+    echo "'Java' command not found! Are you sure you have Java installed?"
+    exit
+fi
+
+
+#Try to locate ZmanimCLI.jar
+ZmanimCLIPATH=`whereis ZmanimCLI.jar | cut -d ' ' -f2`
+
+if [ "$ZmanimCLIPATH" = "" ]
+then
+    echo "ZmanimCLI.jar not found! Are you sure you have ZmanimCLI installed?"
+    exit
+fi
+
+
+$java -jar $ZmanimCLIPATH $@

@@ -24,7 +24,6 @@
 #include "ui_mainwindow.h"
 
 
-
 /*
 
   Kaluach clone:
@@ -35,11 +34,8 @@
         - Hebrew / English date
         - Hebrew / English interface
         - Change date, location, timezone
-
     - Zmanim obainted from ZmanimCLI
-
     - Daf yomi , (eventually should have other "yomi" stuff too)
-
     - Print snapshots
 
 
@@ -52,10 +48,9 @@
 
 */
 
+//TODO: Check zmanimcli locatiob before using it
 
 //TODO: Purim katan
-
-//TODO: Remove seconds from times
 
 //TODO: Add a list of pre-defined places
 
@@ -125,9 +120,6 @@ MainWindow::MainWindow(QWidget *parent)
 
     weekdays << tr("Sunday") << tr("Monday") << tr("Tuesday") << tr("Wednesday") << tr("Thursday") << tr("Friday") << tr("Saturday");
     engmonths << tr("January") << tr("February") << tr("March") << tr("April") << tr("May") << tr("June") << tr("July") << tr("August") << tr("September") << tr("October") << tr("November") << tr("December");
-
-
-    putenv("LANGUAGE=C");
 
     //Adjust for hebrew if needed
     if (LANG == "Hebrew") toRTL();
@@ -225,23 +217,6 @@ void MainWindow::closeEvent(QCloseEvent *event)
     settings.endGroup();
 }
 
-
-void MainWindow::translateAction()
-{
-    if (LANG == "Hebrew") LANG = "English";
-    else LANG = "Hebrew";
-
-    QSettings settings("Luach", "user");
-    settings.setValue("Language", LANG);
-
-    //Make sure the lang is saved before the reboot
-    QApplication::processEvents();
-
-    //Reboot the program
-    QProcess::startDetached("\"" + QApplication::applicationFilePath() + "\"");
-    exit(0);
-}
-
 void MainWindow::toRTL()
 {
     setLayoutDirection(Qt::RightToLeft);
@@ -267,9 +242,6 @@ void MainWindow::toRTL()
     ui->menu_2->setLayoutDirection(Qt::RightToLeft);
     ui->menu_3->setLayoutDirection(Qt::RightToLeft);
     ui->menuBar->setLayoutDirection(Qt::RightToLeft);
-
-    //Set Env variable LANGUAGE to "he_IL", to force Hebrew year numbers, etc'
-    putenv("LANGUAGE=he_IL");
 }
 
 
@@ -422,8 +394,7 @@ void MainWindow::updateLabels(mHdate *date)
     if (dafYomi(current.get_julian()) != "")
     {
         ui->dafyomilbl->show();
-        if (LANG == "Hebrew") ui->dafyomilbl->setText("דף יומי - " + dafYomi(current.get_julian()));
-        else  ui->dafyomilbl->setText("Day Yomi - " + dafYomi(current.get_julian()));
+        ui->dafyomilbl->setText(tr("Day Yomi - ") + dafYomi(current.get_julian()));
     }
     else ui->dafyomilbl->hide();
 
@@ -456,6 +427,10 @@ void MainWindow::gotTimes()
     for (int i=0; i<times.size(); i++)
     {
         times[i].replace('\r',"");
+
+        //Romve seconds from time
+        if (times[i].size() > 4) times[i] = times[i].mid(0,times[i].size() - 3);
+
 
         QString t = times[i].mid(times[i].lastIndexOf(" ") + 1);
         //A time
@@ -599,7 +574,6 @@ void MainWindow::saveDispConfs()
     QSettings settings("Luach", "user");
     settings.setValue("ShowGDate", ShowGDate);
     settings.setValue("ShowZmanim", ShowZmanim);
-    settings.setValue("Language", LANG);
 }
 
 

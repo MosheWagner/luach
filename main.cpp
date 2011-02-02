@@ -20,10 +20,7 @@ int main(int argc, char *argv[])
 {
     QApplication app(argc, argv);
 
-    //Read lang conf
-    QSettings settings("Luach", "user");
-    LANG = settings.value("Language", "Hebrew").toString();
-
+    LANG = QLocale::languageToString(QLocale::system().language());
 
     QTranslator translator;
 

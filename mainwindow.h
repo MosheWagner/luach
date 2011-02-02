@@ -88,8 +88,6 @@ private slots:
     void on_nextMonthBTN_clicked();
     void on_backMonthBTN_clicked();
 
-    void translateAction();
-
     //Destroys all existing daybuttons
     void clearMonth();
     

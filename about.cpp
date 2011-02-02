@@ -17,9 +17,7 @@
 #include "about.h"
 #include "ui_about.h"
 
-#define VERSION "0.07"
-
-extern QString LANG;
+#define VERSION "0.072"
 
 About::About(QWidget *parent) :
     QDialog(parent),

@@ -17,7 +17,7 @@
 #include "about.h"
 #include "ui_about.h"
 
-#define VERSION "0.072"
+#define VERSION "0.081"
 
 About::About(QWidget *parent) :
     QDialog(parent),

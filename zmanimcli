@@ -13,7 +13,7 @@ java=`which java`
 #Shout if java isn't present
 if [ "$java" = "" ]
 then
-    echo "'Java' command not found! Are you sure you have Java installed?"
+    echo "ERROR: 'Java' command not found! Are you sure you have Java installed?"
     exit
 fi
 
@@ -23,7 +23,7 @@ ZmanimCLIPATH=`whereis ZmanimCLI.jar | cut -d ' ' -f2`
 
 if [ "$ZmanimCLIPATH" = "" ]
 then
-    echo "ZmanimCLI.jar not found! Are you sure you have ZmanimCLI installed?"
+    echo "ERROR: ZmanimCLI.jar not found! Are you sure you have ZmanimCLI installed?"
     exit
 fi
 

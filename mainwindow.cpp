@@ -181,6 +181,8 @@ MainWindow::MainWindow(QWidget *parent)
 
     ui->tslbl->hide();
     ui->tslbllbl->hide();
+
+    ui->grpbox->hide();
 }
 
 
@@ -413,14 +415,28 @@ void MainWindow::updateLabels(mHdate *date)
 
     args << "-d" << dstr << "-lat" << stringify(latitude) << "-lon" << stringify(longitude) << "-e" << stringify(elevation) << "-tz" << TimeZone;
 
+    ////
     zmanimproc->start("zmanimcli", args);
 
     connect(zmanimproc, SIGNAL(readyReadStandardOutput()), this, SLOT(gotTimes()));
+
+    if (!ui->grpbox->isHidden()) ui->errframe->show();
+    else ui->errframe->hide();
 }
 
 void MainWindow::gotTimes()
 {
     QString str =  zmanimproc->readAllStandardOutput();
+
+    if (str.startsWith("ERROR:") || str.isEmpty())
+    {
+        //No Zmanim detected. An error message will be shown
+        return;
+    }
+
+    ui->grpbox->show();
+    ui->errframe->hide();
+
 
     QStringList times = str.split('\n');
 

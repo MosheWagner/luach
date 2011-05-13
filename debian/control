@@ -1,0 +1,12 @@
+Source: luach
+Section: utils
+Priority: extra
+Maintainer: Moshe Wagner <moshe.wagner@gmail.com>
+Build-Depends: debhelper (>= 7), libqt4-dev (>= 4.5), libhdate-dev, libhdate1
+Standards-Version: 3.8.3
+Homepage: http://luach.googlecode.com
+
+Package: luach
+Architecture: any
+Depends: ${misc:Depends}, libqt4-gui (>= 4.5), default-jre, libhdate1
+Description: Hebrew calendar and Jewish "Zmanim" program

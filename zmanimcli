@@ -13,7 +13,7 @@ java=`which java`
 #Shout if java isn't present
 if [ "$java" = "" ]
 then
-    echo "ERROR: 'Java' command not found! Are you sure you have Java installed?"
+    echo "'Java' command not found! Are you sure you have Java installed?"
     exit
 fi
 
@@ -23,9 +23,16 @@ ZmanimCLIPATH=`whereis ZmanimCLI.jar | cut -d ' ' -f2`
 
 if [ "$ZmanimCLIPATH" = "" ]
 then
-    echo "ERROR: ZmanimCLI.jar not found! Are you sure you have ZmanimCLI installed?"
+    echo "ZmanimCLI.jar not found! Are you sure you have ZmanimCLI installed?"
     exit
 fi
 
+#Make sure sed is installed
+sed=`which sed`
+if [ "$sed" = "" ]
+then
+    echo "No sed installed?! If not on a unix system, please use 'ZmanimCLI.jar' directly."
+    exit
+fi
 
-$java -jar $ZmanimCLIPATH $@
+$java -jar $ZmanimCLIPATH $@ | $sed 's/ZmanimCLI/zmanimcli/g'

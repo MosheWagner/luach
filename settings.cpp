@@ -14,8 +14,8 @@
 * Author: Moshe Wagner. <moshe.wagner@gmail.com>
 */
 
-#include "changelocation.h"
-#include "ui_changelocation.h"
+#include "settings.h"
+#include "ui_settings.h"
 
 extern QString LANG;
 
@@ -564,9 +564,7 @@ const QString timezonelist[] = {
 "W-SU",
 "WET"};
 
-
-
-ChangeLocation::ChangeLocation(QWidget *parent, QString *locationName, double *latitude, double *longitude, double *candleoffset, QString *timeZone, double *elevation, bool *hool) : QDialog(parent),  m_ui(new Ui::ChangeLocation)
+settings::settings(QWidget *parent, QString *locationName, double *latitude, double *longitude, double *candleoffset, QString *timeZone, double *elevation, bool *hool) : QDialog(parent),  m_ui(new Ui::settings)
 {
     m_ui->setupUi(this);
 
@@ -593,9 +591,6 @@ ChangeLocation::ChangeLocation(QWidget *parent, QString *locationName, double *l
     longitudeptr = longitude;
     m_ui->longitudeLine->setValue(*longitude);
 
-    elevationeptr = elevation;
-    m_ui->elevationLine->setValue(*elevationeptr);
-
     candleoffsetptr = candleoffset;
     m_ui->offsetLine->setValue(*candleoffset);
 
@@ -616,21 +611,21 @@ ChangeLocation::ChangeLocation(QWidget *parent, QString *locationName, double *l
     if (LANG == "Hebrew") toRTL();
 }
 
-ChangeLocation::~ChangeLocation()
+settings::~settings()
 {
     delete m_ui;
 }
 
 
-void ChangeLocation::toRTL()
+void settings::toRTL()
 {
     setLayoutDirection(Qt::RightToLeft);
 }
 
-void ChangeLocation::on_exitBTN_clicked()
+void settings::on_exitBTN_clicked()
 {    close();   }
 
-void ChangeLocation::on_okBTN_clicked()
+void settings::on_okBTN_clicked()
 {
 
     *locationNameptr = m_ui->locationLine->text();
@@ -638,7 +633,6 @@ void ChangeLocation::on_okBTN_clicked()
 
     *latitudeptr = m_ui->latitudeLine->value();
     *longitudeptr = m_ui->longitudeLine->value();
-    *elevationeptr = m_ui->elevationLine->value();
     *candleoffsetptr = m_ui->offsetLine->value();
 
 

@@ -9,17 +9,20 @@ SOURCES += main.cpp \
     daybutton.cpp \
     functions.cpp \
     mhdate.cpp \
-    changelocation.cpp \
-    about.cpp
+    about.cpp \
+    settings.cpp \
+    dialog.cpp
 HEADERS += mainwindow.h \
     daybutton.h \
     functions.h \
     mhdate.h \
-    changelocation.h \
-    about.h
+    about.h \
+    settings.h \
+    dialog.h
 FORMS += mainwindow.ui \
-    changelocation.ui \
-    about.ui
+    about.ui \
+    settings.ui \
+    dialog.ui
 LIBS += -lhdate
 win32 { 
     LIBS += -lintl \

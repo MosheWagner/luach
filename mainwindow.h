@@ -38,7 +38,7 @@
 
 #include "daybutton.h"
 #include "functions.h"
-#include "changelocation.h"
+#include "settings.h"
 #include "about.h"
 
 
@@ -109,11 +109,15 @@ private slots:
 
     void updateLabels(mHdate *date);
 
+    void initZmanim();
+    void getZmanim(mHdate *date);
     void gotTimes();
 
     //Show change location form
-    void changeLocationForm();
+    void settingsForm();
     void aboutForm();
+    void ZmanimInfoForm();
+    void ZmanimAccuracyForm();
 
     void printSnap();
 
@@ -126,8 +130,12 @@ private:
     //Deals with keyboard events
     void keyPressEvent( QKeyEvent *keyEvent );
 
+    QStringList times;
+    QStringList timeNames;
 
     Ui::MainWindow *ui;
+
+    About *about;
 
 };
 

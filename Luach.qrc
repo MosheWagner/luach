@@ -1,5 +1,5 @@
 <RCC>
-    <qresource prefix="/" >
+    <qresource prefix="/">
         <file>Icons/arrow-left.png</file>
         <file>Icons/arrow-right.png</file>
         <file>Icons/icon.png</file>
@@ -11,5 +11,7 @@
         <file>Icons/document-print.png</file>
         <file>Icons/configure.png</file>
         <file>Icons/calendar.png</file>
+        <file>Icons/dialog-cancel.png</file>
+        <file>Icons/flag-red.png</file>
     </qresource>
 </RCC>

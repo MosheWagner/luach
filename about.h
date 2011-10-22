@@ -28,7 +28,7 @@ namespace Ui {
 class About : public QDialog {
     Q_OBJECT
 public:
-    About(QWidget *parent = 0);
+    About(QString info, QWidget *parent = 0);
     ~About();
 
 private:

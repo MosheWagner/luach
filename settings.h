@@ -34,29 +34,30 @@
     elevation
 */
 
-#ifndef CHANGELOCATION_H
-#define CHANGELOCATION_H
+#ifndef settings_H
+#define settings_H
 
 
-#include <QtGui/QDialog>
+#include <QDialog>
 #include <QProcess>
 
 #include "functions.h"
 
 namespace Ui {
-    class ChangeLocation;
+    class settings;
 }
 
-class ChangeLocation : public QDialog {
+class settings : public QDialog {
     Q_OBJECT
 public:
-    ChangeLocation(QWidget *parent, QString *locationName, double *latitude, double *longitude, double *candleoffset, QString *timeZone, double *elevation, bool *hool);
-    ~ChangeLocation();
+    settings(QWidget *parent, QString *locationName, double *latitude, double *longitude, double *candleoffset, QString *timeZone, double *elevation, bool *hool);
+    ~settings();
 
 private:
     void toRTL();
 
-    Ui::ChangeLocation *m_ui;
+    Ui::settings *m_ui;
+
 
     //Pointers to the given program's parameters:
     QString *locationNameptr;
@@ -76,4 +77,4 @@ private slots:
     void on_exitBTN_clicked();
 };
 
-#endif // CHANGELOCATION_H
+#endif // settings_H

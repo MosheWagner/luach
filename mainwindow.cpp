@@ -23,11 +23,9 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
 
-
 /*
 
-  Kaluach clone:
-
+  Cross-Platform Kaluach clone:
 
   Provides:
     - Basic calandar interface:
@@ -35,7 +33,7 @@
         - Hebrew / English interface
         - Change date, location, timezone
     - Zmanim obainted from ZmanimCLI
-    - Daf yomi , (eventually should have other "yomi" stuff too)
+    - Daf yomi ,(eventually should have other "yomi" stuff too)
     - Print snapshots
 
 
@@ -48,15 +46,23 @@
 
 */
 
-//TODO: Check zmanimcli locatiob before using it
+//TODO: Add zmanim shitot choosing
+
+//TODO: Add translation option?
+// Update hebrew translation
+
+//TODO: Test on windows
+
+
+
+
+//TODO: Check zmanimcli location before using it
 
 //TODO: Purim katan
 
 //TODO: Add a list of pre-defined places
 
 //TODO: Add windows resource file
-
-//TODO: Make libzmanim a seperate package
 
 //TODO: System tray icon
 
@@ -128,11 +134,12 @@ MainWindow::MainWindow(QWidget *parent)
     lastselected = NULL;
 
     connect(ui->exitaction, SIGNAL(triggered()), this, SLOT(close()));
-    connect(ui->changelocationaction, SIGNAL(triggered()), this, SLOT(changeLocationForm()));
+    connect(ui->settingsaction, SIGNAL(triggered()), this, SLOT(settingsForm()));
     connect(ui->gdateaction, SIGNAL(toggled(bool)), this, SLOT(toggleGDate(bool)));
     connect(ui->zmanimpanelaction, SIGNAL(triggered(bool)), this, SLOT(toggleZmanimPanel(bool)));
-    connect(ui->translateaction, SIGNAL(triggered()), this, SLOT(translateAction()));
     connect(ui->aboutaction, SIGNAL(triggered()), this, SLOT(aboutForm()));
+    connect(ui->actionZmanim_accuracy, SIGNAL(triggered()), this, SLOT(ZmanimAccuracyForm()));
+    connect(ui->actionZmanim_used, SIGNAL(triggered()), this, SLOT(ZmanimInfoForm()));
     connect(ui->printaction, SIGNAL(triggered()), this, SLOT(printSnap()));
     connect(ui->todayAction, SIGNAL(triggered()), this, SLOT(todayAction()));
 
@@ -164,9 +171,9 @@ MainWindow::MainWindow(QWidget *parent)
         connect(d, SIGNAL(clicked(dayButton*)), this, SLOT(dayClicked(dayButton*)));
     }
 
-
-
     for (int i=0; i<ui->gridLayout->count(); i++) ui->gridLayout->setRowStretch(i,1);
+
+    initZmanim();
 
     //A Hdate starts with todays date, so "current" is set to today
     showMonth(&current);
@@ -185,6 +192,16 @@ MainWindow::MainWindow(QWidget *parent)
     ui->grpbox->hide();
 }
 
+MainWindow::~MainWindow()
+{
+    delete zmanimproc;
+
+    saveDispConfs();
+
+    clearMonth();
+
+    delete ui;
+}
 
 //Restores the window's state from the last run
 void MainWindow::restoreWindowState()
@@ -231,8 +248,6 @@ void MainWindow::toRTL()
     ui->horizontalLayout_4->setDirection(QBoxLayout::RightToLeft);
     ui->horizontalLayout_5->setDirection(QBoxLayout::RightToLeft);
     ui->horizontalLayout_6->setDirection(QBoxLayout::RightToLeft);
-
-    ui->formLayout_3->layout()->setContentsMargins(0,0,0,0);
 
     ui->dockWidget->setLayoutDirection(Qt::RightToLeft);
 
@@ -299,7 +314,7 @@ void MainWindow::showMonth(hdate::Hdate *dayinmonth)
     {
         dayList[i]->setMinimumSize(widest);
     }
-*/
+    */
 
     if (current.get_julian() - firstday.get_julian() >= 0 && current.get_julian() - firstday.get_julian() < dayList.size())
     {
@@ -349,15 +364,6 @@ void MainWindow::todayAction()
     showMonth(&current);
 }
 
-MainWindow::~MainWindow()
-{
-    saveDispConfs();
-
-    clearMonth();
-
-    delete ui;
-}
-
 //Change the current day by the given offset
 void MainWindow::changeDay(int i)
 {
@@ -400,29 +406,82 @@ void MainWindow::updateLabels(mHdate *date)
     }
     else ui->dafyomilbl->hide();
 
-    //Show times:
+    getZmanim(date);
 
-    /* Invokes an istance of ZmanimCLI, telling it to give a list of times for our location and date;
-       The output is sent to "gotTimes()" which updates the time labels by that. */
+}
 
-    if (zmanimproc) zmanimproc->kill();
-    delete zmanimproc;
+void MainWindow::initZmanim()
+{
     zmanimproc = new QProcess(this);
+
+    times << "Alos90";
+    timeNames << tr("Alos (90 min)");
+
+    times << "Alos72";
+    timeNames << tr("Alos (72 min)");
+
+    times << "Misheyakir11Degrees";
+    timeNames << tr("Misheyakir");
+
+    times << "Sunrise";
+    timeNames << tr("Sunrise");
+
+    times << "SofZmanShmaMGA72Minutes";
+    timeNames << tr("Shma MGA");
+
+    times << "SofZmanShmaGRA";
+    timeNames << tr("Shma GRA");
+
+    times << "SofZmanTfilaMGA72Minutes";
+    timeNames << tr("Tfila MGA");
+
+    times << "SofZmanTfilaGRA";
+    timeNames << tr("Tfila GRA");
+
+    times << "Chatzos";
+    timeNames << tr("Chatzos");
+
+    times << ("MinchaGedola");
+    timeNames << tr("Mincha Gedola");
+
+    times << ("MinchaKetana");
+    timeNames << tr("Mincha Ketana");
+
+    times << "Sunset";
+    timeNames << tr("Sunset");
+
+    times << "Sunset";
+    timeNames << tr("Tzais (24 min)");
+
+    times << "Tzais72";
+    timeNames << tr("Tzais 72");
+
+}
+
+void MainWindow::getZmanim(mHdate *date)
+{
+    // Invokes an istance of ZmanimCLI, telling it to give a list of times for our location and date;
+    //   The output is sent to "gotTimes()" which updates the time labels by that.
 
     QStringList args;
 
     QString dstr = stringify(date->get_gyear()) + "/" + stringify(date->get_gmonth()) + "/" + stringify(date->get_gday());
 
-    args << "-d" << dstr << "-lat" << stringify(latitude) << "-lon" << stringify(longitude) << "-e" << stringify(elevation) << "-tz" << TimeZone;
+    args << "-d" << dstr << "-lat" << stringify(latitude) << "-lon" << stringify(longitude) << "-tz" << TimeZone << times;
 
     ////
     zmanimproc->start("zmanimcli", args);
 
     connect(zmanimproc, SIGNAL(readyReadStandardOutput()), this, SLOT(gotTimes()));
 
-    if (!ui->grpbox->isHidden()) ui->errframe->show();
-    else ui->errframe->hide();
+
+    ui->TimeNameLBL->clear();
+    ui->TimesLBL->clear();
+
+    ui->errframe->show();
 }
+
+#include <QDebug>
 
 void MainWindow::gotTimes()
 {
@@ -430,145 +489,97 @@ void MainWindow::gotTimes()
 
     if (str.startsWith("ERROR:") || str.isEmpty())
     {
-        //No Zmanim detected. An error message will be shown
+        //No Zmanim detected. An error message will be shown.
         return;
     }
 
     ui->grpbox->show();
     ui->errframe->hide();
 
-
     QStringList times = str.split('\n');
 
-    for (int i=0; i<times.size(); i++)
+    for (int i=0; i<times.size() && i<timeNames.size(); i++)
     {
         times[i].replace('\r',"");
 
-        //Romve seconds from time
-        if (times[i].size() > 4) times[i] = times[i].mid(0,times[i].size() - 3);
-
-
         QString t = times[i].mid(times[i].lastIndexOf(" ") + 1);
-        //A time
-        if (times[i][0] == '*')
+
+        //Add a leading 0 to 1 digit times
+        if (t.indexOf(":") == 1) t = "0" + t;
+
+
+        //Tzais 24 minutes after skiah
+        if(timeNames[i].indexOf("Tzais (24 min)") != -1)
         {
-            if (times[i].startsWith("* AlosHashachar:") == true)
-            {
-                //Show alos
-                ui->aloslabel->setText(t);
-            }
-            if (times[i].startsWith("* sunrise:") == true)
-            {
-                ui->sunriselabel->setText(t);
-            }
-            if (times[i].startsWith("* SofZmanShmaMGA:") == true)
-            {
-                ui->shmamgalbl->setText(t);
-            }
-            if (times[i].startsWith("* SofZmanShmaGRA:") == true)
-            {
-                ui->shmagralbl->setText(t);
-            }
-            if (times[i].startsWith("* SofZmanTfilaMGA:") == true)
-            {
-                ui->tfilamgalbl->setText(t);
-            }
-            if (times[i].startsWith("* SofZmanTfilaGRA:") == true)
-            {
-                ui->tfilagralbl->setText(t);
-            }
-            if (times[i].startsWith("* Chatzos:") == true)
-            {
-                ui->hatzotlbl->setText(t);
-            }
-            if (times[i].startsWith("* MinchaGedola:") == true)
-            {
-                ui->minchagdolalbl->setText(t);
-            }
-            if (times[i].startsWith("* MinchaKetana:") == true)
-            {
-                ui->minchaktanalbl->setText(t);
-            }
-            if (times[i].startsWith("* PlagHamincha:") == true)
-            {
-                ui->plaglbl->setText(t);
-            }
+            ui->TimeNameLBL->setText(ui->TimeNameLBL->text() + timeNames[i] + ":" + "<br><small><br></small>");
+
+            t = QTime::fromString(t, "hh:mm").addSecs(60 * 24).toString("hh:mm");
+            ui->TimesLBL->setText(ui->TimesLBL->text() + t + "<br><small><br></small>");
+        }
+
+        else if (times[i][0] == '*')
+        {
+            ui->TimeNameLBL->setText(ui->TimeNameLBL->text() + timeNames[i] + ":" + "<br><small><br></small>");
+            ui->TimesLBL->setText(ui->TimesLBL->text() + t + "<br><small><br></small>");
+
             if (times[i].startsWith("* Sunset:") == true)
             {
-                ui->skialbl->setText(t);
-
-
                 //Candel lighting:
                 if (current.get_day_of_the_week() == 6 || current.isErevYomTov(hool))
                 {
                     ui->clllbllbl->show();
                     ui->candellightinglbl->show();
 
-                    QTime sunset = QTime::fromString(t, "h:mm:ss");
+                    QTime sunset = QTime::fromString(t, "hh:mm");
 
                     QTime cl = sunset.addSecs(-1 * (candleLightingOffset * 60));
 
-                    ui->candellightinglbl->setText(cl.toString("h:mm:ss"));
+                    ui->candellightinglbl->setText(cl.toString("hh:mm"));
                 }
                 else
                 {
                     ui->clllbllbl->hide();
                     ui->candellightinglbl->hide();
                 }
-
-                //מוצאי שבת או חג
-                if (current.get_day_of_the_week() == 7  || current.isYomTov(hool))
-                {
-                    ui->tslbllbl->show();
-
-                    if ( current.isYomTov(hool)) ui->tslbllbl->setText(tr("Chag ends"));
-                    if (current.get_day_of_the_week() == 7) ui->tslbllbl->setText(tr("Shabbos ends"));
-
-                    ui->tslbl->show();
-
-                    QProcess tzais;
-                    QString dstr = stringify(current.get_gyear()) + "/" + stringify(current.get_gmonth()) + "/" + stringify(current.get_gday());
-                    QStringList args;
-                    args << "-d" << dstr << "-lat" << stringify(latitude) << "-lon" << stringify(longitude) << "-e" << stringify(elevation) << "-tz" << TimeZone << "TzaisGeonim8Point5Degrees";
-
-                    tzais.start("zmanimcli", args);
-
-                    tzais.waitForFinished();
-                    QByteArray result = tzais.readAllStandardOutput();
-
-                    ui->tslbl->setText(QString(result));
-
-
-                    //If there is any candle lighting today, it should be at tzais shabat,
-                    // and not at the normal time. (unless it's a Yom tov on friday)
-                    if (current.get_day_of_the_week() != 6)
-                    {
-                        ui->candellightinglbl->setText(result);
-                    }
-                }
-                else
-                {
-                    ui->tslbllbl->hide();
-                    ui->tslbl->hide();
-                }
-            }
-            if (times[i].startsWith("* Tzais:") == true)
-            {
-                ui->tzitslbl->setText(t);
-            }
-            if (times[i].startsWith("* Tzais72:") == true)
-            {
-                ui->tzits72lbl->setText(t);
-
-
-                //This is the last time given:
-                QString d = current.get_day_of_week_string(0);
-                d += ", ";
-                d += current.get_format_date(1);
-                d += " - " + locationName;
-                ui->dayandlocationlbl->setText(d);
             }
         }
+    }
+
+
+    //מוצאי שבת או חג
+    if (current.get_day_of_the_week() == 7  || current.isYomTov(hool))
+    {
+        ui->tslbllbl->show();
+
+        if ( current.isYomTov(hool)) ui->tslbllbl->setText(tr("Chag ends"));
+        if (current.get_day_of_the_week() == 7) ui->tslbllbl->setText(tr("Shabbos ends"));
+
+        ui->tslbl->show();
+
+        QProcess tzais;
+        QString dstr = stringify(current.get_gyear()) + "/" + stringify(current.get_gmonth()) + "/" + stringify(current.get_gday());
+        QStringList args;
+        args << "-d" << dstr << "-lat" << stringify(latitude) << "-lon" << stringify(longitude) << "-tz" << TimeZone << "TzaisGeonim8Point5Degrees";
+
+        tzais.start("zmanimcli", args);
+
+        tzais.waitForFinished();
+        QByteArray result = tzais.readAllStandardOutput().replace('\r',"");
+
+        ui->tslbl->setText(QString(result.mid(result.indexOf(":") + 1)));
+
+
+        //If there is any candle lighting today, it should be at tzais shabat,
+        // and not at the normal time. (unless it's a Yom tov on friday)
+        if (current.get_day_of_the_week() != 6)
+        {
+            ui->candellightinglbl->setText(result);
+        }
+    }
+    else
+    {
+        ui->tslbllbl->hide();
+        ui->tslbl->hide();
     }
 }
 
@@ -649,10 +660,10 @@ void MainWindow::on_dockWidget_visibilityChanged(bool visible)
     ui->zmanimpanelaction->setChecked(visible);
 }
 
-ChangeLocation *cl;
-void MainWindow::changeLocationForm()
+settings *cl;
+void MainWindow::settingsForm()
 {
-    cl = new ChangeLocation (this, &locationName, &latitude, &longitude, &candleLightingOffset, &TimeZone, &elevation, &hool);
+    cl = new settings (this, &locationName, &latitude, &longitude, &candleLightingOffset, &TimeZone, &elevation, &hool);
 
     connect(cl, SIGNAL(changed()), this, SLOT(redraw()));
     connect(cl, SIGNAL(save()), this, SLOT(saveConfs()));
@@ -660,10 +671,21 @@ void MainWindow::changeLocationForm()
     cl->show();
 }
 
-About *about;
 void MainWindow::aboutForm()
 {
-    about = new About();
+    about = new About("About");
+    about->show();
+}
+
+void MainWindow::ZmanimInfoForm()
+{
+    about = new About("Shitot");
+    about->show();
+}
+
+void MainWindow::ZmanimAccuracyForm()
+{
+    about = new About("Accuracy");
     about->show();
 }
 

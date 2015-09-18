@@ -17,14 +17,14 @@
 #ifndef MAINWINDOW_H
 #define MAINWINDOW_H
 
-#include <QtGui/QApplication>
-#include <QtGui/QMainWindow>
+#include <QtGui>
+#include <QApplication>
 #include <QProcess>
 #include <QTextCodec>
 #include <QTime>
 #include <QDir>
-#include <QPrinter>
-#include <QPrintDialog>
+#include <QtPrintSupport/QPrinter>
+#include <QtPrintSupport/QPrintDialog>
 #include <QPainter>
 #include <QSystemTrayIcon>
 #include <QToolTip>

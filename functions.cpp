@@ -16,7 +16,6 @@
 
 #include "functions.h"
 
-
 //Converts numbers into strs:
 QString stringify(double x)
 {
@@ -59,10 +58,10 @@ QString NumberToGematria (int num, bool addquotes)
 
     if (addquotes)
     {
-        // '
+        // Add '
         if (str.length() == 1)
             str += "'";
-        // ""
+        // Add ""
         else
         {
             QChar c = str[str.length() - 1];

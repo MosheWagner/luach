@@ -27,7 +27,7 @@
 #ifndef MHDATE_H
 #define MHDATE_H
 
-#include <QtGui/QMainWindow>
+#include <QtWidgets/QMainWindow>
 #include <QtCore/QObject>
 
 #include <hdatepp.h>
@@ -70,6 +70,11 @@ public:
 
     //Returns the holiday type (see inside for details)
     int holidayType();
+
+    //Function to replace 'get_hebrew_day_string' because the real one has a bug in some versions,
+    // and to force a always-hebrew result.
+    // Returns a QString with the string representing the hebrew day of the month
+    QString hebday();
 
 signals:
     //Emmited every time a month was changed, directly or indirectly.

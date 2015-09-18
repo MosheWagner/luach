@@ -308,3 +308,17 @@ int mHdate::holidayType()
 
     return holyday_type;
 }
+
+//Function to replace 'get_hebrew_day_string' because the real one has a bug in some versions,
+// and to force a always-hebrew result.
+// Returns a QString with the string representing the hebrew day of the month
+QString mHdate::hebday()
+{
+    int d = get_hday();
+
+    if (d < 1) return "";
+
+    QString s = NumberToGematria(d);
+
+    return s;
+}

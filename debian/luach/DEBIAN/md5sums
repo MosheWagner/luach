@@ -1,0 +1,10 @@
+bd51c7a8b0188e082536ddfea033f422  usr/bin/luach
+dff2c323e3470b54a6362222ae817942  usr/bin/zmanimcli
+22415a9c9a430e455ac9735fb9d6acf8  usr/share/Luach/Hebrew.qm
+79691b23feddec0fa76d800cfa5e2f47  usr/share/Luach/calendar.png
+c9cbf634cc33dc2e6c9af6ac41707962  usr/share/applications/Luach.desktop
+dfdfd380f6d303a017746dc72d4c1117  usr/share/doc/luach/changelog.gz
+2351653cda81b42f4c8f76799db714cc  usr/share/doc/luach/copyright
+14d1eba8bbf0ab54a059c1e5cd5ef873  usr/share/java/ZmanimCLI.jar
+fdbf44dd9c31ef281321337e53ac2d0e  usr/share/man/man1/luach.1.gz
+b600d8939482729419fc36081b10a3e0  usr/share/man/man1/zmanimcli.1.gz

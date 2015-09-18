@@ -37,7 +37,6 @@ dayButton::dayButton(QWidget * parent, int jd, bool showGDate, bool hool)
 
     vbox->addLayout(hbox);
 
-    //hebday = new QLabel(date.get_hebrew_day_string());
     hebday = new QLabel();
     hebday->setStyleSheet("QLabel { color: purple }");
 
@@ -112,10 +111,10 @@ void dayButton::setDate(int jd, bool hool)
     updateStyle();
 }
 
-
+#include <QDebug>
 void dayButton::showInfo(bool showGDate)
 {
-    hebday->setText(QString(date.get_hebrew_day_string()).replace("'","").replace("\"",""));
+    hebday->setText(QString(date.hebday()).replace("'","").replace("\"",""));
 
     if (showGDate)
     {

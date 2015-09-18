@@ -14,6 +14,8 @@
 * Author: Moshe Wagner. <moshe.wagner@gmail.com>
 */
 
+//TODO: Fix hebrew
+
 #include "mainwindow.h"
 
 int main(int argc, char *argv[])

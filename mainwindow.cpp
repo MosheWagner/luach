@@ -108,7 +108,7 @@ MainWindow::MainWindow(QWidget *parent)
     restoreWindowState();
 
     //Set all QString to work with unicode
-    QTextCodec::setCodecForCStrings(QTextCodec::codecForName("utf8"));
+    QTextCodec::setCodecForLocale(QTextCodec::codecForName("utf8"));
 
     setWindowIcon(QIcon(":/Icons/calendar.png"));
     setWindowTitle(tr("Luach"));
@@ -194,9 +194,9 @@ MainWindow::MainWindow(QWidget *parent)
 
 MainWindow::~MainWindow()
 {
-    delete zmanimproc;
-
     saveDispConfs();
+
+    delete zmanimproc;
 
     clearMonth();
 
@@ -275,6 +275,7 @@ void MainWindow::showMonth(hdate::Hdate *dayinmonth)
     //Go to first day of the month
     hdate::Hdate firstday;
     firstday.set_hdate(1, dayinmonth->get_hmonth(), dayinmonth->get_hyear());
+
 
     hdate::Hdate tmpday;
     tmpday.set_hdate(firstday.get_hday(), firstday.get_hmonth(), firstday.get_hyear());
@@ -386,7 +387,7 @@ void MainWindow::updateLabels(mHdate *date)
     ui->hmonthlbl->setText(date->get_hebrew_month_string(0));
 
 
-    ui->daylabel->setText(current.get_hebrew_day_string());
+    ui->daylabel->setText(current.hebday());
     ui->engdaylbl->setText(stringify(current.get_gday()));
     ui->engmonthlbl->setText(engmonths[current.get_gmonth() - 1]);
 
@@ -469,8 +470,8 @@ void MainWindow::getZmanim(mHdate *date)
 
     args << "-d" << dstr << "-lat" << stringify(latitude) << "-lon" << stringify(longitude) << "-tz" << TimeZone << times;
 
-    ////
-    zmanimproc->start("zmanimcli", args);
+    //Invoke externall zmanim process
+    zmanimproc->start("./zmanimcli", args);
 
     connect(zmanimproc, SIGNAL(readyReadStandardOutput()), this, SLOT(gotTimes()));
 
@@ -618,7 +619,9 @@ void MainWindow::loadConfs()
     hool = settings.value("isHool",false).toBool();
 
     ShowGDate = settings.value("ShowGDate", true).toBool();
+    ui->gdateaction->setChecked(ShowGDate);
     ShowZmanim = settings.value("ShowZmanim", true).toBool();
+    ui->zmanimpanelaction->setChecked(ShowZmanim);
 }
 
 void MainWindow::toggleGDate(bool show)
